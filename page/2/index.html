@@ -162,6 +162,427 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2021/01/20/%E5%85%B3%E4%BA%8E%E6%8E%A5%E5%8F%A3%E6%8F%8F%E8%BF%B0%E7%9A%84%E6%96%87%E6%A1%A3%E5%86%85%E5%AE%B9%E8%A6%81%E6%B1%82/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mr.zhao">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/20/%E5%85%B3%E4%BA%8E%E6%8E%A5%E5%8F%A3%E6%8F%8F%E8%BF%B0%E7%9A%84%E6%96%87%E6%A1%A3%E5%86%85%E5%AE%B9%E8%A6%81%E6%B1%82/" class="post-title-link" itemprop="url">附: 关于接口描述的文档内容要求</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-01-20 09:34:27" itemprop="dateCreated datePublished" datetime="2021-01-20T09:34:27+08:00">2021-01-20</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="接口的概念"><a href="#接口的概念" class="headerlink" title="接口的概念"></a>接口的概念</h2><p>在应用软件系统中，接口是程序和系统与外界交互的窗口。本文中所阐述的接口，包括：</p>
+<p>应用软件系统提供软件功能供外部软件程序调用；<br>应用软件系统调用外部系统提供的软件功能；<br>应用软件系统依据应用级别的交互协议与外系统进行功能和数据的交换；<br>应用软件系统通过公用文件目录或数据库与外部系统交换信息。</p>
+<p>此处中所阐述的接口不包括：</p>
+<p>应用软件系统内部功能模块之间的接口调用；<br>应用软件系统提供的人机交互界面。</p>
+<h2 id="接口处理策略"><a href="#接口处理策略" class="headerlink" title="接口处理策略"></a>接口处理策略</h2><p>xxxxxxxxxxx是一个庞大的由众多应用子系统构成的复杂分布式系统。各应用子系统之间存在众多的软件接口关系。<br>在xxxxxxxxxxx中，我们采用SOA的体系架构来解决各应用子系统之间、应用子系统与外部系统之间的接口问题。通过基于ESB服务总线技术的应用支撑平台来发布和管理应用软件系统对外提供公用服务。在这里，服务系指精确定义、封装完善、独立于其他服务所处环境和状态的软件功能。接口服务系指以服务的方式提供的接口实现。<br>通过支撑平台，各业务子系统接口之间的点对点关系，变成了各业务子系统接口与支撑平台的关系，从而简化了系统间的逻辑关系，应用支撑平台是各业务子系统相互连接的中介和纽带。各业务子系统之间在进行服务请求和服务调用时所需的一些附加工作，如通信协议的转换、路由、消息格式转换、安全性保证等，也可以由应用支撑平台来提供支持。此外，应用支撑平台提供适配器方式以支持文件同步、数据库同步、JMS、FTP等,应用支持平台还提供定制适配器功能接入特殊的外部系统。<br>通过应用支持平台发布公用服务，将有利于接口服务的复用，以及接口服务的维护和管理。</p>
+<h2 id="接口文档规范的必要性"><a href="#接口文档规范的必要性" class="headerlink" title="接口文档规范的必要性"></a>接口文档规范的必要性</h2><p>xxxxxxxxxxx建设过程中，各应用软件系统的接口定义、实现、发布和管理是处理好接口问题的四个关键环节，他们贯穿在软件生命周期的全过程。为了保证在这些环节对应用软件系统之间的接口问题进行有效的处理，保证接口的良好定义、合理实现、受控发布和方便管理，有必要对相关技术文档提出规范化要求。<br>涉及接口定义的技术文档主要有业务需求说明书、软件需求规格说明书；涉及接口实现的技术文档主要有软件概要设计说明书、软件详细设计说明书、用户手册；涉及接口服务发布和管理的技术文档包括接口服务发布和管理规范等。</p>
+<h1 id="接口定义的文档规范要求"><a href="#接口定义的文档规范要求" class="headerlink" title="接口定义的文档规范要求"></a>接口定义的文档规范要求</h1><h2 id="业务需求说明书中的接口描述"><a href="#业务需求说明书中的接口描述" class="headerlink" title="业务需求说明书中的接口描述"></a>业务需求说明书中的接口描述</h2><p>在xxxxxxxxxxx中，业务需求说明书由业主方任命的子项目组负责编制。业务需求说明书中有关接口描述的要求：</p>
+<ul>
+<li>  宜有专门章节阐述子项目拟分包系统与其它子项目系统及外部系统之间的接口关系；</li>
+<li>  在描述本系统与外部某系统接口关系时，宜：</li>
+</ul>
+<p>具体阐明本系统的哪项或哪些业务功能与所述外部系统存在接口关系；<br>阐明接口的类型，如向外系统提供数据、从外系统获取数据、对外系统提供功能服务、向外系统请求某项功能服务；<br>对所述接口作必要的文字解释。</p>
+<h2 id="软件需求规格说明书中的接口描述"><a href="#软件需求规格说明书中的接口描述" class="headerlink" title="软件需求规格说明书中的接口描述"></a>软件需求规格说明书中的接口描述</h2><p>软件需求规格说明书系由承建方在业务需求说明书的基础上，在系统功能、性能、外部限制条件等方面的进一步明确和细化，作为系统设计、实现、测试的依据。是涉及接口定义的重要文档。<br>软件需求规格说明书中有关接口定义和描述的要求如下：</p>
+<ul>
+<li>  软件需求规格说明书中有关与外部系统接口定义的范围应涵盖业务需求说明书中有关接口的描述，并补充业务需求书中遗漏的接口内容；</li>
+<li>  本系统作为接口对外提供的软件功能，应在软件需求规格说明书中明确阐明该功能。包括接口功能编号、名称、性质（功能服务、数据交换、文件交换等）、接口功能的各输入参数及数据类型，返回的结果数据类型等；</li>
+<li>  如果接口是作为某种信息交互协议（如Z39.50）的服务端提供的功能，要求阐明支持的协议版本以及是否完全支持该协议，如果不完全支持，要明确列举支持或不支持的功能；</li>
+<li>  如果接口是某种信息交互协议（如Z39.50）的客户端，且外部系统提供的相应协议服务端功能是本系统相关功能实现的必要条件，须将对外部系统的相关接口实现要求列入软件需求规格说明书中的限制条件部分；</li>
+<li>  如果系统功能涉及到要使用或访问外部系统提供的功能，须将其列入需求规格说明书中限制条件部分。</li>
+</ul>
+<h2 id="接口定义的变更"><a href="#接口定义的变更" class="headerlink" title="接口定义的变更"></a>接口定义的变更</h2><p>如果在软件需求评审通过后的实施过程中，原定义或描述的接口发生了变化，须通过变更流程修改软件需求规格说明书；或编制需求文档的补充材料，与原需求规格说明书一起，作为测试和验收的依据。</p>
+<h1 id="接口实现的文档规范要求"><a href="#接口实现的文档规范要求" class="headerlink" title="接口实现的文档规范要求"></a>接口实现的文档规范要求</h1><h2 id="软件设计说明书中的接口服务实现描述"><a href="#软件设计说明书中的接口服务实现描述" class="headerlink" title="软件设计说明书中的接口服务实现描述"></a>软件设计说明书中的接口服务实现描述</h2><p>在软件概要设计说明书中，有关接口实现的要求如下：</p>
+<ul>
+<li>  须覆盖软件需求说明书中所述对外提供接口功能；</li>
+<li>确定接口的实现策略。如采用Web<br>  Service、EJB、通过网络端口连接对外提供服务、文件目录或数据库同步等。</li>
+<li>  对外提供的接口功能，需要进行形式化描述，如果不能确定在软件概要设计说明书完全进行接口功能的形式化表述，应在该说明书中明示并在详细设计说明书中给出以供编码实现之用。</li>
+</ul>
+<h2 id="用户文档中的接口使用描述"><a href="#用户文档中的接口使用描述" class="headerlink" title="用户文档中的接口使用描述"></a>用户文档中的接口使用描述</h2><p>在设计说明书中描述的所有对外提供的接口功能，最终都要落实在用户文档中。具体的用户文档名称，取决于项目合同和软件开发计划中对最终交付文件的规定。如用户使用手册、用户参考手册、用户技术手册等。<br>各应用软件系统通过该系统的用户文档对外正式公布本系统对外的接口服务的功能和调用方式。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2021/01/17/linux%E4%B8%8B%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mr.zhao">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/17/linux%E4%B8%8B%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/" class="post-title-link" itemprop="url">linux下常用工具</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-01-17 20:08:59" itemprop="dateCreated datePublished" datetime="2021-01-17T20:08:59+08:00">2021-01-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="arch-linux-linux-命令很强大，-命令才是王道啊"><a href="#arch-linux-linux-命令很强大，-命令才是王道啊" class="headerlink" title="arch linux (linux 命令很强大， 命令才是王道啊~~~)"></a>arch linux (linux 命令很强大， 命令才是王道啊~~~)</h1><ol>
+<li><p> f.lux 根据经纬度调整屏幕亮度</p>
+</li>
+<li><p> 网易云音乐 （这段时间跪了, 打开白板 ）</p>
+</li>
+<li><p> sublime text 偶尔当下记事本</p>
+</li>
+<li><p> 为知笔记 笔记软件， 因为跨平台我就支持了</p>
+</li>
+<li><p>input</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#export XIM&#x3D;fcitx</span><br><span class="line">#export XIM_PROGRAM&#x3D;fcitx</span><br><span class="line">#export GTK_IM_MODULE&#x3D;fcitx</span><br><span class="line">#export QT_IM_MODULE&#x3D;fcitx</span><br><span class="line">#export XMODIFIERS&#x3D;&quot;@im&#x3D;fcitx&quot;</span><br><span class="line"></span><br><span class="line">#firefox keyi dazile</span><br><span class="line">export LC_ALL&#x3D;zh_CN.UTF-8</span><br><span class="line">export GTK_IM_MODULE&#x3D;fcitx</span><br><span class="line">export QT_IM_MODULE&#x3D;fcitx</span><br><span class="line">export XMODIFIERS&#x3D;“@im&#x3D;fcitx”</span><br><span class="line">exec openbox-session</span><br><span class="line">#exec xfce4-session</span><br><span class="line">#exec gnome-session</span><br></pre></td></tr></table></figure></li>
+<li><p> 文件比较: meld vimdiff diff等</p>
+</li>
+<li><p> 文本编辑器 emacs vim</p>
+</li>
+<li><p> webtorrenter-desktop 播放bt文件</p>
+</li>
+<li><p>图形界面连接网络 sudo pacman -S network-manager-applet （需要启动<br> systemctl start NetworkManager）</p>
+</li>
+<li><p>rescue time 有兴趣可以看看， 这个是记录你一天在干嘛的软件, 后台运行<br>nohut rescuetime &amp;(会在当前文件夹下生成nohup.out文件)</p>
+</li>
+<li><p>跨平台文件传输 feige<br>url:<a target="_blank" rel="noopener" href="http://www.feige360.com/ipmsg/download.html">http://www.feige360.com/ipmsg/download.html</a></p>
+</li>
+<li><p>锁屏 yaourt -S xlockmore</p>
+</li>
+<li><p>create<del>ap</del> github下的一个项目， 共享热点必备</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">配置启动: nohup sudo create_ap wlp2s0 enp0s20u2u4 archer 1234567890 &gt; &#x2F;tmp&#x2F;create_ap.log &amp; tail -f &#x2F;tmp&#x2F;create_ap.log</span><br></pre></td></tr></table></figure></li>
+<li><p>数据传输工具， 类似飞球， yaourt -s iptux,<br>但是最新的0.75版本有问题， 不能扫描局域网用户,<br>目前使用0.6.4版本进行源码编译安装</p>
+</li>
+<li><p>使用zsh + oh my zsh</p>
+</li>
+<li><p>开发工具使用idea, community</p>
+<ul>
+<li>插件:<ul>
+<li>  ideavim: vi模式， 用过都说好</li>
+<li>  Key promoter: 快捷键菜鸡必备，比如我</li>
+<li>  Markdown support</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>sqldeveloper安装</p>
+<ul>
+<li>oracle 限制， 需要登录下载，<br>  所以先到官网下载sqldeveloper18.nojar.zip</li>
+<li>  pacman -S oracle-sqldeveloper</li>
+<li>  安装过程中将刚刚下载的zip包放到其他pass文件同级的目录, 继续即可</li>
+</ul>
+</li>
+<li><p>postman curl 模拟请求</p>
+<ul>
+<li>curl -H &quot;Accept:application/json&quot; -H<br>  &quot;Content-Type:application/json&quot; -X POST -d &#39;{&quot;id&quot;:1}&#39;<br>  <a target="_blank" rel="noopener" href="http://127.0.0.1:8080/user/save">http://127.0.0.1:8080/user/save</a></li>
+</ul>
+</li>
+<li><p>processon/graphviz 流程图</p>
+<ul>
+<li>  c-c c-c编译执行dot文件</li>
+</ul>
+</li>
+<li><p>dropbox</p>
+<ul>
+<li>  <a target="_blank" rel="noopener" href="https://www.dropbox.com/downloading?src=index&full=1">离线版安装地址</a></li>
+</ul>
+</li>
+<li><p>ag搜索 the<del>silversearcher</del></p>
+</li>
+<li><p>xml处理工具 xmlstarlet, jq处理json, shyaml处理yaml</p>
+</li>
+<li><p>命令行剪贴板工具xclip</p>
+</li>
+<li><p>pandoc 文档转换工具</p>
+<ul>
+<li>  <a target="_blank" rel="noopener" href="https://pandoc.org/MANUAL.html">https://pandoc.org/MANUAL.html</a></li>
+<li>  pandoc linux下常用工具.org -o /tmp/linux常用工具.md</li>
+</ul>
+</li>
+<li><p>cairo-dock dock工具，样式挺好看，不过习惯了launcher运行, 不喜欢点,<br>不使用</p>
+</li>
+<li><p>同步工具</p>
+<ul>
+<li>  Dropbox 这玩意儿有qiang, 并且你的文件需要服务器中转</li>
+<li>  syncthing, 这个东东是通过p2p发送，可以设备互传，好东西</li>
+</ul>
+</li>
+<li><p>截图工具 scrot</p>
+</li>
+</ol>
+<ul>
+<li>scrot 全屏</li>
+<li>scrot -s 截取</li>
+<li>scrot -e ‘mv $f ~/Pictures/scrot_screenshots’ 截图后执行命令</li>
+</ul>
+<ol start="28">
+<li>命令行下模糊搜索工具 fzf</li>
+</ol>
+<ul>
+<li>搭配其它工具或者自己组合命令都很6,可以作为插件加入到vim, ranger, zsh中</li>
+<li>通过搜索可以更方便的打开文件，不用一一展开</li>
+</ul>
+<ol start="29">
+<li>简化版命令手册 tldr, 我这里使用的是tealdeer,arch默认的使用不了, 可以优雅的查看常用命令的基本使用方式</li>
+</ol>
+<h1 id="问题处理"><a href="#问题处理" class="headerlink" title="问题处理"></a>问题处理</h1><ol>
+<li> 网易云音乐白板 : rm `locate netease |grep cache` 删掉缓存即可</li>
+</ol>
+<h1 id="远程连接windows桌面"><a href="#远程连接windows桌面" class="headerlink" title="远程连接windows桌面"></a>远程连接windows桌面</h1><p>➜ ~ rdesktop 192.168.2.144 -p lt@180606 -u lt1 -g workarea</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2021/01/17/docker%E5%AE%9E%E6%88%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mr.zhao">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/17/docker%E5%AE%9E%E6%88%98/" class="post-title-link" itemprop="url">docker实践</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-01-17 19:41:59" itemprop="dateCreated datePublished" datetime="2021-01-17T19:41:59+08:00">2021-01-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-07-19 16:13:44" itemprop="dateModified" datetime="2019-07-19T16:13:44+08:00">2019-07-19</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="环境准本"><a href="#环境准本" class="headerlink" title="环境准本"></a>环境准本</h1><ul>
+<li>  华为云 centos系统</li>
+<li>  本地已经正常使用, 需要部署到服务器并且需要用docker启动</li>
+<li>  web容器使用weblogic10.3.6</li>
+<li>  本人的原始环境为archlinux</li>
+</ul>
+<h1 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h1><h2 id="本地环境打包"><a href="#本地环境打包" class="headerlink" title="本地环境打包"></a>本地环境打包</h2><ul>
+<li>注意： 采用本地环境为了省事, 本地环境包含整个的weblogic环境， 及jdk,<br>  如果自己心情好完全可以再搭建一套</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -zcvf weblogic.tar.gz ~&#x2F;Oracle #这个目录是weblogic的默认安装及建域目录, 相应的war包也在该目录下</span><br><span class="line">tar -zcvf jdk.tar.gz ~&#x2F;applications&#x2F;jdk1.7 #jdk</span><br></pre></td></tr></table></figure>
+<h2 id="上传到云服务器"><a href="#上传到云服务器" class="headerlink" title="上传到云服务器"></a>上传到云服务器</h2><ul>
+<li><p>上传打包好的文件</p>
+<ul>
+<li><p>weblogic</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp weblogic.tar.gz root@11x.xxx.xxx.xxx:&#x2F;root  </span><br><span class="line">根据提示输入密码稍等上传完成</span><br></pre></td></tr></table></figure></li>
+<li><p>jdk</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp jdk.tar.gz root@11x.xxx.xxx.xxx:&#x2F;root  </span><br><span class="line">根据提示输入密码稍等上传完成</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>解压, 找一个自己喜欢的目录，建议跟本地保持一致</p>
+<ul>
+<li><p>在服务建立与本地一致的目录</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir &#x2F;home&#x2F;lx7ly&#x2F;applications</span><br></pre></td></tr></table></figure></li>
+<li><p>解压文件</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf &#x2F;root&#x2F;weblogic.tar.gz -C &#x2F;home&#x2F;lx7ly</span><br><span class="line">tar -zxvf &#x2F;root&#x2F;jdk.tar.gz -C &#x2F;home&#x2F;lx7ly&#x2F;applications</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>在云服务器上配置启动web服务,<br>  并通过弹性公网访问或者服务器本地确认服务启动正常</p>
+<ul>
+<li><p>进入domain目录启动服务验证</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup .&#x2F;startWeblogic.sh &amp; tail -f nohup.out</span><br></pre></td></tr></table></figure>
+<p>使用docker容器启动</p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="制作docker镜像"><a href="#制作docker镜像" class="headerlink" title="制作docker镜像"></a>制作docker镜像</h3><ul>
+<li><p>Dockerfile文件</p>
+<ul>
+<li><p>touch /home/lx7ly/Dockerfile</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#Dockerfile  </span><br><span class="line"># 基于centos构建本容器</span><br><span class="line">FROM centos</span><br><span class="line"># 跟本地映射的端口， 这里相当与访问本地7003会自动转发到容器中7003</span><br><span class="line">EXPOSE 7003</span><br><span class="line">#设置环境变量，所有操作都是非交互式的</span><br><span class="line">ENV LANG en_US.UTF-8  </span><br><span class="line">ENV LC_ALL en_US.UTF-8</span><br><span class="line">ENV DEBIAN_FRONTEND noninteractive</span><br><span class="line">#可以安装软件</span><br><span class="line">#RUN yum install xx</span><br><span class="line"># 需要打到docker中的文件全部copy到docker对应的目录中， 本地目录是相对当前目录，不能写绝对路径, 后面这个路径最好加&#x2F;</span><br><span class="line">COPY . &#x2F;home&#x2F;lx7ly&#x2F;</span><br><span class="line">COPY cmd.sh &#x2F;cmd.sh</span><br><span class="line"># 容器启动后直接执行给定脚本</span><br><span class="line">CMD sh &#x2F;cmd.sh</span><br><span class="line">#End</span><br></pre></td></tr></table></figure></li>
+<li><p>制作镜像</p>
+<ul>
+<li><p>进入目录 /home/lx7ly 在目录 /home/lx7ly中目前存在</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">drwxr-xr-x 3 root root 4096 Sep 30 10:49 applications</span><br><span class="line">-rwxr-xr-x 1 root root  128 Sep 30 11:17 cmd.sh</span><br><span class="line">-rw-r--r-- 1 root root  305 Sep 30 17:07 Dockerfile</span><br><span class="line">drwxr-xr-x 3 root root 4096 Jul 14 18:39 Oracle</span><br></pre></td></tr></table></figure></li>
+<li><p>执行命令 docker build -t payimage .</p>
+<ul>
+<li>  最后的点表示dockerfile在当前目录</li>
+</ul>
+</li>
+<li><p>查看存在镜像 docker images</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE</span><br><span class="line">payimage            latest              d7b3db0e1d59        15 hours ago        2.22 GB</span><br><span class="line">centos              latest              c5507be714a7        7 weeks ago         199.7 MB</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>docker commit命令通过运行中容器制作镜像</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit pay7003 payimages:v1.0</span><br></pre></td></tr></table></figure>
+<h3 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h3></li>
+<li><p>cmd.sh</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;bash</span><br><span class="line">domainname&#x3D;$1 # 这里如果没有其他情况可以写死</span><br><span class="line">nohup sh &#x2F;home&#x2F;lx7ly&#x2F;Oracle&#x2F;Middleware&#x2F;user_projects&#x2F;domains&#x2F;$domainname&#x2F;startWebLogic.sh &gt; &#x2F;7003.log &amp; tail -f &#x2F;7003.log </span><br></pre></td></tr></table></figure></li>
+<li><p>通过上一步镜像启动</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker  run -itd --net&#x3D;host --name pay7003 payimage sh &#x2F;cmd.sh</span><br><span class="line">命令解释:</span><br><span class="line">-i: </span><br><span class="line">-t: </span><br><span class="line">-d: 保持，退出后不关闭docker</span><br><span class="line">--name: docker容器的名称</span><br><span class="line">payimage: 镜像名称</span><br><span class="line">--net&#x3D;host: 这个必须有，否则启动报错</span><br><span class="line">sh &#x2F;cmd.sh: 这个是容器启动会执行的命令， 以后docker start 也会执行该文件</span><br></pre></td></tr></table></figure></li>
+<li><p>可以省略第一步操作直接制作容器启动, 不使用docfile直接制作镜像</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run itd -v weblogic:weblogic idk:jdk --net&#x3D;host -p7003:7003 --name&#x3D;pay7003 centos</span><br><span class="line">上面的weblogic前后分别表示本地的目录和远程的目录</span><br><span class="line">-v 可以达到dockfile中copy的效果</span><br><span class="line">-p 表示端口映射</span><br></pre></td></tr></table></figure></li>
+<li><p>容器管理</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker start pay7003</span><br><span class="line">docker stop pay7003</span><br><span class="line">docker rm pay7003 #删除容器, 先stop再rm</span><br></pre></td></tr></table></figure>
+<h3 id="连接容器，检查服务"><a href="#连接容器，检查服务" class="headerlink" title="连接容器，检查服务"></a>连接容器，检查服务</h3></li>
+<li><p>查看现有容器</p>
+<ul>
+<li><p>docker ps -a</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES</span><br><span class="line">dc2eeca7873e payimage &quot;sh &#x2F;cmd.sh&quot; 15 hours ago Exited (137) 15 hours ago pay7003 </span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>登录容器</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it pay7003 bash #这里pay7003是容器name， 也可以使用容器id</span><br><span class="line">通过该命令可以连接到容器pay7003的bash中， 跟正常操作cenos系统一样, 完成后exit即可</span><br></pre></td></tr></table></figure>
+<h1 id="容器管理"><a href="#容器管理" class="headerlink" title="容器管理"></a>容器管理</h1></li>
+</ul>
+<h2 id="大杀器片甲不留-自己玩可以用"><a href="#大杀器片甲不留-自己玩可以用" class="headerlink" title="大杀器片甲不留, 自己玩可以用"></a>大杀器片甲不留, 自己玩可以用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker kill $(docker ps -q) ; docker rm $(docker ps -a -q) ; docker rmi $(docker images -q -a) </span><br></pre></td></tr></table></figure>
+<h2 id="删除镜像"><a href="#删除镜像" class="headerlink" title="删除镜像"></a>删除镜像</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi payimage</span><br></pre></td></tr></table></figure>
+<h1 id="问题处理"><a href="#问题处理" class="headerlink" title="问题处理"></a>问题处理</h1><h2 id="archlinux中启动docker实例报错"><a href="#archlinux中启动docker实例报错" class="headerlink" title="archlinux中启动docker实例报错"></a>archlinux中启动docker实例报错</h2><ul>
+<li>systemctl start docker.service报错，直接使用systemctl enable<br>  docker.service重启机器正常</li>
+</ul>
+<h2 id="docker镜像持久化到本地-待测试"><a href="#docker镜像持久化到本地-待测试" class="headerlink" title="docker镜像持久化到本地(待测试)"></a>docker镜像持久化到本地(待测试)</h2><ul>
+<li>  有的项目太大了，而且是公司内部使用不合适到公网</li>
+<li>  docker save java -o ./java.tar</li>
+<li>copy到其他伙伴机器后可以使用: docker load -i java.tar,<br>  加载到对方容器中</li>
+<li>  参考: <a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000006843830">https://segmentfault.com/a/1190000006843830</a></li>
+</ul>
+<h2 id="docker到底能干个啥"><a href="#docker到底能干个啥" class="headerlink" title="docker到底能干个啥?"></a>docker到底能干个啥?</h2><ul>
+<li>  在团队内部构建本地的仓库，标准化所有的开发环境，使得团队的新人可以快速上手</li>
+<li>  在生产环境部署Docker，这其实是PaaS的虚拟化和自动化的一种方式，利用LXC和Docker能够更便捷地实施PaaS</li>
+<li>  尝试用Docker做分布式集群模拟和测试，成本会更加低廉，更加容易维护</li>
+<li>参考:<br>  <a target="_blank" rel="noopener" href="https://www.csdn.net/article/2014-06-19/2820312-Docker-lxc-paas-virtualization">https://www.csdn.net/article/2014-06-19/2820312-Docker-lxc-paas-virtualization</a></li>
+</ul>
+<h1 id="搞个玩具"><a href="#搞个玩具" class="headerlink" title="搞个玩具"></a>搞个玩具</h1><ul>
+<li>  将公司项目开发做到docker, 帮助新人快速构建开发环境</li>
+<li>项目依赖<ul>
+<li>  jdk1.6</li>
+<li>  weblogic 10.3.6</li>
+<li>  oracle11g (这玩意儿一般不装到本地找虐)</li>
+</ul>
+</li>
+<li>技术点(目前没思路, 关键文件不能提交到仓库中)<ul>
+<li>  源码和容器关系, 如何引用静态文件和变异的class文件到容器中</li>
+<li>  一些关键配置文件  </li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2021/01/17/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1227,230 +1648,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2019/03/04/nodejs%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Mr.zhao">
-      <meta itemprop="description" content="show me your code">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="离线de日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/04/nodejs%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">nodejs实战</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-04 17:50:40" itemprop="dateCreated datePublished" datetime="2019-03-04T17:50:40+08:00">2019-03-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-17 20:00:35" itemprop="dateModified" datetime="2021-01-17T20:00:35+08:00">2021-01-17</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="nodejs项目初始化"><a href="#nodejs项目初始化" class="headerlink" title="nodejs项目初始化"></a>nodejs项目初始化</h1><ol>
-<li><p>创建目录 mkdir nodejs &amp; cd nodejs</p>
-</li>
-<li><p>npm init (根据提示，或者一路回车即可)</p>
-</li>
-<li><p>创建server.js文件,并写入以下内容</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 内置组件  </span></span><br><span class="line"> <span class="keyword">var</span> http=<span class="built_in">require</span>(<span class="string">&quot;http&quot;</span>);</span><br><span class="line"></span><br><span class="line"> http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">request, response</span>)</span>&#123;</span><br><span class="line">     <span class="comment">// 发送 HTTP 头部 </span></span><br><span class="line">     <span class="comment">// HTTP 状态值: 200 : OK</span></span><br><span class="line">     <span class="comment">// 内容类型: text/plain</span></span><br><span class="line">     response.writeHead(<span class="number">200</span>, &#123;<span class="string">&quot;Content-Type&quot;</span>:<span class="string">&quot;text/plain&quot;</span>&#125;);</span><br><span class="line"></span><br><span class="line">     <span class="comment">//响应数据</span></span><br><span class="line">     response.end(<span class="string">&quot;hello nodejs&quot;</span>);</span><br><span class="line"> &#125;).listen(<span class="number">8888</span>);</span><br><span class="line"> <span class="comment">//服务启动成功后输出日志</span></span><br><span class="line"> <span class="built_in">console</span>.log(<span class="string">&#x27;Server running at http://127.0.0.1:8888/&#x27;</span>); </span><br></pre></td></tr></table></figure></li>
-<li><p>node server.js 启动成功</p>
-</li>
-<li><p>浏览器访问 127.0.0.1:8888</p>
-</li>
-</ol>
-<h1 id="npm使用-root"><a href="#npm使用-root" class="headerlink" title="npm使用(root)"></a>npm使用(root)</h1><h2 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h2><ul>
-<li>npm search <mould></li>
-</ul>
-<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><ul>
-<li><p>npm install -g npm</p>
-</li>
-<li><p>npm update -g npm</p>
-</li>
-</ul>
-<h2 id="安装卸载模块"><a href="#安装卸载模块" class="headerlink" title="安装卸载模块"></a>安装卸载模块</h2><ul>
-<li><p>当前目录<br>npm install <mould><br>npm uninstall <mould></p>
-</li>
-<li><p>全局<br>npm install -g <mould><br>npm uninstall -g <mould></p>
-</li>
-</ul>
-<h2 id="查看模块安装信息"><a href="#查看模块安装信息" class="headerlink" title="查看模块安装信息"></a>查看模块安装信息</h2><ul>
-<li><p>一个<br>npm list -g</p>
-</li>
-<li><p>所有<br>npm list <mould></p>
-</li>
-</ul>
-<h2 id="Package-json属性说明"><a href="#Package-json属性说明" class="headerlink" title="Package.json属性说明"></a>Package.json属性说明</h2>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">name - 包名。</span><br><span class="line">version - 包的版本号。</span><br><span class="line">description - 包的描述。</span><br><span class="line">homepage - 包的官网 url 。</span><br><span class="line">author - 包的作者姓名。</span><br><span class="line">contributors - 包的其他贡献者姓名。</span><br><span class="line">dependencies - 依赖包列表。如果依赖包没有安装，npm 会自动将依赖包安装在 node_module 目录下。</span><br><span class="line">repository - 包代码存放的地方的类型，可以是 git 或 svn，git 可在 Github 上。</span><br><span class="line">main - main 字段指定了程序的主入口文件，require(&#39;moduleName&#39;) 就会加载这个文件。这个字段的默认值是模块根目录下面的 index.js。</span><br><span class="line">keywords - 关键字</span><br></pre></td></tr></table></figure>
-
-<h2 id="whatis-npm"><a href="#whatis-npm" class="headerlink" title="whatis npm"></a>whatis npm</h2><ol>
-<li>npm就是js下的maven, 支持包依赖， 执行等</li>
-<li>package.json == pom.xml</li>
-</ol>
-<h1 id="var-和-const"><a href="#var-和-const" class="headerlink" title="var 和 const"></a>var 和 const</h1><h1 id="初始化buffer"><a href="#初始化buffer" class="headerlink" title="初始化buffer"></a>初始化buffer</h1><ul>
-<li>类似于初始化一个list</li>
-<li>Buffer.alloc(5)</li>
-</ul>
-<h1 id="nodejs对标的是其他的后端语言类似java"><a href="#nodejs对标的是其他的后端语言类似java" class="headerlink" title="nodejs对标的是其他的后端语言类似java"></a>nodejs对标的是其他的后端语言类似java</h1><h1 id="require的执行流程"><a href="#require的执行流程" class="headerlink" title="require的执行流程"></a>require的执行流程</h1><ol>
-<li>如果 X 是内置模块<ol>
-<li> 返回内置模块</li>
-<li> 停止执行</li>
-</ol>
-</li>
-<li>如果 X 以 ‘/‘ 开头<ol>
-<li>设置 Y 为文件根路径</li>
-</ol>
-</li>
-<li>如果 X 以 ‘./‘ 或 ‘/‘ or ‘../‘ 开头<ol>
-<li>LOAD_AS_FILE(Y + X)</li>
-<li>LOAD_AS_DIRECTORY(Y + X)</li>
-</ol>
-</li>
-<li>LOAD_NODE_MODULES(X, dirname(Y))</li>
-<li>抛出异常 “not found”</li>
-</ol>
-<h1 id="extend"><a href="#extend" class="headerlink" title="extend"></a>extend</h1><p>Sub 仅仅继承了Base 在原型中定义的函数，而构造函数内部创造的 base 属 性和 sayHello 函数都没有被 Sub 继承。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>如果有一定变成基础，nodejs还是很easy的， 例子6一下就可以， 入门容易，用好就需要code code code!</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2019/01/14/window%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Mr.zhao">
-      <meta itemprop="description" content="show me your code">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="离线de日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/01/14/window%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/" class="post-title-link" itemprop="url">windows下常用工具</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-01-14 10:50:40" itemprop="dateCreated datePublished" datetime="2019-01-14T10:50:40+08:00">2019-01-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-17 20:08:05" itemprop="dateModified" datetime="2021-01-17T20:08:05+08:00">2021-01-17</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li>everything 搜索神器, 强烈推荐</li>
-<li>faststone capture 红绿小工具，工具小功能强</li>
-<li>clcl  复制粘贴神器</li>
-<li>f.lux linux和windows都用，自动根据经纬度调整屏幕亮度</li>
-<li>launchy  运行软件(可以自己将软件的快捷方式起别名放入一个目录，该软件引用，很爽)</li>
-<li>自己编写的一些 bat小工具 自动化</li>
-<li>远程工具 anydesk teamview</li>
-<li>zeal 文档阅读器</li>
-<li>itellij idea java开发工具<br>  插件推荐: vim  plantuml(这个玩意儿依赖于一个小软件(graphviz)， 需要单独装)、 jprofiler(需要配套对应的软件, 用来查看系统耗时，作为调节性能的依据)</li>
-<li>软媒魔方 偶尔用用 更新软件了什么的, 现在随便找个软件管理什么的，可以省下满世间找软件的尴尬</li>
-<li>unlocker  文件诡异的锁住了，用这个解锁，随便搞</li>
-<li>ccleaner 电脑清理的，不知道为啥一直用着</li>
-<li>beyond compare  文件比较软件</li>
-<li>rescue time 有兴趣可以看看， 这个是记录你一天在干嘛的软件</li>
-<li>gvim 文本编辑器 我一般只用这个和notepad++</li>
-<li>scoop命令行下的包管理器，软件有点少但是社区还是很给力的, 建议添加extral包</li>
-</ol>
-<ul>
-<li>参考: <a target="_blank" rel="noopener" href="https://sspai.com/post/52710">https://sspai.com/post/52710</a></li>
-</ul>
-<ol start="17">
-<li>dism++ 垃圾清理, 备份还原，等。</li>
-<li>spacesniffer 无需安装，分析磁盘，清理文件</li>
-<li>独立版本qq软件管理</li>
-</ol>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.52pojie.cn/thread-1170453-1-1.html">https://www.52pojie.cn/thread-1170453-1-1.html</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1516,20 +1717,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-count">42</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
