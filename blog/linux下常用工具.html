@@ -27,11 +27,11 @@
 <meta property="og:site_name" content="离线de日常">
 <meta property="og:description" content="arch linux (linux 命令很强大， 命令才是王道啊~~~)  f.lux 根据经纬度调整屏幕亮度   网易云音乐 （这段时间跪了, 打开白板 ）   sublime text 偶尔当下记事本   为知笔记 笔记软件， 因为跨平台我就支持了  input  1234567891011121314#export XIM&#x3D;fcitx#export XIM_PROGRAM&amp;#x3D">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-01-17T12:08:59.258Z">
-<meta property="article:modified_time" content="2021-01-17T12:08:59.254Z">
+<meta property="article:published_time" content="2021-02-02T10:07:41.633Z">
+<meta property="article:modified_time" content="2021-02-02T10:07:41.629Z">
 <meta property="article:author" content="Mr.zhao">
 <meta property="article:tag" content="linux">
-<meta property="article:tag" content="工具">
+<meta property="article:tag" content="常用工具">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://zhaozhiwei1992.github.io/blog/linux%E4%B8%8B%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7">
@@ -211,7 +211,7 @@
 </li>
 <li><p>锁屏 yaourt -S xlockmore</p>
 </li>
-<li><p>create<del>ap</del> github下的一个项目， 共享热点必备</p>
+<li><p>create_ap github下的一个项目， 共享热点必备</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">配置启动: nohup sudo create_ap wlp2s0 enp0s20u2u4 archer 1234567890 &gt; &#x2F;tmp&#x2F;create_ap.log &amp; tail -f &#x2F;tmp&#x2F;create_ap.log</span><br></pre></td></tr></table></figure></li>
 <li><p>数据传输工具， 类似飞球， yaourt -s iptux,<br>但是最新的0.75版本有问题， 不能扫描局域网用户,<br>目前使用0.6.4版本进行源码编译安装</p>
 </li>
@@ -249,7 +249,7 @@
 <li>  <a target="_blank" rel="noopener" href="https://www.dropbox.com/downloading?src=index&full=1">离线版安装地址</a></li>
 </ul>
 </li>
-<li><p>ag搜索 the<del>silversearcher</del></p>
+<li><p>ag搜索 the_silver_searcher</p>
 </li>
 <li><p>xml处理工具 xmlstarlet, jq处理json, shyaml处理yaml</p>
 </li>
@@ -270,27 +270,30 @@
 </ul>
 </li>
 <li><p>截图工具 scrot</p>
+<ul>
+<li>  scrot 全屏</li>
+<li>  scrot -s 截取</li>
+<li>  scrot -e &#39;mv $f ~/Pictures/scrot_screenshots&#39; 截图后执行命令</li>
+</ul>
 </li>
-</ol>
+<li><p>命令行下模糊搜索工具 fzf</p>
 <ul>
-<li>scrot 全屏</li>
-<li>scrot -s 截取</li>
-<li>scrot -e ‘mv $f ~/Pictures/scrot_screenshots’ 截图后执行命令</li>
+<li>搭配其它工具或者自己组合命令都很6,可以作为插件加入到vim, ranger,<br>  zsh中</li>
+<li>  通过搜索可以更方便的打开文件，不用一一展开</li>
 </ul>
-<ol start="28">
-<li>命令行下模糊搜索工具 fzf</li>
-</ol>
+</li>
+<li><p>简化版命令手册 tldr, 我这里使用的是tealdeer,arch默认的使用不了,<br>可以优雅的查看常用命令的基本使用方式</p>
+</li>
+<li><p>远程连接windows桌面</p>
 <ul>
-<li>搭配其它工具或者自己组合命令都很6,可以作为插件加入到vim, ranger, zsh中</li>
-<li>通过搜索可以更方便的打开文件，不用一一展开</li>
+<li>  rdesktop 192.168.2.144 -p lt@180606 -u lt1 -g workarea</li>
+<li>rdesktop 192.168.2.144 -p password -u username -r<br>  disk:share=/tmp<br>  可以将当前系统下/tmp目录作为共享磁盘给远程服务器，可以实现文件copy</li>
 </ul>
-<ol start="29">
-<li>简化版命令手册 tldr, 我这里使用的是tealdeer,arch默认的使用不了, 可以优雅的查看常用命令的基本使用方式</li>
+</li>
 </ol>
 <h1 id="问题处理"><a href="#问题处理" class="headerlink" title="问题处理"></a>问题处理</h1><ol>
 <li> 网易云音乐白板 : rm `locate netease |grep cache` 删掉缓存即可</li>
 </ol>
-<h1 id="远程连接windows桌面"><a href="#远程连接windows桌面" class="headerlink" title="远程连接windows桌面"></a>远程连接windows桌面</h1><p>➜ ~ rdesktop 192.168.2.144 -p lt@180606 -u lt1 -g workarea</p>
 
       </div>
       
@@ -352,7 +355,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#arch-linux-linux-%E5%91%BD%E4%BB%A4%E5%BE%88%E5%BC%BA%E5%A4%A7%EF%BC%8C-%E5%91%BD%E4%BB%A4%E6%89%8D%E6%98%AF%E7%8E%8B%E9%81%93%E5%95%8A"><span class="nav-number">1.</span> <span class="nav-text">arch linux (linux 命令很强大， 命令才是王道啊~~~)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">问题处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5windows%E6%A1%8C%E9%9D%A2"><span class="nav-number">3.</span> <span class="nav-text">远程连接windows桌面</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#arch-linux-linux-%E5%91%BD%E4%BB%A4%E5%BE%88%E5%BC%BA%E5%A4%A7%EF%BC%8C-%E5%91%BD%E4%BB%A4%E6%89%8D%E6%98%AF%E7%8E%8B%E9%81%93%E5%95%8A"><span class="nav-number">1.</span> <span class="nav-text">arch linux (linux 命令很强大， 命令才是王道啊~~~)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">问题处理</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
