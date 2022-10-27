@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"zhaozhiwei1992.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="目的将java的代码注释转换为json格式，并写入文件 本文介绍了完整的开发流程及如何使用 运行环境jdk1.8maven3.x设计思想系统构思  编译完成的class里没有注释的，所以注释信息只有在编译代码时存储起来  将能够生成javadoc.json的代码做成maven插件  关键技术与算法需要实现Doclet必须引入下述jar包, 来导入com.sun.javadoc.Doclet 123">
+<meta property="og:type" content="website">
+<meta property="og:title" content="java注释转json插件开发实战">
+<meta property="og:url" content="http://zhaozhiwei1992.github.io/blog/java%E6%B3%A8%E9%87%8A%E8%BD%ACjson%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98.html">
+<meta property="og:site_name" content="离线de日常">
+<meta property="og:description" content="目的将java的代码注释转换为json格式，并写入文件 本文介绍了完整的开发流程及如何使用 运行环境jdk1.8maven3.x设计思想系统构思  编译完成的class里没有注释的，所以注释信息只有在编译代码时存储起来  将能够生成javadoc.json的代码做成maven插件  关键技术与算法需要实现Doclet必须引入下述jar包, 来导入com.sun.javadoc.Doclet 123">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-10-26T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-10-27T09:15:26.932Z">
+<meta property="article:author" content="Mr.zhao">
+<meta property="article:tag" content="maven插件">
+<meta property="article:tag" content="javadoc">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://zhaozhiwei1992.github.io/blog/java%E6%B3%A8%E9%87%8A%E8%BD%ACjson%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>java注释转json插件开发实战 | 离线de日常
+</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">离线de日常</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content page posts-expand">
+            
+
+    
+    
+    
+    <div class="post-block" lang="zh-CN">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">java注释转json插件开发实战
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h1 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h1><p>将java的代码注释转换为json格式，并写入文件</p>
+<p>本文介绍了完整的开发流程及如何使用</p>
+<h1 id="运行环境"><a href="#运行环境" class="headerlink" title="运行环境"></a>运行环境</h1><h2 id="jdk1-8"><a href="#jdk1-8" class="headerlink" title="jdk1.8"></a>jdk1.8</h2><h2 id="maven3-x"><a href="#maven3-x" class="headerlink" title="maven3.x"></a>maven3.x</h2><h1 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h1><h2 id="系统构思"><a href="#系统构思" class="headerlink" title="系统构思"></a>系统构思</h2><ol>
+<li> 编译完成的class里没有注释的，所以注释信息只有在编译代码时存储起来</li>
+<li> 将能够生成javadoc.json的代码做成maven插件</li>
+</ol>
+<h2 id="关键技术与算法"><a href="#关键技术与算法" class="headerlink" title="关键技术与算法"></a>关键技术与算法</h2><h3 id="需要实现Doclet"><a href="#需要实现Doclet" class="headerlink" title="需要实现Doclet"></a>需要实现Doclet</h3><p>必须引入下述jar包, 来导入com.sun.javadoc.Doclet</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.sun&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;tools&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.8&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;scope&gt;system&lt;&#x2F;scope&gt;</span><br><span class="line">    &lt;systemPath&gt;&#x2F;home&#x2F;zhaozhiwei&#x2F;applications&#x2F;jdk1.8.0_181&#x2F;lib&#x2F;tools.jar&lt;&#x2F;systemPath&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="代码路径"><a href="#代码路径" class="headerlink" title="代码路径"></a>代码路径</h3><p><a href="https:github.com:zhaozhiwei1992/javadoc-json-maven-plugin">https:github.com:zhaozhiwei1992/javadoc-json-maven-plugin</a></p>
+<p>入口: com.example.Javadoc2JsonMojo#execute</p>
+<h3 id="生成javadoc-json文件"><a href="#生成javadoc-json文件" class="headerlink" title="生成javadoc.json文件"></a>生成javadoc.json文件</h3><p>com.example.CommentToJson(做成maven插件使用)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;com.example.web.rest.PersonResource.findByID(java.lang.Long)#date&quot;: &quot;2022&#x2F;10&#x2F;25-上午10:19&quot;,</span><br><span class="line">  &quot;com.example.web.rest.PersonResource#Package&quot;: &quot;com&#x2F;example&#x2F;springbootcache&#x2F;controller&#x2F;PersonController.java&quot;,</span><br><span class="line">  &quot;com.example.web.rest.PersonResource.findByID(java.lang.Long)#Description&quot;: &quot;根据id获取用户信息&quot;,</span><br><span class="line">  &quot;com.example.web.rest.PersonResource.save(Person)#method&quot;: &quot;save&quot;,</span><br><span class="line">  &quot;com.example.web.rest.PersonResource#author&quot;: &quot;zhaozhiwei&quot;,</span><br><span class="line">  &quot;com.example.web.rest.PersonResource.deleteByID(java.lang.Long)#Description&quot;: &quot;根据id删除person信息&quot;,</span><br><span class="line">  &quot;com.example.web.rest.PersonResource#Title&quot;: &quot;PersonController&quot;,</span><br><span class="line">  &quot;com.example.web.rest.PersonResource.update(Person)#date&quot;: &quot;2022&#x2F;10&#x2F;25-上午10:21&quot;,</span><br><span class="line">  &quot;com.example.web.rest.PersonResource.save(Person)#Description&quot;: &quot;保存方法&quot;,</span><br><span class="line">  &quot;com.example.web.rest.PersonResource#Description&quot;: &quot;用户信息接口&quot;,</span><br><span class="line">  &quot;com.example.web.rest.PersonResource#date&quot;: &quot;2022&#x2F;10&#x2F;25 下午8:23&quot;,</span><br><span class="line">  &quot;com.example.web.rest.PersonResource.update(Person)#Description&quot;: &quot;修改内容看是否会调整缓存&quot;,</span><br><span class="line">  ... 省略了一大堆</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="类代码注释规范"><a href="#类代码注释规范" class="headerlink" title="类代码注释规范"></a>类代码注释规范</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * @Title: PersonController</span><br><span class="line"> * @Package: com&#x2F;example&#x2F;springbootcache&#x2F;controller&#x2F;PersonController.java</span><br><span class="line"> * @Description: 用户信息接口</span><br><span class="line"> * @author: zhaozhiwei</span><br><span class="line"> * @date: 2022&#x2F;10&#x2F;25 下午8:23</span><br><span class="line"> * @version: V1.0</span><br><span class="line"> *&#x2F;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="方法代码注释规范"><a href="#方法代码注释规范" class="headerlink" title="方法代码注释规范"></a>方法代码注释规范</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * @date: 2022&#x2F;10&#x2F;25-上午10:19</span><br><span class="line"> * @author: zhaozhiwei</span><br><span class="line"> * @method: findByID</span><br><span class="line">  * @param id : 唯一id</span><br><span class="line"> * @return: com.lx.demo.springbootcache.domain.Person</span><br><span class="line"> * @Description: 根据id获取用户信息</span><br><span class="line"> * 获取十次， 只有第一次是读库，后续都是取缓存</span><br><span class="line"> * 直接删掉redis缓存里的内容，仍然可以获取数据，并且走缓存，此时获取的是服务缓存ehcache中的信息</span><br><span class="line"> * seq 10 |xargs -i curl -XGET &#39;http:&#x2F;&#x2F;localhost:8080&#x2F;persons&#x2F;2&#39;</span><br><span class="line"> *&#x2F;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="参数定义"><a href="#参数定义" class="headerlink" title="参数定义"></a>参数定义</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@parameter额外属性：</span><br><span class="line"></span><br><span class="line">@parameter alias&#x3D;&quot;&lt;aliasName&gt;&quot;:为mojo参数使用别名</span><br><span class="line"></span><br><span class="line">@parameter expression&#x3D;&quot;$&#123;aSystemProperty&#125;&quot;:使用系统属性表达式对mojo参数进行赋值</span><br><span class="line"></span><br><span class="line">@parameter defaultValue&#x3D;&quot;aValue&#x2F;$&#123;anExpression&#125;&quot;:提供一个默认值</span><br></pre></td></tr></table></figure>
+<h1 id="开发流程"><a href="#开发流程" class="headerlink" title="开发流程"></a>开发流程</h1><h2 id="项目构建"><a href="#项目构建" class="headerlink" title="项目构建"></a>项目构建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate -DgroupId&#x3D;com.example -DartifactId&#x3D;javadoc-json-maven-plugin -DarchetypeArtifactId&#x3D;maven-archetype-mojo -DinteractiveMode&#x3D;false</span><br></pre></td></tr></table></figure>
+<h2 id="使用插件"><a href="#使用插件" class="headerlink" title="使用插件"></a>使用插件</h2><h3 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h3><p>在javadoc-json-maven-plugin项目中执行maven的install命令,<br>将插件安装到本地仓库</p>
+<h3 id="引入自定义插件"><a href="#引入自定义插件" class="headerlink" title="引入自定义插件"></a>引入自定义插件</h3><p>在其它项目引入插件测试</p>
+<p>展开插件可以看到Mojo列表，由于项目里只有一个Mojo，且Mojo上用注释@goal指定了名称为generate，所以这里只能看到一个javadoc-json:generate</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">            &lt;plugin&gt;</span><br><span class="line">                &lt;groupId&gt;com.example&lt;&#x2F;groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;javadoc-json-maven-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">                &lt;version&gt;2.0-SNAPSHOT&lt;&#x2F;version&gt;</span><br><span class="line">                &lt;configuration&gt;</span><br><span class="line">&lt;!--                    指定java注释扫描目录--&gt;</span><br><span class="line">                    &lt;basePackage&gt;com&#x2F;example&#x2F;web&#x2F;rest&lt;&#x2F;basePackage&gt;</span><br><span class="line">                &lt;&#x2F;configuration&gt;</span><br><span class="line">            &lt;&#x2F;plugin&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="执行插件"><a href="#执行插件" class="headerlink" title="执行插件"></a>执行插件</h3><p>双击javadoc-json:generate就会执行这个插件。</p>
+<p>执行完毕后，可以看到项目根目录的target文件下多了个javadoc.json文件。</p>
+<h3 id="命令行执行插件-可选"><a href="#命令行执行插件-可选" class="headerlink" title="命令行执行插件(可选)"></a>命令行执行插件(可选)</h3><p>命令格式为mvn groupId:artifactId:version:goal，执行如下命令：</p>
+<p>mvn com.<a href="example:javadoc-json-maven-plugin:1.0.0-SNAPSHOT:generate">example:javadoc-json-maven-plugin:1.0.0-SNAPSHOT:generate</a></p>
+<p>由于我们的插件命名符合规范，所以上面的命令可以简写为：</p>
+<p>mvn javadoc-json:generate</p>
+<h1 id="尚未解决的问题"><a href="#尚未解决的问题" class="headerlink" title="尚未解决的问题"></a>尚未解决的问题</h1><p>javadoc插件去掉异常提示</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><h2 id="maven插件开发"><a href="#maven插件开发" class="headerlink" title="maven插件开发"></a>maven插件开发</h2><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/9cfe599b3c5e">https://www.jianshu.com/p/9cfe599b3c5e</a></p>
+<h2 id="参数定义-1"><a href="#参数定义-1" class="headerlink" title="参数定义"></a>参数定义</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/z69183787/article/details/52984622">https://blog.csdn.net/z69183787/article/details/52984622</a></p>
+
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%AE%E7%9A%84"><span class="nav-number">1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">运行环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#jdk1-8"><span class="nav-number">2.1.</span> <span class="nav-text">jdk1.8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#maven3-x"><span class="nav-number">2.2.</span> <span class="nav-text">maven3.x</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3"><span class="nav-number">3.</span> <span class="nav-text">设计思想</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%9E%84%E6%80%9D"><span class="nav-number">3.1.</span> <span class="nav-text">系统构思</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%AE%97%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">关键技术与算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E8%A6%81%E5%AE%9E%E7%8E%B0Doclet"><span class="nav-number">3.2.1.</span> <span class="nav-text">需要实现Doclet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E8%B7%AF%E5%BE%84"><span class="nav-number">3.2.2.</span> <span class="nav-text">代码路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90javadoc-json%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.3.</span> <span class="nav-text">生成javadoc.json文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E4%BB%A3%E7%A0%81%E6%B3%A8%E9%87%8A%E8%A7%84%E8%8C%83"><span class="nav-number">3.2.4.</span> <span class="nav-text">类代码注释规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BB%A3%E7%A0%81%E6%B3%A8%E9%87%8A%E8%A7%84%E8%8C%83"><span class="nav-number">3.2.5.</span> <span class="nav-text">方法代码注释规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E5%AE%9A%E4%B9%89"><span class="nav-number">3.2.6.</span> <span class="nav-text">参数定义</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">开发流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA"><span class="nav-number">4.1.</span> <span class="nav-text">项目构建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%8F%92%E4%BB%B6"><span class="nav-number">4.2.</span> <span class="nav-text">使用插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Install"><span class="nav-number">4.2.1.</span> <span class="nav-text">Install</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8F%92%E4%BB%B6"><span class="nav-number">4.2.2.</span> <span class="nav-text">引入自定义插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E6%8F%92%E4%BB%B6"><span class="nav-number">4.2.3.</span> <span class="nav-text">执行插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%89%A7%E8%A1%8C%E6%8F%92%E4%BB%B6-%E5%8F%AF%E9%80%89"><span class="nav-number">4.2.4.</span> <span class="nav-text">命令行执行插件(可选)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%9A%E6%9C%AA%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">5.</span> <span class="nav-text">尚未解决的问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#maven%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91"><span class="nav-number">6.1.</span> <span class="nav-text">maven插件开发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E5%AE%9A%E4%B9%89-1"><span class="nav-number">6.2.</span> <span class="nav-text">参数定义</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mr.zhao</p>
+  <div class="site-description" itemprop="description">show me your code</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhaozhiwei1992" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhaozhiwei1992" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/p205/posts" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;p205&#x2F;posts" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.jianshu.com/u/65f51bc73109" title="简书 → https:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;65f51bc73109" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>简书</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/qq347061329" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;qq347061329" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>博客园</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u012768510" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u012768510" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.zhao</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
