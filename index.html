@@ -162,6 +162,118 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2022/12/25/%E9%80%9A%E8%BF%87%E7%94%B5%E8%84%91%E6%89%8B%E6%9F%84%E7%8E%A9%E5%AE%89%E5%8D%93%E6%89%8B%E6%B8%B8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mr.zhao">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/12/25/%E9%80%9A%E8%BF%87%E7%94%B5%E8%84%91%E6%89%8B%E6%9F%84%E7%8E%A9%E5%AE%89%E5%8D%93%E6%89%8B%E6%B8%B8/" class="post-title-link" itemprop="url">如何通过电脑手柄玩安卓手机游戏?</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-12-25 00:00:00" itemprop="dateCreated datePublished" datetime="2022-12-25T00:00:00+08:00">2022-12-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-26 09:21:35" itemprop="dateModified" datetime="2022-12-26T09:21:35+08:00">2022-12-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="环境工具"><a href="#环境工具" class="headerlink" title="环境工具"></a>环境工具</h1><p>系统archlinux</p>
+<p>手柄 北通360, usb</p>
+<p>安卓手机 小米11</p>
+<p>游戏 流行群侠传</p>
+<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><h2 id="手机要打开开发者调试-并通过usb连接测试"><a href="#手机要打开开发者调试-并通过usb连接测试" class="headerlink" title="手机要打开开发者调试, 并通过usb连接测试"></a>手机要打开开发者调试, 并通过usb连接测试</h2><p><strong>不属于此次重点, 可自行搜索, 通过命令行adb<br>devices测试输出，说明连接成功</strong></p>
+<h2 id="安装scrcpy"><a href="#安装scrcpy" class="headerlink" title="安装scrcpy"></a>安装scrcpy</h2><p>此工具用来在电脑端远程操作手机, 并且该软件开源, 而且使用还算流畅</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S scrcpy</span><br></pre></td></tr></table></figure>
+<p>在手机电脑正常连接的情况下, 直接启动改程序即可</p>
+<h2 id="测试键盘控制"><a href="#测试键盘控制" class="headerlink" title="测试键盘控制"></a>测试键盘控制</h2><p>通过键盘测试游戏中一些主要操作的对应按键, 后续跟手柄进行绑定</p>
+<h3 id="键盘"><a href="#键盘" class="headerlink" title="键盘"></a>键盘</h3><ol>
+<li><p> 前后左右(wsad)</p>
+</li>
+<li><p> 轻击(h)</p>
+</li>
+<li><p> 重击(j)</p>
+</li>
+<li><p> 技能1(u)</p>
+</li>
+<li><p>技能2/3(i)</p>
+<p> <strong>随从技能也会一起被放出去,真刺激</strong></p>
+</li>
+<li><p> 闪避(k)</p>
+</li>
+<li><p> 怒气(p)</p>
+</li>
+<li><p> 换武器(l)</p>
+</li>
+</ol>
+<h2 id="编写手柄键盘按键映射程序"><a href="#编写手柄键盘按键映射程序" class="headerlink" title="编写手柄键盘按键映射程序"></a>编写手柄键盘按键映射程序</h2><p>这里要注意, 按键使用的是keyboard组件, 测试使用pyautogui会出现连点的情况</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">通过python + adb + scrcpy的方式，实现手柄玩安卓手机游戏</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># Released by rdb under the Unlicense (unlicense.org)</span></span><br><span class="line"><span class="string"># Based on information from:</span></span><br><span class="line"><span class="string"># https://www.kernel.org/doc/Documentation/input/joystick-api.txt</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 参考</span></span><br><span class="line"><span class="string">https://blog.csdn.net/Enderman_xiaohei/article/details/88050036?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-9-88050036-blog-109139735.pc_relevant_3mothn_strategy_recovery&amp;spm=1001.2101.3001.4242.6&amp;utm_relevant_index=12</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">https://blog.csdn.net/dhjabc_1/article/details/117444998</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">使用:</span></span><br><span class="line"><span class="string">linux下需要使用管理员身份运行(触发按键需要), 否则运行报错</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">sudo python xx.py</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">import</span> pygame</span><br><span class="line"><span class="comment"># 键盘</span></span><br><span class="line"><span class="keyword">import</span> keyboard</span><br><span class="line"><span class="keyword">import</span> pyautogui</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 鼠标, 没啥用了</span></span><br><span class="line"><span class="comment"># from pymouse import PyMouseMeta</span></span><br><span class="line"><span class="comment"># m = PyMouseMeta()</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">JoyToKey</span>:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    将手柄映射到键盘输入上</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">exec</span>(<span class="params">self, joystick, event</span>):</span></span><br><span class="line">        <span class="comment"># 可能的joystick行为: JOYAXISMOTION JOYBALLMOTION JOYBUTTONDOWN JOYBUTTONUP JOYHATMOTION</span></span><br><span class="line">        <span class="comment"># if event.type == pygame.JOYBUTTONUP:</span></span><br><span class="line">        <span class="comment">#     print(&quot;Joystick button released.&quot;)</span></span><br><span class="line">        <span class="comment"># ********************键盘按键********************</span></span><br><span class="line">        <span class="keyword">if</span> event.<span class="built_in">type</span> == pygame.KEYDOWN:</span><br><span class="line">            <span class="comment"># print(pygame.key.get_pressed())</span></span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">            <span class="comment"># event.key 表示键盘按键的值，比如k 的值是107， 回车键的值是13，等</span></span><br><span class="line">            <span class="comment"># self.toggle_show_fps(event.key)</span></span><br><span class="line">        <span class="keyword">elif</span> event.<span class="built_in">type</span> == pygame.KEYUP:</span><br><span class="line">            <span class="comment"># print(pygame.key.get_pressed())</span></span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># ********************手柄操作********************</span></span><br><span class="line">        <span class="keyword">elif</span> event.<span class="built_in">type</span> == pygame.JOYBUTTONDOWN:</span><br><span class="line">            <span class="comment"># 检测到手柄上的键按下</span></span><br><span class="line">            <span class="comment"># print(&quot;Joystick button pressed.&quot;)</span></span><br><span class="line">            <span class="keyword">if</span> joystick.get_button(<span class="number">7</span>) == <span class="number">1</span>:</span><br><span class="line">                <span class="comment"># 手柄start键 --&gt; 键盘中的回车键。</span></span><br><span class="line">                keyboard.press(<span class="string">&#x27;enter&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> joystick.get_button(<span class="number">0</span>) == <span class="number">1</span>:</span><br><span class="line">                <span class="comment"># 手柄A键 --&gt; 键盘的k键，也就是对应跳(闪)的功能。</span></span><br><span class="line">                keyboard.press(<span class="string">&#x27;k&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> joystick.get_button(<span class="number">2</span>) == <span class="number">1</span>:</span><br><span class="line">                <span class="comment"># 手柄X键 --&gt; 键盘u</span></span><br><span class="line">                keyboard.press(<span class="string">&#x27;u&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> joystick.get_button(<span class="number">1</span>) == <span class="number">1</span>:</span><br><span class="line">                <span class="comment"># 手柄B键 --&gt; 键盘i</span></span><br><span class="line">                keyboard.press(<span class="string">&#x27;i&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> joystick.get_button(<span class="number">3</span>) == <span class="number">1</span>:</span><br><span class="line">                <span class="comment"># 手柄Y键 --&gt; 键盘p</span></span><br><span class="line">                keyboard.press(<span class="string">&#x27;p&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> joystick.get_button(<span class="number">4</span>) == <span class="number">1</span>:</span><br><span class="line">                keyboard.press(<span class="string">&#x27;h&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> joystick.get_button(<span class="number">5</span>) == <span class="number">1</span>:</span><br><span class="line">                <span class="comment"># 手柄又键 --&gt; 键盘l(换武器)</span></span><br><span class="line">                <span class="comment"># keyboard.press(&#x27;l&#x27;)</span></span><br><span class="line">                keyboard.press(<span class="string">&#x27;j&#x27;</span>)</span><br><span class="line">        <span class="keyword">elif</span> event.<span class="built_in">type</span> == pygame.JOYBUTTONUP:</span><br><span class="line">            <span class="comment"># print(&quot;Joystick button release.&quot;)</span></span><br><span class="line">            <span class="keyword">if</span> joystick.get_button(<span class="number">7</span>) == <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 手柄start键 --&gt; 键盘中的回车键。</span></span><br><span class="line">                keyboard.release(<span class="string">&#x27;enter&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> joystick.get_button(<span class="number">0</span>) == <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 手柄A键 --&gt; 键盘的k键，也就是对应跳(闪)的功能。</span></span><br><span class="line">                keyboard.release(<span class="string">&#x27;k&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> joystick.get_button(<span class="number">2</span>) == <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 手柄X键 --&gt; 键盘u</span></span><br><span class="line">                keyboard.release(<span class="string">&#x27;u&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> joystick.get_button(<span class="number">1</span>) == <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 手柄B键 --&gt; 键盘i</span></span><br><span class="line">                keyboard.release(<span class="string">&#x27;i&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> joystick.get_button(<span class="number">3</span>) == <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 手柄Y键 --&gt; 键盘p</span></span><br><span class="line">                keyboard.release(<span class="string">&#x27;p&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> joystick.get_button(<span class="number">4</span>) == <span class="number">0</span>:</span><br><span class="line">                keyboard.release(<span class="string">&#x27;h&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> joystick.get_button(<span class="number">5</span>) == <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 手柄又键 --&gt; 键盘l(换武器)</span></span><br><span class="line">                <span class="comment"># keyboard.release(&#x27;l&#x27;)</span></span><br><span class="line">                <span class="comment"># 攻击键容易连点</span></span><br><span class="line">                keyboard.release(<span class="string">&#x27;j&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 攻击键</span></span><br><span class="line">        <span class="keyword">elif</span> event.<span class="built_in">type</span> == pygame.JOYAXISMOTION:</span><br><span class="line">            <span class="comment"># print(&quot;Joystick axis pressed.&quot;)</span></span><br><span class="line">            <span class="keyword">if</span> joystick.get_axis(<span class="number">2</span>) &gt; <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 手柄左x --&gt; 键盘h</span></span><br><span class="line">                <span class="comment"># 注意: 这里需要让手柄, pygame来控制按压和释放, 如果用pyautogui, keydown每次会触发很多按压,(连点)</span></span><br><span class="line">                <span class="comment"># 还是用这个保险</span></span><br><span class="line">                keyboard.press(<span class="string">&#x27;h&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> joystick.get_axis(<span class="number">5</span>) &gt; <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 手柄右x --&gt; 键盘j</span></span><br><span class="line">                keyboard.press(<span class="string">&#x27;j&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">round</span>(joystick.get_axis(<span class="number">1</span>)) &lt; <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 前</span></span><br><span class="line">                keyboard.press(<span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">round</span>(joystick.get_axis(<span class="number">1</span>)) &gt; <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 后</span></span><br><span class="line">                keyboard.press(<span class="string">&#x27;s&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">round</span>(joystick.get_axis(<span class="number">0</span>)) &lt; <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 左</span></span><br><span class="line">                keyboard.press(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">round</span>(joystick.get_axis(<span class="number">0</span>)) &gt; <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 右</span></span><br><span class="line">                keyboard.press(<span class="string">&#x27;d&#x27;</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 释放</span></span><br><span class="line">            <span class="comment"># print(&quot;Joystick axis released.&quot;)</span></span><br><span class="line">            <span class="comment"># print(&quot;s&quot;, joystick.get_axis(1))</span></span><br><span class="line">            <span class="keyword">if</span> joystick.get_axis(<span class="number">2</span>) &lt; <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 手柄左x --&gt; 键盘h</span></span><br><span class="line">                keyboard.release(<span class="string">&#x27;h&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> joystick.get_axis(<span class="number">5</span>) &lt; <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 手柄右x --&gt; 键盘j</span></span><br><span class="line">                keyboard.release(<span class="string">&#x27;j&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">round</span>(joystick.get_axis(<span class="number">0</span>)) == <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 释放左右</span></span><br><span class="line">                keyboard.release(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">                keyboard.release(<span class="string">&#x27;d&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">round</span>(joystick.get_axis(<span class="number">1</span>)) == <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 释放前后</span></span><br><span class="line">                keyboard.release(<span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">                keyboard.release(<span class="string">&#x27;s&#x27;</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 摇杆转向</span></span><br><span class="line">            <span class="comment"># 当前鼠标光标位置, 固定位置, 不单独获取了</span></span><br><span class="line">            <span class="comment"># x, y = pygame.mouse.get_pos()</span></span><br><span class="line">            x, y = <span class="number">482</span>, <span class="number">305</span></span><br><span class="line">            pyautogui.moveTo(x, y)</span><br><span class="line">            <span class="comment"># 1. 设置当前鼠标光标位置, 放中间或偏右</span></span><br><span class="line">            <span class="comment"># 2. 根据摇杆变化, 利用pyautogui进行拖拽</span></span><br><span class="line">            <span class="comment"># 3, 4为遥感的横/纵向变化</span></span><br><span class="line">            <span class="keyword">if</span> joystick.get_axis(<span class="number">3</span>) != <span class="number">0</span> <span class="keyword">or</span> joystick.get_axis(<span class="number">4</span>) != <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 将当前光标位置的东西向下移动100个像素点，在拖动的过程中按住鼠标左键。</span></span><br><span class="line">                <span class="comment"># &gt;&gt; &gt; pyautogui.drag(100, 0, button=&#x27;left&#x27;)</span></span><br><span class="line">                <span class="comment"># 一样的问题, 连点</span></span><br><span class="line">                <span class="comment"># pyautogui.drag(int(round(joystick.get_axis(4))), int(round(joystick.get_axis(3))), button=&#x27;left&#x27;)</span></span><br><span class="line">                print(y+<span class="built_in">int</span>(<span class="built_in">round</span>(joystick.get_axis(<span class="number">4</span>))), x+<span class="built_in">int</span>(<span class="built_in">round</span>(joystick.get_axis(<span class="number">3</span>))))</span><br><span class="line"></span><br><span class="line">                <span class="comment"># 使用pymouse实现上述payautogui的拖拽</span></span><br><span class="line">                <span class="comment"># x, y = pygame.mouse.get_pos()</span></span><br><span class="line">                <span class="comment"># m.press(x, y)</span></span><br><span class="line">                <span class="comment"># x1 = x + joystick.get_axis(3)</span></span><br><span class="line">                <span class="comment"># y1 = y + joystick.get_axis(4)</span></span><br><span class="line">                <span class="comment"># m.move(x1, y1)</span></span><br><span class="line">                <span class="comment"># m.release(x1, y1)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    pygame.init()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 初始化joystick</span></span><br><span class="line">    pygame.joystick.init()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 得到joystick的数量</span></span><br><span class="line">    joystick_count = pygame.joystick.get_count()</span><br><span class="line">    print(<span class="string">&quot;Number of joysticks: &#123;&#125;&quot;</span>.<span class="built_in">format</span>(joystick_count))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 之考虑一个手柄</span></span><br><span class="line">    joystick = pygame.joystick.Joystick(<span class="number">0</span>)</span><br><span class="line">    <span class="comment"># 按键映射对象</span></span><br><span class="line">    joyToKey = JoyToKey()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># -------- 程序主循环 -----------</span></span><br><span class="line">    <span class="comment"># 保持循环直到用户点击关闭按钮</span></span><br><span class="line">    done = <span class="literal">False</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> done:</span><br><span class="line">        <span class="comment"># 事件处理的步骤</span></span><br><span class="line">        <span class="comment"># 手柄事件触发</span></span><br><span class="line">        <span class="keyword">for</span> event <span class="keyword">in</span> pygame.event.get():</span><br><span class="line">            <span class="comment"># 如果用户触发了关闭事件</span></span><br><span class="line">            <span class="keyword">if</span> event.<span class="built_in">type</span> == pygame.QUIT:</span><br><span class="line">                <span class="comment"># 设置我们做了这件事的标志，所以我们就可以退出循环了</span></span><br><span class="line">                done = <span class="literal">True</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                joyToKey.exec(joystick, event)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 关闭窗口并退出.</span></span><br><span class="line">    pygame.quit()</span><br></pre></td></tr></table></figure>
+<h2 id="程序运行"><a href="#程序运行" class="headerlink" title="程序运行"></a>程序运行</h2><p>程序使用的是keyboard组件, 在linux下运行时需要sudo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo python 北通360-流行群侠传手游.py</span><br></pre></td></tr></table></figure>
+<p>此时在scrcpy界面, 通过手柄即可控制手机进行游戏操作, 并且流畅性也还可以</p>
+<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>只是为了提高下游戏的趣味性, 其它操作可自行发掘</p>
+<h2 id="摇杆目前无法适应"><a href="#摇杆目前无法适应" class="headerlink" title="摇杆目前无法适应"></a>摇杆目前无法适应</h2><p>摇杆转向跟鼠标适配未实现, 事件刷新太快, 暂时未想到好方法进行转换</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2022/10/30/%E8%87%AA%E5%AE%9A%E4%B9%89swagger%E6%89%A9%E5%B1%95%E8%A7%A3%E6%9E%90jsondoc/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1008,86 +1120,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2021/05/18/%E8%BF%81%E7%A7%BBpolardb%E9%97%AE%E9%A2%98%E4%B8%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Mr.zhao">
-      <meta itemprop="description" content="show me your code">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="离线de日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/18/%E8%BF%81%E7%A7%BBpolardb%E9%97%AE%E9%A2%98%E4%B8%80/" class="post-title-link" itemprop="url">迁移polardb问题一</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-18 00:00:00" itemprop="dateCreated datePublished" datetime="2021-05-18T00:00:00+08:00">2021-05-18</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%BD%AF%E4%BB%B6-%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">软件, 数据库</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><h2 id="polardb版本"><a href="#polardb版本" class="headerlink" title="polardb版本"></a>polardb版本</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;com.aliyun&lt;&#x2F;groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;polardb-jdbc18&lt;&#x2F;artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.0.0&lt;&#x2F;version&gt;</span><br><span class="line">  &lt;scope&gt;system&lt;&#x2F;scope&gt;</span><br><span class="line">  &lt;systemPath&gt;$&#123;lib.dir&#125;&#x2F;polardb-jdbc18.jar&lt;&#x2F;systemPath&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="mybatis版本"><a href="#mybatis版本" class="headerlink" title="mybatis版本"></a>mybatis版本</h2><p><strong>直接使用springboot引入</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.mybatis.spring.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;mybatis-spring-boot-starter&lt;&#x2F;artifactId&gt;</span><br><span class="line">  &lt;version&gt;2.1.4&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
-<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">javax.servlet.ServletException: org.springframework.dao.DataIntegrityViolationException: </span><br><span class="line">### The error may exist in com&#x2F;xx&#x2F;templatedef&#x2F;dao&#x2F;oracle&#x2F;XXTemplateDef_SqlMap.xml</span><br><span class="line">### The error may involve com.xx.templatedef.dao.XXTemplateDefDao.selectTemplateDefByCategoryAndState-Inline</span><br><span class="line">### The error occurred while setting parameters</span><br><span class="line">### SQL: select * from act_xx_tem_def where category&#x3D;? and deploy_state&#x3D;1</span><br><span class="line">### Cause: com.aliyun.polardb.util.PSQLException: 不良的类型值 long : </span><br><span class="line">com.aliyun.polardb.util.PSQLException: canot convert the column of type BYTEA to requested type long;</span><br></pre></td></tr></table></figure>
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>mybatis查询act_tem_def表涉及到blob字段(content_bytes)，<br>默认的BlobTypeHandler的getBlob方法不适用, 需要重写handler</p>
-<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><ol>
-<li> 在业务下重写BlobTypeHandler, 获取getBinaryStream然后转换byte数组</li>
-<li> mapper.xml -&gt; resultmap中, 加入下述转换</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;result column&#x3D;&quot;CONTENT_BYTES&quot; property&#x3D;&quot;contentBytes&quot; jdbcType&#x3D;&quot;BLOB&quot;</span><br><span class="line">  typeHandler&#x3D;&quot;com.example.springbootpolardb.handler.PolarDbBlobTypeHandler&quot;&#x2F;&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="转换逻辑"><a href="#转换逻辑" class="headerlink" title="转换逻辑"></a>转换逻辑</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public static byte[] toByteArray(InputStream input) throws IOException &#123;</span><br><span class="line">    ByteArrayOutputStream output &#x3D; new ByteArrayOutputStream();</span><br><span class="line">    byte[] buffer &#x3D; new byte[4096];</span><br><span class="line">    int n &#x3D; 0;</span><br><span class="line">    while (-1 !&#x3D; (n &#x3D; input.read(buffer))) &#123;</span><br><span class="line">        output.write(buffer, 0, n);</span><br><span class="line">    &#125;</span><br><span class="line">    return output.toByteArray();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><ul>
-<li>  <a target="_blank" rel="noopener" href="https://github.com/zhaozhiwei1992/demo/tree/master/springboot/springboot-polardb">springboot-polardb</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1157,20 +1189,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
