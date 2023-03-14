@@ -162,6 +162,130 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2022/03/14/%E6%89%A9%E5%B1%95%E5%B1%8F%E5%AE%9E%E6%88%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mr.zhao">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/14/%E6%89%A9%E5%B1%95%E5%B1%8F%E5%AE%9E%E6%88%98/" class="post-title-link" itemprop="url">如何将手机/平板/其它电脑作为扩展屏?</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-03-14 00:00:00" itemprop="dateCreated datePublished" datetime="2022-03-14T00:00:00+08:00">2022-03-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%BD%AF%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">软件</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%BD%AF%E4%BB%B6/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="普通屏幕"><a href="#普通屏幕" class="headerlink" title="普通屏幕"></a>普通屏幕</h1><p>连根线就行, 跳过</p>
+<h1 id="如何将手机-平板-其它电脑作为扩展屏幕"><a href="#如何将手机-平板-其它电脑作为扩展屏幕" class="headerlink" title="如何将手机/平板/其它电脑作为扩展屏幕"></a>如何将手机/平板/其它电脑作为扩展屏幕</h1><h2 id="一些可行的方案"><a href="#一些可行的方案" class="headerlink" title="一些可行的方案"></a>一些可行的方案</h2><h3 id="如果只是为了演示屏幕-方案很多-使用各种远程工具啥的都可以如anydesk-向日葵等"><a href="#如果只是为了演示屏幕-方案很多-使用各种远程工具啥的都可以如anydesk-向日葵等" class="headerlink" title="如果只是为了演示屏幕,方案很多, 使用各种远程工具啥的都可以如anydesk, 向日葵等."></a>如果只是为了演示屏幕,方案很多, 使用各种远程工具啥的都可以如anydesk, 向日葵等.</h3><h3 id="如果是扩展-那必须要是要支持部分内容到扩展屏幕"><a href="#如果是扩展-那必须要是要支持部分内容到扩展屏幕" class="headerlink" title="如果是扩展, 那必须要是要支持部分内容到扩展屏幕"></a>如果是扩展, 那必须要是要支持部分内容到扩展屏幕</h3><p>可以配置活动窗口如deskreen</p>
+<p>采用vnc的工具如 VirtScreen</p>
+<h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><p>基于Intel集显中的Virtualheads功能, 目前笔记本也是集显，没试其他方案</p>
+<p>这里也是采用vnc技术来搞， 如果是用现成的推荐virtscreen</p>
+<p>扩展屏在 <strong>右</strong></p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>archlinux(主) + i3wm桌面管理器</p>
+<p>android(扩展) 小米平板</p>
+<h2 id="xrandr设置屏幕扩展"><a href="#xrandr设置屏幕扩展" class="headerlink" title="xrandr设置屏幕扩展"></a>xrandr设置屏幕扩展</h2><p>将笔记本屏幕扩展到android平板上, 并且采用分屏方式</p>
+<h3 id="查看现有配置"><a href="#查看现有配置" class="headerlink" title="查看现有配置"></a>查看现有配置</h3><p>~: xrandr</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Screen 0: minimum 8 x 8, current 1920 x 1080, maximum 32767 x 32767</span><br><span class="line">eDP1 connected primary 1920x1080+0+0 (normal left inverted right x axis y axis) 310mm x 170mm</span><br><span class="line">   1920x1080     60.02*+  59.93  </span><br><span class="line">   1680x1050     59.88  </span><br><span class="line">   1400x1050     59.98  </span><br><span class="line">   1600x900      60.00    59.95    59.82  </span><br><span class="line">DP1 disconnected (normal left inverted right x axis y axis)</span><br><span class="line">DP2 disconnected (normal left inverted right x axis y axis)</span><br><span class="line">HDMI1 disconnected (normal left inverted right x axis y axis)</span><br><span class="line">HDMI2 disconnected (normal left inverted right x axis y axis)</span><br></pre></td></tr></table></figure>
+<p>该命令显示了电脑当前的显示状态，Screen 0<br>是当前正在显示的屏幕的分辨率参数，eDP1是笔记本内置显示屏当前的分辨率参数，下面的一堆数字是该显示屏所支持的分辨率及刷新率，最底下的三行分别是<br>HDMI 接口输出及虚拟输出，如果没有连接则会显示disconnect</p>
+<h3 id="增加虚拟屏幕"><a href="#增加虚拟屏幕" class="headerlink" title="增加虚拟屏幕"></a>增加虚拟屏幕</h3><ol>
+<li><p>使用cvt命令获取所需分辨率的相应配置信息,<br> 如我想让扩展屏幕分辨率为1920x1080</p>
+<p> ~: cvt 1920 1080</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 1920x1080 59.96 Hz (CVT 2.07M9) hsync: 67.16 kHz; pclk: 173.00 MHz</span><br><span class="line">Modeline &quot;1920x1080_60.00&quot;  173.00  1920 2048 2248 2576  1080 1083 1088 1120 -hsync +vsync</span><br></pre></td></tr></table></figure>
+<p> 其中第二行 Modeline <strong>后面的内容</strong> 是接下来需要的</p>
+</li>
+<li><p>产生新的分辨率模式 xrandr –newmode</p>
+<p> ~: xrandr –newmode<br> 上述Modelline后边部分，或者直接使用下面命令一步到位</p>
+<p> ~: xrandr –newmode `cvt 1920 1080|tail -n1 |sed &#39;s/Modeline<br> //&#39; |sed &#39;s/&quot;//g&#39;`</p>
+<p> 此时通过查看xrandr, 多出了Virtual1部分,</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Screen 0: minimum 8 x 8, current 1920 x 1080, maximum 32767 x 32767</span><br><span class="line">eDP1 connected primary 1920x1080+0+0 (normal left inverted right x axis y axis) 310mm x 170mm</span><br><span class="line">   1920x1080     60.02*+  59.93  </span><br><span class="line">   1680x1050     59.88  </span><br><span class="line">   1400x1050     59.98  </span><br><span class="line">DP1 disconnected (normal left inverted right x axis y axis)</span><br><span class="line">DP2 disconnected (normal left inverted right x axis y axis)</span><br><span class="line">HDMI1 disconnected (normal left inverted right x axis y axis)</span><br><span class="line">HDMI2 disconnected (normal left inverted right x axis y axis)</span><br><span class="line">VIRTUAL1 disconnected (normal left inverted right x axis y axis)</span><br><span class="line">  1920x1080_60.00 (0x20a) 173.000MHz -HSync +VSync</span><br><span class="line">        h: width  1920 start 2048 end 2248 total 2576 skew    0 clock  67.16KHz</span><br><span class="line">        v: height 1080 start 1083 end 1088 total 1120           clock  59.96Hz</span><br></pre></td></tr></table></figure></li>
+<li><p>启用新的显示器</p>
+<p> ~: xrandr –addmode VIRTUAL1 &quot;1920x1080_60.00&quot;<br> <strong>注意VIRTUAL1变成了connected</strong></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">VIRTUAL1 connected (normal left inverted right x axis y axis)</span><br><span class="line">  1920x1080_60.00  59.96  </span><br></pre></td></tr></table></figure>
+<p> xrandr –output VIRTUAL1 –right-of eDP1 –auto <strong>eDP1为主屏幕,<br> 扩展屏幕在右边,所以使用right-of,<br> 该命令最好执行两次，否则可能不生效</strong></p>
+</li>
+<li><p>关闭扩展屏设置</p>
+<p> ~: xrandr –output VIRTUAL1 –off</p>
+</li>
+</ol>
+<h2 id="X11vnc"><a href="#X11vnc" class="headerlink" title="X11vnc"></a>X11vnc</h2><p>启动x11vnc server服务并设置扩展屏</p>
+<p>x11vnc -rfbport 5900 -clip 1920x1080+1920+0 -wait 1 –defer 1 -nowf -sb<br>0</p>
+<p>x11vnc -rfbport 5900 -clip xinerama1 -wait 1 –defer 1 -nowf -sb 0</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-rfbport：指定了连接所用的端口，默认为5900也可以自行设置。</span><br><span class="line">-clip：该命令设置x11vnc映射屏幕的范围，可以使用-clip WxH+X+Y来手动设置映射范围，也可以使用-clip xinerama0来自动映射显示器，其中xinerama0为屏幕设置中从左往右数第一个显示器，以此类推xinerama1为第二个，如果你的主屏幕在左边虚拟屏幕在右边，那如果设置为xinerama0就会将主屏幕的显示内容复制到虚拟屏幕上，也就是两个屏幕的内容一样了，这时就应该设置为xinerama1。</span><br><span class="line">-wait：是两次屏幕抓取的时间间隔，默认为 20 ms 效果比较卡顿，设置为 1 的话会尽可能降低抓取时间减少延迟。</span><br><span class="line">-defer：向vnc客户端发送更新的间隔，默认也为 20 ms，设置为 1 可以尽可能提高发送频率（但对网速的要求就高了）。</span><br><span class="line">-nowf：在移动窗口到虚拟屏幕时显示内容，否则会显示为一个框。</span><br><span class="line">-sb：设置休眠时间，默认为 60s 也就是如果屏幕 60s 内没有活动的话就停止数据传送，这样会导致有时鼠标从主屏移动到虚拟屏幕时会卡顿，设置为 0 后就不会休眠了</span><br></pre></td></tr></table></figure>
+<h2 id="客户端连接工具"><a href="#客户端连接工具" class="headerlink" title="客户端连接工具"></a>客户端连接工具</h2><p>安卓下可以使用bvnc</p>
+<p>默认配置地址如192.168.1.xx:5900即可</p>
+<h2 id="adb工具-usb连接才需要"><a href="#adb工具-usb连接才需要" class="headerlink" title="adb工具(usb连接才需要)"></a>adb工具(usb连接才需要)</h2><p>打开手机的开发者模式, 并且选择usb调试</p>
+<p>电脑端安装adb工具</p>
+<p>使用adb reverse tcp:5900 tcp:5900 创建代理</p>
+<p>扩展端配置host地址为127.0.0.1:5900即可</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010750137/article/details/104277527">https://blog.csdn.net/u010750137/article/details/104277527</a></p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><h2 id="将活动程序移动到扩展屏"><a href="#将活动程序移动到扩展屏" class="headerlink" title="将活动程序移动到扩展屏"></a>将活动程序移动到扩展屏</h2><p>Win+Shift+Right</p>
+<h2 id="光标定位扩展屏"><a href="#光标定位扩展屏" class="headerlink" title="光标定位扩展屏"></a>光标定位扩展屏</h2><p>Win+Right 注意观察鼠标光标</p>
+<h1 id="问题处理"><a href="#问题处理" class="headerlink" title="问题处理"></a>问题处理</h1><h2 id="安装virtscreen以来python-quamash提示编译不通过-弃用"><a href="#安装virtscreen以来python-quamash提示编译不通过-弃用" class="headerlink" title="安装virtscreen以来python-quamash提示编译不通过(弃用)"></a>安装virtscreen以来python-quamash提示编译不通过(弃用)</h2><p>python版本过高，考虑降低版本</p>
+<h2 id="找不到xrandr-cannot-find-mode-quot-1920x1080-60-00-quot"><a href="#找不到xrandr-cannot-find-mode-quot-1920x1080-60-00-quot" class="headerlink" title="找不到xrandr: cannot find mode &quot;1920x1080_60.00&quot;"></a>找不到xrandr: cannot find mode &quot;1920x1080_60.00&quot;</h2><p>执行该命令时提示上述错误xrandr –delmode VIRTUAL1 &quot;1920x1080_60.00&quot;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">VIRTUAL1 disconnected (normal left inverted right x axis y axis)</span><br><span class="line">  1920x1080_60.00 (0x20a) 173.000MHz -HSync +VSync</span><br><span class="line">        h: width  1920 start 2048 end 2248 total 2576 skew    0 clock  67.16KHz</span><br><span class="line">        v: height 1080 start 1083 end 1088 total 1120           clock  59.96Hz</span><br></pre></td></tr></table></figure>
+<p>注意这里的mode不能有双引号, 必须是1920x1080_60.00<br>而不是&quot;1920x1080_60.00&quot;</p>
+<h2 id="bvnc客户端连接失败"><a href="#bvnc客户端连接失败" class="headerlink" title="bvnc客户端连接失败"></a>bvnc客户端连接失败</h2><p>确认服务端已经启动，客户端连接失败, 一般为防火墙导致</p>
+<p>关闭防火墙systemctl stop iptables.service</p>
+<p>增加防火墙规则(推荐)</p>
+<h2 id="扩展没效果"><a href="#扩展没效果" class="headerlink" title="扩展没效果?"></a>扩展没效果?</h2><p><strong>该命令最好执行两次，否则可能不生效</strong></p>
+<p>xrandr –output VIRTUAL1 –right-of eDP1 –auto</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2021/05/18/%E8%BF%81%E7%A7%BBpolardb%E9%97%AE%E9%A2%98%E4%B8%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1085,95 +1209,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2021/01/22/%E6%BA%90%E4%BB%A3%E7%A0%81%E4%BA%A4%E4%BB%98%E8%AF%B4%E6%98%8E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Mr.zhao">
-      <meta itemprop="description" content="show me your code">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="离线de日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/22/%E6%BA%90%E4%BB%A3%E7%A0%81%E4%BA%A4%E4%BB%98%E8%AF%B4%E6%98%8E/" class="post-title-link" itemprop="url">源代码交付说明</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-01-22 00:00:00" itemprop="dateCreated datePublished" datetime="2021-01-22T00:00:00+08:00">2021-01-22</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A3/" itemprop="url" rel="index"><span itemprop="name">项目文档</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>::: {.center}<br><strong>xx公司</strong></p>
-<p><strong>2020-01-01</strong><br>:::</p>
-<p><strong>文档管理</strong></p>
-<p>合理地管理主文档，<br>确保文档版本的及时更新，同时保持备份文档和源文档的一致性。</p>
-<p><strong>版本管理</strong></p>
-<hr>
-<p>  本版本修订日期   2019-08-12   生效日期   2019-08-12</p>
-<hr>
-<p>  版本   生效日期     变更内容       编制人</p>
-<hr>
-<p>  V1.0   2020-01-01   初稿编写完成   xx</p>
-<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>说明系统的项目背景，本系统的使用和运维单位等。</p>
-<h2 id="范围"><a href="#范围" class="headerlink" title="范围"></a>范围</h2><p>说明本文档的适用范围。</p>
-<h1 id="源代码交付清单"><a href="#源代码交付清单" class="headerlink" title="源代码交付清单"></a>源代码交付清单</h1><p>以表格的形式，列出所提交的源代码光盘中所有的文件目录结构，对各目录和子目录加以说明。对主要源代码程序加以说明。对其它必要的附件（包括第三方包、类库、配置文件、程序的帮助说明文档等）也要加以说明。</p>
-<h1 id="编译和打包的说明"><a href="#编译和打包的说明" class="headerlink" title="编译和打包的说明"></a>编译和打包的说明</h1><h2 id="编译环境和工具要求"><a href="#编译环境和工具要求" class="headerlink" title="编译环境和工具要求"></a>编译环境和工具要求</h2><p>如果需要，对编译环境和所需要工具进行简要说明。</p>
-<h2 id="编译和打包步聚"><a href="#编译和打包步聚" class="headerlink" title="编译和打包步聚"></a>编译和打包步聚</h2><p>说明对源代码进行编译和打包的详细步聚，要能根据这些步骤生成可用的目标程序。尽量使用脚本方式生成目标程序。</p>
-<h2 id="生成物说明"><a href="#生成物说明" class="headerlink" title="生成物说明"></a>生成物说明</h2><p>对编译生成的执行程序进行简要说明。</p>
-<h1 id="内容审核要点："><a href="#内容审核要点：" class="headerlink" title="内容审核要点："></a>内容审核要点：</h1><ul>
-<li>  交付清单是否详细完备；</li>
-<li>  说明文字是否明确易懂；</li>
-<li>  交付物版本是否和实际系统的程序版本一致（能根据本文档生成与实际生产系统一致的程序）；</li>
-</ul>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/a7984927cfb9">https://www.jianshu.com/p/a7984927cfb9</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1243,20 +1278,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">63</span>
+        <span class="site-state-item-count">66</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1300,7 +1335,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
