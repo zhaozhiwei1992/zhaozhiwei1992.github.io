@@ -162,6 +162,182 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2023/06/16/springboot%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E6%9C%80%E5%B0%8F%E5%8C%96%E4%BE%9D%E8%B5%96%E5%AE%9E%E8%B7%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mr.zhao">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/16/springboot%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E6%9C%80%E5%B0%8F%E5%8C%96%E4%BE%9D%E8%B5%96%E5%AE%9E%E8%B7%B5/" class="post-title-link" itemprop="url">springboot集成测试最小化依赖实践</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-06-16 00:00:00 / 修改时间：14:04:39" itemprop="dateCreated datePublished" datetime="2023-06-16T00:00:00+08:00">2023-06-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/springboot/" itemprop="url" rel="index"><span itemprop="name">springboot</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/springboot/%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">集成测试</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="30446-24405"><a href="#30446-24405" class="headerlink" title="&#30446;&#24405;"></a>&#30446;&#24405;</h1><ol>
+<li> <a href="#org0621382">简介</a></li>
+<li><a href="#org57c73ee">版本及依赖引入</a><ol>
+<li> <a href="#org6310b4a">springboot版本</a></li>
+<li> <a href="#org66807b5">项目部分依赖</a></li>
+</ol>
+</li>
+<li><a href="#orgf64cec2">直接使用SpringBootTest方式</a><ol>
+<li> <a href="#orge7cf830">代码示例</a></li>
+<li> <a href="#org5a627ae">场景及优劣</a></li>
+</ol>
+</li>
+<li><a href="#orgb57b8af">最小化依赖方案</a><ol>
+<li> <a href="#org6514fc3">代码</a></li>
+<li> <a href="#org2820a75">思路及步骤</a></li>
+<li> <a href="#orgd7166ef">最小化依赖方案的优点</a></li>
+</ol>
+</li>
+<li> <a href="#org2de8b13">结论</a></li>
+</ol>
+<p><a id="org0621382"></a></p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>想要代码跑的稳, 集成测试还是必不可少的, 不然出现开发环境正常, 集成环境各种问题就坑爹了。</p>
+<p>当前项目对外提供各种rest接口, 通过RestTemplate做接口测试, 同时需要注入一些SpringBean, 如何使用SpringBootTest又不需要启动整个容器?</p>
+<p><a id="org57c73ee"></a></p>
+<h1 id="版本及依赖引入"><a href="#版本及依赖引入" class="headerlink" title="版本及依赖引入"></a>版本及依赖引入</h1><p><a id="org6310b4a"></a></p>
+<h2 id="springboot版本"><a href="#springboot版本" class="headerlink" title="springboot版本"></a>springboot版本</h2><pre><code>&lt;parent&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+    &lt;version&gt;2.1.7.RELEASE&lt;/version&gt;
+    &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
+&lt;/parent&gt;</code></pre>
+<p><a id="org66807b5"></a></p>
+<h2 id="项目部分依赖"><a href="#项目部分依赖" class="headerlink" title="项目部分依赖"></a>项目部分依赖</h2><pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;</code></pre>
+<p><a id="orgf64cec2"></a></p>
+<h1 id="直接使用SpringBootTest方式"><a href="#直接使用SpringBootTest方式" class="headerlink" title="直接使用SpringBootTest方式"></a>直接使用SpringBootTest方式</h1><p><a id="orge7cf830"></a></p>
+<h2 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h2><pre><code>@RunWith(SpringRunner.class)
+// 默认启动容器
+@SpringBootTest
+public class BdgResourceITest &#123;
+
+    @Autowired
+    @Qualifier(value = &quot;iTestRestTemplate&quot;)
+    private RestTemplate restTemplate;
+
+    @Test
+    public void testPull() throws URISyntaxException &#123;
+
+        // /pull/&#123;mof_div_code&#125;/&#123;fiscal_year&#125;/&#123;agency_code&#125;
+        String url = &quot;/api/pull/340000000/2022/001001&quot;;
+        final ResponseEntity&lt;ResponseData&gt; exchange = restTemplate.exchange(
+                RequestEntity.get(new URI(url)).build(), ResponseData.class);
+
+        Assert.isTrue(exchange.getStatusCode().equals(HttpStatus.OK), &quot;本单位数据获取异常&quot;);
+    &#125;
+&#125;</code></pre>
+<p><a id="org5a627ae"></a></p>
+<h2 id="场景及优劣"><a href="#场景及优劣" class="headerlink" title="场景及优劣"></a>场景及优劣</h2><h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><p>如果是测试类中大量引入了依赖, 这种情况下直接启动容器比较方便, 不过集成测试个人感觉从入口访问即可, 这种嵌套比较深的建议使用单元测试</p>
+<h3 id="劣势"><a href="#劣势" class="headerlink" title="劣势"></a>劣势</h3><p>当前项目中测试代码需要依赖很少, 极端情况下只用restTemplate即可, 根本没必要启动容器, 而且启动容器占用了大量时间</p>
+<p>项目中使用了ehcache3.x作为本地缓存, 启动容器后因为文件锁无法测试, 如果单独指定ehcache.xml配置, 又会产生新的垃圾, 所以果断减少依赖</p>
+<p><a id="orgb57b8af"></a></p>
+<h1 id="最小化依赖方案"><a href="#最小化依赖方案" class="headerlink" title="最小化依赖方案"></a>最小化依赖方案</h1><p><a id="org6514fc3"></a></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre><code>@RunWith(SpringRunner.class)
+// 指定class就不启动容器了
+@SpringBootTest(classes = BdgResourceITest.class)
+@Import(value = &#123;ITestRestTemplateConfigurer.class&#125;)
+// 激活 main 中resources下的test profile
+//@ActiveProfiles(&quot;dev&quot;)
+// 加载测试目录resources下的application.yml文件
+//@TestPropertySource(properties = &#123;&quot;spring.config.location=classpath:application.yml&quot;&#125;)
+public class BdgResourceITest &#123;
+
+    @Autowired
+    @Qualifier(value = &quot;iTestRestTemplate&quot;)
+    private RestTemplate restTemplate;
+
+    @Test
+    public void testPull() throws URISyntaxException &#123;
+
+        // /pull/&#123;mof_div_code&#125;/&#123;fiscal_year&#125;/&#123;agency_code&#125;
+        String url = &quot;/api/pull/340000000/2022/001001&quot;;
+        final ResponseEntity&lt;ResponseData&gt; exchange = restTemplate.exchange(
+                RequestEntity.get(new URI(url)).build(), ResponseData.class);
+
+        Assert.isTrue(exchange.getStatusCode().equals(HttpStatus.OK), &quot;本单位数据获取异常&quot;);
+    &#125;
+&#125;</code></pre>
+<p><a id="org2820a75"></a></p>
+<h2 id="思路及步骤"><a href="#思路及步骤" class="headerlink" title="思路及步骤"></a>思路及步骤</h2><p>通过指定SpringBootTest的classes, 只启动当前类,如果需要注入其它bean, 则使用@import进行引入</p>
+<p>如果import内部的类也也需要引入其它类, 同理根据需要使用@Import注解, 这样产生的代码更加聚合, 所然在当前类可以全部@Import, 但是看着头疼</p>
+<p>对于需要引入yml配置信息的，可以配合@EnableConfigurationProperties读取测试目录下的application.yml文件</p>
+<p><a id="orgd7166ef"></a></p>
+<h2 id="最小化依赖方案的优点"><a href="#最小化依赖方案的优点" class="headerlink" title="最小化依赖方案的优点"></a>最小化依赖方案的优点</h2><p>减少了容器启动时间, 对于当前项目更加符合实际的使用场景, 毕竟第三方使用不可能启动你自己的容器:D</p>
+<p>更加优雅的解决了ehcache同时被容器扫描启动, 本地文件锁导致测试无法运行, 实际测试代码根本不需要缓存, 项目服务有就行</p>
+<p>测试代码也更加简单优雅, 可以直接提供第三方公司作为接口请求示例代码</p>
+<p><a id="org2de8b13"></a></p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>如果集成测试的场景类似当前项目情况, 全部测试都从rest接口入手, 建议采用最小容器依赖方案</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2023/03/14/ChatGpt%E6%80%8E%E4%B9%88%E7%8E%A9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1002,93 +1178,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2022/03/14/cpu%E5%BC%82%E5%B8%B8%E5%88%86%E6%9E%90%E4%BC%98%E5%8C%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Mr.zhao">
-      <meta itemprop="description" content="show me your code">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="离线de日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/03/14/cpu%E5%BC%82%E5%B8%B8%E5%88%86%E6%9E%90%E4%BC%98%E5%8C%96/" class="post-title-link" itemprop="url">cpu异常分析优化</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-03-14 00:00:00" itemprop="dateCreated datePublished" datetime="2022-03-14T00:00:00+08:00">2022-03-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-11 18:06:10" itemprop="dateModified" datetime="2022-04-11T18:06:10+08:00">2022-04-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CPU%E5%8D%A0%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">CPU占用</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CPU%E5%8D%A0%E7%94%A8/%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">并发</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="cpu占用飙升"><a href="#cpu占用飙升" class="headerlink" title="cpu占用飙升"></a>cpu占用飙升</h1><h2 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h2><p>系统访问很慢</p>
-<h2 id="排查"><a href="#排查" class="headerlink" title="排查"></a>排查</h2><p>top 获取进程pid</p>
-<p>top -Hp pid, 查看线程情况,获取线程id</p>
-<p>print &quot;%x&quot; &quot;线程id&quot; #输出16进制线程id</p>
-<p>jstack 进程pid &gt; /tmp/jstack.txt</p>
-<p>在jstack.txt中搜索上述16进制线程id, 紧跟着就是问题原因</p>
-<p>jmap</p>
-<p>查看最耗费cpu的线程堆栈信息</p>
-<p>cat stack |grep -i 34670 -C10 –color</p>
-<h1 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h1><p>并发场景下使用currenthashmap替代hashmap, 避免死循环</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1158,20 +1247,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">66</span>
+        <span class="site-state-item-count">67</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

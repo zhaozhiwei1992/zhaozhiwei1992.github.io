@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"zhaozhiwei1992.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="&amp;#30446;&amp;#24405;  简介 版本及依赖引入  springboot版本  项目部分依赖   直接使用SpringBootTest方式  代码示例  场景及优劣   最小化依赖方案  代码  思路及步骤  最小化依赖方案的优点    结论   简介想要代码跑的稳, 集成测试还是必不可少的, 不然出现开发环境正常, 集成环境各种问题就坑爹了。 当前项目对外提供各种rest接口, 通过Re">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springboot集成测试最小化依赖实践">
+<meta property="og:url" content="http://zhaozhiwei1992.github.io/2023/06/16/springboot%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E6%9C%80%E5%B0%8F%E5%8C%96%E4%BE%9D%E8%B5%96%E5%AE%9E%E8%B7%B5/index.html">
+<meta property="og:site_name" content="离线de日常">
+<meta property="og:description" content="&amp;#30446;&amp;#24405;  简介 版本及依赖引入  springboot版本  项目部分依赖   直接使用SpringBootTest方式  代码示例  场景及优劣   最小化依赖方案  代码  思路及步骤  最小化依赖方案的优点    结论   简介想要代码跑的稳, 集成测试还是必不可少的, 不然出现开发环境正常, 集成环境各种问题就坑爹了。 当前项目对外提供各种rest接口, 通过Re">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-16T06:04:39.205Z">
+<meta property="article:author" content="Mr.zhao">
+<meta property="article:tag" content="springboot">
+<meta property="article:tag" content="集成测试">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://zhaozhiwei1992.github.io/2023/06/16/springboot%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E6%9C%80%E5%B0%8F%E5%8C%96%E4%BE%9D%E8%B5%96%E5%AE%9E%E8%B7%B5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>springboot集成测试最小化依赖实践 | 离线de日常</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">离线de日常</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2023/06/16/springboot%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E6%9C%80%E5%B0%8F%E5%8C%96%E4%BE%9D%E8%B5%96%E5%AE%9E%E8%B7%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mr.zhao">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          springboot集成测试最小化依赖实践
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-06-16 00:00:00 / 修改时间：14:04:39" itemprop="dateCreated datePublished" datetime="2023-06-16T00:00:00+08:00">2023-06-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/springboot/" itemprop="url" rel="index"><span itemprop="name">springboot</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/springboot/%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">集成测试</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="30446-24405"><a href="#30446-24405" class="headerlink" title="&#30446;&#24405;"></a>&#30446;&#24405;</h1><ol>
+<li> <a href="#org0621382">简介</a></li>
+<li><a href="#org57c73ee">版本及依赖引入</a><ol>
+<li> <a href="#org6310b4a">springboot版本</a></li>
+<li> <a href="#org66807b5">项目部分依赖</a></li>
+</ol>
+</li>
+<li><a href="#orgf64cec2">直接使用SpringBootTest方式</a><ol>
+<li> <a href="#orge7cf830">代码示例</a></li>
+<li> <a href="#org5a627ae">场景及优劣</a></li>
+</ol>
+</li>
+<li><a href="#orgb57b8af">最小化依赖方案</a><ol>
+<li> <a href="#org6514fc3">代码</a></li>
+<li> <a href="#org2820a75">思路及步骤</a></li>
+<li> <a href="#orgd7166ef">最小化依赖方案的优点</a></li>
+</ol>
+</li>
+<li> <a href="#org2de8b13">结论</a></li>
+</ol>
+<p><a id="org0621382"></a></p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>想要代码跑的稳, 集成测试还是必不可少的, 不然出现开发环境正常, 集成环境各种问题就坑爹了。</p>
+<p>当前项目对外提供各种rest接口, 通过RestTemplate做接口测试, 同时需要注入一些SpringBean, 如何使用SpringBootTest又不需要启动整个容器?</p>
+<p><a id="org57c73ee"></a></p>
+<h1 id="版本及依赖引入"><a href="#版本及依赖引入" class="headerlink" title="版本及依赖引入"></a>版本及依赖引入</h1><p><a id="org6310b4a"></a></p>
+<h2 id="springboot版本"><a href="#springboot版本" class="headerlink" title="springboot版本"></a>springboot版本</h2><pre><code>&lt;parent&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+    &lt;version&gt;2.1.7.RELEASE&lt;/version&gt;
+    &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
+&lt;/parent&gt;</code></pre>
+<p><a id="org66807b5"></a></p>
+<h2 id="项目部分依赖"><a href="#项目部分依赖" class="headerlink" title="项目部分依赖"></a>项目部分依赖</h2><pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;</code></pre>
+<p><a id="orgf64cec2"></a></p>
+<h1 id="直接使用SpringBootTest方式"><a href="#直接使用SpringBootTest方式" class="headerlink" title="直接使用SpringBootTest方式"></a>直接使用SpringBootTest方式</h1><p><a id="orge7cf830"></a></p>
+<h2 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h2><pre><code>@RunWith(SpringRunner.class)
+// 默认启动容器
+@SpringBootTest
+public class BdgResourceITest &#123;
+
+    @Autowired
+    @Qualifier(value = &quot;iTestRestTemplate&quot;)
+    private RestTemplate restTemplate;
+
+    @Test
+    public void testPull() throws URISyntaxException &#123;
+
+        // /pull/&#123;mof_div_code&#125;/&#123;fiscal_year&#125;/&#123;agency_code&#125;
+        String url = &quot;/api/pull/340000000/2022/001001&quot;;
+        final ResponseEntity&lt;ResponseData&gt; exchange = restTemplate.exchange(
+                RequestEntity.get(new URI(url)).build(), ResponseData.class);
+
+        Assert.isTrue(exchange.getStatusCode().equals(HttpStatus.OK), &quot;本单位数据获取异常&quot;);
+    &#125;
+&#125;</code></pre>
+<p><a id="org5a627ae"></a></p>
+<h2 id="场景及优劣"><a href="#场景及优劣" class="headerlink" title="场景及优劣"></a>场景及优劣</h2><h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><p>如果是测试类中大量引入了依赖, 这种情况下直接启动容器比较方便, 不过集成测试个人感觉从入口访问即可, 这种嵌套比较深的建议使用单元测试</p>
+<h3 id="劣势"><a href="#劣势" class="headerlink" title="劣势"></a>劣势</h3><p>当前项目中测试代码需要依赖很少, 极端情况下只用restTemplate即可, 根本没必要启动容器, 而且启动容器占用了大量时间</p>
+<p>项目中使用了ehcache3.x作为本地缓存, 启动容器后因为文件锁无法测试, 如果单独指定ehcache.xml配置, 又会产生新的垃圾, 所以果断减少依赖</p>
+<p><a id="orgb57b8af"></a></p>
+<h1 id="最小化依赖方案"><a href="#最小化依赖方案" class="headerlink" title="最小化依赖方案"></a>最小化依赖方案</h1><p><a id="org6514fc3"></a></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre><code>@RunWith(SpringRunner.class)
+// 指定class就不启动容器了
+@SpringBootTest(classes = BdgResourceITest.class)
+@Import(value = &#123;ITestRestTemplateConfigurer.class&#125;)
+// 激活 main 中resources下的test profile
+//@ActiveProfiles(&quot;dev&quot;)
+// 加载测试目录resources下的application.yml文件
+//@TestPropertySource(properties = &#123;&quot;spring.config.location=classpath:application.yml&quot;&#125;)
+public class BdgResourceITest &#123;
+
+    @Autowired
+    @Qualifier(value = &quot;iTestRestTemplate&quot;)
+    private RestTemplate restTemplate;
+
+    @Test
+    public void testPull() throws URISyntaxException &#123;
+
+        // /pull/&#123;mof_div_code&#125;/&#123;fiscal_year&#125;/&#123;agency_code&#125;
+        String url = &quot;/api/pull/340000000/2022/001001&quot;;
+        final ResponseEntity&lt;ResponseData&gt; exchange = restTemplate.exchange(
+                RequestEntity.get(new URI(url)).build(), ResponseData.class);
+
+        Assert.isTrue(exchange.getStatusCode().equals(HttpStatus.OK), &quot;本单位数据获取异常&quot;);
+    &#125;
+&#125;</code></pre>
+<p><a id="org2820a75"></a></p>
+<h2 id="思路及步骤"><a href="#思路及步骤" class="headerlink" title="思路及步骤"></a>思路及步骤</h2><p>通过指定SpringBootTest的classes, 只启动当前类,如果需要注入其它bean, 则使用@import进行引入</p>
+<p>如果import内部的类也也需要引入其它类, 同理根据需要使用@Import注解, 这样产生的代码更加聚合, 所然在当前类可以全部@Import, 但是看着头疼</p>
+<p>对于需要引入yml配置信息的，可以配合@EnableConfigurationProperties读取测试目录下的application.yml文件</p>
+<p><a id="orgd7166ef"></a></p>
+<h2 id="最小化依赖方案的优点"><a href="#最小化依赖方案的优点" class="headerlink" title="最小化依赖方案的优点"></a>最小化依赖方案的优点</h2><p>减少了容器启动时间, 对于当前项目更加符合实际的使用场景, 毕竟第三方使用不可能启动你自己的容器:D</p>
+<p>更加优雅的解决了ehcache同时被容器扫描启动, 本地文件锁导致测试无法运行, 实际测试代码根本不需要缓存, 项目服务有就行</p>
+<p>测试代码也更加简单优雅, 可以直接提供第三方公司作为接口请求示例代码</p>
+<p><a id="org2de8b13"></a></p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>如果集成测试的场景类似当前项目情况, 全部测试都从rest接口入手, 建议采用最小容器依赖方案</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/springboot/" rel="tag"># springboot</a>
+              <a href="/tags/%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95/" rel="tag"># 集成测试</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/03/14/ChatGpt%E6%80%8E%E4%B9%88%E7%8E%A9/" rel="prev" title="ChatGpt怎么玩">
+      <i class="fa fa-chevron-left"></i> ChatGpt怎么玩
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#30446-24405"><span class="nav-number">1.</span> <span class="nav-text">&amp;#30446;&amp;#24405;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E5%8F%8A%E4%BE%9D%E8%B5%96%E5%BC%95%E5%85%A5"><span class="nav-number">3.</span> <span class="nav-text">版本及依赖引入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#springboot%E7%89%88%E6%9C%AC"><span class="nav-number">3.1.</span> <span class="nav-text">springboot版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E9%83%A8%E5%88%86%E4%BE%9D%E8%B5%96"><span class="nav-number">3.2.</span> <span class="nav-text">项目部分依赖</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8SpringBootTest%E6%96%B9%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">直接使用SpringBootTest方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="nav-number">4.1.</span> <span class="nav-text">代码示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E5%8F%8A%E4%BC%98%E5%8A%A3"><span class="nav-number">4.2.</span> <span class="nav-text">场景及优劣</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8A%BF"><span class="nav-number">4.2.1.</span> <span class="nav-text">优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A3%E5%8A%BF"><span class="nav-number">4.2.2.</span> <span class="nav-text">劣势</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E5%8C%96%E4%BE%9D%E8%B5%96%E6%96%B9%E6%A1%88"><span class="nav-number">5.</span> <span class="nav-text">最小化依赖方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">5.1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF%E5%8F%8A%E6%AD%A5%E9%AA%A4"><span class="nav-number">5.2.</span> <span class="nav-text">思路及步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E5%8C%96%E4%BE%9D%E8%B5%96%E6%96%B9%E6%A1%88%E7%9A%84%E4%BC%98%E7%82%B9"><span class="nav-number">5.3.</span> <span class="nav-text">最小化依赖方案的优点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">6.</span> <span class="nav-text">结论</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mr.zhao</p>
+  <div class="site-description" itemprop="description">show me your code</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhaozhiwei1992" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhaozhiwei1992" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/p205/posts" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;p205&#x2F;posts" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.jianshu.com/u/65f51bc73109" title="简书 → https:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;65f51bc73109" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>简书</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/qq347061329" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;qq347061329" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>博客园</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u012768510" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u012768510" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.zhao</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
