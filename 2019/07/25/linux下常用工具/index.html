@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"zhaozhiwei1992.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="arch linux (linux 命令很强大， 命令才是王道啊~~~)  f.lux 根据经纬度调整屏幕亮度   网易云音乐 （这段时间跪了, 打开白板 ）   sublime text 偶尔当下记事本   为知笔记 笔记软件， 因为跨平台我就支持了  input  1234567891011121314#export XIM&#x3D;fcitx#export XIM_PROGRAM&#x3D;fcitx#exp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux下常用工具">
+<meta property="og:url" content="http://zhaozhiwei1992.github.io/2019/07/25/linux%E4%B8%8B%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/index.html">
+<meta property="og:site_name" content="离线de日常">
+<meta property="og:description" content="arch linux (linux 命令很强大， 命令才是王道啊~~~)  f.lux 根据经纬度调整屏幕亮度   网易云音乐 （这段时间跪了, 打开白板 ）   sublime text 偶尔当下记事本   为知笔记 笔记软件， 因为跨平台我就支持了  input  1234567891011121314#export XIM&#x3D;fcitx#export XIM_PROGRAM&#x3D;fcitx#exp">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-07-24T16:00:00.000Z">
+<meta property="article:modified_time" content="2019-07-24T16:00:00.000Z">
+<meta property="article:author" content="Mr.zhao">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="常用工具">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://zhaozhiwei1992.github.io/2019/07/25/linux%E4%B8%8B%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>linux下常用工具 | 离线de日常</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">离线de日常</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2019/07/25/linux%E4%B8%8B%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mr.zhao">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          linux下常用工具
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-07-25 00:00:00" itemprop="dateCreated datePublished" datetime="2019-07-25T00:00:00+08:00">2019-07-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="arch-linux-linux-命令很强大，-命令才是王道啊"><a href="#arch-linux-linux-命令很强大，-命令才是王道啊" class="headerlink" title="arch linux (linux 命令很强大， 命令才是王道啊~~~)"></a>arch linux (linux 命令很强大， 命令才是王道啊~~~)</h1><ol>
+<li><p> f.lux 根据经纬度调整屏幕亮度</p>
+</li>
+<li><p> 网易云音乐 （这段时间跪了, 打开白板 ）</p>
+</li>
+<li><p> sublime text 偶尔当下记事本</p>
+</li>
+<li><p> 为知笔记 笔记软件， 因为跨平台我就支持了</p>
+</li>
+<li><p>input</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#export XIM=fcitx</span><br><span class="line">#export XIM_PROGRAM=fcitx</span><br><span class="line">#export GTK_IM_MODULE=fcitx</span><br><span class="line">#export QT_IM_MODULE=fcitx</span><br><span class="line">#export XMODIFIERS=&quot;@im=fcitx&quot;</span><br><span class="line"></span><br><span class="line">#firefox keyi dazile</span><br><span class="line">export LC_ALL=zh_CN.UTF-8</span><br><span class="line">export GTK_IM_MODULE=fcitx</span><br><span class="line">export QT_IM_MODULE=fcitx</span><br><span class="line">export XMODIFIERS=“@im=fcitx”</span><br><span class="line">exec openbox-session</span><br><span class="line">#exec xfce4-session</span><br><span class="line">#exec gnome-session</span><br></pre></td></tr></table></figure>
+</li>
+<li><p> 文件比较: meld vimdiff diff等</p>
+</li>
+<li><p> 文本编辑器 emacs vim</p>
+</li>
+<li><p> webtorrenter-desktop 播放bt文件</p>
+</li>
+<li><p>图形界面连接网络 sudo pacman -S network-manager-applet （需要启动<br> systemctl start NetworkManager）</p>
+</li>
+<li><p>rescue time 有兴趣可以看看， 这个是记录你一天在干嘛的软件, 后台运行<br>nohut rescuetime &amp;(会在当前文件夹下生成nohup.out文件)</p>
+</li>
+<li><p>跨平台文件传输 feige<br>url:<a target="_blank" rel="noopener" href="http://www.feige360.com/ipmsg/download.html">http://www.feige360.com/ipmsg/download.html</a></p>
+</li>
+<li><p>锁屏 yaourt -S xlockmore</p>
+</li>
+<li><p>create_ap github下的一个项目， 共享热点必备</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">配置启动: nohup sudo create_ap wlp2s0 enp0s20u2u4 archer 1234567890 &gt; /tmp/create_ap.log &amp; tail -f /tmp/create_ap.log</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数据传输工具， 类似飞球， yaourt -s iptux,<br>但是最新的0.75版本有问题， 不能扫描局域网用户,<br>目前使用0.6.4版本进行源码编译安装</p>
+</li>
+<li><p>使用zsh + oh my zsh</p>
+</li>
+<li><p>开发工具使用idea, community</p>
+<ul>
+<li>插件:<ul>
+<li>  ideavim: vi模式， 用过都说好</li>
+<li>  Key promoter: 快捷键菜鸡必备，比如我</li>
+<li>  Markdown support</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>sqldeveloper安装</p>
+<ul>
+<li>oracle 限制， 需要登录下载，<br>  所以先到官网下载sqldeveloper18.nojar.zip</li>
+<li>  pacman -S oracle-sqldeveloper</li>
+<li>  安装过程中将刚刚下载的zip包放到其他pass文件同级的目录, 继续即可</li>
+</ul>
+</li>
+<li><p>postman curl 模拟请求</p>
+<ul>
+<li>curl -H &quot;Accept:application/json&quot; -H<br>  &quot;Content-Type:application/json&quot; -X POST -d &#39;{&quot;id&quot;:1}&#39;<br>  <a target="_blank" rel="noopener" href="http://127.0.0.1:8080/user/save">http://127.0.0.1:8080/user/save</a></li>
+</ul>
+</li>
+<li><p>processon/graphviz 流程图</p>
+<ul>
+<li>  c-c c-c编译执行dot文件</li>
+</ul>
+</li>
+<li><p>dropbox</p>
+<ul>
+<li>  <a target="_blank" rel="noopener" href="https://www.dropbox.com/downloading?src=index&full=1">离线版安装地址</a></li>
+</ul>
+</li>
+<li><p>ag搜索 the_silver_searcher</p>
+</li>
+<li><p>xml处理工具 xmlstarlet, jq处理json, shyaml处理yaml</p>
+</li>
+<li><p>命令行剪贴板工具xclip</p>
+</li>
+<li><p>pandoc 文档转换工具</p>
+<ul>
+<li>  <a target="_blank" rel="noopener" href="https://pandoc.org/MANUAL.html">https://pandoc.org/MANUAL.html</a></li>
+<li>  pandoc linux下常用工具.org -o /tmp/linux常用工具.md</li>
+</ul>
+</li>
+<li><p>cairo-dock dock工具，样式挺好看，不过习惯了launcher运行, 不喜欢点,<br>不使用</p>
+</li>
+<li><p>同步工具</p>
+<ul>
+<li>  Dropbox 这玩意儿有qiang, 并且你的文件需要服务器中转</li>
+<li>  syncthing, 这个东东是通过p2p发送，可以设备互传，好东西</li>
+</ul>
+</li>
+<li><p>截图工具 scrot</p>
+<ul>
+<li>  scrot 全屏</li>
+<li>  scrot -s 截取</li>
+<li>  scrot -e &#39;mv $f ~/Pictures/scrot_screenshots&#39; 截图后执行命令</li>
+</ul>
+</li>
+<li><p>命令行下模糊搜索工具 fzf</p>
+<ul>
+<li>搭配其它工具或者自己组合命令都很6,可以作为插件加入到vim, ranger,<br>  zsh中</li>
+<li>  通过搜索可以更方便的打开文件，不用一一展开</li>
+</ul>
+</li>
+<li><p>简化版命令手册 tldr, 我这里使用的是tealdeer,arch默认的使用不了,<br>可以优雅的查看常用命令的基本使用方式</p>
+</li>
+<li><p>远程连接windows桌面</p>
+<ul>
+<li>  rdesktop 192.168.2.144 -p lt@180606 -u lt1 -g workarea</li>
+<li>rdesktop 192.168.2.144 -p password -u username -r<br>  disk:share=/tmp<br>  可以将当前系统下/tmp目录作为共享磁盘给远程服务器，可以实现文件copy</li>
+</ul>
+</li>
+</ol>
+<h1 id="问题处理"><a href="#问题处理" class="headerlink" title="问题处理"></a>问题处理</h1><ol>
+<li> 网易云音乐白板 : rm `locate netease |grep cache` 删掉缓存即可</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+              <a href="/tags/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/" rel="tag"># 常用工具</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/07/24/thinkpadt480%E5%AE%89%E8%A3%85archlinux/" rel="prev" title="thinkpadt480安装archlinux实战">
+      <i class="fa fa-chevron-left"></i> thinkpadt480安装archlinux实战
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/07/25/intellij%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="next" title="intellij idea快捷键实战">
+      intellij idea快捷键实战 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#arch-linux-linux-%E5%91%BD%E4%BB%A4%E5%BE%88%E5%BC%BA%E5%A4%A7%EF%BC%8C-%E5%91%BD%E4%BB%A4%E6%89%8D%E6%98%AF%E7%8E%8B%E9%81%93%E5%95%8A"><span class="nav-number">1.</span> <span class="nav-text">arch linux (linux 命令很强大， 命令才是王道啊~~~)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">问题处理</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mr.zhao</p>
+  <div class="site-description" itemprop="description">show me your code</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">63</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhaozhiwei1992" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhaozhiwei1992" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/p205/posts" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;p205&#x2F;posts" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.jianshu.com/u/65f51bc73109" title="简书 → https:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;65f51bc73109" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>简书</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/qq347061329" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;qq347061329" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>博客园</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u012768510" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u012768510" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.zhao</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

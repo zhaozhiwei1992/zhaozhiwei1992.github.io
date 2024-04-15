@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.4.2">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"zhaozhiwei1992.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="环境polardb版本1234567&lt;dependency&gt;  &lt;groupId&gt;com.aliyun&lt;&#x2F;groupId&gt;  &lt;artifactId&gt;polardb-jdbc18&lt;&#x2F;artifactId&gt;  &lt;version&gt;1.0.0&lt;&#x2F;version&gt;  &lt;scope&gt;">
+  <meta name="description" content="环境polardb版本1234567&lt;dependency&gt;  &lt;groupId&gt;com.aliyun&lt;&#x2F;groupId&gt;  &lt;artifactId&gt;polardb-jdbc18&lt;&#x2F;artifactId&gt;  &lt;version&gt;1.0.0&lt;&#x2F;version&gt;  &lt;scope&gt;system&lt;&#x2F;scop">
 <meta property="og:type" content="article">
 <meta property="og:title" content="迁移polardb问题一">
 <meta property="og:url" content="http://zhaozhiwei1992.github.io/2021/05/18/%E8%BF%81%E7%A7%BBpolardb%E9%97%AE%E9%A2%98%E4%B8%80/index.html">
 <meta property="og:site_name" content="离线de日常">
-<meta property="og:description" content="环境polardb版本1234567&lt;dependency&gt;  &lt;groupId&gt;com.aliyun&lt;&#x2F;groupId&gt;  &lt;artifactId&gt;polardb-jdbc18&lt;&#x2F;artifactId&gt;  &lt;version&gt;1.0.0&lt;&#x2F;version&gt;  &lt;scope&gt;">
+<meta property="og:description" content="环境polardb版本1234567&lt;dependency&gt;  &lt;groupId&gt;com.aliyun&lt;&#x2F;groupId&gt;  &lt;artifactId&gt;polardb-jdbc18&lt;&#x2F;artifactId&gt;  &lt;version&gt;1.0.0&lt;&#x2F;version&gt;  &lt;scope&gt;system&lt;&#x2F;scop">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-05-18T08:04:17.164Z">
-<meta property="article:modified_time" content="2021-05-18T08:10:23.167Z">
+<meta property="article:published_time" content="2021-05-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-05-17T16:00:00.000Z">
 <meta property="article:author" content="Mr.zhao">
 <meta property="article:tag" content="polardb, mybatis">
 <meta name="twitter:card" content="summary">
@@ -188,9 +188,8 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-05-18 16:04:17 / 修改时间：16:10:23" itemprop="dateCreated datePublished" datetime="2021-05-18T16:04:17+08:00">2021-05-18</time>
+              <time title="创建时间：2021-05-18 00:00:00" itemprop="dateCreated datePublished" datetime="2021-05-18T00:00:00+08:00">2021-05-18</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -213,21 +212,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><h2 id="polardb版本"><a href="#polardb版本" class="headerlink" title="polardb版本"></a>polardb版本</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;com.aliyun&lt;&#x2F;groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;polardb-jdbc18&lt;&#x2F;artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.0.0&lt;&#x2F;version&gt;</span><br><span class="line">  &lt;scope&gt;system&lt;&#x2F;scope&gt;</span><br><span class="line">  &lt;systemPath&gt;$&#123;lib.dir&#125;&#x2F;polardb-jdbc18.jar&lt;&#x2F;systemPath&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+        <h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><h2 id="polardb版本"><a href="#polardb版本" class="headerlink" title="polardb版本"></a>polardb版本</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;com.aliyun&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;polardb-jdbc18&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.0.0&lt;/version&gt;</span><br><span class="line">  &lt;scope&gt;system&lt;/scope&gt;</span><br><span class="line">  &lt;systemPath&gt;$&#123;lib.dir&#125;/polardb-jdbc18.jar&lt;/systemPath&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
 <h2 id="mybatis版本"><a href="#mybatis版本" class="headerlink" title="mybatis版本"></a>mybatis版本</h2><p><strong>直接使用springboot引入</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.mybatis.spring.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;mybatis-spring-boot-starter&lt;&#x2F;artifactId&gt;</span><br><span class="line">  &lt;version&gt;2.1.4&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
-<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">javax.servlet.ServletException: org.springframework.dao.DataIntegrityViolationException: </span><br><span class="line">### The error may exist in com&#x2F;xx&#x2F;templatedef&#x2F;dao&#x2F;oracle&#x2F;XXTemplateDef_SqlMap.xml</span><br><span class="line">### The error may involve com.xx.templatedef.dao.XXTemplateDefDao.selectTemplateDefByCategoryAndState-Inline</span><br><span class="line">### The error occurred while setting parameters</span><br><span class="line">### SQL: select * from act_xx_tem_def where category&#x3D;? and deploy_state&#x3D;1</span><br><span class="line">### Cause: com.aliyun.polardb.util.PSQLException: 不良的类型值 long : </span><br><span class="line">com.aliyun.polardb.util.PSQLException: canot convert the column of type BYTEA to requested type long;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;2.1.4&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">javax.servlet.ServletException: org.springframework.dao.DataIntegrityViolationException: </span><br><span class="line">### The error may exist in com/xx/templatedef/dao/oracle/XXTemplateDef_SqlMap.xml</span><br><span class="line">### The error may involve com.xx.templatedef.dao.XXTemplateDefDao.selectTemplateDefByCategoryAndState-Inline</span><br><span class="line">### The error occurred while setting parameters</span><br><span class="line">### SQL: select * from act_xx_tem_def where category=? and deploy_state=1</span><br><span class="line">### Cause: com.aliyun.polardb.util.PSQLException: 不良的类型值 long : </span><br><span class="line">com.aliyun.polardb.util.PSQLException: canot convert the column of type BYTEA to requested type long;</span><br></pre></td></tr></table></figure>
+
 <h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>mybatis查询act_tem_def表涉及到blob字段(content_bytes)，<br>默认的BlobTypeHandler的getBlob方法不适用, 需要重写handler</p>
 <h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><ol>
-<li><p> 在业务下重写BlobTypeHandler, 获取getBinaryStream然后转换byte数组</p>
-</li>
-<li><p>mapper.xml -&gt; resultmap中, 加入下述转换</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;result column&#x3D;&quot;CONTENT_BYTES&quot; property&#x3D;&quot;contentBytes&quot; jdbcType&#x3D;&quot;BLOB&quot;</span><br><span class="line">   typeHandler&#x3D;&quot;com.example.springbootpolardb.handler.PolarDbBlobTypeHandler&quot;&#x2F;&gt;</span><br></pre></td></tr></table></figure></li>
-<li><p>转换逻辑</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public static byte[] toByteArray(InputStream input) throws IOException &#123;</span><br><span class="line">    ByteArrayOutputStream output &#x3D; new ByteArrayOutputStream();</span><br><span class="line">    byte[] buffer &#x3D; new byte[4096];</span><br><span class="line">    int n &#x3D; 0;</span><br><span class="line">    while (-1 !&#x3D; (n &#x3D; input.read(buffer))) &#123;</span><br><span class="line">        output.write(buffer, 0, n);</span><br><span class="line">    &#125;</span><br><span class="line">    return output.toByteArray();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1></li>
+<li> 在业务下重写BlobTypeHandler, 获取getBinaryStream然后转换byte数组</li>
+<li> mapper.xml -&gt; resultmap中, 加入下述转换</li>
 </ol>
-<ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;result column=&quot;CONTENT_BYTES&quot; property=&quot;contentBytes&quot; jdbcType=&quot;BLOB&quot;</span><br><span class="line">  typeHandler=&quot;com.example.springbootpolardb.handler.PolarDbBlobTypeHandler&quot;/&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="转换逻辑"><a href="#转换逻辑" class="headerlink" title="转换逻辑"></a>转换逻辑</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public static byte[] toByteArray(InputStream input) throws IOException &#123;</span><br><span class="line">    ByteArrayOutputStream output = new ByteArrayOutputStream();</span><br><span class="line">    byte[] buffer = new byte[4096];</span><br><span class="line">    int n = 0;</span><br><span class="line">    while (-1 != (n = input.read(buffer))) &#123;</span><br><span class="line">        output.write(buffer, 0, n);</span><br><span class="line">    &#125;</span><br><span class="line">    return output.toByteArray();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><ul>
 <li>  <a target="_blank" rel="noopener" href="https://github.com/zhaozhiwei1992/demo/tree/master/springboot/springboot-polardb">springboot-polardb</a></li>
 </ul>
 
@@ -248,10 +249,13 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/02/02/linux%E4%B8%8B%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/" rel="prev" title="linux下常用工具">
-      <i class="fa fa-chevron-left"></i> linux下常用工具
+    <a href="/2021/01/26/%E8%BD%AF%E4%BB%B6%E7%BB%88%E9%AA%8C%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/" rel="prev" title="软件终验测试报告">
+      <i class="fa fa-chevron-left"></i> 软件终验测试报告
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/03/14/%E6%89%A9%E5%B1%95%E5%B1%8F%E5%AE%9E%E6%88%98/" rel="next" title="如何将手机/平板/其它电脑作为扩展屏?">
+      如何将手机/平板/其它电脑作为扩展屏? <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -310,7 +314,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#polardb%E7%89%88%E6%9C%AC"><span class="nav-number">1.1.</span> <span class="nav-text">polardb版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mybatis%E7%89%88%E6%9C%AC"><span class="nav-number">1.2.</span> <span class="nav-text">mybatis版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-number">2.</span> <span class="nav-text">问题描述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0"><span class="nav-number">2.1.</span> <span class="nav-text">原因</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">3.</span> <span class="nav-text">解决方案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">4.</span> <span class="nav-text">代码</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#polardb%E7%89%88%E6%9C%AC"><span class="nav-number">1.1.</span> <span class="nav-text">polardb版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mybatis%E7%89%88%E6%9C%AC"><span class="nav-number">1.2.</span> <span class="nav-text">mybatis版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-number">2.</span> <span class="nav-text">问题描述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0"><span class="nav-number">2.1.</span> <span class="nav-text">原因</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">3.</span> <span class="nav-text">解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AC%E6%8D%A2%E9%80%BB%E8%BE%91"><span class="nav-number">3.1.</span> <span class="nav-text">转换逻辑</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">4.</span> <span class="nav-text">代码</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -324,20 +328,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -381,7 +385,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

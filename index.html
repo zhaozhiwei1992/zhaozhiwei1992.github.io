@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.4.2">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -162,7 +162,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2021/05/18/%E8%BF%81%E7%A7%BBpolardb%E9%97%AE%E9%A2%98%E4%B8%80/">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2024/04/15/%E8%BD%AF%E4%BB%B6%E6%A6%82%E8%A6%81%E8%AE%BE%E8%AE%A1%E8%AF%B4%E6%98%8E/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -176,91 +176,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/05/18/%E8%BF%81%E7%A7%BBpolardb%E9%97%AE%E9%A2%98%E4%B8%80/" class="post-title-link" itemprop="url">迁移polardb问题一</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-05-18 16:04:17 / 修改时间：16:10:23" itemprop="dateCreated datePublished" datetime="2021-05-18T16:04:17+08:00">2021-05-18</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%BD%AF%E4%BB%B6-%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">软件, 数据库</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><h2 id="polardb版本"><a href="#polardb版本" class="headerlink" title="polardb版本"></a>polardb版本</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;com.aliyun&lt;&#x2F;groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;polardb-jdbc18&lt;&#x2F;artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.0.0&lt;&#x2F;version&gt;</span><br><span class="line">  &lt;scope&gt;system&lt;&#x2F;scope&gt;</span><br><span class="line">  &lt;systemPath&gt;$&#123;lib.dir&#125;&#x2F;polardb-jdbc18.jar&lt;&#x2F;systemPath&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="mybatis版本"><a href="#mybatis版本" class="headerlink" title="mybatis版本"></a>mybatis版本</h2><p><strong>直接使用springboot引入</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.mybatis.spring.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;mybatis-spring-boot-starter&lt;&#x2F;artifactId&gt;</span><br><span class="line">  &lt;version&gt;2.1.4&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
-<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">javax.servlet.ServletException: org.springframework.dao.DataIntegrityViolationException: </span><br><span class="line">### The error may exist in com&#x2F;xx&#x2F;templatedef&#x2F;dao&#x2F;oracle&#x2F;XXTemplateDef_SqlMap.xml</span><br><span class="line">### The error may involve com.xx.templatedef.dao.XXTemplateDefDao.selectTemplateDefByCategoryAndState-Inline</span><br><span class="line">### The error occurred while setting parameters</span><br><span class="line">### SQL: select * from act_xx_tem_def where category&#x3D;? and deploy_state&#x3D;1</span><br><span class="line">### Cause: com.aliyun.polardb.util.PSQLException: 不良的类型值 long : </span><br><span class="line">com.aliyun.polardb.util.PSQLException: canot convert the column of type BYTEA to requested type long;</span><br></pre></td></tr></table></figure>
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>mybatis查询act_tem_def表涉及到blob字段(content_bytes)，<br>默认的BlobTypeHandler的getBlob方法不适用, 需要重写handler</p>
-<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><ol>
-<li><p> 在业务下重写BlobTypeHandler, 获取getBinaryStream然后转换byte数组</p>
-</li>
-<li><p>mapper.xml -&gt; resultmap中, 加入下述转换</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;result column&#x3D;&quot;CONTENT_BYTES&quot; property&#x3D;&quot;contentBytes&quot; jdbcType&#x3D;&quot;BLOB&quot;</span><br><span class="line">   typeHandler&#x3D;&quot;com.example.springbootpolardb.handler.PolarDbBlobTypeHandler&quot;&#x2F;&gt;</span><br></pre></td></tr></table></figure></li>
-<li><p>转换逻辑</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public static byte[] toByteArray(InputStream input) throws IOException &#123;</span><br><span class="line">    ByteArrayOutputStream output &#x3D; new ByteArrayOutputStream();</span><br><span class="line">    byte[] buffer &#x3D; new byte[4096];</span><br><span class="line">    int n &#x3D; 0;</span><br><span class="line">    while (-1 !&#x3D; (n &#x3D; input.read(buffer))) &#123;</span><br><span class="line">        output.write(buffer, 0, n);</span><br><span class="line">    &#125;</span><br><span class="line">    return output.toByteArray();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1></li>
-</ol>
-<ul>
-<li>  <a target="_blank" rel="noopener" href="https://github.com/zhaozhiwei1992/demo/tree/master/springboot/springboot-polardb">springboot-polardb</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2021/02/02/linux%E4%B8%8B%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Mr.zhao">
-      <meta itemprop="description" content="show me your code">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="离线de日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/02/linux%E4%B8%8B%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/" class="post-title-link" itemprop="url">linux下常用工具</a>
+            <a href="/2024/04/15/%E8%BD%AF%E4%BB%B6%E6%A6%82%E8%A6%81%E8%AE%BE%E8%AE%A1%E8%AF%B4%E6%98%8E/" class="post-title-link" itemprop="url">软件概要设计说明</a>
         </h2>
 
         <div class="post-meta">
@@ -270,330 +186,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-02-02 18:07:41" itemprop="dateCreated datePublished" datetime="2021-02-02T18:07:41+08:00">2021-02-02</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="arch-linux-linux-命令很强大，-命令才是王道啊"><a href="#arch-linux-linux-命令很强大，-命令才是王道啊" class="headerlink" title="arch linux (linux 命令很强大， 命令才是王道啊~~~)"></a>arch linux (linux 命令很强大， 命令才是王道啊~~~)</h1><ol>
-<li><p> f.lux 根据经纬度调整屏幕亮度</p>
-</li>
-<li><p> 网易云音乐 （这段时间跪了, 打开白板 ）</p>
-</li>
-<li><p> sublime text 偶尔当下记事本</p>
-</li>
-<li><p> 为知笔记 笔记软件， 因为跨平台我就支持了</p>
-</li>
-<li><p>input</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#export XIM&#x3D;fcitx</span><br><span class="line">#export XIM_PROGRAM&#x3D;fcitx</span><br><span class="line">#export GTK_IM_MODULE&#x3D;fcitx</span><br><span class="line">#export QT_IM_MODULE&#x3D;fcitx</span><br><span class="line">#export XMODIFIERS&#x3D;&quot;@im&#x3D;fcitx&quot;</span><br><span class="line"></span><br><span class="line">#firefox keyi dazile</span><br><span class="line">export LC_ALL&#x3D;zh_CN.UTF-8</span><br><span class="line">export GTK_IM_MODULE&#x3D;fcitx</span><br><span class="line">export QT_IM_MODULE&#x3D;fcitx</span><br><span class="line">export XMODIFIERS&#x3D;“@im&#x3D;fcitx”</span><br><span class="line">exec openbox-session</span><br><span class="line">#exec xfce4-session</span><br><span class="line">#exec gnome-session</span><br></pre></td></tr></table></figure></li>
-<li><p> 文件比较: meld vimdiff diff等</p>
-</li>
-<li><p> 文本编辑器 emacs vim</p>
-</li>
-<li><p> webtorrenter-desktop 播放bt文件</p>
-</li>
-<li><p>图形界面连接网络 sudo pacman -S network-manager-applet （需要启动<br> systemctl start NetworkManager）</p>
-</li>
-<li><p>rescue time 有兴趣可以看看， 这个是记录你一天在干嘛的软件, 后台运行<br>nohut rescuetime &amp;(会在当前文件夹下生成nohup.out文件)</p>
-</li>
-<li><p>跨平台文件传输 feige<br>url:<a target="_blank" rel="noopener" href="http://www.feige360.com/ipmsg/download.html">http://www.feige360.com/ipmsg/download.html</a></p>
-</li>
-<li><p>锁屏 yaourt -S xlockmore</p>
-</li>
-<li><p>create_ap github下的一个项目， 共享热点必备</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">配置启动: nohup sudo create_ap wlp2s0 enp0s20u2u4 archer 1234567890 &gt; &#x2F;tmp&#x2F;create_ap.log &amp; tail -f &#x2F;tmp&#x2F;create_ap.log</span><br></pre></td></tr></table></figure></li>
-<li><p>数据传输工具， 类似飞球， yaourt -s iptux,<br>但是最新的0.75版本有问题， 不能扫描局域网用户,<br>目前使用0.6.4版本进行源码编译安装</p>
-</li>
-<li><p>使用zsh + oh my zsh</p>
-</li>
-<li><p>开发工具使用idea, community</p>
-<ul>
-<li>插件:<ul>
-<li>  ideavim: vi模式， 用过都说好</li>
-<li>  Key promoter: 快捷键菜鸡必备，比如我</li>
-<li>  Markdown support</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>sqldeveloper安装</p>
-<ul>
-<li>oracle 限制， 需要登录下载，<br>  所以先到官网下载sqldeveloper18.nojar.zip</li>
-<li>  pacman -S oracle-sqldeveloper</li>
-<li>  安装过程中将刚刚下载的zip包放到其他pass文件同级的目录, 继续即可</li>
-</ul>
-</li>
-<li><p>postman curl 模拟请求</p>
-<ul>
-<li>curl -H &quot;Accept:application/json&quot; -H<br>  &quot;Content-Type:application/json&quot; -X POST -d &#39;{&quot;id&quot;:1}&#39;<br>  <a target="_blank" rel="noopener" href="http://127.0.0.1:8080/user/save">http://127.0.0.1:8080/user/save</a></li>
-</ul>
-</li>
-<li><p>processon/graphviz 流程图</p>
-<ul>
-<li>  c-c c-c编译执行dot文件</li>
-</ul>
-</li>
-<li><p>dropbox</p>
-<ul>
-<li>  <a target="_blank" rel="noopener" href="https://www.dropbox.com/downloading?src=index&full=1">离线版安装地址</a></li>
-</ul>
-</li>
-<li><p>ag搜索 the_silver_searcher</p>
-</li>
-<li><p>xml处理工具 xmlstarlet, jq处理json, shyaml处理yaml</p>
-</li>
-<li><p>命令行剪贴板工具xclip</p>
-</li>
-<li><p>pandoc 文档转换工具</p>
-<ul>
-<li>  <a target="_blank" rel="noopener" href="https://pandoc.org/MANUAL.html">https://pandoc.org/MANUAL.html</a></li>
-<li>  pandoc linux下常用工具.org -o /tmp/linux常用工具.md</li>
-</ul>
-</li>
-<li><p>cairo-dock dock工具，样式挺好看，不过习惯了launcher运行, 不喜欢点,<br>不使用</p>
-</li>
-<li><p>同步工具</p>
-<ul>
-<li>  Dropbox 这玩意儿有qiang, 并且你的文件需要服务器中转</li>
-<li>  syncthing, 这个东东是通过p2p发送，可以设备互传，好东西</li>
-</ul>
-</li>
-<li><p>截图工具 scrot</p>
-<ul>
-<li>  scrot 全屏</li>
-<li>  scrot -s 截取</li>
-<li>  scrot -e &#39;mv $f ~/Pictures/scrot_screenshots&#39; 截图后执行命令</li>
-</ul>
-</li>
-<li><p>命令行下模糊搜索工具 fzf</p>
-<ul>
-<li>搭配其它工具或者自己组合命令都很6,可以作为插件加入到vim, ranger,<br>  zsh中</li>
-<li>  通过搜索可以更方便的打开文件，不用一一展开</li>
-</ul>
-</li>
-<li><p>简化版命令手册 tldr, 我这里使用的是tealdeer,arch默认的使用不了,<br>可以优雅的查看常用命令的基本使用方式</p>
-</li>
-<li><p>远程连接windows桌面</p>
-<ul>
-<li>  rdesktop 192.168.2.144 -p lt@180606 -u lt1 -g workarea</li>
-<li>rdesktop 192.168.2.144 -p password -u username -r<br>  disk:share=/tmp<br>  可以将当前系统下/tmp目录作为共享磁盘给远程服务器，可以实现文件copy</li>
-</ul>
-</li>
-</ol>
-<h1 id="问题处理"><a href="#问题处理" class="headerlink" title="问题处理"></a>问题处理</h1><ol>
-<li> 网易云音乐白板 : rm `locate netease |grep cache` 删掉缓存即可</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2021/01/26/%E8%BD%AF%E4%BB%B6%E7%BB%88%E9%AA%8C%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Mr.zhao">
-      <meta itemprop="description" content="show me your code">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="离线de日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/26/%E8%BD%AF%E4%BB%B6%E7%BB%88%E9%AA%8C%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/" class="post-title-link" itemprop="url">软件终验测试报告</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-01-26 00:00:00 / 修改时间：20:32:31" itemprop="dateCreated datePublished" datetime="2021-01-26T00:00:00+08:00">2021-01-26</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>::: {.center}<br><strong>xx公司</strong></p>
-<p><strong>2020-01-01</strong><br>:::</p>
-<p><strong>文档管理</strong></p>
-<p>合理地管理主文档，<br>确保文档版本的及时更新，同时保持备份文档和源文档的一致性。</p>
-<p><strong>版本管理</strong></p>
-<hr>
-<p>  本版本修订日期   2019-08-12   生效日期   2019-08-12</p>
-<hr>
-<p>  版本   生效日期     变更内容       编制人</p>
-<hr>
-<p>  V1.0   2020-01-01   初稿编写完成   xx</p>
-<h1 id="测试目的"><a href="#测试目的" class="headerlink" title="测试目的"></a>测试目的</h1><p>终验测试是项目终验的组成部分，用于各方现场验证系统各功能可用，试运行中发现的问题是否已经解决。</p>
-<h1 id="测试对象"><a href="#测试对象" class="headerlink" title="测试对象"></a>测试对象</h1><p>描述所测试的软件系统名、版本等信息</p>
-<h1 id="测试方式"><a href="#测试方式" class="headerlink" title="测试方式"></a>测试方式</h1><p>由业主方、承建方、监理方、总集方代表在用户现场，依据本方案进行测试，并记录测试结果，时间以半天到一天为宜。测试结束后，现场编制终验测试报告并由各方签字确认。</p>
-<h1 id="测试通过准则"><a href="#测试通过准则" class="headerlink" title="测试通过准则"></a>测试通过准则</h1><p>终验测试方案中所列所有测试项均已通过，则终验测试通过，否则为不通过。</p>
-<h1 id="测试时间"><a href="#测试时间" class="headerlink" title="测试时间"></a>测试时间</h1><p>说明实施测试的时间</p>
-<h1 id="测试地点"><a href="#测试地点" class="headerlink" title="测试地点"></a>测试地点</h1><p>说明实施测试的地点</p>
-<h1 id="测试参与人员"><a href="#测试参与人员" class="headerlink" title="测试参与人员"></a>测试参与人员</h1><p>说明参与终验测试的各方人员，要说明所属单位</p>
-<h1 id="功能测试结果记录"><a href="#功能测试结果记录" class="headerlink" title="功能测试结果记录"></a>功能测试结果记录</h1><p>根据终验测试方案，以表格的方式列出各项所测功能是否通过</p>
-<h1 id="问题解决情况记录"><a href="#问题解决情况记录" class="headerlink" title="问题解决情况记录"></a>问题解决情况记录</h1><p>根据终验测试方案，以表格的方式列出各项所测问题是否全部解决</p>
-<h1 id="测试结论"><a href="#测试结论" class="headerlink" title="测试结论"></a>测试结论</h1><p>给出终验测试是否通过的结论。</p>
-<h1 id="内容审核要点："><a href="#内容审核要点：" class="headerlink" title="内容审核要点："></a>内容审核要点：</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/a7984927cfb9">https://www.jianshu.com/p/a7984927cfb9</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2021/01/26/%E8%BD%AF%E4%BB%B6%E7%BB%88%E9%AA%8C%E6%B5%8B%E8%AF%95%E6%96%B9%E6%A1%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Mr.zhao">
-      <meta itemprop="description" content="show me your code">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="离线de日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/26/%E8%BD%AF%E4%BB%B6%E7%BB%88%E9%AA%8C%E6%B5%8B%E8%AF%95%E6%96%B9%E6%A1%88/" class="post-title-link" itemprop="url">软件终验测试方案</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-01-26 00:00:00 / 修改时间：20:33:23" itemprop="dateCreated datePublished" datetime="2021-01-26T00:00:00+08:00">2021-01-26</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>::: {.center}<br><strong>xx公司</strong></p>
-<p><strong>2020-01-01</strong><br>:::</p>
-<p><strong>文档管理</strong></p>
-<p>合理地管理主文档，<br>确保文档版本的及时更新，同时保持备份文档和源文档的一致性。</p>
-<p><strong>版本管理</strong></p>
-<hr>
-<p>  本版本修订日期   2019-08-12   生效日期   2019-08-12</p>
-<hr>
-<p>  版本   生效日期     变更内容       编制人</p>
-<hr>
-<p>  V1.0   2020-01-01   初稿编写完成   xx</p>
-<h1 id="测试目的"><a href="#测试目的" class="headerlink" title="测试目的"></a>测试目的</h1><p>终验测试是项目终验的组成部分，用于各方现场验证系统各功能可用，试运行中发现的问题是否已经解决。</p>
-<h1 id="测试对象"><a href="#测试对象" class="headerlink" title="测试对象"></a>测试对象</h1><p>描述所测试的软件系统名、版本等信息</p>
-<h1 id="测试方式"><a href="#测试方式" class="headerlink" title="测试方式"></a>测试方式</h1><p>由业主方、承建方、监理方、总集方代表在用户现场，依据本方案进行测试，并记录测试结果，时间以半天到一天为宜。测试结束后，现场编制终验测试报告并由各方签字确认。</p>
-<h1 id="测试通过准则"><a href="#测试通过准则" class="headerlink" title="测试通过准则"></a>测试通过准则</h1><p>本测试方案中所列所有测试项均已通过，则终验测试通过，否则为不通过。</p>
-<h1 id="．功能测试"><a href="#．功能测试" class="headerlink" title="．功能测试"></a>．功能测试</h1><h2 id="功能名1"><a href="#功能名1" class="headerlink" title="功能名1"></a>功能名1</h2><p>以表格方式列出子功能、测试方法、是否通过、备注</p>
-<h2 id="功能名2"><a href="#功能名2" class="headerlink" title="功能名2"></a>功能名2</h2><p>。。。</p>
-<h1 id="．试运行期间问题解决情况测试"><a href="#．试运行期间问题解决情况测试" class="headerlink" title="．试运行期间问题解决情况测试"></a>．试运行期间问题解决情况测试</h1><p>以表格方式列出问题、问题描述、测试方法、是否通过、备注</p>
-<h1 id="内容审核要点："><a href="#内容审核要点：" class="headerlink" title="内容审核要点："></a>内容审核要点：</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/a7984927cfb9">https://www.jianshu.com/p/a7984927cfb9</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2021/01/26/%E8%BD%AF%E4%BB%B6%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1%E8%AF%B4%E6%98%8E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Mr.zhao">
-      <meta itemprop="description" content="show me your code">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="离线de日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/26/%E8%BD%AF%E4%BB%B6%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1%E8%AF%B4%E6%98%8E/" class="post-title-link" itemprop="url">软件详细设计说明</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-01-26 00:00:00 / 修改时间：20:31:03" itemprop="dateCreated datePublished" datetime="2021-01-26T00:00:00+08:00">2021-01-26</time>
+              <time title="创建时间：2024-04-15 16:15:44" itemprop="dateCreated datePublished" datetime="2024-04-15T16:15:44+08:00">2024-04-15</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -616,482 +209,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>::: {.center}<br><strong>xx公司</strong></p>
-<p><strong>2020-01-01</strong><br>:::</p>
-<p><strong>文档管理</strong></p>
-<p>合理地管理主文档，<br>确保文档版本的及时更新，同时保持备份文档和源文档的一致性。</p>
-<p><strong>版本管理</strong></p>
-<hr>
-<p>  本版本修订日期   2019-08-12   生效日期   2019-08-12</p>
-<hr>
-<p>  版本   生效日期     变更内容       编制人</p>
-<hr>
-<p>  V1.0   2020-01-01   初稿编写完成   xx</p>
-<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><h2 id="编写目的"><a href="#编写目的" class="headerlink" title="编写目的"></a>编写目的</h2><p>说明编写这份详细设计说明书的目的，指出预期的读者范围。</p>
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>说明：</p>
-<ul>
-<li>  待开发的软件系统的名称；</li>
-<li>  列出本项目的任务提出者、开发者、用户以及将运行该项软件的单位。</li>
-</ul>
-<h2 id="术语和缩略语"><a href="#术语和缩略语" class="headerlink" title="术语和缩略语"></a>术语和缩略语</h2><p>列出本文件中用到的专门术语的定义和缩写词的原词组。</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>列出要用到的参考资料，如：</p>
-<ul>
-<li>  本项目的经核准的计划任务书或合同、上级机关的批文；</li>
-<li>  属于本项目的其他已发表的文件，包括软件需求说明书、软件概要设计说明等；</li>
-<li>  本文件中各处引用的文件、资料，包括所要用到的软件开发标准。</li>
-</ul>
-<p>列出这些文件的标题、文件编号、发表日期和出版单位，说明能够得到这些文件资料的来源。</p>
-<h1 id="系统结构"><a href="#系统结构" class="headerlink" title="系统结构"></a>系统结构</h1><p>以表格方式列出本程序系统内的每个程序（包括每个模块和子程序）的名称、标识符和它们之间的层次结构关系。并用文字说明每个程序完成的功能，以及互相之间的调用关系。</p>
-<h1 id="程序1（标识符）设计说明"><a href="#程序1（标识符）设计说明" class="headerlink" title="程序1（标识符）设计说明"></a>程序1（标识符）设计说明</h1><p>从本章开始，逐个地给出各个层次中的每个程序的详细设计。以下给出的提纲是针对一般情况的。对于一个具体的模块，可能根据需要在其说明条目上有适当增减。</p>
-<h2 id="程序描述"><a href="#程序描述" class="headerlink" title="程序描述"></a>程序描述</h2><p>给出对该程序的简要描述，主要说明安排设计本程序的目的意义，并且说明本程序的特点。</p>
-<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p>说明该程序应具有的功能，可采用IPO图（即输入－处理－输出图）的形式。</p>
-<h2 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h2><p>说明对该程序的全部性能要求，包括对精度、灵活性和时间特性的要求。</p>
-<h2 id="输入项"><a href="#输入项" class="headerlink" title="输入项"></a>输入项</h2><p>给出对每一个输入项的特性，包括名称、标识、数据的类型和格式、数据值的有效范围、输入的方式、数量和频度、输入媒体、输入数据的来源和安全保密条件等等。</p>
-<h2 id="输出项"><a href="#输出项" class="headerlink" title="输出项"></a>输出项</h2><p>给出对每一个输出项的特性，包括名称、标识、数据的类型和格式、数据值的有效范围、输出的形式、数量和频度、输出媒体、对输出图形及符号的说明、安全保密条件等等。</p>
-<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>详细说明本程序所选用的算法，具体的计算公式和计算步骤。</p>
-<h2 id="流程逻辑"><a href="#流程逻辑" class="headerlink" title="流程逻辑"></a>流程逻辑</h2><p>用图表（例如流程图、判定表等）辅以必要的说明来表示本程序的逻辑流程。</p>
-<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>用图的形式说明本程序所隶属的上一层模块及隶属于本程序的下一层模块、子程序，说明参数赋值和调用方式，说明与本程序相直接关联的数据结构。</p>
-<h2 id="限制条件"><a href="#限制条件" class="headerlink" title="限制条件"></a>限制条件</h2><p>说明本程序运行中所受到的限制条件。</p>
-<h2 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h2><p>说明对本程序进行单元测试的计划和方式，包括单元测试用例的设计等。</p>
-<h2 id="尚未解决的问题"><a href="#尚未解决的问题" class="headerlink" title="尚未解决的问题"></a>尚未解决的问题</h2><p>说明在本程序的设计中尚未解决而设计者认为在软件完成之前应解决的问题。</p>
-<h1 id="程序2（标识符）设计说明"><a href="#程序2（标识符）设计说明" class="headerlink" title="程序2（标识符）设计说明"></a>程序2（标识符）设计说明</h1><p>．．．．．．</p>
-<h1 id="内容审核要点："><a href="#内容审核要点：" class="headerlink" title="内容审核要点："></a>内容审核要点：</h1><ul>
-<li>  本文档内容与概要设计说明、软件需求规格说明等文档中的内容是否一致性；</li>
-<li>  所述内容是否完备；</li>
-<li>  各子程序模块描述是否清楚；</li>
-<li>  是否有必要的单元测试用例编制方面的考虑；</li>
-<li>  程序模块间关系是否清楚准确。</li>
-</ul>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/a7984927cfb9">https://www.jianshu.com/p/a7984927cfb9</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2021/01/24/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Mr.zhao">
-      <meta itemprop="description" content="show me your code">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="离线de日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/24/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/" class="post-title-link" itemprop="url">软件测试报告</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-01-24 00:00:00 / 修改时间：15:03:01" itemprop="dateCreated datePublished" datetime="2021-01-24T00:00:00+08:00">2021-01-24</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">软件开发</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>::: {.center}<br><strong>xx公司</strong></p>
-<p><strong>2020-01-01</strong><br>:::</p>
-<p><strong>文档管理</strong></p>
-<p>合理地管理主文档，<br>确保文档版本的及时更新，同时保持备份文档和源文档的一致性。</p>
-<p><strong>版本管理</strong></p>
-<hr>
-<p>  本版本修订日期   2019-08-12   生效日期   2019-08-12</p>
-<hr>
-<p>  版本   生效日期     变更内容       编制人</p>
-<hr>
-<p>  V1.0   2020-01-01   初稿编写完成   xx</p>
-<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><h2 id="标识"><a href="#标识" class="headerlink" title="标识"></a>标识</h2><p>本条应包含本文档及其所适用的系统和软件的完整标识，(若适用)包括标识号、标题、缩略词语、版本号、发行号。</p>
-<h2 id="系统概述"><a href="#系统概述" class="headerlink" title="系统概述"></a>系统概述</h2><p>本条简述本文档适用的系统和软件的用途。应描述系统与软件的一般性质；描述系统基本功能；概述本系统或软件的开发、测试、试运行和维护的历史；标识项目的承建方、业主方、总集方、监理方等；标识系统当前和计划的运行现场；</p>
-<h2 id="文档概述"><a href="#文档概述" class="headerlink" title="文档概述"></a>文档概述</h2><p>本条应概括本文档的用途与内容，并描述与其使用有关的保密性方面的要求。</p>
-<h2 id="引用文件"><a href="#引用文件" class="headerlink" title="引用文件"></a>引用文件</h2><p>本条应列出本文档引用的所有文档的编号、标题、修订版本、日期和来源。</p>
-<h2 id="术语与缩略语"><a href="#术语与缩略语" class="headerlink" title="术语与缩略语"></a>术语与缩略语</h2><p>提供此文档中用到的专门术语的定义和缩写词的原词组。</p>
-<h1 id="测试概述"><a href="#测试概述" class="headerlink" title="测试概述"></a>测试概述</h1><h2 id="测试目的"><a href="#测试目的" class="headerlink" title="测试目的"></a>测试目的</h2><p>描述本次测试的目的。</p>
-<h2 id="测试内容"><a href="#测试内容" class="headerlink" title="测试内容"></a>测试内容</h2><p>描述本次测试的主要内容，包括需要进行测试的功能和特性。可以引用测试计划和测试说明文档中的内容。对于出厂测试，要将用户文档的正确性测试作为测试的内容之一。</p>
-<h2 id="测试的质量目标"><a href="#测试的质量目标" class="headerlink" title="测试的质量目标"></a>测试的质量目标</h2><p>描述本次测试所要达到的质量目标，如A、B类bug低于多少个，系统响应时间、系统表现达到什么目标等等。</p>
-<h2 id="测试依据"><a href="#测试依据" class="headerlink" title="测试依据"></a>测试依据</h2><p>描述本次测试的所依据的方案、文档和标准。</p>
-<h2 id="测试环境描述"><a href="#测试环境描述" class="headerlink" title="测试环境描述"></a>测试环境描述</h2><p>描述本次测试的软硬件环境，包括使用的服务器的软硬件环境和配置，网络和客户端环境，部署情况说明等。与生产系统环境的差异。</p>
-<h2 id="测试时间"><a href="#测试时间" class="headerlink" title="测试时间"></a>测试时间</h2><p>说明本次测试的执行时间。</p>
-<h2 id="测试人员及工作量"><a href="#测试人员及工作量" class="headerlink" title="测试人员及工作量"></a>测试人员及工作量</h2><p>说明本次测试投入的人员、工作量，以及具体每个功能子模块的人员、计划工作量、实际工作量的分配。</p>
-<h1 id="测试问题记录"><a href="#测试问题记录" class="headerlink" title="测试问题记录"></a>测试问题记录</h1><p>通过列表的方式列出测试发现的主要问题记录，包括问题编号、问题说明、对应测试用例、解决情况等。</p>
-<h1 id="测试结果分析及软件评价"><a href="#测试结果分析及软件评价" class="headerlink" title="测试结果分析及软件评价"></a>测试结果分析及软件评价</h1><h2 id="对被测试软件的总体评价"><a href="#对被测试软件的总体评价" class="headerlink" title="对被测试软件的总体评价"></a>对被测试软件的总体评价</h2><p>.根据本报告中所展示的测试结果，提供对该软件的总体评价，包括遗留bug的统计与分析、软件存在的主要问题、是否达到本次测试的质量目标等。</p>
-<h2 id="测试技术分析"><a href="#测试技术分析" class="headerlink" title="测试技术分析"></a>测试技术分析</h2><p>分析测试技术对测试结果的影响。</p>
-<h2 id="测试环境的影响"><a href="#测试环境的影响" class="headerlink" title="测试环境的影响"></a>测试环境的影响</h2><p>对测试环境与操作环境的差异进行评估，并分析这种差异对测试结果的影响。</p>
-<h2 id="改进建议"><a href="#改进建议" class="headerlink" title="改进建议"></a>改进建议</h2><p>针对对被测试软件还存在的问题，提出改进建议。 附录<br>附录可用来提供那些为便于文档维护而单独出版的信息(例如图表、分类数据)。为便于处理，附录可单独装订成册。附录应按字母顺序(A,B等)编排。<br>文档中，如果定义了缺陷等级分类代码，需要在附录中给出其定义。</p>
-<h1 id="内容审核要点："><a href="#内容审核要点：" class="headerlink" title="内容审核要点："></a>内容审核要点：</h1><ul>
-<li>  是否全面、真实地反映了测试执行过程；测试记录是否完整、有效；</li>
-<li>  是否全面总结了测试执行过程中发现的软件问题和缺陷；</li>
-<li>  对问题及缺陷的判断和定位是否准确；</li>
-<li>  所测试内容与测试计划是否一致。</li>
-</ul>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/a7984927cfb9">https://www.jianshu.com/p/a7984927cfb9</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2021/01/24/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E8%AF%B4%E6%98%8E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Mr.zhao">
-      <meta itemprop="description" content="show me your code">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="离线de日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/24/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E8%AF%B4%E6%98%8E/" class="post-title-link" itemprop="url">软件测试说明</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-01-24 00:00:00 / 修改时间：15:04:45" itemprop="dateCreated datePublished" datetime="2021-01-24T00:00:00+08:00">2021-01-24</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">软件开发</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>::: {.center}<br><strong>xx公司</strong></p>
-<p><strong>2020-01-01</strong><br>:::</p>
-<p><strong>文档管理</strong></p>
-<p>合理地管理主文档，<br>确保文档版本的及时更新，同时保持备份文档和源文档的一致性。</p>
-<p><strong>版本管理</strong></p>
-<hr>
-<p>  本版本修订日期   2019-08-12   生效日期   2019-08-12</p>
-<hr>
-<p>  版本   生效日期     变更内容       编制人</p>
-<hr>
-<p>  V1.0   2020-01-01   初稿编写完成   xx</p>
-<h1 id="范围"><a href="#范围" class="headerlink" title="范围"></a>范围</h1><h2 id="标识"><a href="#标识" class="headerlink" title="标识"></a>标识</h2><p>本条应包含本文档及本文档适用的系统和软件的完整标识，(若适用)包括标识号、标题、缩略词语、版本号和发行号。</p>
-<h2 id="系统概述"><a href="#系统概述" class="headerlink" title="系统概述"></a>系统概述</h2><p>本条应简述本文档适用的系统和软件的用途，它应描述系统和软件的一般特性；概述系统开发、运行和维护的历史；标识项目的开发方、业主方、总集方、监理方等；标识当前和计划的运行现场等。</p>
-<h2 id="文档概述"><a href="#文档概述" class="headerlink" title="文档概述"></a>文档概述</h2><p>本条应概述本文档的用途和内容，并描述与其使用有关的保密性和私密性的要求。</p>
-<h1 id="引用文件"><a href="#引用文件" class="headerlink" title="引用文件"></a>引用文件</h1><p>应列出本文档引用的所有文档的编号、标题、修订版本、日期和来源。</p>
-<h1 id="术语和缩略语"><a href="#术语和缩略语" class="headerlink" title="术语和缩略语"></a>术语和缩略语</h1><p>提供此文档中用到的专门术语的定义和缩写词的原词组。</p>
-<h1 id="测试准备"><a href="#测试准备" class="headerlink" title="测试准备"></a>测试准备</h1><p>以下按照软件测试类型（如：功能测试、性能测试、可靠性测试等）分章节编写。<br>每一项测试类型均应有唯一的标识号，应描述如何准备并获取测试资源，如测试环境所必须的软件、硬件、数据资源等；必要时，应描述如何准备测试程序，如开发测试接口所需的数据仿真、业务仿真程序以及测试支持软件等。</p>
-<h2 id="（测试名称、唯一标识号）"><a href="#（测试名称、唯一标识号）" class="headerlink" title="（测试名称、唯一标识号）"></a>（测试名称、唯一标识号）</h2><h3 id="设施环境要求"><a href="#设施环境要求" class="headerlink" title="设施环境要求"></a>设施环境要求</h3><p>描述对测试场所、设施和环境的要求。（若有）分析上述差异对测试可能造成的影响。</p>
-<h3 id="硬件准备"><a href="#硬件准备" class="headerlink" title="硬件准备"></a>硬件准备</h3><p>描述对测试硬件的要求。分析硬件差异对测试可能造成的影响。</p>
-<h3 id="软件准备"><a href="#软件准备" class="headerlink" title="软件准备"></a>软件准备</h3><p>描述对测试软件的要求。分析软件差异对测试可能造成的影响。</p>
-<h3 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a>数据准备</h3><p>描述对测试数据的要求。分析数据差异对测试可能造成的影响。</p>
-<h3 id="其它测试准备"><a href="#其它测试准备" class="headerlink" title="其它测试准备"></a>其它测试准备</h3><p>描述对测试程序等分面的其他测试准备工作。</p>
-<h1 id="测试项分解"><a href="#测试项分解" class="headerlink" title="测试项分解"></a>测试项分解</h1><p>将需测试的内容进行层次化的分解形成测试项，并进行标识命名。对最终分解后的每个测试项，说明测试用例设计方法的具体应用、测试数据的选择依据等。测试项与具体的功能和性能要求对应，测试项还应包含对用户文档(用户手册、安装部署手册)的测试。</p>
-<h1 id="测试说明"><a href="#测试说明" class="headerlink" title="测试说明"></a>测试说明</h1><p>逐层对测试项和测试用例进行标识和说明。其中，测试用例至少应包含：所属测试项、用例名称标识、用例说明、对应需求、前提和约束、执行步骤、预期结果等。<br>注：测试用例可采用表格方式，可作为本文档的附件另行成文，以下是对测试用例相关项的解释。<br>对应需求：说明测试所依据的内容来源，如软件需求规格说明书中的需求功能编号或具体条款<br>测试说明：简要描述测试的对象、目的和所采用的测试方法。<br>前提和约束：说明实施该测试用例的前提条件和约束条件，如环境条件、准备工作等。<br>执行步骤：编写按照执行顺序排列的一系列相对独立的步骤，每一个执行步骤应包括测试操作动作、测试程序输入或设备操作、期望的测试结果。<br>预期结果：期望测试结果应有具体内容(如确定的元数值、业务流程状态等)，不应是不确切的概念或笼统的描述。</p>
-<h1 id="测试用例执行顺序"><a href="#测试用例执行顺序" class="headerlink" title="测试用例执行顺序"></a>测试用例执行顺序</h1><p>应确定软件测试用例的执行顺序，从而合理安排测试执行过程，避免重复执行测试用例，提高测试工作效率。同时，通过合理的测试用例执行顺序实现对完整的业务流程的确认和验证。</p>
-<h1 id="内容审核要点："><a href="#内容审核要点：" class="headerlink" title="内容审核要点："></a>内容审核要点：</h1><ul>
-<li>  测试说明的范围与合同及其附件要求等是否一致；是否覆盖了全部软件需求；是否覆盖了全部测试需求；</li>
-<li>  软件测试准备是否充分；</li>
-<li>  软件测试分解是否合理；测试设计思路是否清晰；测试技术实现方法是否科学；</li>
-<li>  对接口的分析和说明是否完整、准确；对接口测试的正常和容错说明是否全面；</li>
-<li>  测试用例是否充分；除正常操作、正常流程、正常数据外，是否覆盖了可测试的异常情况；</li>
-<li>  测试用例的执行顺序是否合理；是否可覆盖必要的业务流程。</li>
-</ul>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/a7984927cfb9">https://www.jianshu.com/p/a7984927cfb9</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2021/01/24/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E8%AE%A1%E5%88%92/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Mr.zhao">
-      <meta itemprop="description" content="show me your code">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="离线de日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/24/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E8%AE%A1%E5%88%92/" class="post-title-link" itemprop="url">软件测试计划</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-01-24 00:00:00 / 修改时间：15:03:58" itemprop="dateCreated datePublished" datetime="2021-01-24T00:00:00+08:00">2021-01-24</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">软件开发</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>::: {.center}<br><strong>xx公司</strong></p>
-<p><strong>2020-01-01</strong><br>:::</p>
-<p><strong>文档管理</strong></p>
-<p>合理地管理主文档，<br>确保文档版本的及时更新，同时保持备份文档和源文档的一致性。</p>
-<p><strong>版本管理</strong></p>
-<hr>
-<p>  本版本修订日期   2019-08-12   生效日期   2019-08-12</p>
-<hr>
-<p>  版本   生效日期     变更内容       编制人</p>
-<hr>
-<p>  V1.0   2020-01-01   初稿编写完成   xx</p>
-<h1 id="范围"><a href="#范围" class="headerlink" title="范围"></a>范围</h1><h2 id="标识"><a href="#标识" class="headerlink" title="标识"></a>标识</h2><p>本条应包含本文档及本文档适用的系统和软件的完整标识，(若适用)包括标识号、标题、缩略词语、版本号和发行号。</p>
-<h2 id="系统概述"><a href="#系统概述" class="headerlink" title="系统概述"></a>系统概述</h2><p>本条应简述本文档适用的系统和软件的用途，它应描述系统和软件的一般特性；概述系统开发、运行和维护的历史；标识项目的开发方、业主方、总集方、监理方等；标识当前和计划的运行现场等。</p>
-<h2 id="文档概述"><a href="#文档概述" class="headerlink" title="文档概述"></a>文档概述</h2><p>本条应概述本文档的用途和内容，并描述与其使用有关的保密性和私密性的要求。</p>
-<h1 id="引用文档"><a href="#引用文档" class="headerlink" title="引用文档"></a>引用文档</h1><p>应列出本文档引用的所有文档的编号、标题、修订版本、日期和来源。</p>
-<h1 id="术语和定义"><a href="#术语和定义" class="headerlink" title="术语和定义"></a>术语和定义</h1><p>提供此文档中用到的专门术语的定义和缩写词的原词组。</p>
-<h1 id="测试目标和测试内容"><a href="#测试目标和测试内容" class="headerlink" title="测试目标和测试内容"></a>测试目标和测试内容</h1><h2 id="测试目标"><a href="#测试目标" class="headerlink" title="测试目标"></a>测试目标</h2><p>描述本测试计划的测试目标。如完成软件的出厂测试，达到可交付验证测试的目的。</p>
-<h2 id="测试的功能和特性"><a href="#测试的功能和特性" class="headerlink" title="测试的功能和特性"></a>测试的功能和特性</h2><p>概要说明本次需要测试的功能和特性</p>
-<h2 id="不测的功能和特性"><a href="#不测的功能和特性" class="headerlink" title="不测的功能和特性"></a>不测的功能和特性</h2><p>说明本次不测的功能、特性及原因</p>
-<h2 id="测试质量目标"><a href="#测试质量目标" class="headerlink" title="测试质量目标"></a>测试质量目标</h2><p>简要说明测试的质量目标,如：</p>
-<ul>
-<li>  测试计划中所有测试方法和模块已经执行通过</li>
-<li>  所有的测试案例已经执行过</li>
-<li>  所有的重要等级Bug已经解决并由测试验证</li>
-</ul>
-<h1 id="应交付的测试成果文档"><a href="#应交付的测试成果文档" class="headerlink" title="应交付的测试成果文档"></a>应交付的测试成果文档</h1><p>说明最终需要交付的测试成果文档，包括软件测试计划、软件测试说明(含测试用例)、软件测试报告、测试问题报告等。文档名和数量因具体项目而异，应确定文档责任人。</p>
-<h1 id="测试策略"><a href="#测试策略" class="headerlink" title="测试策略"></a>测试策略</h1><h2 id="整体测试策略"><a href="#整体测试策略" class="headerlink" title="整体测试策略"></a>整体测试策略</h2><p>说明基本的测试过程和策略。如测试人员在需求和设计阶段参与需求评审和设计评审、在开发完成前实施测试案例设计和测试开发，在系统开发完成之后正式执行测试等。</p>
-<h2 id="问题等级划分"><a href="#问题等级划分" class="headerlink" title="问题等级划分"></a>问题等级划分</h2><p>划分软件缺陷的等级分类代码。推荐的等级划分如下：</p>
-<p>  缺陷代码   缺陷等级         描述</p>
-<hr>
-<p>  A          严重缺陷         文档与软件不符、文档严重不足、关键性内容错误。软件需求明显未实现。软件不能正常运行,导致系统崩溃或资源严重不足。例如: 由程序引起的死机、非法退出;死循环;导致数据库发生死锁;错误操作导致的程序中断;与数据库连接错误;数据通讯错误等<br>  B          较严重缺陷中现   软件能够运行,但当前缺陷严重影响软件基本功能的正确实现。例如:软件功能与需求不符;程序接口错误;数据流错误;数值计算错误等。<br>  C          一般性缺陷       软件能够运行,但当前缺陷影响部分功能的正确实现。例如:界面错误;打印内容或格式错误;简单的输入限制未放在前台进行控制;删除操作未给出提示;数据输入没有边界值限定或不合理等。<br>  D          较小缺陷         软件能够运行,软件功能基本实现,但当前缺陷使操作者不方便或遇到麻烦。例如:辅助说明描述不清楚;显示格式不规范;系统处理未优化;长时间操作未给用户进度提示;提示窗口文字未采用行业术语等。</p>
-<h2 id="开始-中断-完成标准"><a href="#开始-中断-完成标准" class="headerlink" title="开始/中断/完成标准"></a>开始/中断/完成标准</h2><h3 id="测试启动条件"><a href="#测试启动条件" class="headerlink" title="测试启动条件"></a>测试启动条件</h3><p>说明启动测试的条件。如对于出厂测试，已经过评审、测试人力资源已经具备、软件需求规格说明/详细设计文档/测试说明文档已经过确认、内部模块测试和组装测试已经完成等。<br>其中业主方、总集方、监理方交付验证测试的准入条件：</p>
-<ul>
-<li>  软件源代码正确通过编译且为最终版本；</li>
-<li>  软硬件测试平台已搭建并已配置完成；</li>
-<li>  业主方具有测试所需的各种文档（纸质、电子版）；</li>
-<li>  业主方获得的各种文档均与最终版本的软件相对应，且全部通过审核；</li>
-<li>  承建方、监理方已完成测试并提交测试报告。</li>
-</ul>
-<h3 id="测试中断条件"><a href="#测试中断条件" class="headerlink" title="测试中断条件"></a>测试中断条件</h3><p>说明测试中断的条件。例如：</p>
-<ul>
-<li>  在测试中发现A类bug，并导致后续的测试无法继续时；</li>
-<li>  已执行完所有的测试用例，并已报告给承建方，等待承建方在限期内改正时。</li>
-</ul>
-<h3 id="测试终止条件"><a href="#测试终止条件" class="headerlink" title="测试终止条件"></a>测试终止条件</h3><p>说明在什么条件下终止本计划所述产品交付验收证测试。如：</p>
-<ol>
-<li><p>正常终止条件：</p>
-<ul>
-<li>  按照测试计划完成所有定义的测试用例；</li>
-<li>  客观、详细地记录了软件测试过程和软件测试中发现的问题；</li>
-<li>  有效完成了定位缺陷的回归测试循环；</li>
-<li>  测试中未发现A、B缺陷，以及少于n个C类缺陷；</li>
-<li>  提交测试报告。</li>
-</ul>
-</li>
-<li><p>异常终止条件</p>
-<p> 太多的A或B类缺陷以致测试无法进行或测试周期已结束。<br> 或者针对软件规模，规定C类bug不超过n个</p>
-</li>
-</ol>
-<h2 id="测试工具选择"><a href="#测试工具选择" class="headerlink" title="测试工具选择"></a>测试工具选择</h2><p>说明需要用到的测试工具软件，应包括软件版本号。</p>
-<h2 id="测试流程"><a href="#测试流程" class="headerlink" title="测试流程"></a>测试流程</h2><p>阐述或引用测试流程，应包括问题报告、审核、分配、跟踪、回归等各方面。测试流程与承建方内部质量管理制度和业主方的要求相关。</p>
-<h2 id="测试技术和方法"><a href="#测试技术和方法" class="headerlink" title="测试技术和方法"></a>测试技术和方法</h2><p>确定测试需要的技术或方法，如测试数据生成与验证技术、测试数据输入技术、测试结果获取技术等；明确测试用例的设计和选择方法，针对不同类型的测试(功能测试、性能测试、容量测试、用户界面测试),<br>根据需要，应给出针对性的测试用例设计要求。</p>
-<h2 id="评价准则和方法"><a href="#评价准则和方法" class="headerlink" title="评价准则和方法"></a>评价准则和方法</h2><h3 id="测试通过准则"><a href="#测试通过准则" class="headerlink" title="测试通过准则"></a>测试通过准则</h3><p>定义系统测试通过准则，以下是一个测试通过准则的示例：</p>
-<ul>
-<li>  可执行软件与需求规格说明书、设计说明书是一致的；</li>
-<li>  测试覆盖率应达到100%</li>
-<li>  测试用例通过率要达到95%；</li>
-<li>  软件缺陷终结率达到100%</li>
-<li>  系统页面风格符合规范化要求，程序代码编写以及各种命名符合规范化要求。</li>
-<li>  各模块正确衔接。</li>
-<li>  对异常数据应有相应的提示信息，并能安全终止异常操作。</li>
-</ul>
-<h3 id="对测试结果处理方法"><a href="#对测试结果处理方法" class="headerlink" title="对测试结果处理方法"></a>对测试结果处理方法</h3><p>测试结果分为通过和未通过。测试达到通过准则的要求称为”通过”，测试结果没有达到测试通过准则的称为”未通过”。说明对不同测试结果的处理方法。<br>测试项目组织与资源</p>
-<h2 id="参与部门和组织"><a href="#参与部门和组织" class="headerlink" title="参与部门和组织"></a>参与部门和组织</h2><p>说明参与测试的组织/部门</p>
-<h2 id="角色和职责"><a href="#角色和职责" class="headerlink" title="角色和职责"></a>角色和职责</h2><p>说明参与测试的组织/部门中各角色划分及职责。</p>
-<h2 id="人员和培训要求"><a href="#人员和培训要求" class="headerlink" title="人员和培训要求"></a>人员和培训要求</h2><p>说明参与测试的组织/部门的员及角色对应关系。以及是否需要预先进行相关培训。</p>
-<h2 id="关键资源"><a href="#关键资源" class="headerlink" title="关键资源"></a>关键资源</h2><p>说明需要用到的关键资源</p>
-<p>测试活动和进度计划<br>应根据测试资源和测试项目内容，分解测试活动，分配测试资源，编制测试进度计划。以下是一个进度计划的示例：</p>
-<p>  测试阶段       开始时间   完成时间   测试人员   阶段完成标志</p>
-<hr>
-<p>  制定测试计划<br>  需求 Review<br>  设计 Review<br>  设计测试用例<br>  测试开发<br>  测试环境准备<br>  测试实施<br>  功能测试<br>  集成测试<br>  性能测试<br>  系统测试<br>  验收测试<br>  文档编写                                        </p>
-<h1 id="风险分析及应对措施"><a href="#风险分析及应对措施" class="headerlink" title="风险分析及应对措施"></a>风险分析及应对措施</h1><p>风险分析是评测项目管理的重要内容。常见的风险包括供测试的软件版本混乱、软件缺陷修改时间过长、回归不足引发新的问题、测试方和开发方对缺陷的认识存在差异等。建议以列表的方式给出识别的风险并提供针对性的缓解措施。</p>
-<h1 id="内容审核要点："><a href="#内容审核要点：" class="headerlink" title="内容审核要点："></a>内容审核要点：</h1><ul>
-<li>  测试内容是否完整，是否涵盖了测试目的、内容、方法策略、资源、进度安排等各方面；</li>
-<li>  测试进度安排是否合理；</li>
-<li>  测试资源要求是否充分；</li>
-<li>  测试技术和方法的选择是否可行；</li>
-<li>  是否包含了对测试结果评价分析标准；</li>
-<li>  是否包含了对测试过程的跟踪和控制规程。</li>
-</ul>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/a7984927cfb9">https://www.jianshu.com/p/a7984927cfb9</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2021/01/23/%E8%BD%AF%E4%BB%B6%E6%A6%82%E8%A6%81%E8%AE%BE%E8%AE%A1%E8%AF%B4%E6%98%8E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Mr.zhao">
-      <meta itemprop="description" content="show me your code">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="离线de日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/23/%E8%BD%AF%E4%BB%B6%E6%A6%82%E8%A6%81%E8%AE%BE%E8%AE%A1%E8%AF%B4%E6%98%8E/" class="post-title-link" itemprop="url">软件概要设计说明</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-01-23 22:38:31" itemprop="dateCreated datePublished" datetime="2021-01-23T22:38:31+08:00">2021-01-23</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">软件设计</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#+DATA：&lt;2021-01-17 日&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#+KEYDORDS：软件设计、概要设计</span><br></pre></td></tr></table></figure>
+          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#+DATA：&lt;2021-01-17 日&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#+KEYDORDS：软件设计、概要设计</span><br></pre></td></tr></table></figure>
 <p>::: {.center}<br><strong>xx公司</strong></p>
 <p><strong>2020-01-01</strong><br>:::</p>
 <p><strong>文档管理</strong></p>
@@ -1151,7 +270,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2021/01/23/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%AE%A1%E5%88%92/">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2024/04/15/%E6%B5%8B%E8%AF%95blog/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1165,7 +284,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/23/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%AE%A1%E5%88%92/" class="post-title-link" itemprop="url">软件开发计划</a>
+            <a href="/2024/04/15/%E6%B5%8B%E8%AF%95blog/" class="post-title-link" itemprop="url">nginx实战</a>
         </h2>
 
         <div class="post-meta">
@@ -1174,17 +293,85 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-01-23 22:38:00 / 修改时间：22:39:20" itemprop="dateCreated datePublished" datetime="2021-01-23T22:38:00+08:00">2021-01-23</time>
+              <time title="创建时间：2024-04-15 16:15:44" itemprop="dateCreated datePublished" datetime="2024-04-15T16:15:44+08:00">2024-04-15</time>
             </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>一个测试</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2022/12/25/%E9%80%9A%E8%BF%87%E7%94%B5%E8%84%91%E6%89%8B%E6%9F%84%E7%8E%A9%E5%AE%89%E5%8D%93%E6%89%8B%E6%B8%B8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mr.zhao">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/12/25/%E9%80%9A%E8%BF%87%E7%94%B5%E8%84%91%E6%89%8B%E6%9F%84%E7%8E%A9%E5%AE%89%E5%8D%93%E6%89%8B%E6%B8%B8/" class="post-title-link" itemprop="url">如何通过电脑手柄玩安卓手机游戏?</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-12-25 00:00:00" itemprop="dateCreated datePublished" datetime="2022-12-25T00:00:00+08:00">2022-12-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-15 16:15:44" itemprop="dateModified" datetime="2024-04-15T16:15:44+08:00">2024-04-15</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">软件设计</span></a>
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
                 </span>
             </span>
 
@@ -1199,65 +386,724 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>::: {.center}<br><strong>xx公司</strong></p>
-<p><strong>2020-01-01</strong><br>:::</p>
-<p><strong>文档管理</strong></p>
-<p>合理地管理主文档，<br>确保文档版本的及时更新，同时保持备份文档和源文档的一致性。</p>
-<p><strong>版本管理</strong></p>
-<hr>
-<p>  本版本修订日期   2019-08-12   生效日期   2019-08-12</p>
-<hr>
-<p>  版本   生效日期     变更内容       编制人</p>
-<hr>
-<p>  V1.0   2020-01-01   初稿编写完成   xx</p>
-<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><h2 id="标识"><a href="#标识" class="headerlink" title="标识"></a>标识</h2><p>本条应包含本文档的完整标识，以及本文档适用的系统和软件的完整标识，包括标识号、标题、缩略词语、版本号和发行号。</p>
-<h2 id="系统概述"><a href="#系统概述" class="headerlink" title="系统概述"></a>系统概述</h2><p>本条应简述本文档适用的系统和软件的用途，应描述系统和软件的一般特性；概述系统开发、运行和维护的历史；标识项目的业主方、用户、承建方、监理方等；标识当前和计划的运行现场等。</p>
-<h2 id="文档概述"><a href="#文档概述" class="headerlink" title="文档概述"></a>文档概述</h2><p>概述本文档的用途和内容，并描述与其使用有关的保密性和私密性的要求。</p>
-<h2 id="与其他计划之间的关系"><a href="#与其他计划之间的关系" class="headerlink" title="与其他计划之间的关系"></a>与其他计划之间的关系</h2><p>描述本计划和其他项目管理计划的关系。</p>
-<h2 id="输入基线"><a href="#输入基线" class="headerlink" title="输入基线"></a>输入基线</h2><p>给出编写本项目开发计划的输入基线，如业务需求说明书等。</p>
-<h1 id="引用文件"><a href="#引用文件" class="headerlink" title="引用文件"></a>引用文件</h1><p>应列出本文档引用的所有文档的编号、标题、修订版本、日期和来源。</p>
-<h1 id="项目范围及约束条件"><a href="#项目范围及约束条件" class="headerlink" title="项目范围及约束条件"></a>项目范围及约束条件</h1><h2 id="交付产品"><a href="#交付产品" class="headerlink" title="交付产品"></a>交付产品</h2><p>列出本项目的交付产品成果，包括软件程序、交付文档等，以及各交付成果的交付期限。</p>
-<h2 id="业务需求和约束条件"><a href="#业务需求和约束条件" class="headerlink" title="业务需求和约束条件"></a>业务需求和约束条件</h2><p>分条阐述项目的业务需求和约束条件；</p>
-<h2 id="其它方面的需求和约束条件"><a href="#其它方面的需求和约束条件" class="headerlink" title="其它方面的需求和约束条件"></a>其它方面的需求和约束条件</h2><p>分条阐述其它方面的约束，如项目进度要求、保密性等。</p>
-<h2 id="项目目标"><a href="#项目目标" class="headerlink" title="项目目标"></a>项目目标</h2><p>综述项目进度目标、成本目标、质量目标。</p>
-<h1 id="项目总体计划"><a href="#项目总体计划" class="headerlink" title="项目总体计划"></a>项目总体计划</h1><h2 id="软件开发过程和里程碑"><a href="#软件开发过程和里程碑" class="headerlink" title="软件开发过程和里程碑"></a>软件开发过程和里程碑</h2><p>描述要采用的软件开发过程。计划应覆盖论及它的所有合同条款，确定已计划的开发阶段(适用)、目标和各阶段要执行的软件开发活动。<br>里程碑设置分条阐述里程碑/阶段名称、期限、里程碑标志说明（进入条件和输出）、评审方式等。<br>提供一张工作产品矩阵表，描述各工作产品的编号、名称、产生阶段、评审方式等。工作产品包括各阶段产生的过程文档和技术文档等，是工作任务分解和配置管理计划制定的重要依据。</p>
-<h2 id="软件开发方法"><a href="#软件开发方法" class="headerlink" title="软件开发方法"></a>软件开发方法</h2><p>描述或引用要使用的软件开发方法，包括为支持这些方法所使用的手工、自动工具和过程的描述。</p>
-<h2 id="软件产品标准"><a href="#软件产品标准" class="headerlink" title="软件产品标准"></a>软件产品标准</h2><p>描述或引用在表达需求、设计、编码、测试用例、测试过程和测试结果方面要遵循的标准和要求。对要使用的各种编程语言应提供编码标准。</p>
-<h2 id="评审途径"><a href="#评审途径" class="headerlink" title="评审途径"></a>评审途径</h2><p>阐述软件内部评审的方式，以及需方或授权代表（总集、监理）实施软件产品和活动评审的途径和方式。</p>
-<h2 id="软件配置管理"><a href="#软件配置管理" class="headerlink" title="软件配置管理"></a>软件配置管理</h2><p>描述针对本项目所采用和遵循的软件配置管理方法.包括配置项的标识、控制、状态统计、审核、交付等。<br>具体的配置项识别和管理可在配置管理计划中另文给出。</p>
-<h2 id="软件质量保证"><a href="#软件质量保证" class="headerlink" title="软件质量保证"></a>软件质量保证</h2><p>描述针对在本项目所采用和遵循的软件质量保证方法。包括软件质量保证评估、软件质量保证记录和处理、第三方独立性保证等。质量保证计划也可另文给出。承建方应在计划中落实下述内部审核和检查工作：<br>软件计划审核：在软件计划编制阶段结束后必须进行软件计划审核，以确保在软件开发计划、软件配置管理计划、软件质量保证计划中所规定的计划的合适性。<br>软件需求审核：在软件需求分析阶段结束后必须进行软件需求审核，以确保在软件需求规格说明中所规定的各项需求的合适性。<br>软件概要设计审核：在软件设计结束后必须进行软件设计的审核，以评价软件概要设计说明、数据结构设计说明中所描述的软件设计在总体结构、外部接口、主要部件功能分配、全局数据结构以及各主要部件之间的接口等方面的合适性；以及在数据结构、功能、算法和过程描述等方面的合适性。<br>软件详细设计、编码阶段的审核：在软件详细设计和编码实现完成之后要对软件详细设计说明、软件测试计划、软件测试说明（含软件测试用例）、目标程序生成说明进行审核，以确认业主方的业务需求是否得到满足，验证软件需求规格说明中的需求是否已由软件设计说明描述的设计实现，软件设计说明表达的设计是否已由编码实现。<br>出厂测试审核：在完成出厂测试之后要对源代码交付验证说明、软件测试报告（含源代码交付验证报告）以及按照合同要求应提交给业主方的所有文档（如：软件用户手册等）进行审核，以评价待交付的程序及文档的质量是否满足出厂交付要求、覆盖了业主方的业务需求、做好了交付准备。<br>部署审核：在配合监理方和业主方完成测试工作后承建方进入系统部署阶段，在完成软件部署并配合完成系统联调联试后，要对部署实施报告进行审核，以验证部署实施的真实性以及外部接口的正确性。</p>
-<h2 id="问题跟踪和处理-更正活动"><a href="#问题跟踪和处理-更正活动" class="headerlink" title="问题跟踪和处理(更正活动)"></a>问题跟踪和处理(更正活动)</h2><p>描述软件更正活动中要遵循的方法，包括不同阶段的问题发现、纪录、报告、处理、审核和更正流程，问题/bug跟踪系统的选用等。须论及出厂测试、需方验证测试、试运行三个阶段。</p>
-<h2 id="档案收集"><a href="#档案收集" class="headerlink" title="档案收集"></a>档案收集</h2><p>阐述作为承建方在项目进行过程中进行自身档案收集管理的方法，包括纸质档案。</p>
-<h1 id="项目估算及进度计划"><a href="#项目估算及进度计划" class="headerlink" title="项目估算及进度计划"></a>项目估算及进度计划</h1><h2 id="工作任务分解"><a href="#工作任务分解" class="headerlink" title="工作任务分解"></a>工作任务分解</h2><p>分解项目工作任务，得出工作任务分解结构（WBS）。</p>
-<h2 id="规模估算"><a href="#规模估算" class="headerlink" title="规模估算"></a>规模估算</h2><p>估算项目规模，如需新编的代码行数、文档页数等。</p>
-<h2 id="工作量估算"><a href="#工作量估算" class="headerlink" title="工作量估算"></a>工作量估算</h2><p>根据规模估算及项目经验，估算项目工作量。</p>
-<h2 id="进度计划"><a href="#进度计划" class="headerlink" title="进度计划"></a>进度计划</h2><p>在工作任务分解结构（WBS）、工作量估算的基础上，进行活动排序、资源分配，进而编制进度计划甘特图,标识各活动的依赖关系、资源分配情况、起止时间等。</p>
-<h2 id="风险估计及应对方法"><a href="#风险估计及应对方法" class="headerlink" title="风险估计及应对方法"></a>风险估计及应对方法</h2><p>逐条给出识别的风险及其风险估计量化指标（可能性、严重性等级）、相应的对策和缓解方案。建议以列表的方式给出。</p>
-<h1 id="项目跟踪与变更管理"><a href="#项目跟踪与变更管理" class="headerlink" title="项目跟踪与变更管理"></a>项目跟踪与变更管理</h1><h2 id="项目日常跟踪"><a href="#项目日常跟踪" class="headerlink" title="项目日常跟踪"></a>项目日常跟踪</h2><p>阐述项目日常跟踪方法，包括由业主方和授权代表(监理方)参与的项目跟踪。</p>
-<h2 id="里程碑评审"><a href="#里程碑评审" class="headerlink" title="里程碑评审"></a>里程碑评审</h2><p>阐述或引用项目各里程碑评审的方法。</p>
-<h2 id="变更管理"><a href="#变更管理" class="headerlink" title="变更管理"></a>变更管理</h2><p>包括计划变更、需求变更等的处理流程、机制和方法。</p>
-<h1 id="项目组织和资源"><a href="#项目组织和资源" class="headerlink" title="项目组织和资源"></a>项目组织和资源</h1><h2 id="项目组织"><a href="#项目组织" class="headerlink" title="项目组织"></a>项目组织</h2><p>本条应描述本项目要采用的组织结构，包括涉及的组织机构、机构之间的关系、执行所需活动的每个机构的权限和职责。</p>
-<h2 id="项目资源"><a href="#项目资源" class="headerlink" title="项目资源"></a>项目资源</h2><p>本条应描述适用于本项目的资源。 主要包括：</p>
-<ol>
-<li> 人力资源，分条说明投入此项目的人员、职责、投入阶段、地理位置和涉密程度等；</li>
-<li> 开发人员要使用的设施，包括执行工作的地理位置、要使用的设施、保密区域和运用合同项目的设施的其他特性；</li>
-<li> 为满足合同需要，需方应提供的设备、软件、服务、文档、资料及设施及需要提供的时间。</li>
+          <h1 id="环境工具"><a href="#环境工具" class="headerlink" title="环境工具"></a>环境工具</h1><p>系统archlinux</p>
+<p>手柄 北通360, usb</p>
+<p>安卓手机 小米11</p>
+<p>游戏 流行群侠传</p>
+<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><h2 id="手机要打开开发者调试-并通过usb连接测试"><a href="#手机要打开开发者调试-并通过usb连接测试" class="headerlink" title="手机要打开开发者调试, 并通过usb连接测试"></a>手机要打开开发者调试, 并通过usb连接测试</h2><p><strong>不属于此次重点, 可自行搜索, 通过命令行adb<br>devices测试输出，说明连接成功</strong></p>
+<h2 id="安装scrcpy"><a href="#安装scrcpy" class="headerlink" title="安装scrcpy"></a>安装scrcpy</h2><p>此工具用来在电脑端远程操作手机, 并且该软件开源, 而且使用还算流畅</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S scrcpy</span><br></pre></td></tr></table></figure>
+
+<p>在手机电脑正常连接的情况下, 直接启动改程序即可</p>
+<h2 id="测试键盘控制"><a href="#测试键盘控制" class="headerlink" title="测试键盘控制"></a>测试键盘控制</h2><p>通过键盘测试游戏中一些主要操作的对应按键, 后续跟手柄进行绑定</p>
+<h3 id="键盘"><a href="#键盘" class="headerlink" title="键盘"></a>键盘</h3><ol>
+<li><p> 前后左右(wsad)</p>
+</li>
+<li><p> 轻击(h)</p>
+</li>
+<li><p> 重击(j)</p>
+</li>
+<li><p> 技能1(u)</p>
+</li>
+<li><p>技能2/3(i)</p>
+<p> <strong>随从技能也会一起被放出去,真刺激</strong></p>
+</li>
+<li><p> 闪避(k)</p>
+</li>
+<li><p> 怒气(p)</p>
+</li>
+<li><p> 换武器(l)</p>
+</li>
 </ol>
-<h1 id="内部培训"><a href="#内部培训" class="headerlink" title="内部培训"></a>内部培训</h1><p>根据项目的技术要求和项目成员的情况，确定是否需要进行项目培训，并制订培训计划。如不需要培训，应说明理由。</p>
-<h1 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h1><p>本章应包含有助于理解本文档的一般信息(例如原理)。本章应包含为理解本文档需要的术语和定义，所有缩略语和它们在文档中的含义的字母序列表。<br>附录<br>附录可用来提供那些为便于文档维护而单独出版的信息(例如图表、分类数据)。为便于处理，附录可单独装订成册。附录应按字母顺序(A,<br>B等)编排。</p>
-<h1 id="内容审核要点："><a href="#内容审核要点：" class="headerlink" title="内容审核要点："></a>内容审核要点：</h1><ul>
-<li>  项目范围阐述与合同及其附件要求等是否一致；</li>
-<li>  工作任务分解与项目范围/需求是否一致；</li>
-<li>  工作任务分解、工作量估计和活动进度安排是否合理；</li>
-<li>  计划内容是否包括软件项目管理的各个必要的方面；</li>
-<li>  作产品定义是否包含需方所要求的各相关必要文档；</li>
-<li>  织机构和人力资源安排和分配是否合理并符合合同相关要求；</li>
-<li>  目日常跟踪管理是否具有可操作性；</li>
-<li>  目开发过程中的问题/bug处理机制是否具有可操作性；</li>
-<li>  案收集管理是否具有可操作性。</li>
-<li>  是否制定了合适的配置管理策略和质量保证策略。</li>
-</ul>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/a7984927cfb9">https://www.jianshu.com/p/a7984927cfb9</a></p>
+<h2 id="编写手柄键盘按键映射程序"><a href="#编写手柄键盘按键映射程序" class="headerlink" title="编写手柄键盘按键映射程序"></a>编写手柄键盘按键映射程序</h2><p>这里要注意, 按键使用的是keyboard组件, 测试使用pyautogui会出现连点的情况</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">通过python + adb + scrcpy的方式，实现手柄玩安卓手机游戏</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># Released by rdb under the Unlicense (unlicense.org)</span></span><br><span class="line"><span class="string"># Based on information from:</span></span><br><span class="line"><span class="string"># https://www.kernel.org/doc/Documentation/input/joystick-api.txt</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 参考</span></span><br><span class="line"><span class="string">https://blog.csdn.net/Enderman_xiaohei/article/details/88050036?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-9-88050036-blog-109139735.pc_relevant_3mothn_strategy_recovery&amp;spm=1001.2101.3001.4242.6&amp;utm_relevant_index=12</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">https://blog.csdn.net/dhjabc_1/article/details/117444998</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">使用:</span></span><br><span class="line"><span class="string">linux下需要使用管理员身份运行(触发按键需要), 否则运行报错</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">sudo python xx.py</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">import</span> pygame</span><br><span class="line"><span class="comment"># 键盘</span></span><br><span class="line"><span class="keyword">import</span> keyboard</span><br><span class="line"><span class="keyword">import</span> pyautogui</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 鼠标, 没啥用了</span></span><br><span class="line"><span class="comment"># from pymouse import PyMouseMeta</span></span><br><span class="line"><span class="comment"># m = PyMouseMeta()</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">JoyToKey</span>:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    将手柄映射到键盘输入上</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">exec</span>(<span class="params">self, joystick, event</span>):</span><br><span class="line">        <span class="comment"># 可能的joystick行为: JOYAXISMOTION JOYBALLMOTION JOYBUTTONDOWN JOYBUTTONUP JOYHATMOTION</span></span><br><span class="line">        <span class="comment"># if event.type == pygame.JOYBUTTONUP:</span></span><br><span class="line">        <span class="comment">#     print(&quot;Joystick button released.&quot;)</span></span><br><span class="line">        <span class="comment"># ********************键盘按键********************</span></span><br><span class="line">        <span class="keyword">if</span> event.<span class="built_in">type</span> == pygame.KEYDOWN:</span><br><span class="line">            <span class="comment"># print(pygame.key.get_pressed())</span></span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">            <span class="comment"># event.key 表示键盘按键的值，比如k 的值是107， 回车键的值是13，等</span></span><br><span class="line">            <span class="comment"># self.toggle_show_fps(event.key)</span></span><br><span class="line">        <span class="keyword">elif</span> event.<span class="built_in">type</span> == pygame.KEYUP:</span><br><span class="line">            <span class="comment"># print(pygame.key.get_pressed())</span></span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># ********************手柄操作********************</span></span><br><span class="line">        <span class="keyword">elif</span> event.<span class="built_in">type</span> == pygame.JOYBUTTONDOWN:</span><br><span class="line">            <span class="comment"># 检测到手柄上的键按下</span></span><br><span class="line">            <span class="comment"># print(&quot;Joystick button pressed.&quot;)</span></span><br><span class="line">            <span class="keyword">if</span> joystick.get_button(<span class="number">7</span>) == <span class="number">1</span>:</span><br><span class="line">                <span class="comment"># 手柄start键 --&gt; 键盘中的回车键。</span></span><br><span class="line">                keyboard.press(<span class="string">&#x27;enter&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> joystick.get_button(<span class="number">0</span>) == <span class="number">1</span>:</span><br><span class="line">                <span class="comment"># 手柄A键 --&gt; 键盘的k键，也就是对应跳(闪)的功能。</span></span><br><span class="line">                keyboard.press(<span class="string">&#x27;k&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> joystick.get_button(<span class="number">2</span>) == <span class="number">1</span>:</span><br><span class="line">                <span class="comment"># 手柄X键 --&gt; 键盘u</span></span><br><span class="line">                keyboard.press(<span class="string">&#x27;u&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> joystick.get_button(<span class="number">1</span>) == <span class="number">1</span>:</span><br><span class="line">                <span class="comment"># 手柄B键 --&gt; 键盘i</span></span><br><span class="line">                keyboard.press(<span class="string">&#x27;i&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> joystick.get_button(<span class="number">3</span>) == <span class="number">1</span>:</span><br><span class="line">                <span class="comment"># 手柄Y键 --&gt; 键盘p</span></span><br><span class="line">                keyboard.press(<span class="string">&#x27;p&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> joystick.get_button(<span class="number">4</span>) == <span class="number">1</span>:</span><br><span class="line">                keyboard.press(<span class="string">&#x27;h&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> joystick.get_button(<span class="number">5</span>) == <span class="number">1</span>:</span><br><span class="line">                <span class="comment"># 手柄又键 --&gt; 键盘l(换武器)</span></span><br><span class="line">                <span class="comment"># keyboard.press(&#x27;l&#x27;)</span></span><br><span class="line">                keyboard.press(<span class="string">&#x27;j&#x27;</span>)</span><br><span class="line">        <span class="keyword">elif</span> event.<span class="built_in">type</span> == pygame.JOYBUTTONUP:</span><br><span class="line">            <span class="comment"># print(&quot;Joystick button release.&quot;)</span></span><br><span class="line">            <span class="keyword">if</span> joystick.get_button(<span class="number">7</span>) == <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 手柄start键 --&gt; 键盘中的回车键。</span></span><br><span class="line">                keyboard.release(<span class="string">&#x27;enter&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> joystick.get_button(<span class="number">0</span>) == <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 手柄A键 --&gt; 键盘的k键，也就是对应跳(闪)的功能。</span></span><br><span class="line">                keyboard.release(<span class="string">&#x27;k&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> joystick.get_button(<span class="number">2</span>) == <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 手柄X键 --&gt; 键盘u</span></span><br><span class="line">                keyboard.release(<span class="string">&#x27;u&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> joystick.get_button(<span class="number">1</span>) == <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 手柄B键 --&gt; 键盘i</span></span><br><span class="line">                keyboard.release(<span class="string">&#x27;i&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> joystick.get_button(<span class="number">3</span>) == <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 手柄Y键 --&gt; 键盘p</span></span><br><span class="line">                keyboard.release(<span class="string">&#x27;p&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> joystick.get_button(<span class="number">4</span>) == <span class="number">0</span>:</span><br><span class="line">                keyboard.release(<span class="string">&#x27;h&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> joystick.get_button(<span class="number">5</span>) == <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 手柄又键 --&gt; 键盘l(换武器)</span></span><br><span class="line">                <span class="comment"># keyboard.release(&#x27;l&#x27;)</span></span><br><span class="line">                <span class="comment"># 攻击键容易连点</span></span><br><span class="line">                keyboard.release(<span class="string">&#x27;j&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 攻击键</span></span><br><span class="line">        <span class="keyword">elif</span> event.<span class="built_in">type</span> == pygame.JOYAXISMOTION:</span><br><span class="line">            <span class="comment"># print(&quot;Joystick axis pressed.&quot;)</span></span><br><span class="line">            <span class="keyword">if</span> joystick.get_axis(<span class="number">2</span>) &gt; <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 手柄左x --&gt; 键盘h</span></span><br><span class="line">                <span class="comment"># 注意: 这里需要让手柄, pygame来控制按压和释放, 如果用pyautogui, keydown每次会触发很多按压,(连点)</span></span><br><span class="line">                <span class="comment"># 还是用这个保险</span></span><br><span class="line">                keyboard.press(<span class="string">&#x27;h&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> joystick.get_axis(<span class="number">5</span>) &gt; <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 手柄右x --&gt; 键盘j</span></span><br><span class="line">                keyboard.press(<span class="string">&#x27;j&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">round</span>(joystick.get_axis(<span class="number">1</span>)) &lt; <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 前</span></span><br><span class="line">                keyboard.press(<span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">round</span>(joystick.get_axis(<span class="number">1</span>)) &gt; <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 后</span></span><br><span class="line">                keyboard.press(<span class="string">&#x27;s&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">round</span>(joystick.get_axis(<span class="number">0</span>)) &lt; <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 左</span></span><br><span class="line">                keyboard.press(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">round</span>(joystick.get_axis(<span class="number">0</span>)) &gt; <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 右</span></span><br><span class="line">                keyboard.press(<span class="string">&#x27;d&#x27;</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 释放</span></span><br><span class="line">            <span class="comment"># print(&quot;Joystick axis released.&quot;)</span></span><br><span class="line">            <span class="comment"># print(&quot;s&quot;, joystick.get_axis(1))</span></span><br><span class="line">            <span class="keyword">if</span> joystick.get_axis(<span class="number">2</span>) &lt; <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 手柄左x --&gt; 键盘h</span></span><br><span class="line">                keyboard.release(<span class="string">&#x27;h&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> joystick.get_axis(<span class="number">5</span>) &lt; <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 手柄右x --&gt; 键盘j</span></span><br><span class="line">                keyboard.release(<span class="string">&#x27;j&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">round</span>(joystick.get_axis(<span class="number">0</span>)) == <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 释放左右</span></span><br><span class="line">                keyboard.release(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">                keyboard.release(<span class="string">&#x27;d&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">round</span>(joystick.get_axis(<span class="number">1</span>)) == <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 释放前后</span></span><br><span class="line">                keyboard.release(<span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">                keyboard.release(<span class="string">&#x27;s&#x27;</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 摇杆转向</span></span><br><span class="line">            <span class="comment"># 当前鼠标光标位置, 固定位置, 不单独获取了</span></span><br><span class="line">            <span class="comment"># x, y = pygame.mouse.get_pos()</span></span><br><span class="line">            x, y = <span class="number">482</span>, <span class="number">305</span></span><br><span class="line">            pyautogui.moveTo(x, y)</span><br><span class="line">            <span class="comment"># 1. 设置当前鼠标光标位置, 放中间或偏右</span></span><br><span class="line">            <span class="comment"># 2. 根据摇杆变化, 利用pyautogui进行拖拽</span></span><br><span class="line">            <span class="comment"># 3, 4为遥感的横/纵向变化</span></span><br><span class="line">            <span class="keyword">if</span> joystick.get_axis(<span class="number">3</span>) != <span class="number">0</span> <span class="keyword">or</span> joystick.get_axis(<span class="number">4</span>) != <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 将当前光标位置的东西向下移动100个像素点，在拖动的过程中按住鼠标左键。</span></span><br><span class="line">                <span class="comment"># &gt;&gt; &gt; pyautogui.drag(100, 0, button=&#x27;left&#x27;)</span></span><br><span class="line">                <span class="comment"># 一样的问题, 连点</span></span><br><span class="line">                <span class="comment"># pyautogui.drag(int(round(joystick.get_axis(4))), int(round(joystick.get_axis(3))), button=&#x27;left&#x27;)</span></span><br><span class="line">                <span class="built_in">print</span>(y+<span class="built_in">int</span>(<span class="built_in">round</span>(joystick.get_axis(<span class="number">4</span>))), x+<span class="built_in">int</span>(<span class="built_in">round</span>(joystick.get_axis(<span class="number">3</span>))))</span><br><span class="line"></span><br><span class="line">                <span class="comment"># 使用pymouse实现上述payautogui的拖拽</span></span><br><span class="line">                <span class="comment"># x, y = pygame.mouse.get_pos()</span></span><br><span class="line">                <span class="comment"># m.press(x, y)</span></span><br><span class="line">                <span class="comment"># x1 = x + joystick.get_axis(3)</span></span><br><span class="line">                <span class="comment"># y1 = y + joystick.get_axis(4)</span></span><br><span class="line">                <span class="comment"># m.move(x1, y1)</span></span><br><span class="line">                <span class="comment"># m.release(x1, y1)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    pygame.init()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 初始化joystick</span></span><br><span class="line">    pygame.joystick.init()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 得到joystick的数量</span></span><br><span class="line">    joystick_count = pygame.joystick.get_count()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Number of joysticks: &#123;&#125;&quot;</span>.<span class="built_in">format</span>(joystick_count))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 之考虑一个手柄</span></span><br><span class="line">    joystick = pygame.joystick.Joystick(<span class="number">0</span>)</span><br><span class="line">    <span class="comment"># 按键映射对象</span></span><br><span class="line">    joyToKey = JoyToKey()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># -------- 程序主循环 -----------</span></span><br><span class="line">    <span class="comment"># 保持循环直到用户点击关闭按钮</span></span><br><span class="line">    done = <span class="literal">False</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> done:</span><br><span class="line">        <span class="comment"># 事件处理的步骤</span></span><br><span class="line">        <span class="comment"># 手柄事件触发</span></span><br><span class="line">        <span class="keyword">for</span> event <span class="keyword">in</span> pygame.event.get():</span><br><span class="line">            <span class="comment"># 如果用户触发了关闭事件</span></span><br><span class="line">            <span class="keyword">if</span> event.<span class="built_in">type</span> == pygame.QUIT:</span><br><span class="line">                <span class="comment"># 设置我们做了这件事的标志，所以我们就可以退出循环了</span></span><br><span class="line">                done = <span class="literal">True</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                joyToKey.<span class="built_in">exec</span>(joystick, event)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 关闭窗口并退出.</span></span><br><span class="line">    pygame.quit()</span><br></pre></td></tr></table></figure>
+
+<h2 id="程序运行"><a href="#程序运行" class="headerlink" title="程序运行"></a>程序运行</h2><p>程序使用的是keyboard组件, 在linux下运行时需要sudo</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo python 北通360-流行群侠传手游.py</span><br></pre></td></tr></table></figure>
+
+<p>此时在scrcpy界面, 通过手柄即可控制手机进行游戏操作, 并且流畅性也还可以</p>
+<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>只是为了提高下游戏的趣味性, 其它操作可自行发掘</p>
+<h2 id="摇杆目前无法适应"><a href="#摇杆目前无法适应" class="headerlink" title="摇杆目前无法适应"></a>摇杆目前无法适应</h2><p>摇杆转向跟鼠标适配未实现, 事件刷新太快, 暂时未想到好方法进行转换</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2022/10/30/%E8%87%AA%E5%AE%9A%E4%B9%89swagger%E6%89%A9%E5%B1%95%E8%A7%A3%E6%9E%90jsondoc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mr.zhao">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/10/30/%E8%87%AA%E5%AE%9A%E4%B9%89swagger%E6%89%A9%E5%B1%95%E8%A7%A3%E6%9E%90jsondoc/" class="post-title-link" itemprop="url">自定义swagger扩展解析jsondoc</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-10-30 00:00:00" itemprop="dateCreated datePublished" datetime="2022-10-30T00:00:00+08:00">2022-10-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-15 16:15:44" itemprop="dateModified" datetime="2024-04-15T16:15:44+08:00">2024-04-15</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="需求规定"><a href="#需求规定" class="headerlink" title="需求规定"></a>需求规定</h1><p>为了减少注释和swagger注解的重复定义, 通过规范注释,<br>让swagger可以通过javadoc来产生</p>
+<p>替换@Api、@ApiOperation、@ApiModel、@ApiModelProperties等注解</p>
+<p>只是对swagger的扩展，如果有swagger注解，以注解为准</p>
+<h1 id="运行环境"><a href="#运行环境" class="headerlink" title="运行环境"></a>运行环境</h1><h2 id="springboot2-1-7"><a href="#springboot2-1-7" class="headerlink" title="springboot2.1.7"></a>springboot2.1.7</h2><h2 id="jdk1-8"><a href="#jdk1-8" class="headerlink" title="jdk1.8"></a>jdk1.8</h2><h1 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h1><h2 id="系统构思"><a href="#系统构思" class="headerlink" title="系统构思"></a>系统构思</h2><ol>
+<li> 编译完成的class里没有注释的，所以注释信息只有在编译代码时存储起来</li>
+<li>swagger本身是通过注解实现接口定义描述等加载的，现将代码注释生成json格式,<br> 利用swagger扩展在启动项目时通过json进行加载到swagger中</li>
+<li> 需要配合自定义的javadoc-json-maven-plugin先将注释生成json文件</li>
+</ol>
+<h2 id="关键技术与算法"><a href="#关键技术与算法" class="headerlink" title="关键技术与算法"></a>关键技术与算法</h2><h3 id="生成javadoc-json文件"><a href="#生成javadoc-json文件" class="headerlink" title="生成javadoc.json文件"></a>生成javadoc.json文件</h3><p>com.example.CommentToJsonMain(已做成maven插件, 这里原始文件可做测试)</p>
+<p>插件: <a target="_blank" rel="noopener" href="https://github.com/zhaozhiwei1992/javadoc-json-maven-plugin">https://github.com/zhaozhiwei1992/javadoc-json-maven-plugin</a></p>
+<h3 id="swagger扩展代码"><a href="#swagger扩展代码" class="headerlink" title="swagger扩展代码"></a>swagger扩展代码</h3><p>com.example.SpringbootSwaggerJavadocApplication启动即可生效</p>
+<p>类定义: com.example.plugin.CommentApiBuilder</p>
+<p>方法定义: com.example.plugin.CommentOperationBuilder</p>
+<h3 id="类代码注释规范"><a href="#类代码注释规范" class="headerlink" title="类代码注释规范"></a>类代码注释规范</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @Title: PersonController</span><br><span class="line"> * @Package: com/example/springbootcache/controller/PersonController.java</span><br><span class="line"> * @Description: 用户信息接口</span><br><span class="line"> * @author: zhaozhiwei</span><br><span class="line"> * @date: 2022/10/25 下午8:23</span><br><span class="line"> * @version: V1.0</span><br><span class="line"> */</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="方法代码注释规范"><a href="#方法代码注释规范" class="headerlink" title="方法代码注释规范"></a>方法代码注释规范</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @date: 2022/10/25-上午10:19</span><br><span class="line"> * @author: zhaozhiwei</span><br><span class="line"> * @method: findByID</span><br><span class="line">  * @param id : 唯一id</span><br><span class="line"> * @return: com.lx.demo.springbootcache.domain.Person</span><br><span class="line"> * @Description: 根据id获取用户信息</span><br><span class="line"> * 获取十次， 只有第一次是读库，后续都是取缓存</span><br><span class="line"> * 直接删掉redis缓存里的内容，仍然可以获取数据，并且走缓存，此时获取的是服务缓存ehcache中的信息</span><br><span class="line"> * seq 10 |xargs -i curl -XGET &#x27;http://localhost:8080/persons/2&#x27;</span><br><span class="line"> */</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="基本处理流程"><a href="#基本处理流程" class="headerlink" title="基本处理流程"></a>基本处理流程</h1><h2 id="系统流程图"><a href="#系统流程图" class="headerlink" title="系统流程图"></a>系统流程图</h2><figure class="highlight plaintext"><figcaption><span>file</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">start</span><br><span class="line">:引入javadoc-json插件;</span><br><span class="line">:使用插件:generate goals生成json版注释;</span><br><span class="line">:正常启动web服务;</span><br><span class="line">:访问swagger-ui.html;</span><br><span class="line">note right</span><br><span class="line">        此时即可看到没有注解的方法也可以显示方法描述信息</span><br><span class="line">end note</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p><a target="_blank" rel="noopener" href="https://github.com/zhaozhiwei1992/demo/tree/master/springboot/springboot-swagger-javadoc">https://github.com/zhaozhiwei1992/demo/tree/master/springboot/springboot-swagger-javadoc</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><h2 id="swagger扩展"><a href="#swagger扩展" class="headerlink" title="swagger扩展"></a>swagger扩展</h2><p><a target="_blank" rel="noopener" href="https://github.com/hadix-lin/springfox-plus">https://github.com/hadix-lin/springfox-plus</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ydonghao2/article/details/109593416">https://blog.csdn.net/ydonghao2/article/details/109593416</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/baiihcy/article/details/53861267">https://blog.csdn.net/baiihcy/article/details/53861267</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_17623363/article/details/109259315">https://blog.csdn.net/qq_17623363/article/details/109259315</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2022/10/27/java%E6%B3%A8%E9%87%8A%E8%BD%ACjson%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mr.zhao">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/10/27/java%E6%B3%A8%E9%87%8A%E8%BD%ACjson%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/" class="post-title-link" itemprop="url">java注释转json插件开发实战</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-10-27 00:00:00" itemprop="dateCreated datePublished" datetime="2022-10-27T00:00:00+08:00">2022-10-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-15 16:15:44" itemprop="dateModified" datetime="2024-04-15T16:15:44+08:00">2024-04-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h1><p>将java的代码注释转换为json格式，并写入文件</p>
+<p>本文介绍了完整的开发流程及如何使用</p>
+<h1 id="运行环境"><a href="#运行环境" class="headerlink" title="运行环境"></a>运行环境</h1><h2 id="jdk1-8"><a href="#jdk1-8" class="headerlink" title="jdk1.8"></a>jdk1.8</h2><h2 id="maven3-x"><a href="#maven3-x" class="headerlink" title="maven3.x"></a>maven3.x</h2><h1 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h1><h2 id="系统构思"><a href="#系统构思" class="headerlink" title="系统构思"></a>系统构思</h2><ol>
+<li> 编译完成的class里没有注释的，所以注释信息只有在编译代码时存储起来</li>
+<li> 将能够生成javadoc.json的代码做成maven插件</li>
+</ol>
+<h2 id="关键技术与算法"><a href="#关键技术与算法" class="headerlink" title="关键技术与算法"></a>关键技术与算法</h2><h3 id="需要实现Doclet"><a href="#需要实现Doclet" class="headerlink" title="需要实现Doclet"></a>需要实现Doclet</h3><p>必须引入下述jar包, 来导入com.sun.javadoc.Doclet</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.sun&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;tools&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.8&lt;/version&gt;</span><br><span class="line">    &lt;scope&gt;system&lt;/scope&gt;</span><br><span class="line">    &lt;systemPath&gt;/home/zhaozhiwei/applications/jdk1.8.0_181/lib/tools.jar&lt;/systemPath&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="代码路径"><a href="#代码路径" class="headerlink" title="代码路径"></a>代码路径</h3><p><a href="https:github.com:zhaozhiwei1992/javadoc-json-maven-plugin">https:github.com:zhaozhiwei1992/javadoc-json-maven-plugin</a></p>
+<p>入口: com.example.Javadoc2JsonMojo#execute</p>
+<h3 id="生成javadoc-json文件"><a href="#生成javadoc-json文件" class="headerlink" title="生成javadoc.json文件"></a>生成javadoc.json文件</h3><p>com.example.CommentToJson(做成maven插件使用)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;com.example.web.rest.PersonResource.findByID(java.lang.Long)#date&quot;: &quot;2022/10/25-上午10:19&quot;,</span><br><span class="line">  &quot;com.example.web.rest.PersonResource#Package&quot;: &quot;com/example/springbootcache/controller/PersonController.java&quot;,</span><br><span class="line">  &quot;com.example.web.rest.PersonResource.findByID(java.lang.Long)#Description&quot;: &quot;根据id获取用户信息&quot;,</span><br><span class="line">  &quot;com.example.web.rest.PersonResource.save(Person)#method&quot;: &quot;save&quot;,</span><br><span class="line">  &quot;com.example.web.rest.PersonResource#author&quot;: &quot;zhaozhiwei&quot;,</span><br><span class="line">  &quot;com.example.web.rest.PersonResource.deleteByID(java.lang.Long)#Description&quot;: &quot;根据id删除person信息&quot;,</span><br><span class="line">  &quot;com.example.web.rest.PersonResource#Title&quot;: &quot;PersonController&quot;,</span><br><span class="line">  &quot;com.example.web.rest.PersonResource.update(Person)#date&quot;: &quot;2022/10/25-上午10:21&quot;,</span><br><span class="line">  &quot;com.example.web.rest.PersonResource.save(Person)#Description&quot;: &quot;保存方法&quot;,</span><br><span class="line">  &quot;com.example.web.rest.PersonResource#Description&quot;: &quot;用户信息接口&quot;,</span><br><span class="line">  &quot;com.example.web.rest.PersonResource#date&quot;: &quot;2022/10/25 下午8:23&quot;,</span><br><span class="line">  &quot;com.example.web.rest.PersonResource.update(Person)#Description&quot;: &quot;修改内容看是否会调整缓存&quot;,</span><br><span class="line">  ... 省略了一大堆</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="类代码注释规范"><a href="#类代码注释规范" class="headerlink" title="类代码注释规范"></a>类代码注释规范</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @Title: PersonController</span><br><span class="line"> * @Package: com/example/springbootcache/controller/PersonController.java</span><br><span class="line"> * @Description: 用户信息接口</span><br><span class="line"> * @author: zhaozhiwei</span><br><span class="line"> * @date: 2022/10/25 下午8:23</span><br><span class="line"> * @version: V1.0</span><br><span class="line"> */</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="方法代码注释规范"><a href="#方法代码注释规范" class="headerlink" title="方法代码注释规范"></a>方法代码注释规范</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @date: 2022/10/25-上午10:19</span><br><span class="line"> * @author: zhaozhiwei</span><br><span class="line"> * @method: findByID</span><br><span class="line">  * @param id : 唯一id</span><br><span class="line"> * @return: com.lx.demo.springbootcache.domain.Person</span><br><span class="line"> * @Description: 根据id获取用户信息</span><br><span class="line"> * 获取十次， 只有第一次是读库，后续都是取缓存</span><br><span class="line"> * 直接删掉redis缓存里的内容，仍然可以获取数据，并且走缓存，此时获取的是服务缓存ehcache中的信息</span><br><span class="line"> * seq 10 |xargs -i curl -XGET &#x27;http://localhost:8080/persons/2&#x27;</span><br><span class="line"> */</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="参数定义"><a href="#参数定义" class="headerlink" title="参数定义"></a>参数定义</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@parameter额外属性：</span><br><span class="line"></span><br><span class="line">@parameter alias=&quot;&lt;aliasName&gt;&quot;:为mojo参数使用别名</span><br><span class="line"></span><br><span class="line">@parameter expression=&quot;$&#123;aSystemProperty&#125;&quot;:使用系统属性表达式对mojo参数进行赋值</span><br><span class="line"></span><br><span class="line">@parameter defaultValue=&quot;aValue/$&#123;anExpression&#125;&quot;:提供一个默认值</span><br></pre></td></tr></table></figure>
+
+<h1 id="开发流程"><a href="#开发流程" class="headerlink" title="开发流程"></a>开发流程</h1><h2 id="项目构建"><a href="#项目构建" class="headerlink" title="项目构建"></a>项目构建</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate -DgroupId=com.example -DartifactId=javadoc-json-maven-plugin -DarchetypeArtifactId=maven-archetype-mojo -DinteractiveMode=false</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用插件"><a href="#使用插件" class="headerlink" title="使用插件"></a>使用插件</h2><h3 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h3><p>在javadoc-json-maven-plugin项目中执行maven的install命令,<br>将插件安装到本地仓库</p>
+<h3 id="引入自定义插件"><a href="#引入自定义插件" class="headerlink" title="引入自定义插件"></a>引入自定义插件</h3><p>在其它项目引入插件测试</p>
+<p>展开插件可以看到Mojo列表，由于项目里只有一个Mojo，且Mojo上用注释@goal指定了名称为generate，所以这里只能看到一个javadoc-json:generate</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">            &lt;plugin&gt;</span><br><span class="line">                &lt;groupId&gt;com.example&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;javadoc-json-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">                &lt;version&gt;2.0-SNAPSHOT&lt;/version&gt;</span><br><span class="line">                &lt;configuration&gt;</span><br><span class="line">&lt;!--                    指定java注释扫描目录--&gt;</span><br><span class="line">                    &lt;basePackage&gt;com/example/web/rest&lt;/basePackage&gt;</span><br><span class="line">                &lt;/configuration&gt;</span><br><span class="line">            &lt;/plugin&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="执行插件"><a href="#执行插件" class="headerlink" title="执行插件"></a>执行插件</h3><p>双击javadoc-json:generate就会执行这个插件。</p>
+<p>执行完毕后，可以看到项目根目录的target文件下多了个javadoc.json文件。</p>
+<h3 id="命令行执行插件-可选"><a href="#命令行执行插件-可选" class="headerlink" title="命令行执行插件(可选)"></a>命令行执行插件(可选)</h3><p>命令格式为mvn groupId:artifactId:version:goal，执行如下命令：</p>
+<p>mvn com.<a href="example:javadoc-json-maven-plugin:1.0.0-SNAPSHOT:generate">example:javadoc-json-maven-plugin:1.0.0-SNAPSHOT:generate</a></p>
+<p>由于我们的插件命名符合规范，所以上面的命令可以简写为：</p>
+<p>mvn javadoc-json:generate</p>
+<h1 id="尚未解决的问题"><a href="#尚未解决的问题" class="headerlink" title="尚未解决的问题"></a>尚未解决的问题</h1><p>javadoc插件去掉异常提示</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><h2 id="maven插件开发"><a href="#maven插件开发" class="headerlink" title="maven插件开发"></a>maven插件开发</h2><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/9cfe599b3c5e">https://www.jianshu.com/p/9cfe599b3c5e</a></p>
+<h2 id="参数定义-1"><a href="#参数定义-1" class="headerlink" title="参数定义"></a>参数定义</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/z69183787/article/details/52984622">https://blog.csdn.net/z69183787/article/details/52984622</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2022/09/19/linux%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9Candroid%E6%89%8B%E6%9C%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mr.zhao">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/09/19/linux%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9Candroid%E6%89%8B%E6%9C%BA/" class="post-title-link" itemprop="url">linux命令操作android手机</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-09-19 00:00:00" itemprop="dateCreated datePublished" datetime="2022-09-19T00:00:00+08:00">2022-09-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-15 16:15:44" itemprop="dateModified" datetime="2024-04-15T16:15:44+08:00">2024-04-15</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h1><p>通过一台linux机器操作android手机做一些常用的操作</p>
+<p>复杂的操作都是由简单操作开始的, 可以自行发掘</p>
+<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">笔记本: thinkpad t480</span><br><span class="line"></span><br><span class="line">操作系统: archlinux</span><br><span class="line"></span><br><span class="line">adb版本: 31.0.3p2-android-tools</span><br><span class="line"></span><br><span class="line">手机: 小米手机 muui13.09</span><br></pre></td></tr></table></figure>
+
+<h1 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h1><h2 id="笔记本安装adb环境"><a href="#笔记本安装adb环境" class="headerlink" title="笔记本安装adb环境"></a>笔记本安装adb环境</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S android-tools</span><br></pre></td></tr></table></figure>
+
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">adb --version</span><br><span class="line"></span><br><span class="line">Android Debug Bridge version 1.0.41</span><br><span class="line">Version 31.0.3p2-android-tools</span><br><span class="line">Installed as /usr/bin/adb</span><br></pre></td></tr></table></figure>
+
+<h2 id="手机打开usb调试开关"><a href="#手机打开usb调试开关" class="headerlink" title="手机打开usb调试开关"></a>手机打开usb调试开关</h2><p>设置—-全部参数—–狂戳miui版本，这样就打开开发者模式了。</p>
+<p>设置—–更多设置——开发者选项—开启开发者选项。</p>
+<p>需要开启的按钮有:USB调试、USB安装、USB调试（安全设置）、关闭启动MIUI优化。</p>
+<h2 id="连接手机"><a href="#连接手机" class="headerlink" title="连接手机"></a>连接手机</h2><p>通过usb连接手机后,<br>需要在小米手机上面的USB的用途上面选择传输文件或者传输照片（除了仅充电就行~）</p>
+<p>测试连接: 查看连接设备 adb devices, 正常输出说明连接成功,<br>usb连通后也可以用wifi连接 :D</p>
+<h2 id="使用命令操作手机拍照"><a href="#使用命令操作手机拍照" class="headerlink" title="使用命令操作手机拍照"></a>使用命令操作手机拍照</h2><h3 id="启动相机"><a href="#启动相机" class="headerlink" title="启动相机"></a>启动相机</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell am start -a android.media.action.STILL_IMAGE_CAMERA</span><br></pre></td></tr></table></figure>
+
+<h3 id="camera键-拍照"><a href="#camera键-拍照" class="headerlink" title="camera键 拍照"></a>camera键 拍照</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell input keyevent 27 </span><br></pre></td></tr></table></figure>
+
+<h3 id="back键-暂退相机"><a href="#back键-暂退相机" class="headerlink" title="back键 暂退相机"></a>back键 暂退相机</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell input keyevent 4</span><br></pre></td></tr></table></figure>
+
+<h3 id="注"><a href="#注" class="headerlink" title="注"></a>注</h3><p>这里只是个简单操作, 并且相机的启动入口基本是固定的,<br>如果是其它的app需要先获取到应用的入口, 可以自行搜索或联系我</p>
+<p>对于按键操作, 最好是网上搜索一份按键编码对应表</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2022/04/25/atomikos%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mr.zhao">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/04/25/atomikos%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/" class="post-title-link" itemprop="url">atomikos实现分布式事务</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-04-25 00:00:00" itemprop="dateCreated datePublished" datetime="2022-04-25T00:00:00+08:00">2022-04-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-15 16:15:44" itemprop="dateModified" datetime="2024-04-15T16:15:44+08:00">2024-04-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>多数据源单服务写入, 分布式事务实现</p>
+<p>使用随机数控制产生异常</p>
+<p><strong>注: 网上很多都是只有多数据源配置，实际不能控制事务统一回滚,<br>单服务场景下如果多个数据源只有一个写，剩下都是读, 则不需要分布式事务</strong></p>
+<p>为减少篇幅，详细代码在代码仓库，可自行参考</p>
+<h1 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h1><p>springboot 2.1.7.RELEASE</p>
+<h1 id="配置引入"><a href="#配置引入" class="headerlink" title="配置引入"></a>配置引入</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;spring-boot-starter-jta-atomikos&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="增加配置类"><a href="#增加配置类" class="headerlink" title="增加配置类"></a>增加配置类</h1><p>AtomikosJtaPlatform</p>
+<p>JPAAtomikosTransactionConfig Atomikos事务配置类</p>
+<p>PrimaryConfig 主数据源配置</p>
+<p>SecondaryConfig 其它数据源配置</p>
+<h1 id="数据对象实现"><a href="#数据对象实现" class="headerlink" title="数据对象实现"></a>数据对象实现</h1><p>User</p>
+<h1 id="增加仓储实现"><a href="#增加仓储实现" class="headerlink" title="增加仓储实现"></a>增加仓储实现</h1><p><strong>需要分别实现primary和secondary, 从而支持多个数据源访问</strong></p>
+<p>PrimaryUserRepository</p>
+<p>SecondaryUserRepository</p>
+<h1 id="实现服务类"><a href="#实现服务类" class="headerlink" title="实现服务类"></a>实现服务类</h1><p>PrimaryUserService</p>
+<p>SecondaryUserService</p>
+<h2 id="ExampleService"><a href="#ExampleService" class="headerlink" title="ExampleService"></a>ExampleService</h2><p>负责统一调用 PrimaryUserService 和 SecondaryUserService,<br>模拟一个服务同时访问多个服务类(<strong>每个服务类引用了不同数据源</strong>)</p>
+<p>如果其中某个服务抛出异常，则整个事务回滚, @Transactional(rollbackOn =<br>Exception.class) 是必须的</p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>com.example.springbootatomikos.services.UserServiceTest#testSave</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p><a target="_blank" rel="noopener" href="https://github.com/zhaozhiwei1992/demo/tree/master/springboot/springboot-atomikos">github地址</a></p>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/zhaozhiwei_1992/demo/tree/master/springboot/springboot-atomikos">gitee地址</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2022/04/13/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB%E6%94%AF%E6%8C%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mr.zhao">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/04/13/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB%E6%94%AF%E6%8C%81/" class="post-title-link" itemprop="url">T480指纹识别支持</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-04-13 00:00:00" itemprop="dateCreated datePublished" datetime="2022-04-13T00:00:00+08:00">2022-04-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-15 16:15:44" itemprop="dateModified" datetime="2024-04-15T16:15:44+08:00">2024-04-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%BD%AF%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">软件</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%BD%AF%E4%BB%B6/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%BD%AF%E4%BB%B6/%E5%B7%A5%E5%85%B7/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" itemprop="url" rel="index"><span itemprop="name">指纹识别</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>通过指纹识别解锁slim-lock</p>
+<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><h2 id="操作系统archlinux"><a href="#操作系统archlinux" class="headerlink" title="操作系统archlinux"></a>操作系统archlinux</h2><h2 id="桌面管理器slim"><a href="#桌面管理器slim" class="headerlink" title="桌面管理器slim"></a>桌面管理器slim</h2><h2 id="锁屏slimlock"><a href="#锁屏slimlock" class="headerlink" title="锁屏slimlock"></a>锁屏slimlock</h2><h2 id="硬件-Thinkpad-T480"><a href="#硬件-Thinkpad-T480" class="headerlink" title="硬件 Thinkpad T480"></a>硬件 Thinkpad T480</h2><p><strong>注: 指纹设备id, 06cb:009a</strong></p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="测试设备-lsusb"><a href="#测试设备-lsusb" class="headerlink" title="测试设备 lsusb"></a>测试设备 lsusb</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Bus 004 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub</span><br><span class="line">Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub</span><br><span class="line">Bus 002 Device 002: ID 0bda:0316 Realtek Semiconductor Corp. Card Reader</span><br><span class="line">Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub</span><br><span class="line"></span><br><span class="line"># 这玩意儿应该就是指纹设备了</span><br><span class="line">Bus 001 Device 005: ID 06cb:009a Synaptics, Inc. Metallica MIS Touch Fingerprint Reader</span><br><span class="line"></span><br><span class="line">Bus 001 Device 004: ID 04f2:b604 Chicony Electronics Co., Ltd Integrated Camera (1280x720@30)</span><br><span class="line">Bus 001 Device 003: ID 8087:0a2b Intel Corp. Bluetooth wireless interface</span><br><span class="line">Bus 001 Device 002: ID 3044:50e0 MIIIW MW Keyboard Air Mini</span><br><span class="line">Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装libfprint-vfs009x-git-测试不通过"><a href="#安装libfprint-vfs009x-git-测试不通过" class="headerlink" title="安装libfprint-vfs009x-git (测试不通过)"></a>安装libfprint-vfs009x-git (测试不通过)</h2><p>yaourt -S libfprint-vfs009x-git</p>
+<h2 id="python-vlidity-推荐"><a href="#python-vlidity-推荐" class="headerlink" title="python-vlidity(推荐)"></a>python-vlidity(推荐)</h2><p><a target="_blank" rel="noopener" href="https://github.com/uunicorn/python-validity">https://github.com/uunicorn/python-validity</a></p>
+<p>安装: yaourt -S python-validity</p>
+<h1 id="录入指纹及解锁"><a href="#录入指纹及解锁" class="headerlink" title="录入指纹及解锁"></a>录入指纹及解锁</h1><h2 id="fprintd-enroll"><a href="#fprintd-enroll" class="headerlink" title="fprintd-enroll"></a>fprintd-enroll</h2><p>按照下述同时，录入指纹，直到completed</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Using device /net/reactivated/Fprint/Device/1</span><br><span class="line">Enrolling right-index-finger finger.</span><br><span class="line">Enroll result: enroll-stage-passed</span><br><span class="line">Enroll result: enroll-stage-passed</span><br><span class="line">Enroll result: enroll-stage-passed</span><br><span class="line">Enroll result: enroll-stage-passed</span><br><span class="line">Enroll result: enroll-stage-passed</span><br><span class="line">Enroll result: enroll-stage-passed</span><br><span class="line">Enroll result: enroll-stage-passed</span><br><span class="line">Enroll result: enroll-stage-passed</span><br><span class="line">Enroll result: enroll-completed</span><br></pre></td></tr></table></figure>
+
+<h2 id="校验指纹是否正常fprintd-verify"><a href="#校验指纹是否正常fprintd-verify" class="headerlink" title="校验指纹是否正常fprintd-verify"></a>校验指纹是否正常fprintd-verify</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Using device /net/reactivated/Fprint/Device/1</span><br><span class="line">Listing enrolled fingers:</span><br><span class="line"> - #0: WINBIO_ANSI_381_POS_RH_INDEX_FINGER</span><br><span class="line">Verify result: verify-match (done)</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看当前用户指纹-fprintd-list-用户名"><a href="#查看当前用户指纹-fprintd-list-用户名" class="headerlink" title="查看当前用户指纹 fprintd-list 用户名"></a>查看当前用户指纹 fprintd-list 用户名</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">found 1 devices</span><br><span class="line">Device at /net/reactivated/Fprint/Device/1</span><br><span class="line">Using device /net/reactivated/Fprint/Device/1</span><br><span class="line">Fingerprints for user zhaozhiwei on DBus driver (press):</span><br><span class="line"> - #0: WINBIO_ANSI_381_POS_RH_INDEX_FINGER</span><br></pre></td></tr></table></figure>
+
+<h2 id="ThinkPadT480-slimlock指纹解锁"><a href="#ThinkPadT480-slimlock指纹解锁" class="headerlink" title="ThinkPadT480 slimlock指纹解锁"></a>ThinkPadT480 slimlock指纹解锁</h2><p>vim /etc/pam.d/system-local-login</p>
+<p>将pam_fprintd.so添加到auth部分的顶部</p>
+<p>auth sufficient pam_fprintd.so</p>
+<p>重新启动计算机，会提示扫描手指以解锁登录(指纹灯亮)</p>
+<h3 id="注"><a href="#注" class="headerlink" title="注"></a>注</h3><p>slimlock认证后直接回车，不需要输入密码</p>
+<h1 id="问题列表"><a href="#问题列表" class="headerlink" title="问题列表"></a>问题列表</h1><h2 id="Impossible-to-enroll-GDBus-Error-net-reactivated-Fprint-Error-NoSuchDevice-No-devices-available"><a href="#Impossible-to-enroll-GDBus-Error-net-reactivated-Fprint-Error-NoSuchDevice-No-devices-available" class="headerlink" title="Impossible to enroll: GDBus.Error:net.reactivated.Fprint.Error.NoSuchDevice: No devices available"></a>Impossible to enroll: GDBus.Error:net.reactivated.Fprint.Error.NoSuchDevice: No devices available</h2><p>运行fprintd-enroll报错</p>
+<p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Lenovo_ThinkPad_T470#Fingerprint_reader">https://wiki.archlinux.org/title/Lenovo_ThinkPad_T470#Fingerprint_reader</a></p>
+<p>Install fprintd and libfprint-vfs009x-git AUR, then reboot. You can now<br>enroll your fingers with fprintd-enroll.</p>
+<h2 id="github下载很慢"><a href="#github下载很慢" class="headerlink" title="github下载很慢"></a>github下载很慢</h2><p>将repository导入到gitee中，并且注意该项目有子模块,<br>所有需要手动增加.gitmodules</p>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/zhaozhiwei_1992/libfprint.git">https://gitee.com/zhaozhiwei_1992/libfprint.git</a></p>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/zhaozhiwei_1992/libfprint-tod-vfs0090.git">https://gitee.com/zhaozhiwei_1992/libfprint-tod-vfs0090.git</a></p>
+<h2 id="libfprint-meson-build-1-0-ERROR-Unknown-options-quot-x11-examples-quot"><a href="#libfprint-meson-build-1-0-ERROR-Unknown-options-quot-x11-examples-quot" class="headerlink" title="libfprint/meson.build:1:0: ERROR: Unknown options: &quot;x11-examples&quot;"></a>libfprint/meson.build:1:0: ERROR: Unknown options: &quot;x11-examples&quot;</h2><p>The x11-examples option seems to have been removed. It looks like it&#39;s<br>been replaced by &quot;gtk-examples&quot;. I edited that in PKGBUILD and it<br>built successfully.</p>
+<p><a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages/libfprint-vfs009x-git">https://aur.archlinux.org/packages/libfprint-vfs009x-git</a></p>
+<p>修改build文件, x11-example改成gtk-example</p>
+<h2 id="libfprint-vfs009x-git和fprintd-gt-1-92-版本冲突"><a href="#libfprint-vfs009x-git和fprintd-gt-1-92-版本冲突" class="headerlink" title="libfprint-vfs009x-git和fprintd &gt;=1.92+版本冲突"></a>libfprint-vfs009x-git和fprintd &gt;=1.92+版本冲突</h2><p>安装低版本 sudo pacman -U<br><a target="_blank" rel="noopener" href="https://archive.archlinux.org/packages/f/fprintd/fprintd-1.90.1-1-x86_64.pkg.tar.zst">https://archive.archlinux.org/packages/f/fprintd/fprintd-1.90.1-1-x86_64.pkg.tar.zst</a></p>
+<h2 id="list-devices-failed-No-devices-available"><a href="#list-devices-failed-No-devices-available" class="headerlink" title="list_devices failed: No devices available"></a>list_devices failed: No devices available</h2><p>thinkpad t480 指纹id为 06cb:009a, 上述一些工具不支持,<br>直接使用python-validity即可</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2022/04/10/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E5%AE%9E%E7%8E%B0%E5%B1%8F%E5%B9%95%E9%94%81%E5%AE%9A%E8%A7%A3%E9%94%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mr.zhao">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/04/10/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E5%AE%9E%E7%8E%B0%E5%B1%8F%E5%B9%95%E9%94%81%E5%AE%9A%E8%A7%A3%E9%94%81/" class="post-title-link" itemprop="url">人脸识别实现屏幕锁定解锁</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-04-10 00:00:00" itemprop="dateCreated datePublished" datetime="2022-04-10T00:00:00+08:00">2022-04-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-15 16:15:44" itemprop="dateModified" datetime="2024-04-15T16:15:44+08:00">2024-04-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/" itemprop="url" rel="index"><span itemprop="name">人脸识别</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/opencv/" itemprop="url" rel="index"><span itemprop="name">opencv</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><h2 id="archlinux"><a href="#archlinux" class="headerlink" title="archlinux"></a>archlinux</h2><h3 id="桌面管理器i3wm"><a href="#桌面管理器i3wm" class="headerlink" title="桌面管理器i3wm"></a>桌面管理器i3wm</h3><h3 id="登录管理器-slim"><a href="#登录管理器-slim" class="headerlink" title="登录管理器 slim"></a>登录管理器 slim</h3><h2 id="python-3-10-4"><a href="#python-3-10-4" class="headerlink" title="python 3.10.4"></a>python 3.10.4</h2><h2 id="dlib"><a href="#dlib" class="headerlink" title="dlib"></a>dlib</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install --user -i https://pypi.tuna.tsinghua.edu.cn/simple dlib</span><br></pre></td></tr></table></figure>
+
+<h2 id="face-recognition-依赖dlib"><a href="#face-recognition-依赖dlib" class="headerlink" title="face_recognition 依赖dlib"></a>face_recognition 依赖dlib</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install --user -i https://pypi.tuna.tsinghua.edu.cn/simple face_recognition</span><br></pre></td></tr></table></figure>
+
+<h2 id="opency-读取摄像头"><a href="#opency-读取摄像头" class="headerlink" title="opency 读取摄像头"></a>opency 读取摄像头</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install --user -i https://pypi.tuna.tsinghua.edu.cn/simple opencv-python</span><br></pre></td></tr></table></figure>
+
+<h2 id="笔记本内置摄像头"><a href="#笔记本内置摄像头" class="headerlink" title="笔记本内置摄像头"></a>笔记本内置摄像头</h2><h1 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h1><p><img src="/images/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/xx.png"></p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">人脸识别认证</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">使用摄像头检验当前用户是否匹配</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> face_recognition</span><br><span class="line"><span class="keyword">import</span> pyautogui</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">AuthByFace</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, clicked, clocked</span>):</span><br><span class="line">        self.clicked = clicked</span><br><span class="line">        self.clocked = clocked</span><br><span class="line">        <span class="comment"># 设置图像保存目录</span></span><br><span class="line">        self.SUCCESS_DIR = os.environ[<span class="string">&#x27;HOME&#x27;</span>] + <span class="string">&quot;/Pictures/authFaces/success/&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 认证通过返回true</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isAuthSuccess</span>(<span class="params">self</span>):</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 获取摄像头中人脸</span></span><br><span class="line">        cameraCapture = cv2.VideoCapture(<span class="number">0</span>)</span><br><span class="line">        result, image = cameraCapture.read()</span><br><span class="line">        <span class="keyword">if</span> result:</span><br><span class="line">            <span class="comment"># cameraImageRgb = image[:, :, ::-1]</span></span><br><span class="line">            <span class="comment"># 摄像头中的人脸位置, 可能出现多张脸</span></span><br><span class="line">            cameraImageFaceLocations = face_recognition.face_locations(image)</span><br><span class="line">            <span class="comment"># 摄像头中人脸进行编码</span></span><br><span class="line">            cameraImageEncodings = face_recognition.face_encodings(image, cameraImageFaceLocations)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 使用仓库中文件 测试匹配</span></span><br><span class="line">            <span class="comment"># unknownImage = face_recognition.load_image_file(self.SUCCESS_DIR + &quot;image_1.jpg&quot;)</span></span><br><span class="line">            <span class="comment"># cameraImageEncodings = face_recognition.face_encodings(unknownImage)[0]</span></span><br><span class="line"></span><br><span class="line">            personNames = []</span><br><span class="line">            knownImageEncodings = []</span><br><span class="line">            <span class="comment"># 跟所有保存的人脸比对</span></span><br><span class="line">            files = os.listdir(self.SUCCESS_DIR)</span><br><span class="line">            <span class="keyword">for</span> file <span class="keyword">in</span> files:</span><br><span class="line">                <span class="keyword">if</span> file.endswith(<span class="string">&quot;jpg&quot;</span>) <span class="keyword">or</span> file.endswith(<span class="string">&quot;png&quot;</span>):</span><br><span class="line">                    name, _ = os.path.split(file)</span><br><span class="line">                    personNames.append(name)</span><br><span class="line">                    knowImagePath = self.SUCCESS_DIR + file</span><br><span class="line">                    knownImage = face_recognition.load_image_file(knowImagePath)</span><br><span class="line">                    <span class="comment"># 将仓库中照片全部编码, 后续比对需要</span></span><br><span class="line">                    knownImageEncodings.append(face_recognition.face_encodings(knownImage)[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 遍历locations，face_encodings，识别图片中的人脸</span></span><br><span class="line">            matchs = face_recognition.compare_faces(knownImageEncodings, cameraImageEncodings)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;hhaha&quot;</span>, matchs)</span><br><span class="line">            <span class="keyword">for</span> index, <span class="keyword">match</span> <span class="keyword">in</span> <span class="built_in">enumerate</span>(matchs):</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">match</span>:</span><br><span class="line">                    <span class="comment"># 有一个匹配就返回</span></span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">&quot;图像: &quot;</span>, personNames[index], <span class="string">&quot;匹配成功&quot;</span>)</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 打开摄像头, 监听鼠标事件</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">onMouse</span>(<span class="params">self, event, x, y, flags, param</span>):</span><br><span class="line">        <span class="comment"># 点击左键, 重置click状态</span></span><br><span class="line">        <span class="keyword">if</span> event == cv2.EVENT_LBUTTONUP:</span><br><span class="line">            self.clicked = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">savePicture</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># 打开摄像头</span></span><br><span class="line">        <span class="comment"># VideoCapture()中参数是0，表示打开笔记本的内置摄像头，</span></span><br><span class="line">        <span class="comment"># 参数是视频文件路径则打开视频</span></span><br><span class="line">        cameraCapture = cv2.VideoCapture(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> cameraCapture.isOpened():</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;摄像头未打开~~&quot;</span>)</span><br><span class="line">            exit()</span><br><span class="line">        cameraCapture.<span class="built_in">set</span>(<span class="number">3</span>, <span class="number">100</span>)</span><br><span class="line">        <span class="comment"># 帧宽度和帧高度都设置为100像素</span></span><br><span class="line">        cameraCapture.<span class="built_in">set</span>(<span class="number">4</span>, <span class="number">100</span>)</span><br><span class="line">        cv2.namedWindow(<span class="string">&#x27;MyWindow&#x27;</span>)</span><br><span class="line">        cv2.setMouseCallback(<span class="string">&#x27;MyWindow&#x27;</span>, self.onMouse)</span><br><span class="line">        <span class="comment"># 点击左键保存</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;showing camera feed. Click window or press and key to stop.&#x27;</span>)</span><br><span class="line">        result, image = cameraCapture.read()</span><br><span class="line">        <span class="comment"># True/False 是否读取到照片</span></span><br><span class="line">        <span class="built_in">print</span>(result)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 点击鼠标左键后, 保存图片, 关闭窗口</span></span><br><span class="line">        <span class="keyword">while</span> result <span class="keyword">and</span> cv2.waitKey(<span class="number">1</span>) == -<span class="number">1</span> <span class="keyword">and</span> <span class="keyword">not</span> self.clicked:</span><br><span class="line">            cv2.imshow(<span class="string">&#x27;MyWindow&#x27;</span>, cv2.flip(image, <span class="number">0</span>))</span><br><span class="line">            result, image = cameraCapture.read()</span><br><span class="line">            name = self.SUCCESS_DIR + <span class="string">&#x27;image_0.jpg&#x27;</span></span><br><span class="line">            cv2.imwrite(name, image)</span><br><span class="line">        cv2.destroyWindow(<span class="string">&#x27;MyWindow&#x27;</span>)</span><br><span class="line">        cameraCapture.release()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    authByFace = AuthByFace(<span class="literal">False</span>, <span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 仓库没有照片则先录入照片</span></span><br><span class="line">    files = os.listdir(authByFace.SUCCESS_DIR)</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(files) &lt; <span class="number">1</span>:</span><br><span class="line">        authByFace.savePicture()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="comment"># 锁定状态才会走这个认证逻辑</span></span><br><span class="line">        <span class="comment"># 每1分钟运行一次认证</span></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            time.sleep(<span class="number">10</span>)</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                isSuccess = authByFace.isAuthSuccess()</span><br><span class="line">                <span class="keyword">if</span> authByFace.clocked <span class="keyword">and</span> isSuccess:</span><br><span class="line">                    <span class="comment"># 认证通过则解开锁屏</span></span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">&quot;认证通过&quot;</span>)</span><br><span class="line">                    <span class="comment"># 输入锁屏密码</span></span><br><span class="line">                    pyautogui.typewrite(<span class="string">&quot;1&quot;</span>)</span><br><span class="line">                    pyautogui.press(<span class="string">&quot;enter&quot;</span>)</span><br><span class="line">                    pyautogui.press(<span class="string">&quot;Esc&quot;</span>)</span><br><span class="line">                    authByFace.clocked = <span class="literal">False</span></span><br><span class="line">                <span class="keyword">elif</span> <span class="keyword">not</span> isSuccess:</span><br><span class="line">                    <span class="comment"># 如果认证不通过, 调用系统快捷键, 锁定屏幕</span></span><br><span class="line">                    pyautogui.hotkey(<span class="string">&#x27;win&#x27;</span>, <span class="string">&#x27;c&#x27;</span>)</span><br><span class="line">                    pyautogui.press([<span class="string">&#x27;l&#x27;</span>], interval=<span class="number">0.1</span>)</span><br><span class="line">                    <span class="comment"># 对象设置为锁定状态</span></span><br><span class="line">                    authByFace.clocked = <span class="literal">True</span></span><br><span class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> exc:</span><br><span class="line">                <span class="built_in">print</span>(<span class="built_in">type</span>(exc))</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> authByFace.clocked:</span><br><span class="line">                    pyautogui.hotkey(<span class="string">&#x27;win&#x27;</span>, <span class="string">&#x27;c&#x27;</span>)</span><br><span class="line">                    pyautogui.press([<span class="string">&#x27;l&#x27;</span>], interval=<span class="number">0.1</span>)</span><br><span class="line">                    <span class="comment"># 对象设置为锁定状态</span></span><br><span class="line">                    authByFace.clocked = <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="开启启动"><a href="#开启启动" class="headerlink" title="开启启动"></a>开启启动</h1><h2 id="方式1-systemd-未通过"><a href="#方式1-systemd-未通过" class="headerlink" title="方式1 systemd (未通过)"></a>方式1 systemd (未通过)</h2><p><strong>经过测试,<br>无法将该程序放入到systemd单元，跟cv2等包有关系，引入就启动失败</strong></p>
+<h2 id="方式2"><a href="#方式2" class="headerlink" title="方式2"></a>方式2</h2><p>直接加入到i3wm的开机启动即可，加载该文件时图形界面已经加载，正合适</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exec --no-startup-id /usr/bin/python ~/workspace/python/demo/AuthByFace.py &gt; /tmp/authByFace.log 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sclu/p/12626553.html">https://www.cnblogs.com/sclu/p/12626553.html</a></p>
+<h1 id="问题列表"><a href="#问题列表" class="headerlink" title="问题列表"></a>问题列表</h1><h2 id="解决python安装opencv速度慢"><a href="#解决python安装opencv速度慢" class="headerlink" title="解决python安装opencv速度慢"></a>解决python安装opencv速度慢</h2><p>使用清华镜像（速度快）</p>
+<p>pip install –user -i <a target="_blank" rel="noopener" href="https://pypi.tuna.tsinghua.edu.cn/simple">https://pypi.tuna.tsinghua.edu.cn/simple</a><br>opencv-python</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2022/03/14/cpu%E5%BC%82%E5%B8%B8%E5%88%86%E6%9E%90%E4%BC%98%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mr.zhao">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/14/cpu%E5%BC%82%E5%B8%B8%E5%88%86%E6%9E%90%E4%BC%98%E5%8C%96/" class="post-title-link" itemprop="url">cpu异常分析优化</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-03-14 00:00:00" itemprop="dateCreated datePublished" datetime="2022-03-14T00:00:00+08:00">2022-03-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-15 16:15:44" itemprop="dateModified" datetime="2024-04-15T16:15:44+08:00">2024-04-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CPU%E5%8D%A0%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">CPU占用</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CPU%E5%8D%A0%E7%94%A8/%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">并发</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="cpu占用飙升"><a href="#cpu占用飙升" class="headerlink" title="cpu占用飙升"></a>cpu占用飙升</h1><h2 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h2><p>系统访问很慢</p>
+<h2 id="排查"><a href="#排查" class="headerlink" title="排查"></a>排查</h2><p>top 获取进程pid</p>
+<p>top -Hp pid, 查看线程情况,获取线程id</p>
+<p>print &quot;%x&quot; &quot;线程id&quot; #输出16进制线程id</p>
+<p>jstack 进程pid &gt; /tmp/jstack.txt</p>
+<p>在jstack.txt中搜索上述16进制线程id, 紧跟着就是问题原因</p>
+<p>jmap</p>
+<p>查看最耗费cpu的线程堆栈信息</p>
+<p>cat stack |grep -i 34670 -C10 –color</p>
+<h1 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h1><p>并发场景下使用currenthashmap替代hashmap, 避免死循环</p>
 
       
     </div>
@@ -1276,7 +1122,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1342,20 +1188,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1399,7 +1245,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
