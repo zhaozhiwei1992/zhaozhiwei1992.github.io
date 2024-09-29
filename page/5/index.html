@@ -123,18 +123,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-count">72</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -171,6 +171,137 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2019/03/04/nodejs%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mr.zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 离线de日常">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/03/04/nodejs%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">nodejs实战</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-03-04 17:50:40" itemprop="dateCreated datePublished" datetime="2019-03-04T17:50:40+08:00">2019-03-04</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="nodejs项目初始化"><a href="#nodejs项目初始化" class="headerlink" title="nodejs项目初始化"></a>nodejs项目初始化</h1><ol>
+<li><p>创建目录 mkdir nodejs &amp; cd nodejs</p>
+</li>
+<li><p>npm init (根据提示，或者一路回车即可)</p>
+</li>
+<li><p>创建server.js文件,并写入以下内容</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 内置组件  </span></span><br><span class="line"> <span class="keyword">var</span> http=<span class="built_in">require</span>(<span class="string">&quot;http&quot;</span>);</span><br><span class="line"></span><br><span class="line"> http.<span class="title function_">createServer</span>(<span class="keyword">function</span>(<span class="params">request, response</span>)&#123;</span><br><span class="line">     <span class="comment">// 发送 HTTP 头部 </span></span><br><span class="line">     <span class="comment">// HTTP 状态值: 200 : OK</span></span><br><span class="line">     <span class="comment">// 内容类型: text/plain</span></span><br><span class="line">     response.<span class="title function_">writeHead</span>(<span class="number">200</span>, &#123;<span class="string">&quot;Content-Type&quot;</span>:<span class="string">&quot;text/plain&quot;</span>&#125;);</span><br><span class="line"></span><br><span class="line">     <span class="comment">//响应数据</span></span><br><span class="line">     response.<span class="title function_">end</span>(<span class="string">&quot;hello nodejs&quot;</span>);</span><br><span class="line"> &#125;).<span class="title function_">listen</span>(<span class="number">8888</span>);</span><br><span class="line"> <span class="comment">//服务启动成功后输出日志</span></span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Server running at http://127.0.0.1:8888/&#x27;</span>); </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>node server.js 启动成功</p>
+</li>
+<li><p>浏览器访问 127.0.0.1:8888</p>
+</li>
+</ol>
+<h1 id="npm使用-root"><a href="#npm使用-root" class="headerlink" title="npm使用(root)"></a>npm使用(root)</h1><h2 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h2><ul>
+<li>npm search <mould></li>
+</ul>
+<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><ul>
+<li><p>npm install -g npm</p>
+</li>
+<li><p>npm update -g npm</p>
+</li>
+</ul>
+<h2 id="安装卸载模块"><a href="#安装卸载模块" class="headerlink" title="安装卸载模块"></a>安装卸载模块</h2><ul>
+<li><p>当前目录<br>npm install <mould><br>npm uninstall <mould></p>
+</li>
+<li><p>全局<br>npm install -g <mould><br>npm uninstall -g <mould></p>
+</li>
+</ul>
+<h2 id="查看模块安装信息"><a href="#查看模块安装信息" class="headerlink" title="查看模块安装信息"></a>查看模块安装信息</h2><ul>
+<li><p>一个<br>npm list -g</p>
+</li>
+<li><p>所有<br>npm list <mould></p>
+</li>
+</ul>
+<h2 id="Package-json属性说明"><a href="#Package-json属性说明" class="headerlink" title="Package.json属性说明"></a>Package.json属性说明</h2>   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">name - 包名。</span><br><span class="line">version - 包的版本号。</span><br><span class="line">description - 包的描述。</span><br><span class="line">homepage - 包的官网 url 。</span><br><span class="line">author - 包的作者姓名。</span><br><span class="line">contributors - 包的其他贡献者姓名。</span><br><span class="line">dependencies - 依赖包列表。如果依赖包没有安装，npm 会自动将依赖包安装在 node_module 目录下。</span><br><span class="line">repository - 包代码存放的地方的类型，可以是 git 或 svn，git 可在 Github 上。</span><br><span class="line">main - main 字段指定了程序的主入口文件，require(&#x27;moduleName&#x27;) 就会加载这个文件。这个字段的默认值是模块根目录下面的 index.js。</span><br><span class="line">keywords - 关键字</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="whatis-npm"><a href="#whatis-npm" class="headerlink" title="whatis npm"></a>whatis npm</h2><ol>
+<li>npm就是js下的maven, 支持包依赖， 执行等</li>
+<li>package.json &#x3D;&#x3D; pom.xml</li>
+</ol>
+<h1 id="var-和-const"><a href="#var-和-const" class="headerlink" title="var 和 const"></a>var 和 const</h1><h1 id="初始化buffer"><a href="#初始化buffer" class="headerlink" title="初始化buffer"></a>初始化buffer</h1><ul>
+<li>类似于初始化一个list</li>
+<li>Buffer.alloc(5)</li>
+</ul>
+<h1 id="nodejs对标的是其他的后端语言类似java"><a href="#nodejs对标的是其他的后端语言类似java" class="headerlink" title="nodejs对标的是其他的后端语言类似java"></a>nodejs对标的是其他的后端语言类似java</h1><h1 id="require的执行流程"><a href="#require的执行流程" class="headerlink" title="require的执行流程"></a>require的执行流程</h1><ol>
+<li>如果 X 是内置模块</li>
+<li>返回内置模块</li>
+<li>停止执行</li>
+<li>如果 X 以 ‘&#x2F;‘ 开头<ol>
+<li>设置 Y 为文件根路径</li>
+</ol>
+</li>
+<li>如果 X 以 ‘.&#x2F;‘ 或 ‘&#x2F;‘ or ‘..&#x2F;‘ 开头<ol>
+<li>LOAD_AS_FILE(Y + X)</li>
+<li>LOAD_AS_DIRECTORY(Y + X)</li>
+</ol>
+</li>
+<li>LOAD_NODE_MODULES(X, dirname(Y))</li>
+<li>抛出异常 “not found”</li>
+</ol>
+<h1 id="extend"><a href="#extend" class="headerlink" title="extend"></a>extend</h1><p>Sub 仅仅继承了Base 在原型中定义的函数，而构造函数内部创造的 base 属 性和 sayHello 函数都没有被 Sub 继承。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>如果有一定变成基础，nodejs还是很easy的， 例子6一下就可以， 入门容易，用好就需要code code code!</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
