@@ -123,18 +123,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-count">46</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-count">75</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -171,6 +171,104 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2022/03/14/cpu%E5%BC%82%E5%B8%B8%E5%88%86%E6%9E%90%E4%BC%98%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Mr.zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 离线de日常">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/14/cpu%E5%BC%82%E5%B8%B8%E5%88%86%E6%9E%90%E4%BC%98%E5%8C%96/" class="post-title-link" itemprop="url">cpu异常分析优化</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-03-14 00:00:00" itemprop="dateCreated datePublished" datetime="2022-03-14T00:00:00+08:00">2022-03-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-09-05 09:51:01" itemprop="dateModified" datetime="2024-09-05T09:51:01+08:00">2024-09-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CPU%E5%8D%A0%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">CPU占用</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CPU%E5%8D%A0%E7%94%A8/%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">并发</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="cpu占用飙升"><a href="#cpu占用飙升" class="headerlink" title="cpu占用飙升"></a>cpu占用飙升</h1><h2 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h2><p>系统访问很慢</p>
+<h2 id="排查"><a href="#排查" class="headerlink" title="排查"></a>排查</h2><p>top 获取进程pid</p>
+<p>top -Hp pid, 查看线程情况,获取线程id</p>
+<p>print &quot;%x&quot; &quot;线程id&quot; #输出16进制线程id</p>
+<p>jstack 进程pid &gt; &#x2F;tmp&#x2F;jstack.txt</p>
+<p>在jstack.txt中搜索上述16进制线程id, 紧跟着就是问题原因</p>
+<p>jmap</p>
+<p>查看最耗费cpu的线程堆栈信息</p>
+<p>cat stack |grep -i 34670 -C10 –color</p>
+<h1 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h1><p>并发场景下使用currenthashmap替代hashmap, 避免死循环</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1212,113 +1310,6 @@
 <p>目开发过程中的问题&#x2F;bug处理机制是否具有可操作性；</p>
 <p>案收集管理是否具有可操作性。</p>
 <p>是否制定了合适的配置管理策略和质量保证策略。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.jianshu.com/p/a7984927cfb9">https://www.jianshu.com/p/a7984927cfb9</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2021/01/23/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E6%89%8B%E5%86%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Mr.zhao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="离线de日常">
-      <meta itemprop="description" content="show me your code">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 离线de日常">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/01/23/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E6%89%8B%E5%86%8C/" class="post-title-link" itemprop="url">软件安装部署手册</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-01-23 22:36:00" itemprop="dateCreated datePublished" datetime="2021-01-23T22:36:00+08:00">2021-01-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/" itemprop="url" rel="index"><span itemprop="name">软件安装部署</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>::: {.center}<br><strong>xx公司</strong></p>
-<p><strong>2020-01-01</strong><br>:::</p>
-<p><strong>文档管理</strong></p>
-<p>合理地管理主文档，确保文档版本的及时更新，同时保持备份文档和源文档的一致性。</p>
-<p><strong>版本管理</strong></p>
-<hr>
-<p>本版本修订日期   2019-08-12   生效日期   2019-08-12</p>
-<hr>
-<p>版本   生效日期     变更内容       编制人</p>
-<hr>
-<p>V1.0   2020-01-01   初稿编写完成   xx</p>
-<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="编写目的"><a href="#编写目的" class="headerlink" title="编写目的"></a>编写目的</h2><p>说明编写目的，指出本文档的预期读者。</p>
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>说明系统的项目背景，使用本系统所包含的用户。</p>
-<h2 id="范围"><a href="#范围" class="headerlink" title="范围"></a>范围</h2><p>说明本文档的适用范围。</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>列出所参考的文档，如其它的用户文档。</p>
-<h2 id="软件清单"><a href="#软件清单" class="headerlink" title="软件清单"></a>软件清单</h2><p>列出所提交的软件产品的程序及其它必要的附件文件，包括可能的支持软件、第三方包、脚本文件、说明文档等，对清单中的名项给出必要的说明。</p>
-<h1 id="运行环境要求"><a href="#运行环境要求" class="headerlink" title="运行环境要求"></a>运行环境要求</h1><p>说明系统进行安装部署时，对运行环境的要求，分为硬件环境和软件环境，包括服务器、客户端。</p>
-<p>服务器端的运行环境，硬件方面需要指出最低参数要求，软件方面需要指出如操作系统、数据库软件、web应用服务器的名称、版本信息等。</p>
-<p>客户端的运行环境，硬件方面需要指出最低参数要求，软件方面需要列出操作系统版本、运行依赖的浏览器版本、需要安装的驱动程序等。</p>
-<h1 id="支撑软件的安装、部署和配置"><a href="#支撑软件的安装、部署和配置" class="headerlink" title="支撑软件的安装、部署和配置"></a>支撑软件的安装、部署和配置</h1><p>给出所有支撑软件的安装、部署和配置步聚，可以引用第三方文档。</p>
-<h2 id="的安装、部署和配置"><a href="#的安装、部署和配置" class="headerlink" title="&lt;支撑软件X&gt;的安装、部署和配置"></a>&lt;支撑软件X&gt;的安装、部署和配置</h2><p>支撑软件X安装、部署和配置步聚。</p>
-<h1 id="应用程序的安装、部署和配置"><a href="#应用程序的安装、部署和配置" class="headerlink" title="应用程序的安装、部署和配置"></a>应用程序的安装、部署和配置</h1><h2 id="的安装、部署和配置-1"><a href="#的安装、部署和配置-1" class="headerlink" title="&lt;应用程序x&gt;的安装、部署和配置"></a>&lt;应用程序x&gt;的安装、部署和配置</h2><h3 id="安装、部署前的准备工作"><a href="#安装、部署前的准备工作" class="headerlink" title="安装、部署前的准备工作"></a>安装、部署前的准备工作</h3><p>说明系统进行安装部署前，需要进行的前期准备工作。如对操作系统、数据库、web应用服务器进行相应的参数设置，数据库的初始化等等。</p>
-<h3 id="部署环境概要说明"><a href="#部署环境概要说明" class="headerlink" title="部署环境概要说明"></a>部署环境概要说明</h3><p>可以对部署的服务器环境，如文件目录结构，进行概要说明。</p>
-<h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><p>系统在进行安装、部署时，如果需要对外部系统运行或接口有依赖关系，在此列出。</p>
-<h3 id="安装、部署和配置步聚"><a href="#安装、部署和配置步聚" class="headerlink" title="安装、部署和配置步聚"></a>安装、部署和配置步聚</h3><p>列出详细的安装、部署和配置过程，包括对相关配置文件内容的修改。</p>
-<h1 id="程序的启动和停止"><a href="#程序的启动和停止" class="headerlink" title="程序的启动和停止"></a>程序的启动和停止</h1><p>给出软件的启动和停止说明</p>
-<h1 id="内容审核要点："><a href="#内容审核要点：" class="headerlink" title="内容审核要点："></a>内容审核要点：</h1><p>所述运行环境和支撑软件是否详细完备；</p>
-<p>部署前的准备工作是否详细完备；</p>
-<p>安装过程是否详细易懂。</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.jianshu.com/p/a7984927cfb9">https://www.jianshu.com/p/a7984927cfb9</a></p>
 
       
