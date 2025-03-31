@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"zhaozhiwei1992.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"zhaozhiwei1992.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="封面::: {.center}xx公司 2020-01-01::: 文档管理 合理地管理主文档，确保文档版本的及时更新，同时保持备份文档和源文档的一致性。 版本管理  本版本修订日期   2019-08-12   生效日期   2019-08-12  版本   生效日期     变更内容       编制人  V1.0   2020-01-01   初稿编写完成   xx 引言编写目的说明编写这份">
@@ -153,6 +153,7 @@
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
+  <div class="reading-progress-bar"></div>
 
 
     <main class="main">
@@ -170,7 +171,7 @@
     <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2024/04/15/%E8%BD%AF%E4%BB%B6%E6%A6%82%E8%A6%81%E8%AE%BE%E8%AE%A1%E8%AF%B4%E6%98%8E/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
       <meta itemprop="name" content="Mr.zhao">
       <meta itemprop="description" content="show me your code">
     </span>
@@ -266,6 +267,43 @@
     
     
     
+        <div class="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpeg" alt="Mr.zhao 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpeg" alt="Mr.zhao 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Mr.zhao
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://zhaozhiwei1992.github.io/2024/04/15/%E8%BD%AF%E4%BB%B6%E6%A6%82%E8%A6%81%E8%AE%BE%E8%AE%A1%E8%AF%B4%E6%98%8E/" title="软件概要设计说明">http://zhaozhiwei1992.github.io/2024/04/15/软件概要设计说明/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
 
       <footer class="post-footer">
           <div class="post-tags">
@@ -350,6 +388,8 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Mr.zhao"
+      src="/images/avatar.png">
   <p class="site-author-name" itemprop="name">Mr.zhao</p>
   <div class="site-description" itemprop="description">show me your code</div>
 </div>
@@ -381,16 +421,19 @@
         <a href="https://github.com/zhaozhiwei1992" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhaozhiwei1992" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/people/p205/posts" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;p205&#x2F;posts" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>知乎</a>
+        <a href="https://www.zhihu.com/people/p205/posts" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;p205&#x2F;posts" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i>知乎</a>
       </span>
       <span class="links-of-author-item">
         <a href="https://www.jianshu.com/u/65f51bc73109" title="简书 → https:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;65f51bc73109" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>简书</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.cnblogs.com/qq347061329" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;qq347061329" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>博客园</a>
+        <a href="https://www.cnblogs.com/qq347061329" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;qq347061329" rel="noopener" target="_blank"><i class="fab fa-blog fa-fw"></i>博客园</a>
       </span>
       <span class="links-of-author-item">
         <a href="https://blog.csdn.net/u012768510" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u012768510" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhaozhiweishanxi@gmail.com" title="E-Mail → mailto:zhaozhiweishanxi@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
   </div>
 
@@ -415,13 +458,13 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Mr.zhao</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
 
         
