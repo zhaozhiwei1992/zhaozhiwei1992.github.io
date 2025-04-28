@@ -123,18 +123,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">84</span>
+        <span class="site-state-item-count">85</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -171,6 +171,121 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2024/10/18/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BAAI%E7%9F%A5%E8%AF%86%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Mr.zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 离线de日常">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/10/18/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BAAI%E7%9F%A5%E8%AF%86%E5%BA%93/" class="post-title-link" itemprop="url">搭建个人AI知识库：RAG与本地模型实践指南</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-10-18 00:00:00 / 修改时间：17:40:53" itemprop="dateCreated datePublished" datetime="2024-10-18T00:00:00+08:00">2024-10-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI%EF%BC%8C%E8%BD%AF%E4%BB%B6%EF%BC%8C%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">AI，软件，工具</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>你是否想过拥有一个私人订制的AI助手，能够随时为你提供最个性化的信息？本文将带你一步步搭建一个基于本地模型和RAG技术的个人知识库。</p>
+<h1 id="搭建本地模型"><a href="#搭建本地模型" class="headerlink" title="搭建本地模型"></a>搭建本地模型</h1><h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
+<li>os: archlinux</li>
+<li>内存: 32g</li>
+<li>cpu: 6核12线程</li>
+<li>python: 3.12.7</li>
+<li>docker27.3.1 + docker-compose</li>
+<li>向量库: milvus2.4.13 + attu2.4(客户端)</li>
+</ul>
+<h2 id="ollama"><a href="#ollama" class="headerlink" title="ollama"></a>ollama</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pacman -S ollama</span><br><span class="line"></span><br><span class="line">systemctl start ollama.service</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">通过下述url判断ollama是否安装成功</span></span><br><span class="line">http://127.0.0.1:11434/</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="llama3-2-3b"><a href="#llama3-2-3b" class="headerlink" title="llama3.2:3b"></a>llama3.2:3b</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ollama run llama3.2:3b</span><br></pre></td></tr></table></figure>
+<h2 id="OpenWebUI-非必须"><a href="#OpenWebUI-非必须" class="headerlink" title="OpenWebUI(非必须)"></a>OpenWebUI(非必须)</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动openwebui, 按照自己需要调整端口</span></span><br><span class="line">docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui ghcr.io/open-webui/open-webui:main</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">浏览器访问, 可以看到之前启动的模型</span></span><br><span class="line">http://localhost:3000/</span><br></pre></td></tr></table></figure>
+<h2 id="程序访问测试"><a href="#程序访问测试" class="headerlink" title="程序访问测试"></a>程序访问测试</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> langchain_ollama <span class="keyword">import</span> ChatOllama</span><br><span class="line"><span class="keyword">from</span> langchain_core.messages <span class="keyword">import</span> HumanMessage</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建ChatOllama实例，指定模型名称</span></span><br><span class="line">model = ChatOllama(model=<span class="string">&quot;llama3.2:3b&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义你的问题</span></span><br><span class="line">question = HumanMessage(<span class="string">&quot;你是如何工作的？&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用模型处理问题</span></span><br><span class="line">response = model.invoke([question])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印返回的结果</span></span><br><span class="line"><span class="built_in">print</span>(response.content)</span><br></pre></td></tr></table></figure>
+<h1 id="构建知识库"><a href="#构建知识库" class="headerlink" title="构建知识库"></a>构建知识库</h1><h2 id="RAG是什么"><a href="#RAG是什么" class="headerlink" title="RAG是什么"></a>RAG是什么</h2><p>大模型的训练数据是有截止日期的，那当我们需要依靠不包含在大模型训练集中的数据时，我们该怎么做呢？一种就是对模型进行微调，另外就是通过检索增强生成RAG（Retrieval Augmented Generation）。在这个过程中，首先检索外部数据，然后在生成步骤中将这些数据传递给LLM。</p>
+<p>利用大模型的能力搭建知识库就是一个RAG技术的应用。</p>
+<h3 id="RAG的应用抽象为5个过程："><a href="#RAG的应用抽象为5个过程：" class="headerlink" title="RAG的应用抽象为5个过程："></a>RAG的应用抽象为5个过程：</h3><ul>
+<li>文档加载（Document Loading） ：从多种不同来源加载文档。LangChain提供了100多种不同的文档加载器，包括PDF在内的非结构化的数据、SQL在内的结构化的数据，以及Python、Java之类的代码等</li>
+<li>文本分割（Splitting） ：文本分割器把Documents 切分为指定大小的块，我把它们称为“文档块”或者“文档片”</li>
+<li>存储（Storage）： 存储涉及到两个环节，分别是：<ol>
+<li>将切分好的文档块进行嵌入（Embedding）转换成向量的形式</li>
+<li>将Embedding后的向量数据存储到向量数据库</li>
+</ol>
+</li>
+<li>检索（Retrieval） ：一旦数据进入向量数据库，我们仍然需要将数据检索出来，我们会通过某种检索算法找到与输入问题相似的嵌入片</li>
+<li>输出（Output） ：把问题以及检索出来的嵌入片一起提交给LLM，LLM会通过问题和检索出来的提示一起来生成更加合理的答案</li>
+</ul>
+<h2 id="个人笔记"><a href="#个人笔记" class="headerlink" title="个人笔记"></a>个人笔记</h2><p>首先起码得有自己的知识库，我这里就是个人多年整理的笔记。或者你有项目相关的文档，也可以作为知识库的基础。</p>
+<h2 id="将个人笔记写入到Milvus"><a href="#将个人笔记写入到Milvus" class="headerlink" title="将个人笔记写入到Milvus"></a>将个人笔记写入到Milvus</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> langchain_community.document_loaders <span class="keyword">import</span> DirectoryLoader</span><br><span class="line"><span class="keyword">from</span> langchain_community.vectorstores <span class="keyword">import</span> Milvus</span><br><span class="line"><span class="keyword">from</span> langchain_ollama <span class="keyword">import</span> OllamaEmbeddings</span><br><span class="line"><span class="keyword">from</span> langchain_text_splitters <span class="keyword">import</span> RecursiveCharacterTextSplitter</span><br><span class="line"><span class="keyword">from</span> pymilvus <span class="keyword">import</span> MilvusClient</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查collection是否存在, 如果不指定，默认为LangChainCollection</span></span><br><span class="line">collection_name = <span class="string">&quot;note&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置 Milvus 客户端</span></span><br><span class="line">client = MilvusClient(uri=<span class="string">&quot;http://localhost:19530&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查collection是否存在</span></span><br><span class="line"><span class="keyword">if</span> client.has_collection(collection_name):</span><br><span class="line">    <span class="comment"># collection存在，执行后续操作</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Collection &#x27;<span class="subst">&#123;collection_name&#125;</span>&#x27; exists.&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="comment"># collection不存在，创建collection并进行向量化</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Collection &#x27;<span class="subst">&#123;collection_name&#125;</span>&#x27; does not exist. Creating now...&quot;</span>)</span><br><span class="line">    <span class="comment"># 从url导入知识作为聊天背景上下文, glob代表只查找org文件，可根据实际情况调整为txt等，recursive=True表示会递归查找</span></span><br><span class="line">    loader = DirectoryLoader(os.path.join(os.environ[<span class="string">&quot;HOME&quot;</span>], <span class="string">&quot;Documents/notes&quot;</span>), glob=<span class="string">&quot;*.org&quot;</span>, recursive=<span class="literal">True</span>)</span><br><span class="line">    <span class="comment"># 加载一堆文件</span></span><br><span class="line">    docs = loader.load()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 文本分词器</span></span><br><span class="line">    <span class="comment"># chunk_size=1000</span></span><br><span class="line">    <span class="comment"># 表示拆分的文档的大小，也就是上面所说的要设置为多少合适取决于所使用LLM 的窗口大小</span></span><br><span class="line">    <span class="comment"># chunk_overlap=100</span></span><br><span class="line">    <span class="comment"># 这个参数表示每个拆分好的文档重复多少个字符串。</span></span><br><span class="line">    <span class="comment"># 不过这种递归的方式更只能点，不设参数试试默认</span></span><br><span class="line">    text_splitter = RecursiveCharacterTextSplitter()</span><br><span class="line">    documents = text_splitter.split_documents(docs)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># ollama嵌入层</span></span><br><span class="line">    embeddings = OllamaEmbeddings(</span><br><span class="line">        model=<span class="string">&quot;llama3.2:3b&quot;</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 文档向量化，会持久化</span></span><br><span class="line">    vector_store = Milvus.from_documents(documents=documents, embedding=embeddings, collection_name=collection_name, drop_old=<span class="literal">True</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;collection&#x27;<span class="subst">&#123;collection_name&#125;</span>&#x27;创建成功!&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>注: 上述加载文件的目录需要根据自己实际情况调整，其它的最好用默认，减少出错概率</p>
+<h2 id="将llm与Milvus结合"><a href="#将llm与Milvus结合" class="headerlink" title="将llm与Milvus结合"></a>将llm与Milvus结合</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> langchain.chains <span class="keyword">import</span> create_retrieval_chain</span><br><span class="line"><span class="keyword">from</span> langchain.chains.combine_documents <span class="keyword">import</span> create_stuff_documents_chain</span><br><span class="line"><span class="keyword">from</span> langchain_community.vectorstores <span class="keyword">import</span> Milvus</span><br><span class="line"><span class="keyword">from</span> langchain_core.output_parsers <span class="keyword">import</span> StrOutputParser</span><br><span class="line"><span class="keyword">from</span> langchain_core.prompts <span class="keyword">import</span> ChatPromptTemplate</span><br><span class="line"><span class="keyword">from</span> langchain_ollama <span class="keyword">import</span> OllamaEmbeddings</span><br><span class="line"><span class="keyword">from</span> langchain_ollama <span class="keyword">import</span> OllamaLLM</span><br><span class="line"><span class="keyword">from</span> langchain_text_splitters <span class="keyword">import</span> RecursiveCharacterTextSplitter</span><br><span class="line"><span class="keyword">from</span> pymilvus <span class="keyword">import</span> MilvusClient</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">exec</span>(<span class="params">question</span>):</span><br><span class="line">    <span class="comment"># 检查collection是否存在</span></span><br><span class="line">    collection_name = <span class="string">&quot;note&quot;</span></span><br><span class="line">    <span class="comment"># 设置 Milvus 客户端</span></span><br><span class="line">    client = MilvusClient(uri=<span class="string">&quot;http://localhost:19530&quot;</span>)</span><br><span class="line">    vector_store = <span class="literal">None</span></span><br><span class="line">    <span class="comment"># 检查collection是否存在</span></span><br><span class="line">    <span class="keyword">if</span> client.has_collection(collection_name):</span><br><span class="line">        <span class="comment"># collection存在，执行后续操作</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;Collection &#x27;<span class="subst">&#123;collection_name&#125;</span>&#x27; exists.&quot;</span>)</span><br><span class="line">        <span class="comment"># 文本分词器</span></span><br><span class="line">        text_splitter = RecursiveCharacterTextSplitter()</span><br><span class="line">        documents = text_splitter.split_documents([])</span><br><span class="line"></span><br><span class="line">        <span class="comment"># ollama嵌入层</span></span><br><span class="line">        embeddings = OllamaEmbeddings(</span><br><span class="line">            model=<span class="string">&quot;llama3.2:3b&quot;</span></span><br><span class="line">        )</span><br><span class="line">        <span class="comment"># 文档向量化</span></span><br><span class="line">        vector_store = Milvus.from_documents(documents=documents, embedding=embeddings, collection_name=collection_name)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="comment"># collection不存在，创建collection并进行向量化</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;Collection &#x27;<span class="subst">&#123;collection_name&#125;</span>&#x27; does not exist. Please exec LoadFile2Vector.py first&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> vector_store <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="comment"># 创建ollama 模型 llama2</span></span><br><span class="line">        llm = OllamaLLM(model=<span class="string">&quot;llama3.2:3b&quot;</span>)</span><br><span class="line">        output_parser = StrOutputParser()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 创建提示词模版</span></span><br><span class="line">        prompt = ChatPromptTemplate.from_template(</span><br><span class="line">            <span class="string">&quot;&quot;&quot;Answer the following question based only on the provided context:</span></span><br><span class="line"><span class="string">            &lt;context&gt;</span></span><br><span class="line"><span class="string">            &#123;context&#125;</span></span><br><span class="line"><span class="string">            &lt;/context&gt;</span></span><br><span class="line"><span class="string">            Question: &#123;input&#125;&quot;&quot;&quot;</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 生成chain ：   prompt | llm</span></span><br><span class="line">        document_chain = create_stuff_documents_chain(llm, prompt)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 向量数据库检索器</span></span><br><span class="line">        retriever = vector_store.as_retriever()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 向量数据库检索chain :  vector | prompt | llm</span></span><br><span class="line">        retrieval_chain = create_retrieval_chain(retriever, document_chain)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 调用上面的 (向量数据库检索chain)</span></span><br><span class="line">        response = retrieval_chain.invoke(&#123;<span class="string">&quot;input&quot;</span>: question&#125;)</span><br><span class="line">        <span class="comment"># 打印结果</span></span><br><span class="line">        <span class="built_in">print</span>(response[<span class="string">&quot;answer&quot;</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="built_in">exec</span>(<span class="string">&quot;我有什么梦想? 如何实现&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>大致的流程是：用户的query先转成embedding，去向量数据库查询最接近的top K回答；然后这query + top K的回答 + 其他context一起进入LLM，让LLM整合上述所有的信息后给出最终的回复。</p>
+<h2 id="提供接口-非必须"><a href="#提供接口-非必须" class="headerlink" title="提供接口(非必须)"></a>提供接口(非必须)</h2><p>可通过fastapi等提供restful接口供外部调用，比如一些个人项目公司内部项目之类的，瞬间高大上起来了。</p>
+<h1 id="项目源码"><a href="#项目源码" class="headerlink" title="项目源码"></a>项目源码</h1><p><a href="https://github.com/zhaozhiwei1992/NoteAI.git">https://github.com/zhaozhiwei1992/NoteAI.git</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://blog.csdn.net/AAI666666/article/details/137509781">https://blog.csdn.net/AAI666666/article/details/137509781</a></p>
+<p><a href="https://ollama.com/library">https://ollama.com/library</a></p>
+<p>文本向量转换: <a href="https://github.com/shibing624/text2vec">https://github.com/shibing624/text2vec</a></p>
+<p>文本存储: <a href="https://juejin.cn/post/7360564568660410377">https://juejin.cn/post/7360564568660410377</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1147,83 +1262,6 @@
     
     <div class="post-body" itemprop="articleBody">
           
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2024/06/24/%E6%B5%8B%E8%AF%95blog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Mr.zhao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="离线de日常">
-      <meta itemprop="description" content="show me your code">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 离线de日常">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/06/24/%E6%B5%8B%E8%AF%95blog/" class="post-title-link" itemprop="url">测试blog</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-06-24 20:32:32" itemprop="dateCreated datePublished" datetime="2024-06-24T20:32:32+08:00">2024-06-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-09-06 16:27:05" itemprop="dateModified" datetime="2024-09-06T16:27:05+08:00">2024-09-06</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>一个测试112</p>
-<p>测试评论</p>
-
       
     </div>
 
