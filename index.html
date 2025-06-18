@@ -123,7 +123,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-count">57</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -134,7 +134,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-count">86</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -171,6 +171,99 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2025/06/18/Dify0.15.1%E5%8D%87%E7%BA%A71.4.3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Mr.zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 离线de日常">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/06/18/Dify0.15.1%E5%8D%87%E7%BA%A71.4.3/" class="post-title-link" itemprop="url">Dify0.15.1升级1.4.3版本</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-06-18 08:00:00" itemprop="dateCreated datePublished" datetime="2025-06-18T08:00:00+08:00">2025-06-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="安装1-4-3"><a href="#安装1-4-3" class="headerlink" title="安装1.4.3"></a>安装1.4.3</h1><p><a href="https://codeload.github.com/langgenius/dify/tar.gz/refs/tags/1.4.3">https://codeload.github.com/langgenius/dify/tar.gz/refs/tags/1.4.3</a></p>
+<p>下载后在原dify-0.15.1同级目录解压</p>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>cd dify-1.4.3&#x2F;docker</p>
+<p>cp .env.example .env # 公司环境需要调整nginx expose端口</p>
+<p>docker-compose up -d # 等待启动完成，正常访问页面即可</p>
+<h1 id="压缩原挂载目录"><a href="#压缩原挂载目录" class="headerlink" title="压缩原挂载目录"></a>压缩原挂载目录</h1><p>cd dify-0.15.1&#x2F;docker</p>
+<p>tar -zcvf volumes.tar.gz volumes</p>
+<h1 id="用0-15-1的挂载目录覆盖1-4-3的挂载"><a href="#用0-15-1的挂载目录覆盖1-4-3的挂载" class="headerlink" title="用0.15.1的挂载目录覆盖1.4.3的挂载"></a>用0.15.1的挂载目录覆盖1.4.3的挂载</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1. 备份1.4.3挂载目录</span><br><span class="line">tar -zcvf volumes143.tar.gz volumes</span><br><span class="line"></span><br><span class="line">2. 删除挂载目录</span><br><span class="line">rm -rf volumes</span><br><span class="line"></span><br><span class="line">3. 用0.15.1的挂载覆盖当前挂载目录，如果是开发本地使用，可以用官方提供的方式测试。</span><br><span class="line">cp dify-0.15.1/docker/volumes.tar.gz .</span><br><span class="line"></span><br><span class="line">tar -zxvf volumes.tar.gz</span><br><span class="line"></span><br><span class="line">4. 启动服务访问测试</span><br><span class="line">docker-compose up -d</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="启动后操作"><a href="#启动后操作" class="headerlink" title="启动后操作"></a>启动后操作</h1><ol>
+<li>原项目中一些llm，embedding等都没有配置，需要自己在界面增加供应商再次配置即可，配置后重新刷新页面。</li>
+</ol>
+<h1 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h1><ol>
+<li>如果是内网环境，docker需要在公网环境下载好后，通过load方式加载到内网，对于插件同理。</li>
+</ol>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://docs.dify.ai/zh-hans/development/migration/migrate-to-v1">https://docs.dify.ai/zh-hans/development/migration/migrate-to-v1</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -244,12 +337,12 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;mcpServers&quot;: &#123;</span><br><span class="line">    &quot;demo&quot;: &#123;</span><br><span class="line">      &quot;command&quot;: &quot;~/.conda/envs/py_3.12/bin/fastmcp&quot;,</span><br><span class="line">      &quot;args&quot;: [&quot;run&quot;, &quot;~/workspace/python/demo/mcp/SumMCP.py&quot;],</span><br><span class="line">      &quot;disabled&quot;: false,</span><br><span class="line">      &quot;alwaysAllow&quot;: []</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="检查是否成功"><a href="#检查是否成功" class="headerlink" title="检查是否成功"></a>检查是否成功</h3><p>配置完成后，mcpServer会显示绿色图标,如下</p>
-<p><img src="https://43.143.194.245/minio/images/roocode_mcp.png" alt="mcp配置"></p>
+<p><img src="https://19921514.xyz/minio/images/roocode_mcp.png" alt="mcp配置"></p>
 <p>如果在之前SumMCP.py中增加了工具，一定要在这里刷新下，显示出新的工具，然后在插件中使用才会读取到。</p>
 <h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><h3 id="求和"><a href="#求和" class="headerlink" title="求和"></a>求和</h3><p>使用demo工具, 计算99和98的和, 效果如下</p>
-<p><img src="https://43.143.194.245/minio/images/roocode_mcp_sum.png" alt="显示求和"></p>
+<p><img src="https://19921514.xyz/minio/images/roocode_mcp_sum.png" alt="显示求和"></p>
 <h3 id="显示文件列表"><a href="#显示文件列表" class="headerlink" title="显示文件列表"></a>显示文件列表</h3><p>使用listdir工具显示 &#x2F;home&#x2F;xx&#x2F;Documents下的文件列表，效果如下</p>
-<p><img src="https://43.143.194.245/minio/images/roocode_mcp_listdir.png" alt="显示文件列表"></p>
+<p><img src="https://19921514.xyz/minio/images/roocode_mcp_listdir.png" alt="显示文件列表"></p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>使用mcp的方式可以按照自己要求实现一些插件本身做不了或者不好实现的功能。目的是为了让外部交互的返回更好的跟模型上下文结合，从而产生更好的效果。如果对话过程中，模型能够自动识别是需要使用哪个mcp那么效果应该会更好。目前是需要明确告诉插件使用mcp，有时候甚至得告诉它具体是哪个tool。</p>
 <p>这里只是一个最简单的使用，企业项目中能否使用该方式扩展业务，如何扩展，且听下回分解。</p>
 
@@ -1016,74 +1109,6 @@
 <h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf8 -*-</span></span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> date, datetime</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> telegram <span class="keyword">import</span> Bot</span><br><span class="line"><span class="keyword">from</span> telegram.utils.request <span class="keyword">import</span> Request</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">...</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">send_telegram_message</span>(<span class="params">msg</span>):</span><br><span class="line">    <span class="comment"># 替换为你的API令牌</span></span><br><span class="line">    token = os.environ[<span class="string">&#x27;TELEGRAM_TOKEN&#x27;</span>]</span><br><span class="line">    <span class="comment"># 替换为你的Telegram账号的ID</span></span><br><span class="line">    chat_id = os.environ[<span class="string">&#x27;TELEGRAM_CHAT_ID&#x27;</span>]</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    python 3.x</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    proxy = Request(proxy_url=<span class="string">&#x27;http://127.0.0.1:7890&#x27;</span>)</span><br><span class="line">    bot = Bot(token=token, request=proxy)</span><br><span class="line">    bot.send_message(chat_id=chat_id, text=msg)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>按照上述步骤即可实现将msg信息发送给机器人。所以理论上你可以创建很多个机器人，分别做不同类型的通知，enjoy！</p>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2024/12/19/%E6%9C%89%E4%BA%86AI%E6%9B%B4%E4%BC%98%E9%9B%85%E7%9A%84%E8%80%83%E8%AF%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Mr.zhao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="离线de日常">
-      <meta itemprop="description" content="show me your code">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 离线de日常">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/12/19/%E6%9C%89%E4%BA%86AI%E6%9B%B4%E4%BC%98%E9%9B%85%E7%9A%84%E8%80%83%E8%AF%81/" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-12-19 15:31:54" itemprop="dateCreated datePublished" datetime="2024-12-19T15:31:54+08:00">2024-12-19</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          
       
     </div>
 
