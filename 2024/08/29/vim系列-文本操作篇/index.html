@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhaozhiwei1992.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"style":null,"show_result":false},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Vim实用技巧：文本编辑与处理基数行与偶数行分组使用Vim的替换命令，可以轻松地将基数行和偶数行分组： 1%s&#x2F;\(^.*$\)\n\(^.*$\)&#x2F;\1 \2&#x2F;g 然后，删除所有的基数行： 1%s&#x2F;^.*$\n\(^.*$\)&#x2F;\1&#x2F;g  删除重复行在Vim中删除重复行是一个常见的操作，以下是几种方法： 删除相邻重复行1:g&#x2F;\(.\+\)$\n\1&#x2F;d  删除不相邻重复行使用排序命令删除不相邻">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vim系列-文本操作篇">
+<meta property="og:url" content="http://zhaozhiwei1992.github.io/2024/08/29/vim%E7%B3%BB%E5%88%97-%E6%96%87%E6%9C%AC%E6%93%8D%E4%BD%9C%E7%AF%87/index.html">
+<meta property="og:site_name" content="离线de日常">
+<meta property="og:description" content="Vim实用技巧：文本编辑与处理基数行与偶数行分组使用Vim的替换命令，可以轻松地将基数行和偶数行分组： 1%s&#x2F;\(^.*$\)\n\(^.*$\)&#x2F;\1 \2&#x2F;g 然后，删除所有的基数行： 1%s&#x2F;^.*$\n\(^.*$\)&#x2F;\1&#x2F;g  删除重复行在Vim中删除重复行是一个常见的操作，以下是几种方法： 删除相邻重复行1:g&#x2F;\(.\+\)$\n\1&#x2F;d  删除不相邻重复行使用排序命令删除不相邻">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-08-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-08-28T16:00:00.000Z">
+<meta property="article:author" content="Mr.zhao">
+<meta property="article:tag" content="vim">
+<meta property="article:tag" content="文本">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://zhaozhiwei1992.github.io/2024/08/29/vim%E7%B3%BB%E5%88%97-%E6%96%87%E6%9C%AC%E6%93%8D%E4%BD%9C%E7%AF%87/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhaozhiwei1992.github.io/2024/08/29/vim%E7%B3%BB%E5%88%97-%E6%96%87%E6%9C%AC%E6%93%8D%E4%BD%9C%E7%AF%87/","path":"2024/08/29/vim系列-文本操作篇/","title":"vim系列-文本操作篇"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>vim系列-文本操作篇 | 离线de日常</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">离线de日常</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vim%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7%EF%BC%9A%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E4%B8%8E%E5%A4%84%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">Vim实用技巧：文本编辑与处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%95%B0%E8%A1%8C%E4%B8%8E%E5%81%B6%E6%95%B0%E8%A1%8C%E5%88%86%E7%BB%84"><span class="nav-number">1.1.</span> <span class="nav-text">基数行与偶数行分组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E9%87%8D%E5%A4%8D%E8%A1%8C"><span class="nav-number">1.2.</span> <span class="nav-text">删除重复行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E7%9B%B8%E9%82%BB%E9%87%8D%E5%A4%8D%E8%A1%8C"><span class="nav-number">1.2.1.</span> <span class="nav-text">删除相邻重复行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E4%B8%8D%E7%9B%B8%E9%82%BB%E9%87%8D%E5%A4%8D%E8%A1%8C"><span class="nav-number">1.2.2.</span> <span class="nav-text">删除不相邻重复行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E9%87%8D%E5%A4%8D%E8%A1%8C%EF%BC%8C%E7%BB%93%E6%9E%9C%E6%8C%89%E7%85%A7%E5%8E%9F%E9%A1%BA%E5%BA%8F%E6%8E%92%E5%88%97"><span class="nav-number">1.2.3.</span> <span class="nav-text">删除重复行，结果按照原顺序排列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E7%A9%BA%E7%99%BD%E8%A1%8C"><span class="nav-number">1.3.</span> <span class="nav-text">删除空白行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%BA%8F%E5%8F%B7"><span class="nav-number">1.4.</span> <span class="nav-text">添加序号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87let%E5%8F%98%E9%87%8F"><span class="nav-number">1.4.1.</span> <span class="nav-text">通过let变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8%E8%A1%8C%E5%8F%B7"><span class="nav-number">1.4.2.</span> <span class="nav-text">直接使用行号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8range-%E5%87%BD%E6%95%B0"><span class="nav-number">1.4.3.</span> <span class="nav-text">使用range()函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8Vim%E7%9A%84%E7%BC%96%E7%A8%8B%E6%94%AF%E6%8C%81"><span class="nav-number">1.4.4.</span> <span class="nav-text">利用Vim的编程支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%96%E9%83%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">1.4.5.</span> <span class="nav-text">外部命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E8%A1%8C%E6%95%B0%E3%80%81%E5%88%97%E6%95%B0%E3%80%81%E5%AD%97%E7%AC%A6%E6%95%B0%E5%8F%8A%E6%89%80%E5%8D%A0%E5%AD%97%E8%8A%82%E5%A4%A7%E5%B0%8F"><span class="nav-number">1.5.</span> <span class="nav-text">查看文件行数、列数、字符数及所占字节大小</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Mr.zhao"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Mr.zhao</p>
+  <div class="site-description" itemprop="description">show me your code</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">88</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhaozhiwei1992" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhaozhiwei1992" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/p205/posts" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;p205&#x2F;posts" rel="noopener me" target="_blank"><i class="fab fa-zhihu fa-fw"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.jianshu.com/u/65f51bc73109" title="简书 → https:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;65f51bc73109" rel="noopener me" target="_blank"><i class="fas fa-book-open fa-fw"></i>简书</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/qq347061329" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;qq347061329" rel="noopener me" target="_blank"><i class="fab fa-blog fa-fw"></i>博客园</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u012768510" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u012768510" rel="noopener me" target="_blank"><i class="fas fa-code fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhaozhiweishanxi@gmail.com" title="E-Mail → mailto:zhaozhiweishanxi@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2024/08/29/vim%E7%B3%BB%E5%88%97-%E6%96%87%E6%9C%AC%E6%93%8D%E4%BD%9C%E7%AF%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Mr.zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="vim系列-文本操作篇 | 离线de日常">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          vim系列-文本操作篇
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-08-29 00:00:00" itemprop="dateCreated datePublished" datetime="2024-08-29T00:00:00+08:00">2024-08-29</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="Vim实用技巧：文本编辑与处理"><a href="#Vim实用技巧：文本编辑与处理" class="headerlink" title="Vim实用技巧：文本编辑与处理"></a>Vim实用技巧：文本编辑与处理</h1><h2 id="基数行与偶数行分组"><a href="#基数行与偶数行分组" class="headerlink" title="基数行与偶数行分组"></a>基数行与偶数行分组</h2><p>使用Vim的替换命令，可以轻松地将基数行和偶数行分组：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%s/\(^.*$\)\n\(^.*$\)/\<span class="number">1</span> \<span class="number">2</span>/g</span><br></pre></td></tr></table></figure>
+<p>然后，删除所有的基数行：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%s/^.*$\n\(^.*$\)/\<span class="number">1</span>/g</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除重复行"><a href="#删除重复行" class="headerlink" title="删除重复行"></a>删除重复行</h2><p>在Vim中删除重复行是一个常见的操作，以下是几种方法：</p>
+<h3 id="删除相邻重复行"><a href="#删除相邻重复行" class="headerlink" title="删除相邻重复行"></a>删除相邻重复行</h3><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:g/\(.\+\)$\n\<span class="number">1</span>/d</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除不相邻重复行"><a href="#删除不相邻重复行" class="headerlink" title="删除不相邻重复行"></a>删除不相邻重复行</h3><p>使用排序命令删除不相邻的重复行：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:<span class="keyword">sort</span> <span class="keyword">u</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="删除重复行，结果按照原顺序排列"><a href="#删除重复行，结果按照原顺序排列" class="headerlink" title="删除重复行，结果按照原顺序排列"></a>删除重复行，结果按照原顺序排列</h3><p>为了保存原有顺序，首先给每行加上行号和1个<code>&#123;</code>：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:<span class="keyword">let</span> i=<span class="number">1</span>|g/^/s//\=i.<span class="string">&#x27;&#123;&#x27;</span>/|<span class="keyword">let</span> i+=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>按照行号后面的内容排序：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:<span class="keyword">sort</span> /^\d\&#123;-&#125;/</span><br></pre></td></tr></table></figure>
+
+<p>删除行号后面的内容相同的行保留后面的行：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:g/^\d\&#123;-&#125;\&#123;.∗$\n\d\&#123;-&#125;\&#123;<span class="number">1</span>$/d</span><br></pre></td></tr></table></figure>
+
+<p>按照行号恢复顺序：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:<span class="keyword">sort</span> n</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除空白行"><a href="#删除空白行" class="headerlink" title="删除空白行"></a>删除空白行</h2><p>删除文件中的空白行：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%g/^\s*$/d</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加序号"><a href="#添加序号" class="headerlink" title="添加序号"></a>添加序号</h2><p>有多种方法可以为文本添加序号：</p>
+<h3 id="通过let变量"><a href="#通过let变量" class="headerlink" title="通过let变量"></a>通过let变量</h3><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> i=<span class="number">1</span> | g/^/s//\=i.<span class="string">&#x27; &#x27;</span>/ | <span class="keyword">let</span> i=i+<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="直接使用行号"><a href="#直接使用行号" class="headerlink" title="直接使用行号"></a>直接使用行号</h3><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:g/^/ s//\=<span class="built_in">line</span>(<span class="string">&#x27;.&#x27;</span>).<span class="string">&#x27; &#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="使用range-函数"><a href="#使用range-函数" class="headerlink" title="使用range()函数"></a>使用range()函数</h3><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:<span class="keyword">for</span> i in <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">31</span>)</span><br><span class="line">:  <span class="keyword">call</span> <span class="built_in">setline</span>(i, i .<span class="string">&#x27; &#x27;</span>. <span class="built_in">getline</span>(i))</span><br><span class="line">:<span class="keyword">endfor</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="利用Vim的编程支持"><a href="#利用Vim的编程支持" class="headerlink" title="利用Vim的编程支持"></a>利用Vim的编程支持</h3><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">:<span class="keyword">python</span> &lt;&lt;EOF</span><br><span class="line">from <span class="keyword">vim</span> import current</span><br><span class="line"><span class="keyword">for</span> i in <span class="built_in">range</span>(<span class="built_in">len</span>(current.<span class="keyword">buffer</span>)):</span><br><span class="line">    current.<span class="keyword">buffer</span>[i] = str(i+<span class="number">1</span>) + <span class="string">&#x27; &#x27;</span> + current.<span class="keyword">buffer</span>[i]</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<h3 id="外部命令"><a href="#外部命令" class="headerlink" title="外部命令"></a>外部命令</h3><p>使用外部命令如<code>findstr</code>, <code>sed</code>, <code>diff</code>, <code>perl</code>, <code>python</code>等为文本添加序号：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">:%!findstr /<span class="keyword">N</span> <span class="string">&quot;^&quot;</span></span><br><span class="line">:%!sed =|sed <span class="string">&quot;N;s/\n/ /&quot;</span></span><br><span class="line">:%!diff --<span class="built_in">line</span>-format=%dn%L % -</span><br><span class="line">:%!perl -<span class="keyword">pe</span> <span class="string">&quot;print ++$a . &#x27; &#x27;&quot;</span></span><br><span class="line">:%!python -<span class="keyword">c</span> <span class="string">&quot;import sys,fileinput as f;[sys.stdout.write(str(f.lineno())+a) for a in f.input()]&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="查看文件行数、列数、字符数及所占字节大小"><a href="#查看文件行数、列数、字符数及所占字节大小" class="headerlink" title="查看文件行数、列数、字符数及所占字节大小"></a>查看文件行数、列数、字符数及所占字节大小</h2><p>查看文件的行数、列数、字符数及所占字节大小：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g + <span class="symbol">&lt;Ctrl-g&gt;</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechat.png" alt="Mr.zhao 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mr.zhao
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://zhaozhiwei1992.github.io/2024/08/29/vim%E7%B3%BB%E5%88%97-%E6%96%87%E6%9C%AC%E6%93%8D%E4%BD%9C%E7%AF%87/" title="vim系列-文本操作篇">http://zhaozhiwei1992.github.io/2024/08/29/vim系列-文本操作篇/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/vim/" rel="tag"># vim</a>
+              <a href="/tags/%E6%96%87%E6%9C%AC/" rel="tag"># 文本</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/08/29/vim%E7%B3%BB%E5%88%97-%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2%E7%AF%87/" rel="prev" title="vim系列-格式转换篇">
+                  <i class="fa fa-angle-left"></i> vim系列-格式转换篇
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/08/29/vim%E7%B3%BB%E5%88%97-%E6%8F%92%E4%BB%B6%E7%AF%87/" rel="next" title="vim系列-插件篇">
+                  vim系列-插件篇 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mr.zhao</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

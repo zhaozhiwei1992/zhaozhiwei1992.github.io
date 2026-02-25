@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhaozhiwei1992.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"style":null,"show_result":false},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="制作U盘启动盘 下载archlinux镜像 下载powerison 将镜像刻录到U盘中  设置bios 如果已经安装了win8+系统,开机重启然后按f1，进入设置界面，加载启动项中将usb放到最前 保存后，插入启动盘重启，按f12， 选择启动项，选择archlinux  分区 工具:fdisk , 使用m指令查看支持的操作 重建分区表干掉所有分区 fdisk &#x2F;dev&#x2F;sda,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="thinkpadt480安装archlinux实战">
+<meta property="og:url" content="http://zhaozhiwei1992.github.io/2019/07/24/thinkpadt480%E5%AE%89%E8%A3%85archlinux/index.html">
+<meta property="og:site_name" content="离线de日常">
+<meta property="og:description" content="制作U盘启动盘 下载archlinux镜像 下载powerison 将镜像刻录到U盘中  设置bios 如果已经安装了win8+系统,开机重启然后按f1，进入设置界面，加载启动项中将usb放到最前 保存后，插入启动盘重启，按f12， 选择启动项，选择archlinux  分区 工具:fdisk , 使用m指令查看支持的操作 重建分区表干掉所有分区 fdisk &#x2F;dev&#x2F;sda,">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-07-23T16:00:00.000Z">
+<meta property="article:modified_time" content="2019-07-23T16:00:00.000Z">
+<meta property="article:author" content="Mr.zhao">
+<meta property="article:tag" content="archlinux">
+<meta property="article:tag" content="thinkpad">
+<meta property="article:tag" content="grub">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://zhaozhiwei1992.github.io/2019/07/24/thinkpadt480%E5%AE%89%E8%A3%85archlinux/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhaozhiwei1992.github.io/2019/07/24/thinkpadt480%E5%AE%89%E8%A3%85archlinux/","path":"2019/07/24/thinkpadt480安装archlinux/","title":"thinkpadt480安装archlinux实战"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>thinkpadt480安装archlinux实战 | 离线de日常</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">离线de日常</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%B6%E4%BD%9CU%E7%9B%98%E5%90%AF%E5%8A%A8%E7%9B%98"><span class="nav-number">1.</span> <span class="nav-text">制作U盘启动盘</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AEbios"><span class="nav-number">2.</span> <span class="nav-text">设置bios</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%8C%BA"><span class="nav-number">3.</span> <span class="nav-text">分区</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5"><span class="nav-number">4.</span> <span class="nav-text">网络连接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F"><span class="nav-number">5.</span> <span class="nav-text">安装系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%BF%85%E8%A6%81%E7%9A%84%E4%BC%98%E5%8C%96%E5%8F%8A%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="nav-number">6.</span> <span class="nav-text">一些必要的优化及软件安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%90%AF%E5%90%8E%E8%BF%9B%E5%85%A5%E8%87%AA%E5%B7%B1%E5%AE%89%E8%A3%85%E5%A5%BD%E7%9A%84%E7%B3%BB%E7%BB%9F"><span class="nav-number">6.1.</span> <span class="nav-text">重启后进入自己安装好的系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E5%8C%BA%EF%BC%8C%E7%BC%96%E7%A0%81"><span class="nav-number">6.2.</span> <span class="nav-text">时区，编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E7%A0%81"><span class="nav-number">6.3.</span> <span class="nav-text">编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#host%E8%AE%BE%E7%BD%AE"><span class="nav-number">6.4.</span> <span class="nav-text">host设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2"><span class="nav-number">6.5.</span> <span class="nav-text">图形界面</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Mr.zhao"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Mr.zhao</p>
+  <div class="site-description" itemprop="description">show me your code</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">88</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhaozhiwei1992" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhaozhiwei1992" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/p205/posts" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;p205&#x2F;posts" rel="noopener me" target="_blank"><i class="fab fa-zhihu fa-fw"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.jianshu.com/u/65f51bc73109" title="简书 → https:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;65f51bc73109" rel="noopener me" target="_blank"><i class="fas fa-book-open fa-fw"></i>简书</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/qq347061329" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;qq347061329" rel="noopener me" target="_blank"><i class="fab fa-blog fa-fw"></i>博客园</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u012768510" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u012768510" rel="noopener me" target="_blank"><i class="fas fa-code fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhaozhiweishanxi@gmail.com" title="E-Mail → mailto:zhaozhiweishanxi@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2019/07/24/thinkpadt480%E5%AE%89%E8%A3%85archlinux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Mr.zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="thinkpadt480安装archlinux实战 | 离线de日常">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          thinkpadt480安装archlinux实战
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-07-24 00:00:00" itemprop="dateCreated datePublished" datetime="2019-07-24T00:00:00+08:00">2019-07-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="制作U盘启动盘"><a href="#制作U盘启动盘" class="headerlink" title="制作U盘启动盘"></a>制作U盘启动盘</h1><ul>
+<li>下载archlinux镜像</li>
+<li>下载powerison</li>
+<li>将镜像刻录到U盘中</li>
+</ul>
+<h1 id="设置bios"><a href="#设置bios" class="headerlink" title="设置bios"></a>设置bios</h1><ul>
+<li>如果已经安装了win8+系统,<br>开机重启然后按f1，进入设置界面，加载启动项中将usb放到最前</li>
+<li>保存后，插入启动盘重启，按f12， 选择启动项，选择archlinux</li>
+</ul>
+<h1 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h1><ul>
+<li>工具:fdisk , 使用m指令查看支持的操作</li>
+<li>重建分区表干掉所有分区 fdisk &#x2F;dev&#x2F;sda, g(是gpt分区表)<br>w(这个指令后所做的配置就会生效)</li>
+<li>创建分区 n{ &#x2F;dev&#x2F;sda1(efi), <em>dev&#x2F;sda2(</em>), &#x2F;dev&#x2F;nvmxxx(&#x2F;home)},<br>我的分区是nvmxx(固态在前, 所以分区方案是&#x2F;dev&#x2F;nvm1(efi),<br><em>dev&#x2F;nvmxx2(</em>)…)</li>
+<li>格式化分区<ul>
+<li>mkfs.vfat -F32 &#x2F;dev&#x2F;sda1</li>
+<li>mkfs.ext4 &#x2F;dev&#x2F;sda2 , 其他分区都使用ext4</li>
+</ul>
+</li>
+<li>分区挂载<ul>
+<li>mount &#x2F;dev&#x2F;sda2 &#x2F;mnt</li>
+<li>mount &#x2F;dev&#x2F;sda1 &#x2F;mnt&#x2F;boot&#x2F;efi</li>
+<li>mount &#x2F;dev&#x2F;sda3 &#x2F;mnt&#x2F;home</li>
+</ul>
+</li>
+</ul>
+<h1 id="网络连接"><a href="#网络连接" class="headerlink" title="网络连接"></a>网络连接</h1><ul>
+<li>有网线的情况下直接跳过第二步</li>
+<li>连接wifi<ul>
+<li>首先查看网卡 ip link命令列出网卡id</li>
+<li>systemctl stop dhcpxxx.service 关闭现有网络</li>
+<li>wifi-menu -o wlp3s0,选择可连接网络连接</li>
+</ul>
+</li>
+<li>配置服务镜像<ul>
+<li>如果是在中国， 就把mirrorlist中的china相关镜像提前,<br>我这里只把163的镜像放最前面</li>
+</ul>
+</li>
+</ul>
+<h1 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统"></a>安装系统</h1><ul>
+<li><p>安装基本包</p>
+<ul>
+<li>pacman -sy 刷新系统更新文件</li>
+<li>安装基础系统及后续工具, base-devel也可以装好系统后再安装<br>#pacstrap -i &#x2F;mnt base base-devel</li>
+</ul>
+</li>
+<li><p>配置fstab</p>
+<ul>
+<li><pre><code class="&#123;.example&#125;"># /dev/nvme0n1p2
+UUID=7bdc64d4-20ed-4073-bcef-dacefcee8e9a       /               ext4            rw,relatime     0 1
+
+# /dev/nvme0n1p1
+UUID=FAB8-E796          /boot/efi       vfat            rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro       0 2
+
+# /dev/nvme0n1p3
+UUID=48256cfb-3694-4102-85fb-33d9142f554c       /home           ext4            rw,relatime     0 2
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    -   挂载机械硬盘/dev/sda1时需要注意，直接在fstab中配置方式导致开机无法启动，后查看官方文档，改为按需挂载,</span><br><span class="line">        这种情况下正常启动，如果有外部对改磁盘进行了引用也会自动挂载</span><br><span class="line"></span><br><span class="line">        UUID=6e3a49e9-131b-4003-b251-cc26eae107ca /mnt/d ext4</span><br><span class="line">        noauto,x-systemd.automount 0 0</span><br><span class="line"></span><br><span class="line">-   安装引导工具(这里一定要弄对，否则进不去系统， 严格顺序执行)</span><br><span class="line">    后续操作全部在安装的系统里进行</span><br><span class="line">    -   下面这个必须执行, 生成grub.cfg配置文件， 默认安装系统会自带一个</span><br><span class="line"></span><br><span class="line">        ``` &#123;.example&#125;</span><br><span class="line">        arch-chroot /mnt</span><br><span class="line">        GRUB启动, UEFI的系统，要装grub-efi-x86_64和efibootmgr</span><br><span class="line">        #pacman -S grub-efi-x86_64, efibootmgr</span><br><span class="line">        把GRUB装到EFI分区里，这样就多一条GRUB启动项了。</span><br><span class="line">        #grub-install --efi-directory=/boot/efi --bootloader-id=arch-grub --recheck</span><br><span class="line">        生成grub配置文件(否则启动一致会报grub的错误)</span><br><span class="line">        pacman -S os-prober</span><br><span class="line">        #grub-install /dev/sda(根目录下, 如果出现grub缺少文件时候再执行)</span><br><span class="line">        grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>为了下次可以连无线最好安装下 pacman -S iw wpa<del>supplicant</del> dialog</p>
+</li>
+<li><p>exit， 取消必要的挂载后重启， 系统已经安装完成</p>
+</li>
+</ul>
+<h1 id="一些必要的优化及软件安装"><a href="#一些必要的优化及软件安装" class="headerlink" title="一些必要的优化及软件安装"></a>一些必要的优化及软件安装</h1><h2 id="重启后进入自己安装好的系统"><a href="#重启后进入自己安装好的系统" class="headerlink" title="重启后进入自己安装好的系统"></a>重启后进入自己安装好的系统</h2><h2 id="时区，编码"><a href="#时区，编码" class="headerlink" title="时区，编码"></a>时区，编码</h2><ul>
+<li>生成localtime的软链就算设置时区了。 #ln -s<br>&#x2F;usr&#x2F;share&#x2F;zoneinfo&#x2F;Asia&#x2F;Shanghai &#x2F;etc&#x2F;localtime</li>
+<li>设置系统时间是当地时间，Linux默认是UTC时间，Windows默认是当地时间，改成一致。<br>#hwclock –localtime</li>
+</ul>
+<h2 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h2><ul>
+<li>打开locale.gen文件，把en<del>US</del>.UTF-8, zh<del>CN</del>.UTF-8,<br>zh<del>CN</del>.GBK前面的#去掉。</li>
+<li>运行locale-gen命令，重建编码表。</li>
+</ul>
+<h2 id="host设置"><a href="#host设置" class="headerlink" title="host设置"></a>host设置</h2><ul>
+<li><p>设置电脑名，随你喜欢。</p>
+<ul>
+<li>#echo arch-zhao &gt; &#x2F;etc&#x2F;hostname</li>
+</ul>
+</li>
+<li><p>设置hosts文件 vim &#x2F;etc&#x2F;hosts</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1 localhost</span><br><span class="line">::1       localhost</span><br><span class="line">127.0.1.1 arch-zhao.localdomain arch-zhao</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="图形界面"><a href="#图形界面" class="headerlink" title="图形界面"></a>图形界面</h2><ul>
+<li><p>安装xorg pacman -S xorg</p>
+</li>
+<li><p>触摸板驱动 pacman -S xf86-input-synaptics</p>
+</li>
+<li><p>根据自己显卡类型安装对应的驱动</p>
+<ul>
+<li><p>确认型号 lspci | grep VGA</p>
+</li>
+<li><p>官方提供驱动</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">通用———————————-xf86-video-vesa </span><br><span class="line">intel———————————-xf86-video-intel </span><br><span class="line">Geforce7+————————–xf86-video-nouveau </span><br><span class="line">Geforce6/7————————-xf86-video-304xx</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>安装字体(图形界面需要) pacman -S ttf-dejavu wqy-microhei</p>
+</li>
+<li><p>安装yaourt vim &#x2F;etc&#x2F;pacman.conf [archlinuxcn] SigLevel&#x3D;Never<br>Server &#x3D; <a href="https://mirrors.ustc.edu.cn/archlinuxcn/$arch">https://mirrors.ustc.edu.cn/archlinuxcn/$arch</a></p>
+</li>
+<li><p>binutils, yaourt 需要进行二进制编译(安装了base-devel后不需要)</p>
+</li>
+<li><p>安装桌面环境 xde(好看), xfce(轻量), openbox(定制化)</p>
+<ul>
+<li>kde桌面安装 pacman -S plasma</li>
+<li>文件管理器 pacman -S dolphin</li>
+<li>命令行 pacman -S konsole</li>
+<li>kde工具套件 pacman -S kde-applications(这个我没安装)</li>
+</ul>
+</li>
+<li><p>启动网络管理 systemctl enable NetworkManager , 安装前端管理工具<br>network-manage-applet, 或者pacman -S plasma-nm</p>
+</li>
+<li><p>安装slim (启动管理器， 用习惯了，类似还有很多), 执行systemctl enable<br>slim(允许开机自启)</p>
+</li>
+<li><p>.xinintrc配置 cp <em>etc&#x2F;X11&#x2F;xinit&#x2F;xinitrc ~</em>.xinitrc vim ~&#x2F;.xinitrc<br>加入exec startkde 启动kde</p>
+</li>
+<li><p>安装openssh sudo pacman -S openssh (非必须)</p>
+</li>
+<li><p>安装chromium</p>
+</li>
+<li><p>reflector 镜像刷新工具, 可以扫描最快的镜像提前</p>
+<ol>
+<li>备份原镜像 cp &#x2F;etc&#x2F;pacman.d&#x2F;mirrorlist<br>&#x2F;etc&#x2F;pacman.d&#x2F;mirrorlist.bak</li>
+<li>查找最快200个源并写入到镜像文件 reflector –verbose -l 200 -p<br>http –sort rate –save &#x2F;etc&#x2F;pacman.d&#x2F;mirrorlist</li>
+</ol>
+</li>
+<li><p>后续软件按个人需要安装</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechat.png" alt="Mr.zhao 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mr.zhao
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://zhaozhiwei1992.github.io/2019/07/24/thinkpadt480%E5%AE%89%E8%A3%85archlinux/" title="thinkpadt480安装archlinux实战">http://zhaozhiwei1992.github.io/2019/07/24/thinkpadt480安装archlinux/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/archlinux/" rel="tag"># archlinux</a>
+              <a href="/tags/thinkpad/" rel="tag"># thinkpad</a>
+              <a href="/tags/grub/" rel="tag"># grub</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/07/19/docker%E5%AE%9E%E6%88%98/" rel="prev" title="docker实践">
+                  <i class="fa fa-angle-left"></i> docker实践
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/07/25/linux%E4%B8%8B%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/" rel="next" title="linux下常用工具">
+                  linux下常用工具 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mr.zhao</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhaozhiwei1992.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"style":null,"show_result":false},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="nodejs项目初始化 创建目录 mkdir nodejs &amp; cd nodejs  npm init (根据提示，或者一路回车即可)  创建server.js文件,并写入以下内容 1234567891011121314&#x2F;&#x2F; 内置组件   var http&#x3D;require(&quot;http&quot;); http.createServer(function(request, resp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nodejs实战">
+<meta property="og:url" content="http://zhaozhiwei1992.github.io/2019/03/04/nodejs%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="离线de日常">
+<meta property="og:description" content="nodejs项目初始化 创建目录 mkdir nodejs &amp; cd nodejs  npm init (根据提示，或者一路回车即可)  创建server.js文件,并写入以下内容 1234567891011121314&#x2F;&#x2F; 内置组件   var http&#x3D;require(&quot;http&quot;); http.createServer(function(request, resp">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-03-04T09:50:40.000Z">
+<meta property="article:modified_time" content="2019-03-04T09:50:40.000Z">
+<meta property="article:author" content="Mr.zhao">
+<meta property="article:tag" content="nodejs">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://zhaozhiwei1992.github.io/2019/03/04/nodejs%E7%AC%94%E8%AE%B0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhaozhiwei1992.github.io/2019/03/04/nodejs%E7%AC%94%E8%AE%B0/","path":"2019/03/04/nodejs笔记/","title":"nodejs实战"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>nodejs实战 | 离线de日常</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">离线de日常</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#nodejs%E9%A1%B9%E7%9B%AE%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">nodejs项目初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#npm%E4%BD%BF%E7%94%A8-root"><span class="nav-number">2.</span> <span class="nav-text">npm使用(root)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2"><span class="nav-number">2.1.</span> <span class="nav-text">搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0"><span class="nav-number">2.2.</span> <span class="nav-text">更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%8D%B8%E8%BD%BD%E6%A8%A1%E5%9D%97"><span class="nav-number">2.3.</span> <span class="nav-text">安装卸载模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%A8%A1%E5%9D%97%E5%AE%89%E8%A3%85%E4%BF%A1%E6%81%AF"><span class="nav-number">2.4.</span> <span class="nav-text">查看模块安装信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Package-json%E5%B1%9E%E6%80%A7%E8%AF%B4%E6%98%8E"><span class="nav-number">2.5.</span> <span class="nav-text">Package.json属性说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#whatis-npm"><span class="nav-number">2.6.</span> <span class="nav-text">whatis npm</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#var-%E5%92%8C-const"><span class="nav-number">3.</span> <span class="nav-text">var 和 const</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96buffer"><span class="nav-number">4.</span> <span class="nav-text">初始化buffer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nodejs%E5%AF%B9%E6%A0%87%E7%9A%84%E6%98%AF%E5%85%B6%E4%BB%96%E7%9A%84%E5%90%8E%E7%AB%AF%E8%AF%AD%E8%A8%80%E7%B1%BB%E4%BC%BCjava"><span class="nav-number">5.</span> <span class="nav-text">nodejs对标的是其他的后端语言类似java</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#require%E7%9A%84%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="nav-number">6.</span> <span class="nav-text">require的执行流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#extend"><span class="nav-number">7.</span> <span class="nav-text">extend</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Mr.zhao"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Mr.zhao</p>
+  <div class="site-description" itemprop="description">show me your code</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">88</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhaozhiwei1992" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhaozhiwei1992" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/p205/posts" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;p205&#x2F;posts" rel="noopener me" target="_blank"><i class="fab fa-zhihu fa-fw"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.jianshu.com/u/65f51bc73109" title="简书 → https:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;65f51bc73109" rel="noopener me" target="_blank"><i class="fas fa-book-open fa-fw"></i>简书</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/qq347061329" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;qq347061329" rel="noopener me" target="_blank"><i class="fab fa-blog fa-fw"></i>博客园</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u012768510" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u012768510" rel="noopener me" target="_blank"><i class="fas fa-code fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhaozhiweishanxi@gmail.com" title="E-Mail → mailto:zhaozhiweishanxi@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2019/03/04/nodejs%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Mr.zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="nodejs实战 | 离线de日常">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          nodejs实战
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-03-04 17:50:40" itemprop="dateCreated datePublished" datetime="2019-03-04T17:50:40+08:00">2019-03-04</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="nodejs项目初始化"><a href="#nodejs项目初始化" class="headerlink" title="nodejs项目初始化"></a>nodejs项目初始化</h1><ol>
+<li><p>创建目录 mkdir nodejs &amp; cd nodejs</p>
+</li>
+<li><p>npm init (根据提示，或者一路回车即可)</p>
+</li>
+<li><p>创建server.js文件,并写入以下内容</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 内置组件  </span></span><br><span class="line"> <span class="keyword">var</span> http=<span class="built_in">require</span>(<span class="string">&quot;http&quot;</span>);</span><br><span class="line"></span><br><span class="line"> http.<span class="title function_">createServer</span>(<span class="keyword">function</span>(<span class="params">request, response</span>)&#123;</span><br><span class="line">     <span class="comment">// 发送 HTTP 头部 </span></span><br><span class="line">     <span class="comment">// HTTP 状态值: 200 : OK</span></span><br><span class="line">     <span class="comment">// 内容类型: text/plain</span></span><br><span class="line">     response.<span class="title function_">writeHead</span>(<span class="number">200</span>, &#123;<span class="string">&quot;Content-Type&quot;</span>:<span class="string">&quot;text/plain&quot;</span>&#125;);</span><br><span class="line"></span><br><span class="line">     <span class="comment">//响应数据</span></span><br><span class="line">     response.<span class="title function_">end</span>(<span class="string">&quot;hello nodejs&quot;</span>);</span><br><span class="line"> &#125;).<span class="title function_">listen</span>(<span class="number">8888</span>);</span><br><span class="line"> <span class="comment">//服务启动成功后输出日志</span></span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Server running at http://127.0.0.1:8888/&#x27;</span>); </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>node server.js 启动成功</p>
+</li>
+<li><p>浏览器访问 127.0.0.1:8888</p>
+</li>
+</ol>
+<h1 id="npm使用-root"><a href="#npm使用-root" class="headerlink" title="npm使用(root)"></a>npm使用(root)</h1><h2 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h2><ul>
+<li>npm search <mould></li>
+</ul>
+<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><ul>
+<li><p>npm install -g npm</p>
+</li>
+<li><p>npm update -g npm</p>
+</li>
+</ul>
+<h2 id="安装卸载模块"><a href="#安装卸载模块" class="headerlink" title="安装卸载模块"></a>安装卸载模块</h2><ul>
+<li><p>当前目录<br>npm install <mould><br>npm uninstall <mould></p>
+</li>
+<li><p>全局<br>npm install -g <mould><br>npm uninstall -g <mould></p>
+</li>
+</ul>
+<h2 id="查看模块安装信息"><a href="#查看模块安装信息" class="headerlink" title="查看模块安装信息"></a>查看模块安装信息</h2><ul>
+<li><p>一个<br>npm list -g</p>
+</li>
+<li><p>所有<br>npm list <mould></p>
+</li>
+</ul>
+<h2 id="Package-json属性说明"><a href="#Package-json属性说明" class="headerlink" title="Package.json属性说明"></a>Package.json属性说明</h2>   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">name - 包名。</span><br><span class="line">version - 包的版本号。</span><br><span class="line">description - 包的描述。</span><br><span class="line">homepage - 包的官网 url 。</span><br><span class="line">author - 包的作者姓名。</span><br><span class="line">contributors - 包的其他贡献者姓名。</span><br><span class="line">dependencies - 依赖包列表。如果依赖包没有安装，npm 会自动将依赖包安装在 node_module 目录下。</span><br><span class="line">repository - 包代码存放的地方的类型，可以是 git 或 svn，git 可在 Github 上。</span><br><span class="line">main - main 字段指定了程序的主入口文件，require(&#x27;moduleName&#x27;) 就会加载这个文件。这个字段的默认值是模块根目录下面的 index.js。</span><br><span class="line">keywords - 关键字</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="whatis-npm"><a href="#whatis-npm" class="headerlink" title="whatis npm"></a>whatis npm</h2><ol>
+<li>npm就是js下的maven, 支持包依赖， 执行等</li>
+<li>package.json &#x3D;&#x3D; pom.xml</li>
+</ol>
+<h1 id="var-和-const"><a href="#var-和-const" class="headerlink" title="var 和 const"></a>var 和 const</h1><h1 id="初始化buffer"><a href="#初始化buffer" class="headerlink" title="初始化buffer"></a>初始化buffer</h1><ul>
+<li>类似于初始化一个list</li>
+<li>Buffer.alloc(5)</li>
+</ul>
+<h1 id="nodejs对标的是其他的后端语言类似java"><a href="#nodejs对标的是其他的后端语言类似java" class="headerlink" title="nodejs对标的是其他的后端语言类似java"></a>nodejs对标的是其他的后端语言类似java</h1><h1 id="require的执行流程"><a href="#require的执行流程" class="headerlink" title="require的执行流程"></a>require的执行流程</h1><ol>
+<li>如果 X 是内置模块</li>
+<li>返回内置模块</li>
+<li>停止执行</li>
+<li>如果 X 以 ‘&#x2F;‘ 开头<ol>
+<li>设置 Y 为文件根路径</li>
+</ol>
+</li>
+<li>如果 X 以 ‘.&#x2F;‘ 或 ‘&#x2F;‘ or ‘..&#x2F;‘ 开头<ol>
+<li>LOAD_AS_FILE(Y + X)</li>
+<li>LOAD_AS_DIRECTORY(Y + X)</li>
+</ol>
+</li>
+<li>LOAD_NODE_MODULES(X, dirname(Y))</li>
+<li>抛出异常 “not found”</li>
+</ol>
+<h1 id="extend"><a href="#extend" class="headerlink" title="extend"></a>extend</h1><p>Sub 仅仅继承了Base 在原型中定义的函数，而构造函数内部创造的 base 属 性和 sayHello 函数都没有被 Sub 继承。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>如果有一定变成基础，nodejs还是很easy的， 例子6一下就可以， 入门容易，用好就需要code code code!</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechat.png" alt="Mr.zhao 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mr.zhao
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://zhaozhiwei1992.github.io/2019/03/04/nodejs%E7%AC%94%E8%AE%B0/" title="nodejs实战">http://zhaozhiwei1992.github.io/2019/03/04/nodejs笔记/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/nodejs/" rel="tag"># nodejs</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/01/14/window%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/" rel="prev" title="windows下常用工具">
+                  <i class="fa fa-angle-left"></i> windows下常用工具
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/07/19/docker%E5%AE%9E%E6%88%98/" rel="next" title="docker实践">
+                  docker实践 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mr.zhao</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhaozhiwei1992.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"style":null,"show_result":false},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="前提本地目前没有显卡，只能用cpu刚。 如果不想自己搭建本地模型，完全可以掏钱使用现成的API即可。 需要了解一些docker知识 搭建本地模型环境os: archlinux内存: 32gcpu: 6核12线程docker: 27.3.1docker-compose: 2.32.4ollama123456pacman -S ollamasystemctl start ollama.service">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建个人AI知识库-DIFY">
+<meta property="og:url" content="http://zhaozhiwei1992.github.io/2025/01/21/%E6%9C%AC%E5%9C%B0%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA-DIFY/index.html">
+<meta property="og:site_name" content="离线de日常">
+<meta property="og:description" content="前提本地目前没有显卡，只能用cpu刚。 如果不想自己搭建本地模型，完全可以掏钱使用现成的API即可。 需要了解一些docker知识 搭建本地模型环境os: archlinux内存: 32gcpu: 6核12线程docker: 27.3.1docker-compose: 2.32.4ollama123456pacman -S ollamasystemctl start ollama.service">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2025/01/21/XtlN3fowajFcrY2.png">
+<meta property="og:image" content="https://s2.loli.net/2025/01/21/MxvKOBUuGg1EJC8.png">
+<meta property="og:image" content="https://s2.loli.net/2025/01/21/D1xUA3iM4tLTchw.png">
+<meta property="og:image" content="https://s2.loli.net/2025/01/21/hFE8kuyQ7qBNs52.png">
+<meta property="og:image" content="https://s2.loli.net/2025/01/21/lnJCkKOuqLHadoE.png">
+<meta property="og:image" content="https://s2.loli.net/2025/01/21/mCRV8dXSBoZTJbY.png">
+<meta property="og:image" content="https://s2.loli.net/2025/01/21/O6FTmeAgRG5brck.png">
+<meta property="article:published_time" content="2025-01-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-12T07:40:02.883Z">
+<meta property="article:author" content="Mr.zhao">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="知识库">
+<meta property="article:tag" content="大语言模型">
+<meta property="article:tag" content="DIFY">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2025/01/21/XtlN3fowajFcrY2.png">
+
+
+<link rel="canonical" href="http://zhaozhiwei1992.github.io/2025/01/21/%E6%9C%AC%E5%9C%B0%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA-DIFY/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhaozhiwei1992.github.io/2025/01/21/%E6%9C%AC%E5%9C%B0%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA-DIFY/","path":"2025/01/21/本地知识库搭建-DIFY/","title":"搭建个人AI知识库-DIFY"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>搭建个人AI知识库-DIFY | 离线de日常</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">离线de日常</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E6%8F%90"><span class="nav-number">1.</span> <span class="nav-text">前提</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA%E6%9C%AC%E5%9C%B0%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">搭建本地模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">2.1.</span> <span class="nav-text">环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#os-archlinux"><span class="nav-number">2.1.1.</span> <span class="nav-text">os: archlinux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98-32g"><span class="nav-number">2.1.2.</span> <span class="nav-text">内存: 32g</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cpu-6%E6%A0%B812%E7%BA%BF%E7%A8%8B"><span class="nav-number">2.1.3.</span> <span class="nav-text">cpu: 6核12线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-27-3-1"><span class="nav-number">2.1.4.</span> <span class="nav-text">docker: 27.3.1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-compose-2-32-4"><span class="nav-number">2.1.5.</span> <span class="nav-text">docker-compose: 2.32.4</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ollama"><span class="nav-number">2.2.</span> <span class="nav-text">ollama</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LLM%E6%A8%A1%E5%9E%8B-qwen2-1-5b"><span class="nav-number">2.3.</span> <span class="nav-text">LLM模型 (qwen2:1.5b)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD"><span class="nav-number">2.3.1.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8"><span class="nav-number">2.3.2.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">2.3.3.</span> <span class="nav-text">测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Text-Embedding%E6%A8%A1%E5%9E%8B-m3e"><span class="nav-number">2.4.</span> <span class="nav-text">Text Embedding模型 (m3e)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD-1"><span class="nav-number">2.4.1.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95-1"><span class="nav-number">2.4.2.</span> <span class="nav-text">测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%A8%A1%E5%9E%8B%E8%BF%90%E8%A1%8C%E6%83%85%E5%86%B5"><span class="nav-number">2.5.</span> <span class="nav-text">查看模型运行情况</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E7%9F%A5%E8%AF%86%E5%BA%93-ollama-DIFY"><span class="nav-number">3.</span> <span class="nav-text">构建知识库(ollama+DIFY)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E5%90%AF%E5%8A%A8dify"><span class="nav-number">3.1.</span> <span class="nav-text">下载启动dify</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.2.</span> <span class="nav-text">添加模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#qwen2-1-5b%E6%A8%A1%E5%9E%8B%E6%B7%BB%E5%8A%A0"><span class="nav-number">3.2.1.</span> <span class="nav-text">qwen2:1.5b模型添加</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#milkey-m3e-latest"><span class="nav-number">3.2.2.</span> <span class="nav-text">milkey&#x2F;m3e:latest</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E6%B5%8B%E8%AF%95"><span class="nav-number">3.2.3.</span> <span class="nav-text">访问测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%9F%A5%E8%AF%86%E5%BA%93"><span class="nav-number">3.3.</span> <span class="nav-text">创建知识库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%81%8A%E5%A4%A9%E5%8A%A9%E6%89%8B"><span class="nav-number">4.</span> <span class="nav-text">创建聊天助手</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E9%80%9A%E8%BF%87dify%E4%BD%BF%E7%94%A8"><span class="nav-number">4.1.</span> <span class="nav-text">直接通过dify使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%86dify%E5%B5%8C%E5%85%A5%E5%88%B0%E8%87%AA%E5%B7%B1%E7%9A%84%E5%BA%94%E7%94%A8%E4%B8%AD"><span class="nav-number">4.2.</span> <span class="nav-text">将dify嵌入到自己的应用中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E5%BA%93%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="nav-number">4.3.</span> <span class="nav-text">知识库工作流</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86"><span class="nav-number">5.</span> <span class="nav-text">问题处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#dify%E8%AE%BF%E9%97%AE%E6%97%B6%E6%8F%90%E7%A4%BA11434%E6%8B%92%E7%BB%9D"><span class="nav-number">5.1.</span> <span class="nav-text">dify访问时提示11434拒绝</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86"><span class="nav-number">5.1.1.</span> <span class="nav-text">处理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reached-maximum-retries-3-for-URL-http-localhost-8090-api-system-ext-examples-echo"><span class="nav-number">5.2.</span> <span class="nav-text">Reached maximum retries (3) for URL http:&#x2F;&#x2F;localhost:8090&#x2F;api&#x2F;system&#x2F;ext&#x2F;examples&#x2F;echo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E5%A4%84%E7%90%86"><span class="nav-number">5.2.1.</span> <span class="nav-text">分析处理</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Mr.zhao"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Mr.zhao</p>
+  <div class="site-description" itemprop="description">show me your code</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">88</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhaozhiwei1992" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhaozhiwei1992" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/p205/posts" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;p205&#x2F;posts" rel="noopener me" target="_blank"><i class="fab fa-zhihu fa-fw"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.jianshu.com/u/65f51bc73109" title="简书 → https:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;65f51bc73109" rel="noopener me" target="_blank"><i class="fas fa-book-open fa-fw"></i>简书</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/qq347061329" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;qq347061329" rel="noopener me" target="_blank"><i class="fab fa-blog fa-fw"></i>博客园</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u012768510" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u012768510" rel="noopener me" target="_blank"><i class="fas fa-code fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhaozhiweishanxi@gmail.com" title="E-Mail → mailto:zhaozhiweishanxi@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2025/01/21/%E6%9C%AC%E5%9C%B0%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA-DIFY/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Mr.zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="搭建个人AI知识库-DIFY | 离线de日常">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          搭建个人AI知识库-DIFY
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-01-21 00:00:00" itemprop="dateCreated datePublished" datetime="2025-01-21T00:00:00+08:00">2025-01-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-11-12 15:40:02" itemprop="dateModified" datetime="2025-11-12T15:40:02+08:00">2025-11-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI%EF%BC%8C%E8%BD%AF%E4%BB%B6%EF%BC%8C%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">AI，软件，工具</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h1><p>本地目前没有显卡，只能用cpu刚。</p>
+<p>如果不想自己搭建本地模型，完全可以掏钱使用现成的API即可。</p>
+<p>需要了解一些docker知识</p>
+<h1 id="搭建本地模型"><a href="#搭建本地模型" class="headerlink" title="搭建本地模型"></a>搭建本地模型</h1><h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><h3 id="os-archlinux"><a href="#os-archlinux" class="headerlink" title="os: archlinux"></a>os: archlinux</h3><h3 id="内存-32g"><a href="#内存-32g" class="headerlink" title="内存: 32g"></a>内存: 32g</h3><h3 id="cpu-6核12线程"><a href="#cpu-6核12线程" class="headerlink" title="cpu: 6核12线程"></a>cpu: 6核12线程</h3><h3 id="docker-27-3-1"><a href="#docker-27-3-1" class="headerlink" title="docker: 27.3.1"></a>docker: 27.3.1</h3><h3 id="docker-compose-2-32-4"><a href="#docker-compose-2-32-4" class="headerlink" title="docker-compose: 2.32.4"></a>docker-compose: 2.32.4</h3><h2 id="ollama"><a href="#ollama" class="headerlink" title="ollama"></a>ollama</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pacman -S ollama</span><br><span class="line"></span><br><span class="line">systemctl start ollama.service</span><br><span class="line"></span><br><span class="line"> # 通过下述url判断ollama是否安装成功</span><br><span class="line">http://127.0.0.1:11434/</span><br></pre></td></tr></table></figure>
+<h2 id="LLM模型-qwen2-1-5b"><a href="#LLM模型-qwen2-1-5b" class="headerlink" title="LLM模型 (qwen2:1.5b)"></a>LLM模型 (qwen2:1.5b)</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ollama pull qwen2:1.5b</span><br></pre></td></tr></table></figure>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ollama run qwen2:1.5b</span><br></pre></td></tr></table></figure>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ollama run qwen2:1.5b</span><br><span class="line">&gt;&gt;&gt; who are you?</span><br><span class="line">I am an AI language model, designed to answer questions and provide information on various topics. How can I assist you today?</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; Send a message (/? for help)</span><br></pre></td></tr></table></figure>
+<h2 id="Text-Embedding模型-m3e"><a href="#Text-Embedding模型-m3e" class="headerlink" title="Text Embedding模型 (m3e)"></a>Text Embedding模型 (m3e)</h2><h3 id="下载-1"><a href="#下载-1" class="headerlink" title="下载"></a>下载</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ollama pull milkey/m3e</span><br><span class="line"></span><br><span class="line">embedding模型不需要run, ollama服务启动可直接使用</span><br></pre></td></tr></table></figure>
+
+<h3 id="测试-1"><a href="#测试-1" class="headerlink" title="测试"></a>测试</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl http://127.0.0.1:11434/api/embed -d &#x27;&#123;</span><br><span class="line">  &quot;model&quot;: &quot;milkey/m3e&quot;,</span><br><span class="line">  &quot;input&quot;: &quot;balabalabala&quot;</span><br><span class="line">&#125;&#x27; | jq .</span><br></pre></td></tr></table></figure>
+<h2 id="查看模型运行情况"><a href="#查看模型运行情况" class="headerlink" title="查看模型运行情况"></a>查看模型运行情况</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ollama ps</span><br><span class="line"></span><br><span class="line">NAME                        ID              SIZE      PROCESSOR    UNTIL    </span><br><span class="line">qwen2:1.5b                  f6daf2b25194    1.5 GB    100% CPU     4 minutes from now</span><br><span class="line">milkey/m3e:latest           1477f12451b0    860 MB    100% CPU     4 minutes from now</span><br></pre></td></tr></table></figure>
+<h1 id="构建知识库-ollama-DIFY"><a href="#构建知识库-ollama-DIFY" class="headerlink" title="构建知识库(ollama+DIFY)"></a>构建知识库(ollama+DIFY)</h1><h2 id="下载启动dify"><a href="#下载启动dify" class="headerlink" title="下载启动dify"></a>下载启动dify</h2><p>参考官方文档，so easy!</p>
+<p><a href="https://docs.dify.ai/zh-hans/getting-started/install-self-hosted/docker-compose">https://docs.dify.ai/zh-hans/getting-started/install-self-hosted/docker-compose</a></p>
+<p>本地采用的是 #systemd方式* 部署。这里一定要注意，不同的部署方式网络配置有点区别，比如systemd的方式服务启动需要增加环境变量OLLAMA_HOST，而对于docker启动方式，可以参考官方文档(暂未测试)</p>
+<h2 id="添加模型"><a href="#添加模型" class="headerlink" title="添加模型"></a>添加模型</h2><p>这里我们需要两个模型，一个LLM，一个Text Embedding</p>
+<h3 id="qwen2-1-5b模型添加"><a href="#qwen2-1-5b模型添加" class="headerlink" title="qwen2:1.5b模型添加"></a>qwen2:1.5b模型添加</h3><p>模型名称：qwen2:1.5b（必须完整填写）</p>
+<p>基础 URL：http:&#x2F;&#x2F;<your-ollama-endpoint-domain>:11434 (这里的ip要是你本地ip,不能用localhost，127这些。本地是<a href="http://10.10.15.159:11434/">http://10.10.15.159:11434</a>)</p>
+<p>模型类型：对话</p>
+<p>模型上下文长度：4096 (模型的最大上下文长度，若不清楚可填写默认值 4096)</p>
+<p>最大 token 上限：4096 (模型返回内容的最大 token 数量，若模型无特别说明，则可与模型上下文长度保持一致)</p>
+<p>是否支持 Vision：是</p>
+<p>保存即可使用</p>
+<p><img src="https://s2.loli.net/2025/01/21/XtlN3fowajFcrY2.png" alt="screenshot_x3ym8s_000.png"></p>
+<h3 id="milkey-m3e-latest"><a href="#milkey-m3e-latest" class="headerlink" title="milkey&#x2F;m3e:latest"></a>milkey&#x2F;m3e:latest</h3><p>模型名称：milkey&#x2F;m3e:latest (同上)</p>
+<p>基础 URL：http:&#x2F;&#x2F;<your-ollama-endpoint-domain>:11434 (这里的ip要是你本地ip,不能用localhost，127这些。本地是<a href="http://10.10.15.159:11434/">http://10.10.15.159:11434</a>)</p>
+<p>模型上下文长度：4096</p>
+<p>保存即可使用</p>
+<h3 id="访问测试"><a href="#访问测试" class="headerlink" title="访问测试"></a>访问测试</h3><h2 id="创建知识库"><a href="#创建知识库" class="headerlink" title="创建知识库"></a>创建知识库</h2><p>导入数据 –&gt; 设置分段 –&gt;设置索引及检索</p>
+<p>对于word这种格式化的数据,分段模式最好使用 #父子模式* ; 索引方式使用高质量模式，使用上述m3e模型来生成索引数据。</p>
+<p><img src="https://s2.loli.net/2025/01/21/MxvKOBUuGg1EJC8.png" alt="screenshot_zSwzzS_000.png"></p>
+<h1 id="创建聊天助手"><a href="#创建聊天助手" class="headerlink" title="创建聊天助手"></a>创建聊天助手</h1><p>知识库是没法直接去使用的，顶多能做个召回测试。这里我们创建一个聊天助手，可以关联知识库，这样能真正使用。</p>
+<p>聊天助手创建很简单，可以选择顶部工作室 -&gt; 创建空白应用</p>
+<p><img src="https://s2.loli.net/2025/01/21/D1xUA3iM4tLTchw.png" alt="screenshot_UWVTYt_000.png"></p>
+<p>选择已经创建好的知识库</p>
+<p><img src="https://s2.loli.net/2025/01/21/hFE8kuyQ7qBNs52.png" alt="screenshot_NnXWmT_000.png"></p>
+<p>应用发布即可</p>
+<h2 id="直接通过dify使用"><a href="#直接通过dify使用" class="headerlink" title="直接通过dify使用"></a>直接通过dify使用</h2><p>dify默认启动使用的是80端口，可以直接通过<a href="http://localhost/">http://localhost</a> 访问(首次使用需要注册用户密码)。 然后选择探索，选择我们刚刚创建的聊天助手就可以开始愉快的聊天了。</p>
+<p><img src="https://s2.loli.net/2025/01/21/lnJCkKOuqLHadoE.png" alt="screenshot_vq0gwR_000.png"></p>
+<p><img src="https://s2.loli.net/2025/01/21/mCRV8dXSBoZTJbY.png" alt="screenshot_dhJZif_000.png"></p>
+<h2 id="将dify嵌入到自己的应用中"><a href="#将dify嵌入到自己的应用中" class="headerlink" title="将dify嵌入到自己的应用中"></a>将dify嵌入到自己的应用中</h2><p>可以通过api、iframe之类的方式将自己搭建的聊天助手嵌入到系统中(需要有开发能力，很简单)。</p>
+<h2 id="知识库工作流"><a href="#知识库工作流" class="headerlink" title="知识库工作流"></a>知识库工作流</h2><p><img src="https://s2.loli.net/2025/01/21/O6FTmeAgRG5brck.png" alt="screenshot_pMpzgp_000.png"></p>
+<h1 id="问题处理"><a href="#问题处理" class="headerlink" title="问题处理"></a>问题处理</h1><h2 id="dify访问时提示11434拒绝"><a href="#dify访问时提示11434拒绝" class="headerlink" title="dify访问时提示11434拒绝"></a>dify访问时提示11434拒绝</h2><p><a href="http://10.10.15.159:11434/">http://10.10.15.159:11434/</a> 请求失败</p>
+<h3 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h3><p>检查服务启动正常，需要在service中增加环境变量 Environment&#x3D;”OLLAMA_HOST&#x3D;0.0.0.0:11434”</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /usr/lib/systemd/system/ollama.service</span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart ollama.service</span><br></pre></td></tr></table></figure>
+
+<p>其它系统类似，就是让服务启动读取到该变量即可</p>
+<h2 id="Reached-maximum-retries-3-for-URL-http-localhost-8090-api-system-ext-examples-echo"><a href="#Reached-maximum-retries-3-for-URL-http-localhost-8090-api-system-ext-examples-echo" class="headerlink" title="Reached maximum retries (3) for URL http://localhost:8090/api/system/ext/examples/echo"></a>Reached maximum retries (3) for URL <a href="http://localhost:8090/api/system/ext/examples/echo">http://localhost:8090/api/system/ext/examples/echo</a></h2><h3 id="分析处理"><a href="#分析处理" class="headerlink" title="分析处理"></a>分析处理</h3><p>添加工具后，访问本地接口提示上述错误, 其实还是ip的问题，这里使用本地ip,如10.10.15.159。因为dify部署在容器中,localhost有特殊意义</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechat.png" alt="Mr.zhao 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mr.zhao
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://zhaozhiwei1992.github.io/2025/01/21/%E6%9C%AC%E5%9C%B0%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA-DIFY/" title="搭建个人AI知识库-DIFY">http://zhaozhiwei1992.github.io/2025/01/21/本地知识库搭建-DIFY/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/%E7%9F%A5%E8%AF%86%E5%BA%93/" rel="tag"># 知识库</a>
+              <a href="/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/" rel="tag"># 大语言模型</a>
+              <a href="/tags/DIFY/" rel="tag"># DIFY</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/12/31/%E5%A5%BD%E7%89%A9%E6%8E%A8%E8%8D%90-telegram%E6%B6%88%E6%81%AF%E6%8F%90%E9%86%92/" rel="prev" title="好物推荐-telegram消息提醒">
+                  <i class="fa fa-angle-left"></i> 好物推荐-telegram消息提醒
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/02/26/%E4%BC%81%E4%B8%9A%E7%9F%A5%E8%AF%86%E5%BA%93%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/" rel="next" title="企业知识库落地实践">
+                  企业知识库落地实践 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mr.zhao</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

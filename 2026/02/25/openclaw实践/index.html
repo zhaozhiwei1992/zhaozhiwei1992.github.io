@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhaozhiwei1992.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"style":null,"show_result":false},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="什么是openclaw以及能做什么OpenClaw（曾用名：Clawdbot、Moltbot），一款可以部署在个人电脑上的AI代理，采用”龙虾”图标设计，slogan是”TheAI that actually does things”，由程序员彼得·斯坦伯格开发。 个人主要关注它能够关联telegram，飞书等作为客户端，这样能够很方便的通过移动端来进行控制。它本身权限也足够，理论上可以在个人电脑">
+<meta property="og:type" content="article">
+<meta property="og:title" content="openclaw实践">
+<meta property="og:url" content="http://zhaozhiwei1992.github.io/2026/02/25/openclaw%E5%AE%9E%E8%B7%B5/index.html">
+<meta property="og:site_name" content="离线de日常">
+<meta property="og:description" content="什么是openclaw以及能做什么OpenClaw（曾用名：Clawdbot、Moltbot），一款可以部署在个人电脑上的AI代理，采用”龙虾”图标设计，slogan是”TheAI that actually does things”，由程序员彼得·斯坦伯格开发。 个人主要关注它能够关联telegram，飞书等作为客户端，这样能够很方便的通过移动端来进行控制。它本身权限也足够，理论上可以在个人电脑">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-02-25T00:00:00.000Z">
+<meta property="article:modified_time" content="2026-02-25T00:00:00.000Z">
+<meta property="article:author" content="Mr.zhao">
+<meta property="article:tag" content="penclaw、AI">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://zhaozhiwei1992.github.io/2026/02/25/openclaw%E5%AE%9E%E8%B7%B5/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhaozhiwei1992.github.io/2026/02/25/openclaw%E5%AE%9E%E8%B7%B5/","path":"2026/02/25/openclaw实践/","title":"openclaw实践"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>openclaw实践 | 离线de日常</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">离线de日常</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFopenclaw%E4%BB%A5%E5%8F%8A%E8%83%BD%E5%81%9A%E4%BB%80%E4%B9%88"><span class="nav-number">1.</span> <span class="nav-text">什么是openclaw以及能做什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="nav-number">2.1.</span> <span class="nav-text">环境准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#apikey"><span class="nav-number">2.2.</span> <span class="nav-text">apikey</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%85%E7%90%86"><span class="nav-number">2.3.</span> <span class="nav-text">清理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE"><span class="nav-number">3.1.</span> <span class="nav-text">安装配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B%E5%BC%95%E5%AF%BC"><span class="nav-number">3.2.</span> <span class="nav-text">快速开始引导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E7%BD%91%E5%85%B3"><span class="nav-number">3.3.</span> <span class="nav-text">检查网关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%95%8C%E9%9D%A2%E8%AE%BF%E9%97%AE"><span class="nav-number">3.4.</span> <span class="nav-text">界面访问</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C"><span class="nav-number">4.</span> <span class="nav-text">常用操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E7%BD%91%E5%85%B3-1"><span class="nav-number">4.1.</span> <span class="nav-text">检查网关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%90%AF%E7%BD%91%E5%85%B3"><span class="nav-number">4.2.</span> <span class="nav-text">重启网关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0-%E5%9B%BD%E5%86%85%E7%89%88"><span class="nav-number">4.3.</span> <span class="nav-text">更新(国内版)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-%E9%87%8D%E8%A6%81"><span class="nav-number">5.</span> <span class="nav-text">配置文件(重要)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E6%8E%A5telegram"><span class="nav-number">6.</span> <span class="nav-text">对接telegram</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%9C%BA%E5%99%A8%E4%BA%BA"><span class="nav-number">6.1.</span> <span class="nav-text">创建机器人</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE-token"><span class="nav-number">6.2.</span> <span class="nav-text">设置 token</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%90%AF-Gateway-%E7%BD%91%E5%85%B3"><span class="nav-number">6.3.</span> <span class="nav-text">重启 Gateway 网关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E9%85%8D%E7%BD%AE"><span class="nav-number">6.4.</span> <span class="nav-text">最小配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E9%85%8D%E5%AF%B9%E7%A0%81"><span class="nav-number">6.5.</span> <span class="nav-text">生成配对码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8openclaw%E8%BF%9B%E8%A1%8C%E9%85%8D%E5%AF%B9"><span class="nav-number">6.6.</span> <span class="nav-text">使用openclaw进行配对</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-number">6.7.</span> <span class="nav-text">使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E5%AE%83%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">7.</span> <span class="nav-text">其它使用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E9%82%AE%E4%BB%B6gmail"><span class="nav-number">7.1.</span> <span class="nav-text">管理邮件gmail</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%85%E7%BB%AD"><span class="nav-number">7.2.</span> <span class="nav-text">待续</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86"><span class="nav-number">8.</span> <span class="nav-text">问题处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Webchat-UI-fails-to-authenticate-gateway-token-missing-even-with-token-in-URL-1690"><span class="nav-number">8.1.</span> <span class="nav-text">Webchat UI fails to authenticate: &#39;gateway token missing&#39; even with token in URL #1690</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">9.</span> <span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Mr.zhao"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Mr.zhao</p>
+  <div class="site-description" itemprop="description">show me your code</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">88</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhaozhiwei1992" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhaozhiwei1992" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/p205/posts" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;p205&#x2F;posts" rel="noopener me" target="_blank"><i class="fab fa-zhihu fa-fw"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.jianshu.com/u/65f51bc73109" title="简书 → https:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;65f51bc73109" rel="noopener me" target="_blank"><i class="fas fa-book-open fa-fw"></i>简书</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/qq347061329" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;qq347061329" rel="noopener me" target="_blank"><i class="fab fa-blog fa-fw"></i>博客园</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u012768510" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u012768510" rel="noopener me" target="_blank"><i class="fas fa-code fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhaozhiweishanxi@gmail.com" title="E-Mail → mailto:zhaozhiweishanxi@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2026/02/25/openclaw%E5%AE%9E%E8%B7%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Mr.zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="openclaw实践 | 离线de日常">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          openclaw实践
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-02-25 08:00:00" itemprop="dateCreated datePublished" datetime="2026-02-25T08:00:00+08:00">2026-02-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/penclaw%E3%80%81AI/" itemprop="url" rel="index"><span itemprop="name">penclaw、AI</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="什么是openclaw以及能做什么"><a href="#什么是openclaw以及能做什么" class="headerlink" title="什么是openclaw以及能做什么"></a>什么是openclaw以及能做什么</h1><p>OpenClaw（曾用名：Clawdbot、Moltbot），一款可以部署在个人电脑上的AI代理，采用”龙虾”图标设计，slogan是”The<br>AI that actually does things”，由程序员彼得·斯坦伯格开发。</p>
+<p>个人主要关注它能够关联telegram，飞书等作为客户端，这样能够很方便的通过移动端来进行控制。它本身权限也足够，理论上可以在个人电脑操作一切，一些运维工作，文档处理，聊天，邮件等都可以进行处理。但是一定要注意安全性，安全性，安全性。</p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><figure class="highlight plaintext"><figcaption><span>org-language</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># node版本要在22+, 为了避免环境依赖，并且本地存在多个node版本，可以考虑用nvm来管理</span><br><span class="line">nvm use 22.14.0</span><br><span class="line"></span><br><span class="line"># 操作系统</span><br><span class="line">archlinux</span><br></pre></td></tr></table></figure>
+
+<h2 id="apikey"><a href="#apikey" class="headerlink" title="apikey"></a>apikey</h2><p>我这里使用的是智谱的那个code plan,<br>glm4.7，多说一句，这个plan只支持部分工具，包括claude code, openclaw,<br>cline等，不能直接在dify等工作流使用的，一定要注意，按需选择。</p>
+<h2 id="清理"><a href="#清理" class="headerlink" title="清理"></a>清理</h2><p>如果之前安装过但是没成功，最好先备份配置目录，然后全部删除，防止影响。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>目前其实存在两个版本，如果不纠结英文可以用原版，或者可以考虑中文版本。</p>
+<h2 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h2><figure class="highlight plaintext"><figcaption><span>org-language</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. install</span><br><span class="line">  pnpm add -g openclaw@latest</span><br><span class="line">2. Run the onboarding wizard</span><br><span class="line">  openclaw onboard --install-daemon</span><br></pre></td></tr></table></figure>
+
+<h2 id="快速开始引导"><a href="#快速开始引导" class="headerlink" title="快速开始引导"></a>快速开始引导</h2><p>快速开始保持默认设置：</p>
+<p>本地网关（回环） 工作区默认设置（或现有工作区） 网关端口 18789<br>网关认证令牌（自动生成，即使是回环） Tailscale 暴露关闭 Telegram +<br>WhatsApp 私信默认为白名单（这里第一次可以先不配置,<br>如果需要可以看对接telegram配置部分）</p>
+<p>配置模型key</p>
+<h2 id="检查网关"><a href="#检查网关" class="headerlink" title="检查网关"></a>检查网关</h2><figure class="highlight plaintext"><figcaption><span>org-language</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">如果您安装了服务，它应该已经在运行：</span><br><span class="line">openclaw gateway status</span><br></pre></td></tr></table></figure>
+
+<h2 id="界面访问"><a href="#界面访问" class="headerlink" title="界面访问"></a>界面访问</h2><figure class="highlight plaintext"><figcaption><span>org-language</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 国内版</span><br><span class="line">openclaw-cn dashboard --no-open |xclip -selection c</span><br><span class="line"></span><br><span class="line"># linux下使用下述命令会生成一个url, 直接浏览器访问即可, windows下可以直接查看openclaw.json配置文件中的token</span><br><span class="line">openclaw dashboard --no-open |xclip -selection c</span><br><span class="line"></span><br><span class="line">http://127.0.0.1:18789/?token=58bfd507741fae2e3ee10aaab291c5d1765aae0a731f2b5b</span><br></pre></td></tr></table></figure>
+
+<p>此时在界面上发一个简单的测试，正常有回复即表示成功。后续怎么使用就看个人发挥了。</p>
+<h1 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h1><h2 id="检查网关-1"><a href="#检查网关-1" class="headerlink" title="检查网关"></a>检查网关</h2><figure class="highlight plaintext"><figcaption><span>org-language</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openclaw gateway status</span><br></pre></td></tr></table></figure>
+
+<h2 id="重启网关"><a href="#重启网关" class="headerlink" title="重启网关"></a>重启网关</h2><p>openclaw gateway restart</p>
+<h2 id="更新-国内版"><a href="#更新-国内版" class="headerlink" title="更新(国内版)"></a>更新(国内版)</h2><p>有坑，国内版升级1.6.0直接噶了。 npm i -g openclaw-cn@latest<br>–registry&#x3D;<a href="https://registry.npmmirror.com/">https://registry.npmmirror.com</a> &amp;&amp; openclaw-cn doctor &amp;&amp;<br>openclaw-cn gateway restart</p>
+<h1 id="配置文件-重要"><a href="#配置文件-重要" class="headerlink" title="配置文件(重要)"></a>配置文件(重要)</h1><p>~&#x2F;.openclaw&#x2F;openclaw.json</p>
+<h1 id="对接telegram"><a href="#对接telegram" class="headerlink" title="对接telegram"></a>对接telegram</h1><p>通过telegram作为openclaw的前端，可以远程通过telegram查看一些本地内容。比如查看自己的待办事项，添加一些小想法。甚至如果是开发人员，都可以用手机来控制电脑写代码。</p>
+<p>默认使用长轮询；如果有公网更推荐使用webhook来处理。</p>
+<h2 id="创建机器人"><a href="#创建机器人" class="headerlink" title="创建机器人"></a>创建机器人</h2><ol>
+<li>打开 Telegram 并与 @BotFather对话。确认用户名确实是 @BotFather。</li>
+<li>运行 &#x2F;newbot，然后按照提示操作（名称 + 以 bot 结尾的用户名）。</li>
+<li>复制 token 并安全保存。</li>
+</ol>
+<h2 id="设置-token"><a href="#设置-token" class="headerlink" title="设置 token"></a>设置 token</h2><p>环境变量：TELEGRAM_BOT_TOKEN&#x3D;… 或配置：channels.telegram.botToken:<br>&quot;…&quot;。</p>
+<h2 id="重启-Gateway-网关"><a href="#重启-Gateway-网关" class="headerlink" title="重启 Gateway 网关"></a>重启 Gateway 网关</h2><p>私信访问默认使用配对模式；首次联系时需要批准配对码。</p>
+<h2 id="最小配置"><a href="#最小配置" class="headerlink" title="最小配置"></a>最小配置</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">channels:</span> &#123;</span><br><span class="line">    <span class="attr">telegram:</span> &#123;</span><br><span class="line">      <span class="attr">enabled:</span> <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">botToken:</span> <span class="string">&quot;123:abc&quot;</span>,</span><br><span class="line">      <span class="attr">dmPolicy:</span> <span class="string">&quot;pairing&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;proxy&quot;:</span> <span class="string">&quot;http://10.11.12.164:7890&quot;</span> <span class="comment"># 注意这里如果环境不允许，需要增加一个属性，否则一直无法给telegram发消息。</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;<span class="string">​</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="生成配对码"><a href="#生成配对码" class="headerlink" title="生成配对码"></a>生成配对码</h2><p>在telgram机器人选择start,首次访问会生成配对码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">OpenClaw: access not configured.</span><br><span class="line"></span><br><span class="line">Your Telegram user id: xxxx6</span><br><span class="line"></span><br><span class="line">Pairing code: XGxxxkxj</span><br><span class="line"></span><br><span class="line">Ask the bot owner to approve with:</span><br><span class="line">openclaw pairing approve telegram XGxxxkxj</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用openclaw进行配对"><a href="#使用openclaw进行配对" class="headerlink" title="使用openclaw进行配对"></a>使用openclaw进行配对</h2><p>openclaw pairing list telegram</p>
+<p>openclaw pairing approve telegram XGxxxkxj</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>此时就可以直接通过telegram给openclaw下达指令了，可以先发一个<br>测试，等待能够正常回复即可。</p>
+<h1 id="其它使用场景"><a href="#其它使用场景" class="headerlink" title="其它使用场景"></a>其它使用场景</h1><h2 id="管理邮件gmail"><a href="#管理邮件gmail" class="headerlink" title="管理邮件gmail"></a>管理邮件gmail</h2><p>生成一些脚本，做一些邮件之类的清理工作。这个用claudecode也行，后续可以不通过openclaw触发。</p>
+<h2 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h2><h1 id="问题处理"><a href="#问题处理" class="headerlink" title="问题处理"></a>问题处理</h1><h2 id="Webchat-UI-fails-to-authenticate-gateway-token-missing-even-with-token-in-URL-1690"><a href="#Webchat-UI-fails-to-authenticate-gateway-token-missing-even-with-token-in-URL-1690" class="headerlink" title="Webchat UI fails to authenticate: &#39;gateway token missing&#39; even with token in URL #1690"></a>Webchat UI fails to authenticate: &#39;gateway token missing&#39; even with token in URL #1690</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">使用命令行获取带令牌的链接</span><br><span class="line">在终端中运行以下命令：</span><br><span class="line">openclaw-cn dashboard --no-open</span><br><span class="line">此命令会：</span><br><span class="line">自动生成带令牌的仪表板链接</span><br><span class="line">将链接复制到剪贴板</span><br><span class="line">显示链接但不会自动打开浏览器</span><br><span class="line">然后复制输出的链接并在浏览器中打开，即可自动带令牌访问 Web 页面。</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://clawd.org.cn/gateway/token-mismatch-troubleshooting">https://clawd.org.cn/gateway/token-mismatch-troubleshooting</a></p>
+<p><a href="https://clawd.org.cn/">https://clawd.org.cn/</a></p>
+<p><a href="https://github.com/openclaw/openclaw">https://github.com/openclaw/openclaw</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechat.png" alt="Mr.zhao 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mr.zhao
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://zhaozhiwei1992.github.io/2026/02/25/openclaw%E5%AE%9E%E8%B7%B5/" title="openclaw实践">http://zhaozhiwei1992.github.io/2026/02/25/openclaw实践/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/penclaw%E3%80%81AI/" rel="tag"># penclaw、AI</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/11/12/%E6%B5%8B%E8%AF%95blog/" rel="prev" title="测试blog">
+                  <i class="fa fa-angle-left"></i> 测试blog
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mr.zhao</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

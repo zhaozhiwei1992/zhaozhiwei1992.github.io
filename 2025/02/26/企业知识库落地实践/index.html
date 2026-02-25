@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhaozhiwei1992.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"style":null,"show_result":false},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="为什么企业要搭建本地知识库在当今信息爆炸的时代，企业面临着海量数据和知识的管理挑战。搭建本地知识库已成为企业提升效率和竞争力的重要手段。以下是企业搭建本地知识库的几个核心原因： 解决碎片化问题企业多年积累的知识比较碎片化，很多也慢慢流于形式。使用知识库可以将这些碎片化知识重新整合，并且通过大模型学习进行分类整合，充分发挥知识的价值。 提升效率和创新能力通过知识库的整合，员工不需要在茫茫的文档中查找">
+<meta property="og:type" content="article">
+<meta property="og:title" content="企业知识库落地实践">
+<meta property="og:url" content="http://zhaozhiwei1992.github.io/2025/02/26/%E4%BC%81%E4%B8%9A%E7%9F%A5%E8%AF%86%E5%BA%93%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/index.html">
+<meta property="og:site_name" content="离线de日常">
+<meta property="og:description" content="为什么企业要搭建本地知识库在当今信息爆炸的时代，企业面临着海量数据和知识的管理挑战。搭建本地知识库已成为企业提升效率和竞争力的重要手段。以下是企业搭建本地知识库的几个核心原因： 解决碎片化问题企业多年积累的知识比较碎片化，很多也慢慢流于形式。使用知识库可以将这些碎片化知识重新整合，并且通过大模型学习进行分类整合，充分发挥知识的价值。 提升效率和创新能力通过知识库的整合，员工不需要在茫茫的文档中查找">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-02-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-02-25T16:00:00.000Z">
+<meta property="article:author" content="Mr.zhao">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="DeepSeek">
+<meta property="article:tag" content="知识库">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://zhaozhiwei1992.github.io/2025/02/26/%E4%BC%81%E4%B8%9A%E7%9F%A5%E8%AF%86%E5%BA%93%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhaozhiwei1992.github.io/2025/02/26/%E4%BC%81%E4%B8%9A%E7%9F%A5%E8%AF%86%E5%BA%93%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/","path":"2025/02/26/企业知识库落地实践/","title":"企业知识库落地实践"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>企业知识库落地实践 | 离线de日常</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">离线de日常</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%81%E4%B8%9A%E8%A6%81%E6%90%AD%E5%BB%BA%E6%9C%AC%E5%9C%B0%E7%9F%A5%E8%AF%86%E5%BA%93"><span class="nav-number">1.</span> <span class="nav-text">为什么企业要搭建本地知识库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E7%A2%8E%E7%89%87%E5%8C%96%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">解决碎片化问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E5%8D%87%E6%95%88%E7%8E%87%E5%92%8C%E5%88%9B%E6%96%B0%E8%83%BD%E5%8A%9B"><span class="nav-number">1.2.</span> <span class="nav-text">提升效率和创新能力</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E9%AB%98%E5%AE%89%E5%85%A8%E6%80%A7"><span class="nav-number">1.3.</span> <span class="nav-text">提高安全性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%81%E4%B8%9A%E7%9F%A5%E8%AF%86%E5%BA%93%E7%9A%84%E7%9B%AE%E6%A0%87"><span class="nav-number">2.</span> <span class="nav-text">企业知识库的目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA%E7%9F%A5%E8%AF%86%E5%BA%93%E7%9A%84%E7%97%9B%E7%82%B9"><span class="nav-number">3.</span> <span class="nav-text">搭建知识库的痛点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E9%9A%BE%E5%BA%A6"><span class="nav-number">3.1.</span> <span class="nav-text">技术难度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9E%E7%AD%94%E4%B8%8D%E5%A4%9F%E5%87%86%E7%A1%AE"><span class="nav-number">3.2.</span> <span class="nav-text">回答不够准确</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%88%E7%90%86%E6%96%87%E6%A1%A3%E6%A0%BC%E5%BC%8F%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7%E5%8F%8A%E6%A8%A1%E6%9D%BF%E5%8F%82%E8%80%83"><span class="nav-number">4.</span> <span class="nav-text">合理文档格式的重要性及模板参考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AE%A9%E7%9F%A5%E8%AF%86%E5%BA%93%E6%A8%A1%E5%9E%8B%E4%B8%8D%E4%B9%B1%E8%AF%B4"><span class="nav-number">5.</span> <span class="nav-text">如何让知识库模型不乱说</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E6%96%BD%E8%AE%A1%E5%88%92"><span class="nav-number">6.</span> <span class="nav-text">实施计划</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E9%98%B6%E6%AE%B5%E5%AE%9E%E6%96%BD%E5%BB%BA%E8%AE%AE"><span class="nav-number">6.1.</span> <span class="nav-text">分阶段实施建议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%A8%E9%87%8F%E8%AF%84%E4%BC%B0"><span class="nav-number">6.2.</span> <span class="nav-text">质量评估</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-number">7.</span> <span class="nav-text">结语</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Mr.zhao"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Mr.zhao</p>
+  <div class="site-description" itemprop="description">show me your code</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">88</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhaozhiwei1992" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhaozhiwei1992" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/p205/posts" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;p205&#x2F;posts" rel="noopener me" target="_blank"><i class="fab fa-zhihu fa-fw"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.jianshu.com/u/65f51bc73109" title="简书 → https:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;65f51bc73109" rel="noopener me" target="_blank"><i class="fas fa-book-open fa-fw"></i>简书</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/qq347061329" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;qq347061329" rel="noopener me" target="_blank"><i class="fab fa-blog fa-fw"></i>博客园</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u012768510" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u012768510" rel="noopener me" target="_blank"><i class="fas fa-code fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhaozhiweishanxi@gmail.com" title="E-Mail → mailto:zhaozhiweishanxi@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2025/02/26/%E4%BC%81%E4%B8%9A%E7%9F%A5%E8%AF%86%E5%BA%93%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Mr.zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="企业知识库落地实践 | 离线de日常">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          企业知识库落地实践
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-02-26 00:00:00" itemprop="dateCreated datePublished" datetime="2025-02-26T00:00:00+08:00">2025-02-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="为什么企业要搭建本地知识库"><a href="#为什么企业要搭建本地知识库" class="headerlink" title="为什么企业要搭建本地知识库"></a>为什么企业要搭建本地知识库</h1><p>在当今信息爆炸的时代，企业面临着海量数据和知识的管理挑战。搭建本地知识库已成为企业提升效率和竞争力的重要手段。以下是企业搭建本地知识库的几个核心原因：</p>
+<h2 id="解决碎片化问题"><a href="#解决碎片化问题" class="headerlink" title="解决碎片化问题"></a>解决碎片化问题</h2><p>企业多年积累的知识比较碎片化，很多也慢慢流于形式。使用知识库可以将这些碎片化知识重新整合，并且通过大模型学习进行分类整合，充分发挥知识的价值。</p>
+<h2 id="提升效率和创新能力"><a href="#提升效率和创新能力" class="headerlink" title="提升效率和创新能力"></a>提升效率和创新能力</h2><p>通过知识库的整合，员工不需要在茫茫的文档中查找，可以基于统一的入口去查找需要的东西。而且随着知识越发丰富，模型也会越来越强大，可以将海量知识组合，创造出新的想法。</p>
+<h2 id="提高安全性"><a href="#提高安全性" class="headerlink" title="提高安全性"></a>提高安全性</h2><p>相对于将知识全部放在公网知识库中，本地知识库可以有效保护企业的核心知识和技术，防止人员流动以及公网安全性导致的知识缺失。</p>
+<h1 id="企业知识库的目标"><a href="#企业知识库的目标" class="headerlink" title="企业知识库的目标"></a>企业知识库的目标</h1><p>不同于通用大模型，企业知识库最重要的就是，专业性和准确性。知识库应该是垂直领域的，基于企业的核心业务，结合各种内部的文档进行知识的整合，使得行业知识逻辑更加清晰完整，并且数据来源是内部文档，所以对比通用大模型会更加准确。</p>
+<h1 id="搭建知识库的痛点"><a href="#搭建知识库的痛点" class="headerlink" title="搭建知识库的痛点"></a>搭建知识库的痛点</h1><h2 id="技术难度"><a href="#技术难度" class="headerlink" title="技术难度"></a>技术难度</h2><p>个人原型搭建相对简单，但企业级部署需考虑权限管理、版本控制、审计追踪等复杂需求。</p>
+<h2 id="回答不够准确"><a href="#回答不够准确" class="headerlink" title="回答不够准确"></a>回答不够准确</h2><p>回答准确性问题可能是知识库构建最麻烦的地方，不同的人，不同的团队写出的文档格式千奇百怪。而且有些知识是从网上下载，没有专门做整理就作为知识文档保留下来。知识库采用RAG（检索增强生成）技术，通过语义检索获取相关文档片段，再结合生成模型输出答案，不同分块的方式，大小都会导致知识库的回答不一定准确。下面以用户使用手册为例，来解决这些问题。</p>
+<h1 id="合理文档格式的重要性及模板参考"><a href="#合理文档格式的重要性及模板参考" class="headerlink" title="合理文档格式的重要性及模板参考"></a>合理文档格式的重要性及模板参考</h1><p>一般网上搜到知识库的搭建都是给你搞个embedding模型，或者根据什么换行之类的东西直接分块，但是这种方式对于企业知识库没什么用，因为文档真的太乱了。可能你换行的、用模型处理后的内容语义本身就不连续，有的段落内容多，有的少，有的可能多个分段是一个语义环境。目前只是专业的人才能够去理解真正哪些内容是一个语义环境。所以目前我的想法是可以通过人工干预，将文档按照格式整理，在通过程序增加分割符，然后在文档分块时，通过分割符号来处理，保证语义的完整性。下边给出一个简单的操作手册片段:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">** 功能1：[功能名称]</span><br><span class="line"></span><br><span class="line">*** 功能描述</span><br><span class="line">简要描述功能1的主要用途和实现目标。</span><br><span class="line"></span><br><span class="line">*** 菜单路径</span><br><span class="line">- 主菜单：[具体菜单路径]</span><br><span class="line">- 快捷方式：[快捷键或图标]</span><br><span class="line"></span><br><span class="line">*** 操作步骤</span><br><span class="line">1. 打开软件，进入主界面。</span><br><span class="line">   [[file:功能1_步骤1.png]]</span><br><span class="line">2. 点击“[菜单名称]”，选择“[子菜单名称]”。</span><br><span class="line">   [[file:功能1_步骤2.png]]</span><br><span class="line">3. 在弹出的窗口中，输入相关信息（如用户名、密码等）。</span><br><span class="line">   [[file:功能1_步骤3.png]]</span><br><span class="line">4. 点击“确定”按钮，完成操作。</span><br><span class="line">   [[file:功能1_步骤4.png]]</span><br><span class="line"></span><br><span class="line">*** 注意事项</span><br><span class="line">- 确保输入的信息准确无误。</span><br><span class="line">- 如果遇到错误提示，请参考“常见问题”部分。</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">** 功能2：[功能名称]</span><br><span class="line"></span><br><span class="line">*** 功能描述</span><br><span class="line">简要描述功能2的主要用途和实现目标。</span><br><span class="line"></span><br><span class="line">*** 菜单路径</span><br><span class="line">- 主菜单：[具体菜单路径]</span><br><span class="line">- 快捷方式：[快捷键或图标]</span><br><span class="line"></span><br><span class="line">*** 操作步骤</span><br><span class="line">1. 打开软件，进入主界面。</span><br><span class="line">   [[file:功能2_步骤1.png]]</span><br><span class="line">2. 点击“[菜单名称]”，选择“[子菜单名称]”。</span><br><span class="line">   [[file:功能2_步骤2.png]]</span><br><span class="line">3. 在弹出的窗口中，选择所需选项（如文件类型、格式等）。</span><br><span class="line">   [[file:功能2_步骤3.png]]</span><br><span class="line">4. 点击“保存”按钮，完成操作。</span><br><span class="line">   [[file:功能2_步骤4.png]]</span><br><span class="line"></span><br><span class="line">*** 注意事项</span><br><span class="line">- 在保存文件时，建议选择合适的文件格式。</span><br><span class="line">- 如果文件过大，可能会导致保存时间较长。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>对于上述文档，我们可以按照层次结构添加分隔符，比如按照<em>的个数，两个</em>作为二级标题，然后在功能2前增加&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;split&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;作为分隔符，效果如下。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">** 功能1：[功能名称]</span><br><span class="line">内容同上</span><br><span class="line">---</span><br><span class="line">=====split=====</span><br><span class="line">** 功能2：[功能名称]</span><br><span class="line">内容同上</span><br><span class="line">=====split=====</span><br><span class="line">** 功能3：[功能名称]</span><br><span class="line">内容同上</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>此时将上述内容按照&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;split&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;分隔传入知识库，会将相同语义的内容放到单独的块中。在中知识搜索时，通过向量匹配的内容就会相对完整准确。</p>
+<h1 id="如何让知识库模型不乱说"><a href="#如何让知识库模型不乱说" class="headerlink" title="如何让知识库模型不乱说"></a>如何让知识库模型不乱说</h1><p>其实光是知识库内容完整还不够，将知识库搜索结果作为提问的上下文仍然无法阻止模型自己的”发明创造”，这种结果是企业知识库无法接受的。这时候就需要对模型增加一些约束，此时就是prompt大显身手了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">你是xx企业业务专家。你的回答应基于以下规则：</span><br><span class="line">1. 使用提供的上下文（&lt;context&gt;&lt;/context&gt;）作为你的知识来源。</span><br><span class="line">2. 如果上下文中有相关信息，请直接根据上下文回答。</span><br><span class="line">3. 如果上下文中没有相关信息，请直接说“我不知道”或请求用户提供更多信息。</span><br><span class="line">4. 当且仅当上下文包含相关信息时，用自然对话方式输出答案；否则明确告知&#x27;该问题不在知识库覆盖范围内。</span><br><span class="line">5. 根据用户提问的语言（如中文或英文）来回答。</span><br><span class="line">必需行为:</span><br><span class="line">- 知识库存在的内容必须全部包含，并且不能改变上下文语义</span><br><span class="line">禁止行为：</span><br><span class="line">- 禁止任何形式的内容编造</span><br><span class="line">- 禁止使用&quot;根据我的知识&quot;等模糊表述</span><br><span class="line">- 禁止扩展知识库外的信息</span><br><span class="line">- 禁止引入聊天上下文中无关内容，优先使用context中内容</span><br><span class="line"></span><br><span class="line">Context: &lt;context&gt;</span><br><span class="line">&#123;&#123;#context#&#125;&#125;</span><br><span class="line">&lt;/context&gt;</span><br></pre></td></tr></table></figure>
+
+<p>仔细看下上述prompt就知道它是怎么工作了，其它限制可以按照企业需要继续扩展，按照知识库返回结果逐步优化。</p>
+<h1 id="实施计划"><a href="#实施计划" class="headerlink" title="实施计划"></a>实施计划</h1><h2 id="分阶段实施建议"><a href="#分阶段实施建议" class="headerlink" title="分阶段实施建议"></a>分阶段实施建议</h2><ol>
+<li>知识盘点阶段（1-2周）：成立跨部门小组，梳理核心知识资产</li>
+<li>规范制定阶段（2-4周）：建立文档编写标准和审核流程</li>
+<li>试点运行阶段（4-8周）：选择3-5个关键业务模块进行验证</li>
+<li>全面推广阶段（8-12周）：基于试点经验完善系统后全面部署</li>
+</ol>
+<h2 id="质量评估"><a href="#质量评估" class="headerlink" title="质量评估"></a>质量评估</h2><ol>
+<li>准确率（Accuracy）：人工抽检回答正确性</li>
+<li>召回率（Recall）：测试集问题解决率</li>
+</ol>
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>希望本文的分享能帮助大家在搭建和使用本地知识库时更加得心应手，祝大家实践成功！</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechat.png" alt="Mr.zhao 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mr.zhao
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://zhaozhiwei1992.github.io/2025/02/26/%E4%BC%81%E4%B8%9A%E7%9F%A5%E8%AF%86%E5%BA%93%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/" title="企业知识库落地实践">http://zhaozhiwei1992.github.io/2025/02/26/企业知识库落地实践/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/DeepSeek/" rel="tag"># DeepSeek</a>
+              <a href="/tags/%E7%9F%A5%E8%AF%86%E5%BA%93/" rel="tag"># 知识库</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/01/21/%E6%9C%AC%E5%9C%B0%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA-DIFY/" rel="prev" title="搭建个人AI知识库-DIFY">
+                  <i class="fa fa-angle-left"></i> 搭建个人AI知识库-DIFY
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/03/10/OpenManus%E5%B0%9D%E9%B2%9C/" rel="next" title="OpenManus+DeepSeek体验">
+                  OpenManus+DeepSeek体验 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mr.zhao</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

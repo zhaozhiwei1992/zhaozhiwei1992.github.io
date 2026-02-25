@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhaozhiwei1992.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"style":null,"show_result":false},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="前言这篇文章偏技术，如果跟着文章操作有难度，建议找网上找相关视频操作。 什么是OpenManus，为什么要使用说到OpenManus就不得不先提下Manus，Manus是全球首款真正意义上的通用型AI Agent，由中国的创业公司Monica开发，看官方的演示感觉很6，但是10w的邀请吗告诉我，我不配。 幸好有大佬连夜整出来一个OpenManus，引用官方一句描述: Manus 非常棒，但 Ope">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenManus+DeepSeek体验">
+<meta property="og:url" content="http://zhaozhiwei1992.github.io/2025/03/10/OpenManus%E5%B0%9D%E9%B2%9C/index.html">
+<meta property="og:site_name" content="离线de日常">
+<meta property="og:description" content="前言这篇文章偏技术，如果跟着文章操作有难度，建议找网上找相关视频操作。 什么是OpenManus，为什么要使用说到OpenManus就不得不先提下Manus，Manus是全球首款真正意义上的通用型AI Agent，由中国的创业公司Monica开发，看官方的演示感觉很6，但是10w的邀请吗告诉我，我不配。 幸好有大佬连夜整出来一个OpenManus，引用官方一句描述: Manus 非常棒，但 Ope">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-03-09T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-09T16:00:00.000Z">
+<meta property="article:author" content="Mr.zhao">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="OpenManus">
+<meta property="article:tag" content="DeepSeek">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://zhaozhiwei1992.github.io/2025/03/10/OpenManus%E5%B0%9D%E9%B2%9C/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhaozhiwei1992.github.io/2025/03/10/OpenManus%E5%B0%9D%E9%B2%9C/","path":"2025/03/10/OpenManus尝鲜/","title":"OpenManus+DeepSeek体验"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>OpenManus+DeepSeek体验 | 离线de日常</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">离线de日常</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFOpenManus%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">什么是OpenManus，为什么要使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%A3%E4%B9%88OpenManus%E8%83%BD%E5%81%9A%E4%BB%80%E4%B9%88%E5%91%A2"><span class="nav-number">2.1.</span> <span class="nav-text">那么OpenManus能做什么呢</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">安装使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">3.1.</span> <span class="nav-text">环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#os-archlinux"><span class="nav-number">3.1.1.</span> <span class="nav-text">os: archlinux</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85OpenManus"><span class="nav-number">3.2.</span> <span class="nav-text">安装OpenManus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%AD%E4%B9%B0DeepSeekApi"><span class="nav-number">3.3.</span> <span class="nav-text">购买DeepSeekApi</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEOpenManus"><span class="nav-number">3.4.</span> <span class="nav-text">配置OpenManus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8"><span class="nav-number">3.5.</span> <span class="nav-text">启动</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%B0%8F%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">一些小问题处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E5%89%8D%E5%86%85%E9%83%A8%E9%BB%98%E8%AE%A4%E9%87%87%E7%94%A8%E7%9A%84%E6%98%AFgoogle%E6%90%9C%E7%B4%A2%EF%BC%8C%E5%9B%BD%E5%86%85%E4%B8%8D%E5%A5%BD%E7%94%A8%EF%BC%8C%E8%B0%83%E6%95%B4%E4%B8%BAbing%E6%90%9C%E7%B4%A2"><span class="nav-number">4.1.</span> <span class="nav-text">目前内部默认采用的是google搜索，国内不好用，调整为bing搜索</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">5.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Mr.zhao"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Mr.zhao</p>
+  <div class="site-description" itemprop="description">show me your code</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">88</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhaozhiwei1992" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhaozhiwei1992" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/p205/posts" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;p205&#x2F;posts" rel="noopener me" target="_blank"><i class="fab fa-zhihu fa-fw"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.jianshu.com/u/65f51bc73109" title="简书 → https:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;65f51bc73109" rel="noopener me" target="_blank"><i class="fas fa-book-open fa-fw"></i>简书</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/qq347061329" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;qq347061329" rel="noopener me" target="_blank"><i class="fab fa-blog fa-fw"></i>博客园</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u012768510" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u012768510" rel="noopener me" target="_blank"><i class="fas fa-code fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhaozhiweishanxi@gmail.com" title="E-Mail → mailto:zhaozhiweishanxi@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2025/03/10/OpenManus%E5%B0%9D%E9%B2%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Mr.zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="OpenManus+DeepSeek体验 | 离线de日常">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OpenManus+DeepSeek体验
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-03-10 00:00:00" itemprop="dateCreated datePublished" datetime="2025-03-10T00:00:00+08:00">2025-03-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这篇文章偏技术，如果跟着文章操作有难度，建议找网上找相关视频操作。</p>
+<h1 id="什么是OpenManus，为什么要使用"><a href="#什么是OpenManus，为什么要使用" class="headerlink" title="什么是OpenManus，为什么要使用"></a>什么是OpenManus，为什么要使用</h1><p>说到OpenManus就不得不先提下Manus，Manus是全球首款真正意义上的通用型AI Agent，由中国的创业公司Monica开发，看官方的演示感觉很6，但是10w的邀请吗告诉我，我不配。</p>
+<p>幸好有大佬连夜整出来一个OpenManus，引用官方一句描述: Manus 非常棒，但 OpenManus 无需邀请码即可实现任何创意 ！</p>
+<h2 id="那么OpenManus能做什么呢"><a href="#那么OpenManus能做什么呢" class="headerlink" title="那么OpenManus能做什么呢"></a>那么OpenManus能做什么呢</h2><p>复杂任务规划与执行：它可以把复杂的任务拆解成多个小步骤，自动规划并执行，最后给出完整的成果。</p>
+<p>工具调用与自动化：很多工作离不开外部工具。 OpenManus 能灵活调动 各种工具，比如浏览器、数据分析软件等，完全不用你担心技术细节。</p>
+<p>智能信息收集与处理：OpenManus 不仅能浏览网页、提取信息，还能进行精准的内容整理。</p>
+<h1 id="安装使用"><a href="#安装使用" class="headerlink" title="安装使用"></a>安装使用</h1><h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><h3 id="os-archlinux"><a href="#os-archlinux" class="headerlink" title="os: archlinux"></a>os: archlinux</h3><h2 id="安装OpenManus"><a href="#安装OpenManus" class="headerlink" title="安装OpenManus"></a>安装OpenManus</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1. 源码下载</span><br><span class="line">git clone https://github.com/mannaandpoem/OpenManus.git</span><br><span class="line"></span><br><span class="line">2. 进入项目根目录</span><br><span class="line">cd OpenManus</span><br><span class="line"></span><br><span class="line">3. 创建新的 conda 环境</span><br><span class="line">conda create -n open_manus python=3.12</span><br><span class="line"></span><br><span class="line">4. 等待完成后，设置当前python环境</span><br><span class="line">source /opt/anaconda/bin/activate open_manus</span><br><span class="line"></span><br><span class="line">5. 安装依赖</span><br><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+<h2 id="购买DeepSeekApi"><a href="#购买DeepSeekApi" class="headerlink" title="购买DeepSeekApi"></a>购买DeepSeekApi</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 访问DeepSeek官网 https://www.deepseek.com./ 。</span><br><span class="line"></span><br><span class="line">2. 点击右上角API开放平台，左边充值即可，测试充个10元就勾了。</span><br><span class="line"></span><br><span class="line">3. 充值完毕后，点击API Keys，创建自己的key，我这里起名字就是OpenManus(可以看看这玩意儿消耗tokens的量)</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置OpenManus"><a href="#配置OpenManus" class="headerlink" title="配置OpenManus"></a>配置OpenManus</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">OpenManus 需要配置使用的 LLM API，请按以下步骤设置：</span><br><span class="line"></span><br><span class="line">1. 保证当前还在项目跟目录下</span><br><span class="line"></span><br><span class="line">2. 创建config.toml文件：</span><br><span class="line">cp config/config.example.toml config/config.toml</span><br><span class="line"></span><br><span class="line">3. 编辑 config/config.toml 添加 API 密钥和自定义设置：(注: model和base_url在deepseek充值界面接口文档就可以看到)</span><br><span class="line"></span><br><span class="line"># Global LLM configuration</span><br><span class="line">[llm]</span><br><span class="line">model = &quot;deepseek-chat&quot;</span><br><span class="line">base_url = &quot;https://api.deepseek.com&quot;</span><br><span class="line">api_key = &quot;sk-8.....9ff89&quot;</span><br><span class="line">max_tokens = 4096</span><br><span class="line">temperature = 0.0</span><br><span class="line"></span><br><span class="line"># [llm] #AZURE OPENAI:</span><br><span class="line"># api_type= &#x27;azure&#x27;</span><br><span class="line"># model = &quot;YOUR_MODEL_NAME&quot; #&quot;gpt-4o-mini&quot;</span><br><span class="line"># base_url = &quot;&#123;YOUR_AZURE_ENDPOINT.rstrip(&#x27;/&#x27;)&#125;/openai/deployments/&#123;AZURE_DEPOLYMENT_ID&#125;&quot;</span><br><span class="line"># api_key = &quot;AZURE API KEY&quot;</span><br><span class="line"># max_tokens = 8096</span><br><span class="line"># temperature = 0.0</span><br><span class="line"># api_version=&quot;AZURE API VERSION&quot; #&quot;2024-08-01-preview&quot;</span><br><span class="line"></span><br><span class="line"># Optional configuration for specific LLM models</span><br><span class="line">[llm.vision]</span><br><span class="line">model = &quot;claude-3-5-sonnet&quot;</span><br><span class="line">base_url = &quot;https://api.openai.com/v1&quot;</span><br><span class="line">api_key = &quot;sk-...&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python main.py</span><br></pre></td></tr></table></figure>
+
+<p>输出如下: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">INFO     [browser_use] BrowserUse logging setup complete with level info</span><br><span class="line">INFO     [root] Anonymized telemetry enabled. See https://docs.browser-use.com/development/telemetry for more information.</span><br><span class="line">Enter your prompt (or &#x27;exit&#x27;/&#x27;quit&#x27; to quit): (这里就是发挥创意的地方了)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="一些小问题处理"><a href="#一些小问题处理" class="headerlink" title="一些小问题处理"></a>一些小问题处理</h1><h2 id="目前内部默认采用的是google搜索，国内不好用，调整为bing搜索"><a href="#目前内部默认采用的是google搜索，国内不好用，调整为bing搜索" class="headerlink" title="目前内部默认采用的是google搜索，国内不好用，调整为bing搜索"></a>目前内部默认采用的是google搜索，国内不好用，调整为bing搜索</h2><ol>
+<li>在app&#x2F;tool&#x2F;目录，加bing_search.py<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> <span class="type">List</span></span><br><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> quote</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">from</span> app.tool.base <span class="keyword">import</span> BaseTool</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BingSearch</span>(<span class="title class_ inherited__">BaseTool</span>):</span><br><span class="line">    name: <span class="built_in">str</span> = <span class="string">&quot;bing_search&quot;</span></span><br><span class="line">    description: <span class="built_in">str</span> = <span class="string">&quot;&quot;&quot;执行必应搜索并返回相关链接列表。</span></span><br><span class="line"><span class="string">当需要获取国际信息或英文内容时建议使用此工具。</span></span><br><span class="line"><span class="string">工具返回与搜索查询匹配的URL列表。&quot;&quot;&quot;</span></span><br><span class="line">    parameters: <span class="built_in">dict</span> = &#123;</span><br><span class="line">        <span class="string">&quot;type&quot;</span>: <span class="string">&quot;object&quot;</span>,</span><br><span class="line">        <span class="string">&quot;properties&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;query&quot;</span>: &#123;</span><br><span class="line">                <span class="string">&quot;type&quot;</span>: <span class="string">&quot;string&quot;</span>,</span><br><span class="line">                <span class="string">&quot;description&quot;</span>: <span class="string">&quot;(必填) 提交给必应的搜索关键词&quot;</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="string">&quot;num_results&quot;</span>: &#123;</span><br><span class="line">                <span class="string">&quot;type&quot;</span>: <span class="string">&quot;integer&quot;</span>,</span><br><span class="line">                <span class="string">&quot;description&quot;</span>: <span class="string">&quot;(可选) 返回的搜索结果数量，默认10&quot;</span>,</span><br><span class="line">                <span class="string">&quot;default&quot;</span>: <span class="number">10</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="string">&quot;required&quot;</span>: [<span class="string">&quot;query&quot;</span>]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">execute</span>(<span class="params">self, query: <span class="built_in">str</span>, num_results: <span class="built_in">int</span> = <span class="number">10</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">str</span>]:</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        执行必应搜索并返回URL列表</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Args:</span></span><br><span class="line"><span class="string">            query: 搜索关键词</span></span><br><span class="line"><span class="string">            num_results: 返回结果数量</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Returns:</span></span><br><span class="line"><span class="string">            匹配搜索结果的URL列表</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">sync_search</span>():</span><br><span class="line">            headers = &#123;</span><br><span class="line">                <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;Accept-Language&#x27;</span>: <span class="string">&#x27;en-US,en;q=0.9&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">            url = <span class="string">f&#x27;https://www.bing.com/search?q=<span class="subst">&#123;quote(query)&#125;</span>&#x27;</span></span><br><span class="line">            links = []</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> page <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, num_results // <span class="number">10</span> + <span class="number">1</span>):</span><br><span class="line">                resp = requests.get(</span><br><span class="line">                    <span class="string">f&#x27;<span class="subst">&#123;url&#125;</span>&amp;first=<span class="subst">&#123;page * <span class="number">10</span>&#125;</span>&#x27;</span>,</span><br><span class="line">                    headers=headers,</span><br><span class="line">                    timeout=<span class="number">10</span></span><br><span class="line">                )</span><br><span class="line">                soup = BeautifulSoup(resp.text, <span class="string">&#x27;html.parser&#x27;</span>)</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> result <span class="keyword">in</span> soup.select(<span class="string">&#x27;.b_algo&#x27;</span>):</span><br><span class="line">                    link = result.find(<span class="string">&#x27;a&#x27;</span>, href=<span class="literal">True</span>)</span><br><span class="line">                    <span class="keyword">if</span> link <span class="keyword">and</span> <span class="string">&#x27;href&#x27;</span> <span class="keyword">in</span> link.attrs:</span><br><span class="line">                        links.append(link[<span class="string">&#x27;href&#x27;</span>])</span><br><span class="line">                        <span class="keyword">if</span> <span class="built_in">len</span>(links) &gt;= num_results:</span><br><span class="line">                            <span class="keyword">return</span> links</span><br><span class="line">            rst = links[:num_results]</span><br><span class="line">            <span class="keyword">return</span> rst</span><br><span class="line"></span><br><span class="line">        loop = asyncio.get_event_loop()</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">await</span> loop.run_in_executor(<span class="literal">None</span>, sync_search)</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>agent&#x2F;manus.py 中添加 BingSearch<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pydantic <span class="keyword">import</span> Field</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> app.agent.toolcall <span class="keyword">import</span> ToolCallAgent</span><br><span class="line"><span class="keyword">from</span> app.prompt.manus <span class="keyword">import</span> NEXT_STEP_PROMPT, SYSTEM_PROMPT</span><br><span class="line"><span class="keyword">from</span> app.tool <span class="keyword">import</span> Terminate, ToolCollection</span><br><span class="line"><span class="keyword">from</span> app.tool.browser_use_tool <span class="keyword">import</span> BrowserUseTool</span><br><span class="line"><span class="keyword">from</span> app.tool.file_saver <span class="keyword">import</span> FileSaver</span><br><span class="line"><span class="keyword">from</span> app.tool.google_search <span class="keyword">import</span> GoogleSearch</span><br><span class="line"><span class="comment"># 一定要先引入</span></span><br><span class="line"><span class="keyword">from</span> app.tool.bing_search <span class="keyword">import</span> BingSearch</span><br><span class="line"><span class="keyword">from</span> app.tool.python_execute <span class="keyword">import</span> PythonExecute</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Manus</span>(<span class="title class_ inherited__">ToolCallAgent</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    A versatile general-purpose agent that uses planning to solve various tasks.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    This agent extends PlanningAgent with a comprehensive set of tools and capabilities,</span></span><br><span class="line"><span class="string">    including Python execution, web browsing, file operations, and information retrieval</span></span><br><span class="line"><span class="string">    to handle a wide range of user requests.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    name: <span class="built_in">str</span> = <span class="string">&quot;Manus&quot;</span></span><br><span class="line">    description: <span class="built_in">str</span> = (</span><br><span class="line">        <span class="string">&quot;A versatile agent that can solve various tasks using multiple tools&quot;</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    system_prompt: <span class="built_in">str</span> = SYSTEM_PROMPT</span><br><span class="line">    next_step_prompt: <span class="built_in">str</span> = NEXT_STEP_PROMPT</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Add general-purpose tools to the tool collection</span></span><br><span class="line">    <span class="comment"># 注意这里添加BingSearch</span></span><br><span class="line">    available_tools: ToolCollection = Field(</span><br><span class="line">        default_factory=<span class="keyword">lambda</span>: ToolCollection(</span><br><span class="line">            PythonExecute(), GoogleSearch(), BingSearch(), BrowserUseTool(), FileSaver(), Terminate()</span><br><span class="line">        )</span><br><span class="line">    )</span><br></pre></td></tr></table></figure></li>
+<li>prompt&#x2F;manus.py 修改GoogleSearch为BingSearch<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">&#x27;s/GoogleSearch/BingSearch/g&#x27;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>参考: <a href="https://github.com/mannaandpoem/OpenManus/issues/277">https://github.com/mannaandpoem/OpenManus/issues/277</a></p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><ol>
+<li>查找中国 前十高校，通过csv格式返回到跟目录，只需要有学校名称 、排名、官网即可</li>
+</ol>
+<p>实际测试，这玩意儿还是bug不少，跑了十几分钟结果没出结果，白瞎了我的token :D。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>速度真的是挺慢，但是能够自己主动去搜索解决问题也算是挺牛了，对于技术人员来说又多了一个玩具。</p>
+<p>这种主动去思考解决问题的思想比较有意思，在其它平台定义工作流时候可以借鉴这种方案，创建自己的manus，加油!!</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechat.png" alt="Mr.zhao 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mr.zhao
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://zhaozhiwei1992.github.io/2025/03/10/OpenManus%E5%B0%9D%E9%B2%9C/" title="OpenManus+DeepSeek体验">http://zhaozhiwei1992.github.io/2025/03/10/OpenManus尝鲜/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/OpenManus/" rel="tag"># OpenManus</a>
+              <a href="/tags/DeepSeek/" rel="tag"># DeepSeek</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/02/26/%E4%BC%81%E4%B8%9A%E7%9F%A5%E8%AF%86%E5%BA%93%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/" rel="prev" title="企业知识库落地实践">
+                  <i class="fa fa-angle-left"></i> 企业知识库落地实践
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/03/13/AI%E6%A8%A1%E5%9E%8B%E8%90%BD%E5%9C%B0%E6%80%9D%E8%80%83/" rel="next" title="从"我要去山西旅游"看AI智能体的未来之旅：大模型如何重构自动化服务生态">
+                  从"我要去山西旅游"看AI智能体的未来之旅：大模型如何重构自动化服务生态 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mr.zhao</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

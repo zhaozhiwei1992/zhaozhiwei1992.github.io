@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhaozhiwei1992.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"style":null,"show_result":false},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="::: {.center}xx公司 2020-01-01::: 文档管理 合理地管理主文档，确保文档版本的及时更新，同时保持备份文档和源文档的一致性。 版本管理  本版本修订日期   2019-08-12   生效日期   2019-08-12  版本   生效日期     变更内容       编制人  V1.0   2020-01-01   初稿编写完成   xx 引言标识本条应包含本文档的完">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件开发计划">
+<meta property="og:url" content="http://zhaozhiwei1992.github.io/2021/01/23/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%AE%A1%E5%88%92/index.html">
+<meta property="og:site_name" content="离线de日常">
+<meta property="og:description" content="::: {.center}xx公司 2020-01-01::: 文档管理 合理地管理主文档，确保文档版本的及时更新，同时保持备份文档和源文档的一致性。 版本管理  本版本修订日期   2019-08-12   生效日期   2019-08-12  版本   生效日期     变更内容       编制人  V1.0   2020-01-01   初稿编写完成   xx 引言标识本条应包含本文档的完">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-23T14:38:00.000Z">
+<meta property="article:modified_time" content="2021-01-23T14:38:00.000Z">
+<meta property="article:author" content="Mr.zhao">
+<meta property="article:tag" content="软件设计">
+<meta property="article:tag" content="开发计划">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://zhaozhiwei1992.github.io/2021/01/23/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%AE%A1%E5%88%92/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhaozhiwei1992.github.io/2021/01/23/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%AE%A1%E5%88%92/","path":"2021/01/23/软件开发计划/","title":"软件开发计划"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>软件开发计划 | 离线de日常</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">离线de日常</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E8%AF%86"><span class="nav-number">1.1.</span> <span class="nav-text">标识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0"><span class="nav-number">1.2.</span> <span class="nav-text">系统概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E6%A1%A3%E6%A6%82%E8%BF%B0"><span class="nav-number">1.3.</span> <span class="nav-text">文档概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8E%E5%85%B6%E4%BB%96%E8%AE%A1%E5%88%92%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">1.4.</span> <span class="nav-text">与其他计划之间的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E5%9F%BA%E7%BA%BF"><span class="nav-number">1.5.</span> <span class="nav-text">输入基线</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E7%94%A8%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">引用文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E8%8C%83%E5%9B%B4%E5%8F%8A%E7%BA%A6%E6%9D%9F%E6%9D%A1%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">项目范围及约束条件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A4%E4%BB%98%E4%BA%A7%E5%93%81"><span class="nav-number">3.1.</span> <span class="nav-text">交付产品</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E9%9C%80%E6%B1%82%E5%92%8C%E7%BA%A6%E6%9D%9F%E6%9D%A1%E4%BB%B6"><span class="nav-number">3.2.</span> <span class="nav-text">业务需求和约束条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E5%AE%83%E6%96%B9%E9%9D%A2%E7%9A%84%E9%9C%80%E6%B1%82%E5%92%8C%E7%BA%A6%E6%9D%9F%E6%9D%A1%E4%BB%B6"><span class="nav-number">3.3.</span> <span class="nav-text">其它方面的需求和约束条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%9B%AE%E6%A0%87"><span class="nav-number">3.4.</span> <span class="nav-text">项目目标</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E6%80%BB%E4%BD%93%E8%AE%A1%E5%88%92"><span class="nav-number">4.</span> <span class="nav-text">项目总体计划</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E5%92%8C%E9%87%8C%E7%A8%8B%E7%A2%91"><span class="nav-number">4.1.</span> <span class="nav-text">软件开发过程和里程碑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E6%96%B9%E6%B3%95"><span class="nav-number">4.2.</span> <span class="nav-text">软件开发方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E4%BA%A7%E5%93%81%E6%A0%87%E5%87%86"><span class="nav-number">4.3.</span> <span class="nav-text">软件产品标准</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%84%E5%AE%A1%E9%80%94%E5%BE%84"><span class="nav-number">4.4.</span> <span class="nav-text">评审途径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86"><span class="nav-number">4.5.</span> <span class="nav-text">软件配置管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E8%B4%A8%E9%87%8F%E4%BF%9D%E8%AF%81"><span class="nav-number">4.6.</span> <span class="nav-text">软件质量保证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E8%B7%9F%E8%B8%AA%E5%92%8C%E5%A4%84%E7%90%86-%E6%9B%B4%E6%AD%A3%E6%B4%BB%E5%8A%A8"><span class="nav-number">4.7.</span> <span class="nav-text">问题跟踪和处理(更正活动)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A1%A3%E6%A1%88%E6%94%B6%E9%9B%86"><span class="nav-number">4.8.</span> <span class="nav-text">档案收集</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E4%BC%B0%E7%AE%97%E5%8F%8A%E8%BF%9B%E5%BA%A6%E8%AE%A1%E5%88%92"><span class="nav-number">5.</span> <span class="nav-text">项目估算及进度计划</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E4%BB%BB%E5%8A%A1%E5%88%86%E8%A7%A3"><span class="nav-number">5.1.</span> <span class="nav-text">工作任务分解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%84%E6%A8%A1%E4%BC%B0%E7%AE%97"><span class="nav-number">5.2.</span> <span class="nav-text">规模估算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E9%87%8F%E4%BC%B0%E7%AE%97"><span class="nav-number">5.3.</span> <span class="nav-text">工作量估算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E5%BA%A6%E8%AE%A1%E5%88%92"><span class="nav-number">5.4.</span> <span class="nav-text">进度计划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A3%8E%E9%99%A9%E4%BC%B0%E8%AE%A1%E5%8F%8A%E5%BA%94%E5%AF%B9%E6%96%B9%E6%B3%95"><span class="nav-number">5.5.</span> <span class="nav-text">风险估计及应对方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E8%B7%9F%E8%B8%AA%E4%B8%8E%E5%8F%98%E6%9B%B4%E7%AE%A1%E7%90%86"><span class="nav-number">6.</span> <span class="nav-text">项目跟踪与变更管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%B8%B8%E8%B7%9F%E8%B8%AA"><span class="nav-number">6.1.</span> <span class="nav-text">项目日常跟踪</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8C%E7%A8%8B%E7%A2%91%E8%AF%84%E5%AE%A1"><span class="nav-number">6.2.</span> <span class="nav-text">里程碑评审</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E6%9B%B4%E7%AE%A1%E7%90%86"><span class="nav-number">6.3.</span> <span class="nav-text">变更管理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%BB%84%E7%BB%87%E5%92%8C%E8%B5%84%E6%BA%90"><span class="nav-number">7.</span> <span class="nav-text">项目组织和资源</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%BB%84%E7%BB%87"><span class="nav-number">7.1.</span> <span class="nav-text">项目组织</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E8%B5%84%E6%BA%90"><span class="nav-number">7.2.</span> <span class="nav-text">项目资源</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%85%E9%83%A8%E5%9F%B9%E8%AE%AD"><span class="nav-number">8.</span> <span class="nav-text">内部培训</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%A8%E8%A7%A3"><span class="nav-number">9.</span> <span class="nav-text">注解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%99%84%E5%BD%95"><span class="nav-number">10.</span> <span class="nav-text">附录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%85%E5%AE%B9%E5%AE%A1%E6%A0%B8%E8%A6%81%E7%82%B9%EF%BC%9A"><span class="nav-number">11.</span> <span class="nav-text">内容审核要点：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">12.</span> <span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Mr.zhao"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Mr.zhao</p>
+  <div class="site-description" itemprop="description">show me your code</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">88</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhaozhiwei1992" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhaozhiwei1992" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/p205/posts" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;p205&#x2F;posts" rel="noopener me" target="_blank"><i class="fab fa-zhihu fa-fw"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.jianshu.com/u/65f51bc73109" title="简书 → https:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;65f51bc73109" rel="noopener me" target="_blank"><i class="fas fa-book-open fa-fw"></i>简书</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/qq347061329" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;qq347061329" rel="noopener me" target="_blank"><i class="fab fa-blog fa-fw"></i>博客园</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u012768510" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u012768510" rel="noopener me" target="_blank"><i class="fas fa-code fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhaozhiweishanxi@gmail.com" title="E-Mail → mailto:zhaozhiweishanxi@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2021/01/23/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%AE%A1%E5%88%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Mr.zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="软件开发计划 | 离线de日常">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          软件开发计划
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-01-23 22:38:00" itemprop="dateCreated datePublished" datetime="2021-01-23T22:38:00+08:00">2021-01-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">软件设计</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>::: {.center}<br><strong>xx公司</strong></p>
+<p><strong>2020-01-01</strong><br>:::</p>
+<p><strong>文档管理</strong></p>
+<p>合理地管理主文档，<br>确保文档版本的及时更新，同时保持备份文档和源文档的一致性。</p>
+<p><strong>版本管理</strong></p>
+<hr>
+<p>本版本修订日期   2019-08-12   生效日期   2019-08-12</p>
+<hr>
+<p>版本   生效日期     变更内容       编制人</p>
+<hr>
+<p>V1.0   2020-01-01   初稿编写完成   xx</p>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><h2 id="标识"><a href="#标识" class="headerlink" title="标识"></a>标识</h2><p>本条应包含本文档的完整标识，以及本文档适用的系统和软件的完整标识，包括标识号、标题、缩略词语、版本号和发行号。</p>
+<h2 id="系统概述"><a href="#系统概述" class="headerlink" title="系统概述"></a>系统概述</h2><p>本条应简述本文档适用的系统和软件的用途，应描述系统和软件的一般特性；概述系统开发、运行和维护的历史；标识项目的业主方、用户、承建方、监理方等；标识当前和计划的运行现场等。</p>
+<h2 id="文档概述"><a href="#文档概述" class="headerlink" title="文档概述"></a>文档概述</h2><p>概述本文档的用途和内容，并描述与其使用有关的保密性和私密性的要求。</p>
+<h2 id="与其他计划之间的关系"><a href="#与其他计划之间的关系" class="headerlink" title="与其他计划之间的关系"></a>与其他计划之间的关系</h2><p>描述本计划和其他项目管理计划的关系。</p>
+<h2 id="输入基线"><a href="#输入基线" class="headerlink" title="输入基线"></a>输入基线</h2><p>给出编写本项目开发计划的输入基线，如业务需求说明书等。</p>
+<h1 id="引用文件"><a href="#引用文件" class="headerlink" title="引用文件"></a>引用文件</h1><p>应列出本文档引用的所有文档的编号、标题、修订版本、日期和来源。</p>
+<h1 id="项目范围及约束条件"><a href="#项目范围及约束条件" class="headerlink" title="项目范围及约束条件"></a>项目范围及约束条件</h1><h2 id="交付产品"><a href="#交付产品" class="headerlink" title="交付产品"></a>交付产品</h2><p>列出本项目的交付产品成果，包括软件程序、交付文档等，以及各交付成果的交付期限。</p>
+<h2 id="业务需求和约束条件"><a href="#业务需求和约束条件" class="headerlink" title="业务需求和约束条件"></a>业务需求和约束条件</h2><p>分条阐述项目的业务需求和约束条件；</p>
+<h2 id="其它方面的需求和约束条件"><a href="#其它方面的需求和约束条件" class="headerlink" title="其它方面的需求和约束条件"></a>其它方面的需求和约束条件</h2><p>分条阐述其它方面的约束，如项目进度要求、保密性等。</p>
+<h2 id="项目目标"><a href="#项目目标" class="headerlink" title="项目目标"></a>项目目标</h2><p>综述项目进度目标、成本目标、质量目标。</p>
+<h1 id="项目总体计划"><a href="#项目总体计划" class="headerlink" title="项目总体计划"></a>项目总体计划</h1><h2 id="软件开发过程和里程碑"><a href="#软件开发过程和里程碑" class="headerlink" title="软件开发过程和里程碑"></a>软件开发过程和里程碑</h2><p>描述要采用的软件开发过程。计划应覆盖论及它的所有合同条款，确定已计划的开发阶段(适用)、目标和各阶段要执行的软件开发活动。</p>
+<p>里程碑设置分条阐述里程碑&#x2F;阶段名称、期限、里程碑标志说明（进入条件和输出）、评审方式等。</p>
+<p>提供一张工作产品矩阵表，描述各工作产品的编号、名称、产生阶段、评审方式等。工作产品包括各阶段产生的过程文档和技术文档等，是工作任务分解和配置管理计划制定的重要依据。</p>
+<h2 id="软件开发方法"><a href="#软件开发方法" class="headerlink" title="软件开发方法"></a>软件开发方法</h2><p>描述或引用要使用的软件开发方法，包括为支持这些方法所使用的手工、自动工具和过程的描述。</p>
+<h2 id="软件产品标准"><a href="#软件产品标准" class="headerlink" title="软件产品标准"></a>软件产品标准</h2><p>描述或引用在表达需求、设计、编码、测试用例、测试过程和测试结果方面要遵循的标准和要求。对要使用的各种编程语言应提供编码标准。</p>
+<h2 id="评审途径"><a href="#评审途径" class="headerlink" title="评审途径"></a>评审途径</h2><p>阐述软件内部评审的方式，以及需方或授权代表（总集、监理）实施软件产品和活动评审的途径和方式。</p>
+<h2 id="软件配置管理"><a href="#软件配置管理" class="headerlink" title="软件配置管理"></a>软件配置管理</h2><p>描述针对本项目所采用和遵循的软件配置管理方法.包括配置项的标识、控制、状态统计、审核、交付等。</p>
+<p>具体的配置项识别和管理可在配置管理计划中另文给出。</p>
+<h2 id="软件质量保证"><a href="#软件质量保证" class="headerlink" title="软件质量保证"></a>软件质量保证</h2><p>描述针对在本项目所采用和遵循的软件质量保证方法。包括软件质量保证评估、软件质量保证记录和处理、第三方独立性保证等。质量保证计划也可另文给出。承建方应在计划中落实下述内部审核和检查工作：</p>
+<p>软件计划审核：在软件计划编制阶段结束后必须进行软件计划审核，以确保在软件开发计划、软件配置管理计划、软件质量保证计划中所规定的计划的合适性。</p>
+<p>软件需求审核：在软件需求分析阶段结束后必须进行软件需求审核，以确保在软件需求规格说明中所规定的各项需求的合适性。</p>
+<p>软件概要设计审核：在软件设计结束后必须进行软件设计的审核，以评价软件概要设计说明、数据结构设计说明中所描述的软件设计在总体结构、外部接口、主要部件功能分配、全局数据结构以及各主要部件之间的接口等方面的合适性；以及在数据结构、功能、算法和过程描述等方面的合适性。</p>
+<p>软件详细设计、编码阶段的审核：在软件详细设计和编码实现完成之后要对软件详细设计说明、软件测试计划、软件测试说明（含软件测试用例）、目标程序生成说明进行审核，以确认业主方的业务需求是否得到满足，验证软件需求规格说明中的需求是否已由软件设计说明描述的设计实现，软件设计说明表达的设计是否已由编码实现。</p>
+<p>出厂测试审核：在完成出厂测试之后要对源代码交付验证说明、软件测试报告（含源代码交付验证报告）以及按照合同要求应提交给业主方的所有文档（如：软件用户手册等）进行审核，以评价待交付的程序及文档的质量是否满足出厂交付要求、覆盖了业主方的业务需求、做好了交付准备。</p>
+<p>部署审核：在配合监理方和业主方完成测试工作后承建方进入系统部署阶段，在完成软件部署并配合完成系统联调联试后，要对部署实施报告进行审核，以验证部署实施的真实性以及外部接口的正确性。</p>
+<h2 id="问题跟踪和处理-更正活动"><a href="#问题跟踪和处理-更正活动" class="headerlink" title="问题跟踪和处理(更正活动)"></a>问题跟踪和处理(更正活动)</h2><p>描述软件更正活动中要遵循的方法，包括不同阶段的问题发现、纪录、报告、处理、审核和更正流程，问题&#x2F;bug跟踪系统的选用等。须论及出厂测试、需方验证测试、试运行三个阶段。</p>
+<h2 id="档案收集"><a href="#档案收集" class="headerlink" title="档案收集"></a>档案收集</h2><p>阐述作为承建方在项目进行过程中进行自身档案收集管理的方法，包括纸质档案。</p>
+<h1 id="项目估算及进度计划"><a href="#项目估算及进度计划" class="headerlink" title="项目估算及进度计划"></a>项目估算及进度计划</h1><h2 id="工作任务分解"><a href="#工作任务分解" class="headerlink" title="工作任务分解"></a>工作任务分解</h2><p>分解项目工作任务，得出工作任务分解结构（WBS）。</p>
+<h2 id="规模估算"><a href="#规模估算" class="headerlink" title="规模估算"></a>规模估算</h2><p>估算项目规模，如需新编的代码行数、文档页数等。</p>
+<h2 id="工作量估算"><a href="#工作量估算" class="headerlink" title="工作量估算"></a>工作量估算</h2><p>根据规模估算及项目经验，估算项目工作量。</p>
+<h2 id="进度计划"><a href="#进度计划" class="headerlink" title="进度计划"></a>进度计划</h2><p>在工作任务分解结构（WBS）、工作量估算的基础上，进行活动排序、资源分配，进而编制进度计划甘特图,标识各活动的依赖关系、资源分配情况、起止时间等。</p>
+<h2 id="风险估计及应对方法"><a href="#风险估计及应对方法" class="headerlink" title="风险估计及应对方法"></a>风险估计及应对方法</h2><p>逐条给出识别的风险及其风险估计量化指标（可能性、严重性等级）、相应的对策和缓解方案。建议以列表的方式给出。</p>
+<h1 id="项目跟踪与变更管理"><a href="#项目跟踪与变更管理" class="headerlink" title="项目跟踪与变更管理"></a>项目跟踪与变更管理</h1><h2 id="项目日常跟踪"><a href="#项目日常跟踪" class="headerlink" title="项目日常跟踪"></a>项目日常跟踪</h2><p>阐述项目日常跟踪方法，包括由业主方和授权代表(监理方)参与的项目跟踪。</p>
+<h2 id="里程碑评审"><a href="#里程碑评审" class="headerlink" title="里程碑评审"></a>里程碑评审</h2><p>阐述或引用项目各里程碑评审的方法。</p>
+<h2 id="变更管理"><a href="#变更管理" class="headerlink" title="变更管理"></a>变更管理</h2><p>包括计划变更、需求变更等的处理流程、机制和方法。</p>
+<h1 id="项目组织和资源"><a href="#项目组织和资源" class="headerlink" title="项目组织和资源"></a>项目组织和资源</h1><h2 id="项目组织"><a href="#项目组织" class="headerlink" title="项目组织"></a>项目组织</h2><p>本条应描述本项目要采用的组织结构，包括涉及的组织机构、机构之间的关系、执行所需活动的每个机构的权限和职责。</p>
+<h2 id="项目资源"><a href="#项目资源" class="headerlink" title="项目资源"></a>项目资源</h2><p>本条应描述适用于本项目的资源。 主要包括：</p>
+<p>人力资源，分条说明投入此项目的人员、职责、投入阶段、地理位置和涉密程度等；</p>
+<p>开发人员要使用的设施，包括执行工作的地理位置、要使用的设施、保密区域和运用合同项目的设施的其他特性；</p>
+<p>为满足合同需要，需方应提供的设备、软件、服务、文档、资料及设施及需要提供的时间。</p>
+<h1 id="内部培训"><a href="#内部培训" class="headerlink" title="内部培训"></a>内部培训</h1><p>根据项目的技术要求和项目成员的情况，确定是否需要进行项目培训，并制订培训计划。如不需要培训，应说明理由。</p>
+<h1 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h1><p>本章应包含有助于理解本文档的一般信息(例如原理)。本章应包含为理解本文档需要的术语和定义，所有缩略语和它们在文档中的含义的字母序列表。</p>
+<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><p>附录可用来提供那些为便于文档维护而单独出版的信息(例如图表、分类数据)。为便于处理，附录可单独装订成册。附录应按字母顺序(A,<br>B等)编排。</p>
+<h1 id="内容审核要点："><a href="#内容审核要点：" class="headerlink" title="内容审核要点："></a>内容审核要点：</h1><p>项目范围阐述与合同及其附件要求等是否一致；</p>
+<p>工作任务分解与项目范围&#x2F;需求是否一致；</p>
+<p>工作任务分解、工作量估计和活动进度安排是否合理；</p>
+<p>计划内容是否包括软件项目管理的各个必要的方面；</p>
+<p>作产品定义是否包含需方所要求的各相关必要文档；</p>
+<p>织机构和人力资源安排和分配是否合理并符合合同相关要求；</p>
+<p>目日常跟踪管理是否具有可操作性；</p>
+<p>目开发过程中的问题&#x2F;bug处理机制是否具有可操作性；</p>
+<p>案收集管理是否具有可操作性。</p>
+<p>是否制定了合适的配置管理策略和质量保证策略。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.jianshu.com/p/a7984927cfb9">https://www.jianshu.com/p/a7984927cfb9</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechat.png" alt="Mr.zhao 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mr.zhao
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://zhaozhiwei1992.github.io/2021/01/23/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%AE%A1%E5%88%92/" title="软件开发计划">http://zhaozhiwei1992.github.io/2021/01/23/软件开发计划/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1/" rel="tag"># 软件设计</a>
+              <a href="/tags/%E5%BC%80%E5%8F%91%E8%AE%A1%E5%88%92/" rel="tag"># 开发计划</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/01/23/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E6%89%8B%E5%86%8C/" rel="prev" title="软件安装部署手册">
+                  <i class="fa fa-angle-left"></i> 软件安装部署手册
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/01/24/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E8%AF%B4%E6%98%8E/" rel="next" title="软件测试说明">
+                  软件测试说明 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mr.zhao</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

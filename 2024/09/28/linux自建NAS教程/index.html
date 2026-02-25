@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhaozhiwei1992.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"style":null,"show_result":false},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="什么是NAS及为什么要用NASNAS，英文全名Network Attached Storage，翻译过来是:网络附接存储。 引用维基百科定义 1网络附接存储（英语：Network Attached Storage，缩写：NAS）[1]是一种文件级（与块级存储相对）的计算机数据存储服务器，它连接到计算机网络，并提供对异构网络用户的数据访问。它专门用于通过其硬件、软件或配置来提供文件服务。它通常作为专">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux下自建NAS教程">
+<meta property="og:url" content="http://zhaozhiwei1992.github.io/2024/09/28/linux%E8%87%AA%E5%BB%BANAS%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:site_name" content="离线de日常">
+<meta property="og:description" content="什么是NAS及为什么要用NASNAS，英文全名Network Attached Storage，翻译过来是:网络附接存储。 引用维基百科定义 1网络附接存储（英语：Network Attached Storage，缩写：NAS）[1]是一种文件级（与块级存储相对）的计算机数据存储服务器，它连接到计算机网络，并提供对异构网络用户的数据访问。它专门用于通过其硬件、软件或配置来提供文件服务。它通常作为专">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-09-27T16:00:00.000Z">
+<meta property="article:author" content="Mr.zhao">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="NAS">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://zhaozhiwei1992.github.io/2024/09/28/linux%E8%87%AA%E5%BB%BANAS%E6%95%99%E7%A8%8B/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhaozhiwei1992.github.io/2024/09/28/linux%E8%87%AA%E5%BB%BANAS%E6%95%99%E7%A8%8B/","path":"2024/09/28/linux自建NAS教程/","title":"linux下自建NAS教程"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>linux下自建NAS教程 | 离线de日常</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">离线de日常</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFNAS%E5%8F%8A%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8NAS"><span class="nav-number">1.</span> <span class="nav-text">什么是NAS及为什么要用NAS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%99%BD%E7%89%B9%E4%BE%9B%EF%BC%8CNAS%E5%8F%AF%E4%BB%A5%E5%B9%B2%E4%BB%80%E4%B9%88"><span class="nav-number">1.1.</span> <span class="nav-text">小白特供，NAS可以干什么</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9"><span class="nav-number">2.</span> <span class="nav-text">如何选择</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%87%AA%E5%BB%BA%E5%8F%8A%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">3.</span> <span class="nav-text">为什么要自建及优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%90%E6%9C%AC%E6%95%88%E7%9B%8A%EF%BC%9A"><span class="nav-number">3.1.</span> <span class="nav-text">成本效益：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E5%88%B6%E5%8C%96"><span class="nav-number">3.2.</span> <span class="nav-text">定制化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8A%E8%BE%B9%E9%83%BD%E6%98%AF%E4%BC%98%E7%82%B9%EF%BC%8C%E5%BD%93%E7%84%B6%E8%87%AA%E5%BB%BA%E4%B9%9F%E6%98%AF%E6%9C%89%E7%BC%BA%E7%82%B9%E7%9A%84"><span class="nav-number">3.3.</span> <span class="nav-text">上边都是优点，当然自建也是有缺点的</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%87%AA%E5%BB%BA"><span class="nav-number">4.</span> <span class="nav-text">如何自建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E5%8F%B0%E4%B8%AA%E4%BA%BA%E9%97%B2%E7%BD%AE%E7%94%B5%E8%84%91"><span class="nav-number">4.1.</span> <span class="nav-text">一台个人闲置电脑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DLNA-UPnP%E5%AE%B6%E5%BA%AD%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1-jellyfin-KODI-%E6%92%AD%E6%94%BE%E5%99%A8-%E5%AE%B6%E5%BA%AD%E5%BD%B1%E9%99%A2%E8%BD%AF%E4%BB%B6"><span class="nav-number">4.2.</span> <span class="nav-text">DLNA&#x2F;UPnP家庭流媒体服务 jellyfin + KODI(播放器) 家庭影院软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BT%E4%B8%8B%E8%BD%BDaria2"><span class="nav-number">4.3.</span> <span class="nav-text">BT下载aria2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux%E6%9C%8D%E5%8A%A1%E5%99%A8web%E7%AE%A1%E7%90%86%E7%A5%9E%E5%99%A8%E2%80%93Cockpit-%E4%BD%9C%E4%B8%BA%E6%9C%8D%E5%8A%A1%E8%B5%84%E6%BA%90%E7%9B%91%E6%8E%A7%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8"><span class="nav-number">4.4.</span> <span class="nav-text">Linux服务器web管理神器–Cockpit (作为服务资源监控管理工具使用)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%85%A7%E7%89%87%E6%9F%A5%E7%9C%8B-photoprism"><span class="nav-number">4.5.</span> <span class="nav-text">照片查看 photoprism</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8"><span class="nav-number">4.5.1.</span> <span class="nav-text">注</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%9B%98%E8%81%9A%E5%90%88alist-rclone-%E9%9D%9E%E5%BF%85%E9%A1%BB"><span class="nav-number">4.6.</span> <span class="nav-text">网盘聚合alist + rclone(非必须)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#samba-Samba-SMB-%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1-%E9%9D%9E%E5%BF%85%E9%A1%BB"><span class="nav-number">4.7.</span> <span class="nav-text">samba: Samba(SMB)文件共享服务(非必须)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E7%AB%AF"><span class="nav-number">4.8.</span> <span class="nav-text">移动端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE-mxplayer-%E5%AE%89%E5%8D%93-nplayer-ios"><span class="nav-number">4.8.1.</span> <span class="nav-text">视频播放 mxplayer(安卓) nplayer(ios)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9B%B4%E6%8E%A5%E8%AE%BF%E9%97%AE"><span class="nav-number">4.8.2.</span> <span class="nav-text">浏览器直接访问</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%A4%E6%B5%81"><span class="nav-number">5.</span> <span class="nav-text">交流</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Mr.zhao"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Mr.zhao</p>
+  <div class="site-description" itemprop="description">show me your code</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">88</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhaozhiwei1992" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhaozhiwei1992" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/p205/posts" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;p205&#x2F;posts" rel="noopener me" target="_blank"><i class="fab fa-zhihu fa-fw"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.jianshu.com/u/65f51bc73109" title="简书 → https:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;65f51bc73109" rel="noopener me" target="_blank"><i class="fas fa-book-open fa-fw"></i>简书</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/qq347061329" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;qq347061329" rel="noopener me" target="_blank"><i class="fab fa-blog fa-fw"></i>博客园</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u012768510" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u012768510" rel="noopener me" target="_blank"><i class="fas fa-code fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhaozhiweishanxi@gmail.com" title="E-Mail → mailto:zhaozhiweishanxi@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2024/09/28/linux%E8%87%AA%E5%BB%BANAS%E6%95%99%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Mr.zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="linux下自建NAS教程 | 离线de日常">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          linux下自建NAS教程
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-09-28 00:00:00" itemprop="dateCreated datePublished" datetime="2024-09-28T00:00:00+08:00">2024-09-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%BD%AF%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">软件</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%BD%AF%E4%BB%B6/NAS/" itemprop="url" rel="index"><span itemprop="name">NAS</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="什么是NAS及为什么要用NAS"><a href="#什么是NAS及为什么要用NAS" class="headerlink" title="什么是NAS及为什么要用NAS"></a>什么是NAS及为什么要用NAS</h1><p>NAS，英文全名Network Attached Storage，翻译过来是:网络附接存储。</p>
+<p>引用维基百科定义</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">网络附接存储（英语：Network Attached Storage，缩写：NAS）[1]是一种文件级（与块级存储相对）的计算机数据存储服务器，它连接到计算机网络，并提供对异构网络用户的数据访问。它专门用于通过其硬件、软件或配置来提供文件服务。它通常作为专门制造的专用计算机设备制造。 NAS系统是包含一个或多个通常排列成逻辑存储器、冗余存储器或RAID存储驱动器的网络设备。NAS消除了从网络上的其他服务器提供文件服务的负担，它们通常使用网络文件共享协议（如NFS、SMB或AFP）提供对文件的访问。</span><br></pre></td></tr></table></figure>
+
+<p>上边说了一大堆，看着头疼。其实说直白一点，百度网盘大家都用过，可以直接存文件，看电影，放照片很方便对吧, 那么NAS也是干这事儿的。这里大家要问，那我百度2个T的宝贝为啥还要要用NAS呢? 这里就不得不说百度网盘及各种乱七八糟的网盘是很方便，但是有一个很大的缺点，那就是你的资源都掌握在别人手里(你懂得)，这时候NAS就体现了它的一个优势，数据都由你自己掌控。</p>
+<h2 id="小白特供，NAS可以干什么"><a href="#小白特供，NAS可以干什么" class="headerlink" title="小白特供，NAS可以干什么"></a>小白特供，NAS可以干什么</h2><p>个人感觉最主要的几个场景，构建家庭影院，照片分享，文件备份。 同时因为其本身就是一个服务器，心情好你可以做个人博客。</p>
+<h1 id="如何选择"><a href="#如何选择" class="headerlink" title="如何选择"></a>如何选择</h1><p>新手小白可以直接选择现成品牌即可，市面上用的比较多的有以下几个:</p>
+<p>极空间：<a href="https://tiyan.zspace.cn/">https://tiyan.zspace.cn/</a></p>
+<p>群晖：<a href="https://demo.synology.cn/zh-cn/dsm">https://demo.synology.cn/zh-cn/dsm</a></p>
+<p>威联通：<a href="https://www.qnap.com.cn/zh-cn/live-demo">https://www.qnap.com.cn/zh-cn/live-demo</a></p>
+<p>爱速特：<a href="https://www.asustor.com/zh-cn/live_demo">https://www.asustor.com/zh-cn/live_demo</a></p>
+<p>可以参考他们的官网按照自己的心里价位购买即可，很easy</p>
+<p>如果是老鸟(我是菜鸟)，就可以根据以前的使用经验，从硬件到软件统统考虑，然后再结合自己的心里价位去综合考虑。或者动手能力强，自己刷刷刷也不是不行。</p>
+<h1 id="为什么要自建及优缺点"><a href="#为什么要自建及优缺点" class="headerlink" title="为什么要自建及优缺点"></a>为什么要自建及优缺点</h1><p>现在到了本文的重点，自建NAS。 那么为什么自建，且听我一一道来。</p>
+<h2 id="成本效益："><a href="#成本效益：" class="headerlink" title="成本效益："></a>成本效益：</h2><p>自建NAS通常比购买现成的NAS系统更经济，只要你有台差不多的基本废弃不用的电脑，就可以自建。系统本身及需要的软件也是开源免费使用，四舍五入那就是不花钱。</p>
+<h2 id="定制化"><a href="#定制化" class="headerlink" title="定制化"></a>定制化</h2><p>可以根据自己的需求定制硬件和软件，如果你觉得自己磁盘不够就可以随时加硬盘，软件不好用那就换软件，系统用腻了那就换系统，爽。</p>
+<h2 id="上边都是优点，当然自建也是有缺点的"><a href="#上边都是优点，当然自建也是有缺点的" class="headerlink" title="上边都是优点，当然自建也是有缺点的"></a>上边都是优点，当然自建也是有缺点的</h2><p>没有开箱即用，很多东西需要自己学习，对于小白来说有点难。</p>
+<p>稳定性可能不如现成的NAS。</p>
+<p>UI没有现成的NAS看起来好看统一。</p>
+<h1 id="如何自建"><a href="#如何自建" class="headerlink" title="如何自建"></a>如何自建</h1><h2 id="一台个人闲置电脑"><a href="#一台个人闲置电脑" class="headerlink" title="一台个人闲置电脑"></a>一台个人闲置电脑</h2><p>首先要有一台电脑，最好是台式机，小机箱也行，但是如果需要扩展多块硬盘还是大点好。其次是系统，我个人是使用archlinux习惯了，也可以使用其它发行版本。</p>
+<h2 id="DLNA-UPnP家庭流媒体服务-jellyfin-KODI-播放器-家庭影院软件"><a href="#DLNA-UPnP家庭流媒体服务-jellyfin-KODI-播放器-家庭影院软件" class="headerlink" title="DLNA&#x2F;UPnP家庭流媒体服务 jellyfin + KODI(播放器) 家庭影院软件"></a>DLNA&#x2F;UPnP家庭流媒体服务 jellyfin + KODI(播放器) 家庭影院软件</h2><p><a href="https://jellyfin.org/docs/general/installation/linux/">https://jellyfin.org/docs/general/installation/linux/</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 启动</span><br><span class="line">systemctl start jellyfin.service</span><br><span class="line"># 访问, 按照自己设置的密码搞起即可</span><br><span class="line">http://127.0.0.1:8096</span><br></pre></td></tr></table></figure>
+
+<h2 id="BT下载aria2"><a href="#BT下载aria2" class="headerlink" title="BT下载aria2"></a>BT下载aria2</h2><h2 id="Linux服务器web管理神器–Cockpit-作为服务资源监控管理工具使用"><a href="#Linux服务器web管理神器–Cockpit-作为服务资源监控管理工具使用" class="headerlink" title="Linux服务器web管理神器–Cockpit (作为服务资源监控管理工具使用)"></a>Linux服务器web管理神器–Cockpit (作为服务资源监控管理工具使用)</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#启动</span><br><span class="line">systemctl start cockpit.service</span><br><span class="line"># 访问</span><br><span class="line">http://localhost:9091</span><br></pre></td></tr></table></figure>
+<h2 id="照片查看-photoprism"><a href="#照片查看-photoprism" class="headerlink" title="照片查看 photoprism"></a>照片查看 photoprism</h2><p><a href="https://docs.photoprism.app/user-guide/">https://docs.photoprism.app/user-guide/</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.photoprism</span><br><span class="line">docker-compose up -d</span><br><span class="line"></span><br><span class="line">#访问</span><br><span class="line">http://127.0.0.1:2342</span><br><span class="line"></span><br><span class="line">PhotoPrism 的默认用户名为 admin，密码为 insecure</span><br></pre></td></tr></table></figure>
+
+<h3 id="注"><a href="#注" class="headerlink" title="注"></a>注</h3><p>优势: 可以使用现有的存储路径，重建索引</p>
+<p>缺点: 只有网页版</p>
+<h2 id="网盘聚合alist-rclone-非必须"><a href="#网盘聚合alist-rclone-非必须" class="headerlink" title="网盘聚合alist + rclone(非必须)"></a>网盘聚合alist + rclone(非必须)</h2><p>可以通过该工具,直接在线访问网盘中视频,或者配合其它工具(rclone)通过webdav将网盘目录挂载到本地</p>
+<p>windows下用RaiDrive替代rclone</p>
+<h2 id="samba-Samba-SMB-文件共享服务-非必须"><a href="#samba-Samba-SMB-文件共享服务-非必须" class="headerlink" title="samba: Samba(SMB)文件共享服务(非必须)"></a>samba: Samba(SMB)文件共享服务(非必须)</h2><p>主要是用来跟win进行数据共享，如果有需要可以安装起来</p>
+<h2 id="移动端"><a href="#移动端" class="headerlink" title="移动端"></a>移动端</h2><h3 id="视频播放-mxplayer-安卓-nplayer-ios"><a href="#视频播放-mxplayer-安卓-nplayer-ios" class="headerlink" title="视频播放 mxplayer(安卓) nplayer(ios)"></a>视频播放 mxplayer(安卓) nplayer(ios)</h3><h3 id="浏览器直接访问"><a href="#浏览器直接访问" class="headerlink" title="浏览器直接访问"></a>浏览器直接访问</h3><h1 id="交流"><a href="#交流" class="headerlink" title="交流"></a>交流</h1><p>欢迎关注公众号, 更方便查看文章</p>
+<p>公众号: 陌上花kai</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechat.png" alt="Mr.zhao 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mr.zhao
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://zhaozhiwei1992.github.io/2024/09/28/linux%E8%87%AA%E5%BB%BANAS%E6%95%99%E7%A8%8B/" title="linux下自建NAS教程">http://zhaozhiwei1992.github.io/2024/09/28/linux自建NAS教程/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+              <a href="/tags/NAS/" rel="tag"># NAS</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/09/26/%E4%B8%80%E4%B8%AA8%E5%B9%B4archlinux%E9%87%8D%E5%BA%A6%E4%BD%BF%E7%94%A8%E8%80%85%E8%87%AA%E8%BF%B0/" rel="prev" title="一个9年archlinux重度使用者自述">
+                  <i class="fa fa-angle-left"></i> 一个9年archlinux重度使用者自述
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/10/14/%E5%A5%BD%E7%89%A9%E6%8E%A8%E8%8D%90-copyq/" rel="next" title="CV高手是怎么炼成的?">
+                  CV高手是怎么炼成的? <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mr.zhao</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

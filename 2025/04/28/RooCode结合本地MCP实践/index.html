@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhaozhiwei1992.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"style":null,"show_result":false},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="引言目前MCP也炒了一段时间，是骡子是马得拉出来溜溜。这篇文章偏向点技术，如果没有一点开发经验听个响就好。 实现两个简单功能计算求和显示本地目录列表操作步骤通过python实现一个server文件创建123cd ~&#x2F;workspace&#x2F;python&#x2F;demomkdir mcp &amp;&amp; cd mcptouch SumMCP.py  代码1234567891011121314151617">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RooCode结合本地MCP实践">
+<meta property="og:url" content="http://zhaozhiwei1992.github.io/2025/04/28/RooCode%E7%BB%93%E5%90%88%E6%9C%AC%E5%9C%B0MCP%E5%AE%9E%E8%B7%B5/index.html">
+<meta property="og:site_name" content="离线de日常">
+<meta property="og:description" content="引言目前MCP也炒了一段时间，是骡子是马得拉出来溜溜。这篇文章偏向点技术，如果没有一点开发经验听个响就好。 实现两个简单功能计算求和显示本地目录列表操作步骤通过python实现一个server文件创建123cd ~&#x2F;workspace&#x2F;python&#x2F;demomkdir mcp &amp;&amp; cd mcptouch SumMCP.py  代码1234567891011121314151617">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://19921514.xyz/minio/images/roocode_mcp.png">
+<meta property="og:image" content="https://19921514.xyz/minio/images/roocode_mcp_sum.png">
+<meta property="og:image" content="https://19921514.xyz/minio/images/roocode_mcp_listdir.png">
+<meta property="article:published_time" content="2025-04-28T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-04-28T00:00:00.000Z">
+<meta property="article:author" content="Mr.zhao">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="MCP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://19921514.xyz/minio/images/roocode_mcp.png">
+
+
+<link rel="canonical" href="http://zhaozhiwei1992.github.io/2025/04/28/RooCode%E7%BB%93%E5%90%88%E6%9C%AC%E5%9C%B0MCP%E5%AE%9E%E8%B7%B5/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhaozhiwei1992.github.io/2025/04/28/RooCode%E7%BB%93%E5%90%88%E6%9C%AC%E5%9C%B0MCP%E5%AE%9E%E8%B7%B5/","path":"2025/04/28/RooCode结合本地MCP实践/","title":"RooCode结合本地MCP实践"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>RooCode结合本地MCP实践 | 离线de日常</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">离线de日常</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E4%B8%A4%E4%B8%AA%E7%AE%80%E5%8D%95%E5%8A%9F%E8%83%BD"><span class="nav-number">2.</span> <span class="nav-text">实现两个简单功能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%B1%82%E5%92%8C"><span class="nav-number">2.1.</span> <span class="nav-text">计算求和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E6%9C%AC%E5%9C%B0%E7%9B%AE%E5%BD%95%E5%88%97%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">显示本地目录列表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.</span> <span class="nav-text">操作步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87python%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AAserver"><span class="nav-number">3.1.</span> <span class="nav-text">通过python实现一个server</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%88%9B%E5%BB%BA"><span class="nav-number">3.1.1.</span> <span class="nav-text">文件创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">3.1.2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E5%AE%89%E8%A3%85"><span class="nav-number">3.1.3.</span> <span class="nav-text">依赖安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">3.1.4.</span> <span class="nav-text">参考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vscode%E5%AE%89%E8%A3%85RooCode%E6%8F%92%E4%BB%B6"><span class="nav-number">3.2.</span> <span class="nav-text">vscode安装RooCode插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8RooCode%E6%8F%92%E4%BB%B6%E4%B8%AD%E9%85%8D%E7%BD%AEMCP"><span class="nav-number">3.3.</span> <span class="nav-text">在RooCode插件中配置MCP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">3.3.1.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E6%98%AF%E5%90%A6%E6%88%90%E5%8A%9F"><span class="nav-number">3.3.2.</span> <span class="nav-text">检查是否成功</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">3.4.</span> <span class="nav-text">测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E5%92%8C"><span class="nav-number">3.4.1.</span> <span class="nav-text">求和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E6%96%87%E4%BB%B6%E5%88%97%E8%A1%A8"><span class="nav-number">3.4.2.</span> <span class="nav-text">显示文件列表</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Mr.zhao"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Mr.zhao</p>
+  <div class="site-description" itemprop="description">show me your code</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">88</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhaozhiwei1992" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhaozhiwei1992" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/p205/posts" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;p205&#x2F;posts" rel="noopener me" target="_blank"><i class="fab fa-zhihu fa-fw"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.jianshu.com/u/65f51bc73109" title="简书 → https:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;65f51bc73109" rel="noopener me" target="_blank"><i class="fas fa-book-open fa-fw"></i>简书</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/qq347061329" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;qq347061329" rel="noopener me" target="_blank"><i class="fab fa-blog fa-fw"></i>博客园</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u012768510" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u012768510" rel="noopener me" target="_blank"><i class="fas fa-code fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhaozhiweishanxi@gmail.com" title="E-Mail → mailto:zhaozhiweishanxi@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2025/04/28/RooCode%E7%BB%93%E5%90%88%E6%9C%AC%E5%9C%B0MCP%E5%AE%9E%E8%B7%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Mr.zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="RooCode结合本地MCP实践 | 离线de日常">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          RooCode结合本地MCP实践
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-04-28 08:00:00" itemprop="dateCreated datePublished" datetime="2025-04-28T08:00:00+08:00">2025-04-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>目前MCP也炒了一段时间，是骡子是马得拉出来溜溜。这篇文章偏向点技术，如果没有一点开发经验听个响就好。</p>
+<h1 id="实现两个简单功能"><a href="#实现两个简单功能" class="headerlink" title="实现两个简单功能"></a>实现两个简单功能</h1><h2 id="计算求和"><a href="#计算求和" class="headerlink" title="计算求和"></a>计算求和</h2><h2 id="显示本地目录列表"><a href="#显示本地目录列表" class="headerlink" title="显示本地目录列表"></a>显示本地目录列表</h2><h1 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h1><h2 id="通过python实现一个server"><a href="#通过python实现一个server" class="headerlink" title="通过python实现一个server"></a>通过python实现一个server</h2><h3 id="文件创建"><a href="#文件创建" class="headerlink" title="文件创建"></a>文件创建</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/workspace/python/demo</span><br><span class="line"><span class="built_in">mkdir</span> mcp &amp;&amp; <span class="built_in">cd</span> mcp</span><br><span class="line"><span class="built_in">touch</span> SumMCP.py</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">一个MCP Server, SumMCP.py</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">from</span> fastmcp <span class="keyword">import</span> FastMCP</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">mcp = FastMCP(<span class="string">&quot;Demo&quot;</span>, log_level=<span class="string">&quot;ERROR&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@mcp.tool()</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">a: <span class="built_in">int</span>, b: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Add two numbers&quot;&quot;&quot;</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;add&quot;</span>, a, b)</span><br><span class="line">    <span class="keyword">return</span> a + b</span><br><span class="line"></span><br><span class="line"><span class="meta">@mcp.tool()</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">listdir</span>(<span class="params">path: <span class="built_in">str</span></span>) -&gt; <span class="built_in">list</span>[<span class="built_in">str</span>]:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;show user dir list 显示用户文件列表&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> os.listdir(path)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="comment"># mcp.run()</span></span><br><span class="line">    <span class="comment"># mcp.run(transport=&quot;sse&quot;, port=9123)</span></span><br><span class="line">    <span class="comment"># 基于标准输入输出实现，本地小工具推荐这种方式</span></span><br><span class="line">    mcp.run(transport=<span class="string">&#x27;stdio&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="依赖安装"><a href="#依赖安装" class="headerlink" title="依赖安装"></a>依赖安装</h3><p>我这里使用的是anaconda，其它依赖管理都行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda create -n py_3.12 python=3.12</span><br><span class="line"><span class="built_in">source</span> /opt/anaconda/bin/activate py_3.12</span><br><span class="line">pip install fastmcp</span><br></pre></td></tr></table></figure>
+
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://github.com/jlowin/fastmcp">https://github.com/jlowin/fastmcp</a></p>
+<h2 id="vscode安装RooCode插件"><a href="#vscode安装RooCode插件" class="headerlink" title="vscode安装RooCode插件"></a>vscode安装RooCode插件</h2><h2 id="在RooCode插件中配置MCP"><a href="#在RooCode插件中配置MCP" class="headerlink" title="在RooCode插件中配置MCP"></a>在RooCode插件中配置MCP</h2><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>在mcp_setting.json文件中配置自己的server</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;mcpServers&quot;: &#123;</span><br><span class="line">    &quot;demo&quot;: &#123;</span><br><span class="line">      &quot;command&quot;: &quot;~/.conda/envs/py_3.12/bin/fastmcp&quot;,</span><br><span class="line">      &quot;args&quot;: [&quot;run&quot;, &quot;~/workspace/python/demo/mcp/SumMCP.py&quot;],</span><br><span class="line">      &quot;disabled&quot;: false,</span><br><span class="line">      &quot;alwaysAllow&quot;: []</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="检查是否成功"><a href="#检查是否成功" class="headerlink" title="检查是否成功"></a>检查是否成功</h3><p>配置完成后，mcpServer会显示绿色图标,如下</p>
+<p><img src="https://19921514.xyz/minio/images/roocode_mcp.png" alt="mcp配置"></p>
+<p>如果在之前SumMCP.py中增加了工具，一定要在这里刷新下，显示出新的工具，然后在插件中使用才会读取到。</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><h3 id="求和"><a href="#求和" class="headerlink" title="求和"></a>求和</h3><p>使用demo工具, 计算99和98的和, 效果如下</p>
+<p><img src="https://19921514.xyz/minio/images/roocode_mcp_sum.png" alt="显示求和"></p>
+<h3 id="显示文件列表"><a href="#显示文件列表" class="headerlink" title="显示文件列表"></a>显示文件列表</h3><p>使用listdir工具显示 &#x2F;home&#x2F;xx&#x2F;Documents下的文件列表，效果如下</p>
+<p><img src="https://19921514.xyz/minio/images/roocode_mcp_listdir.png" alt="显示文件列表"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>使用mcp的方式可以按照自己要求实现一些插件本身做不了或者不好实现的功能。目的是为了让外部交互的返回更好的跟模型上下文结合，从而产生更好的效果。如果对话过程中，模型能够自动识别是需要使用哪个mcp那么效果应该会更好。目前是需要明确告诉插件使用mcp，有时候甚至得告诉它具体是哪个tool。</p>
+<p>这里只是一个最简单的使用，企业项目中能否使用该方式扩展业务，如何扩展，且听下回分解。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechat.png" alt="Mr.zhao 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mr.zhao
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://zhaozhiwei1992.github.io/2025/04/28/RooCode%E7%BB%93%E5%90%88%E6%9C%AC%E5%9C%B0MCP%E5%AE%9E%E8%B7%B5/" title="RooCode结合本地MCP实践">http://zhaozhiwei1992.github.io/2025/04/28/RooCode结合本地MCP实践/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/MCP/" rel="tag"># MCP</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/04/22/Vaultwarden%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86/" rel="prev" title="本地密码管理器-Vaultwarden">
+                  <i class="fa fa-angle-left"></i> 本地密码管理器-Vaultwarden
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/06/18/Dify0.15.1%E5%8D%87%E7%BA%A71.4.3/" rel="next" title="Dify0.15.1升级1.4.3版本">
+                  Dify0.15.1升级1.4.3版本 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mr.zhao</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

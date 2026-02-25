@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhaozhiwei1992.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"style":null,"show_result":false},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="快捷键自动代码 常用的有fori&#x2F;sout&#x2F;psvm+Tab即可生成循环、System.out、main方法等boilerplate样板代码 例如要输入for(User user : users)只需输入user.for+Tab 再比如，要输入Date birthday &#x3D;user.getBirthday();只需输入user.getBirthday().var+Ta">
+<meta property="og:type" content="article">
+<meta property="og:title" content="intellij idea快捷键实战">
+<meta property="og:url" content="http://zhaozhiwei1992.github.io/2019/07/25/intellij%E5%BF%AB%E6%8D%B7%E9%94%AE/index.html">
+<meta property="og:site_name" content="离线de日常">
+<meta property="og:description" content="快捷键自动代码 常用的有fori&#x2F;sout&#x2F;psvm+Tab即可生成循环、System.out、main方法等boilerplate样板代码 例如要输入for(User user : users)只需输入user.for+Tab 再比如，要输入Date birthday &#x3D;user.getBirthday();只需输入user.getBirthday().var+Ta">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-07-24T16:00:00.000Z">
+<meta property="article:modified_time" content="2019-07-24T16:00:00.000Z">
+<meta property="article:author" content="Mr.zhao">
+<meta property="article:tag" content="开发工具">
+<meta property="article:tag" content="intellij">
+<meta property="article:tag" content="idea">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://zhaozhiwei1992.github.io/2019/07/25/intellij%E5%BF%AB%E6%8D%B7%E9%94%AE/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhaozhiwei1992.github.io/2019/07/25/intellij%E5%BF%AB%E6%8D%B7%E9%94%AE/","path":"2019/07/25/intellij快捷键/","title":"intellij idea快捷键实战"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>intellij idea快捷键实战 | 离线de日常</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">离线de日常</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">1.</span> <span class="nav-text">快捷键</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E4%BB%A3%E7%A0%81"><span class="nav-number">1.1.</span> <span class="nav-text">自动代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">1.2.</span> <span class="nav-text">查询快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">1.3.</span> <span class="nav-text">其他快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#svn%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">1.4.</span> <span class="nav-text">svn快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E8%AF%95%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">1.5.</span> <span class="nav-text">调试快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E6%9E%84"><span class="nav-number">1.6.</span> <span class="nav-text">重构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E5%A4%A7Intellij-IDEA%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">1.7.</span> <span class="nav-text">十大Intellij IDEA快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E9%80%89%E5%A4%8D%E9%80%89%E6%A1%86"><span class="nav-number">1.8.</span> <span class="nav-text">全选复选框</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%AE%9E%E7%94%A8%E7%9A%84%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">一些实用的设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9host-%E9%98%B2%E6%AD%A2idea%E6%A3%80%E6%B5%8B%E6%B3%A8%E5%86%8C%E4%BF%A1%E6%81%AF"><span class="nav-number">3.</span> <span class="nav-text">修改host, 防止idea检测注册信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90"><span class="nav-number">4.</span> <span class="nav-text">插件推荐</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Mr.zhao"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Mr.zhao</p>
+  <div class="site-description" itemprop="description">show me your code</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">88</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhaozhiwei1992" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhaozhiwei1992" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/p205/posts" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;p205&#x2F;posts" rel="noopener me" target="_blank"><i class="fab fa-zhihu fa-fw"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.jianshu.com/u/65f51bc73109" title="简书 → https:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;65f51bc73109" rel="noopener me" target="_blank"><i class="fas fa-book-open fa-fw"></i>简书</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/qq347061329" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;qq347061329" rel="noopener me" target="_blank"><i class="fab fa-blog fa-fw"></i>博客园</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u012768510" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u012768510" rel="noopener me" target="_blank"><i class="fas fa-code fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhaozhiweishanxi@gmail.com" title="E-Mail → mailto:zhaozhiweishanxi@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2019/07/25/intellij%E5%BF%AB%E6%8D%B7%E9%94%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Mr.zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="intellij idea快捷键实战 | 离线de日常">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          intellij idea快捷键实战
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-07-25 00:00:00" itemprop="dateCreated datePublished" datetime="2019-07-25T00:00:00+08:00">2019-07-25</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h1><h2 id="自动代码"><a href="#自动代码" class="headerlink" title="自动代码"></a>自动代码</h2><ul>
+<li>常用的有fori&#x2F;sout&#x2F;psvm+Tab即可生成循环、System.out、main方法等boilerplate样板代码</li>
+<li>例如要输入for(User user : users)只需输入user.for+Tab</li>
+<li>再比如，要输入Date birthday &#x3D;<br>user.getBirthday();只需输入user.getBirthday().var+Tab即可。代码标签输入完成后，按Tab，生成代码。</li>
+<li>Ctrl+Alt+O 优化导入的类和包, 清理import</li>
+<li>Alt+Insert 生成代码(如get,set方法,构造函数等) 或者右键（Generate）</li>
+<li>fori&#x2F;sout&#x2F;psvm + Tab</li>
+<li>Ctrl+Alt+T 生成try catch 或者 Alt+enter</li>
+<li>CTRL+ALT+T 把选中的代码放在 TRY{} IF{} ELSE{} 里</li>
+<li>Ctrl + O 重写方法</li>
+<li>Ctrl + I 实现方法</li>
+<li>Ctr+shift+U 大小写转化</li>
+<li>ALT+回车 导入包,自动修正</li>
+<li>ALT+&#x2F; 代码提示</li>
+<li>CTRL+J 自动代码</li>
+<li>Ctrl+Shift+J，整合两行为一行</li>
+<li>CTRL+空格 代码提示</li>
+<li>CTRL+SHIFT+SPACE 自动补全代码</li>
+<li>CTRL+ALT+L 格式化代码</li>
+<li>CTRL+ALT+I 自动缩进</li>
+<li>CTRL+E 最近更改的代码</li>
+<li>CTRL+ALT+SPACE 类名或接口名提示</li>
+<li>CTRL+P 方法参数提示</li>
+<li>CTRL+Q，可以看到当前方法的声明</li>
+<li>Shift+F6 重构重命名 (包、类、方法、变量、甚至注释等)</li>
+<li>Ctrl+Alt+V 提取变量</li>
+<li>提取当前选择为变量（extract variable）：CTRL+ALT+V</li>
+<li>提取当前选择为属性（extract field）：CTRL+ALT+F</li>
+<li>提取当前选择为常量（extract constant）：CTRL+ALT+C</li>
+<li>提取当前选择为方法（extract method）：CTRL+ALT+M</li>
+<li>提取当前选择为方法参数（extract parameter）：CTRL+ALT+P</li>
+<li>重构类、方法（change signarture）：CTRL+F6</li>
+<li>提取代码块至if、try等结构中（surround with）：CTRL+ALT+T</li>
+<li>创建模块文件等（new）：CTRL+ALT+N</li>
+<li>创建测试用例（test）：CTRL+SHIFT+T</li>
+<li>重构菜单（refactor for this）：CTRL+T</li>
+</ul>
+<h2 id="查询快捷键"><a href="#查询快捷键" class="headerlink" title="查询快捷键"></a>查询快捷键</h2><ul>
+<li>Ctrl＋Shift＋Backspace可以跳转到上次编辑的地</li>
+<li>CTRL+ALT+ left&#x2F;right 前后导航编辑过的地方</li>
+<li>ALT+7 靠左窗口显示当前文件的结构</li>
+<li>Ctrl+F12 浮动显示当前文件的结构, 查找当前类中的方法</li>
+<li>ALT+F7 找到你的函数或者变量或者类的所有引用到的地方</li>
+<li>CTRL+ALT+F7 找到你的函数或者变量或者类的所有引用到的地方</li>
+<li>Ctrl+Shift+Alt+N 查找类中的方法或变量</li>
+<li>双击SHIFT 在项目的所有目录查找文件</li>
+<li>Ctrl+N 查找类</li>
+<li>Ctrl+Shift+N 查找文件</li>
+<li>CTRL+G 定位行</li>
+<li>CTRL+F 在当前窗口查找文本</li>
+<li>CTRL+SHIFT+F 在指定窗口查找文本</li>
+<li>CTRL+R 在 当前窗口替换文本</li>
+<li>CTRL+SHIFT+R 在指定窗口替换文本</li>
+<li>ALT+SHIFT+C 查找修改的文件</li>
+<li>CTRL+E 最近打开的文件</li>
+<li>F3 向下查找关键字出现位置</li>
+<li>SHIFT+F3 向上一个关键字出现位置</li>
+<li>选中文本，按Alt+F3 ，高亮相同文本，F3逐个往下查找相同文本</li>
+<li>F4 查找变量来源</li>
+<li><ul>
+<li>&#x2F;&#x2F;CTRL+SHIFT+O 弹出显示查找内容</li>
+</ul>
+</li>
+<li><ul>
+<li>Ctrl+W 选中代码，连续按会有其他效果, vim shift %</li>
+</ul>
+</li>
+<li>F2 或Shift+F2 高亮错误或警告快速定位</li>
+<li>Ctrl+Up&#x2F;Down 光标跳转到第一行或最后一行下</li>
+<li><ul>
+<li>Ctrl+B 快速打开光标处的类或方法</li>
+</ul>
+</li>
+<li>CTRL+ALT+B 找所有的子类</li>
+<li>CTRL+SHIFT+B 找变量的类</li>
+<li><ul>
+<li>Ctrl+Shift+上下键 上下移动代码</li>
+</ul>
+</li>
+<li>Ctrl+X 删除行</li>
+<li>Ctrl+D 复制行</li>
+<li>Ctrl+&#x2F; 或 Ctrl+Shift+&#x2F; 注释（&#x2F;&#x2F; 或者&#x2F;*…*&#x2F; ）</li>
+<li><ul>
+<li>Ctrl+H 显示类结构图</li>
+</ul>
+</li>
+<li>Ctrl+Q 显示注释文档</li>
+<li><ul>
+<li>Alt+F1 查找代码所在位置</li>
+</ul>
+</li>
+<li>Alt+1 快速打开或隐藏工程面板</li>
+<li><ul>
+<li>Alt+ left&#x2F;right 切换代码视图</li>
+</ul>
+</li>
+<li>ALT+ ↑&#x2F;↓ 在方法间快速移动定位</li>
+<li>CTRL+ALT+ left&#x2F;right 前后导航编辑过的地方</li>
+<li>Ctrl＋Shift＋Backspace可以跳转到上次编辑的地</li>
+<li>Alt+6 查找TODO</li>
+</ul>
+<h2 id="其他快捷键"><a href="#其他快捷键" class="headerlink" title="其他快捷键"></a>其他快捷键</h2><ul>
+<li>SHIFT+ENTER 另起一行</li>
+<li>CTRL+Z 倒退(撤销)</li>
+<li>CTRL+SHIFT+Z 向前(取消撤销)</li>
+<li>CTRL+ALT+F12 资源管理器打开文件夹</li>
+<li>ALT+F1 查找文件所在目录位置</li>
+<li>SHIFT+ALT+INSERT 竖编辑模式</li>
+<li>CTRL+F4 关闭当前窗口</li>
+<li>Ctrl+Alt+V，可以引入变量。例如：new String(); 自动导入变量定义</li>
+<li>Ctrl+~，快速切换方案（界面外观、代码风格、快捷键映射等菜单）,<br>可以切换主题</li>
+</ul>
+<h2 id="svn快捷键"><a href="#svn快捷键" class="headerlink" title="svn快捷键"></a>svn快捷键</h2><ul>
+<li>ctrl+k 提交代码到SVN</li>
+<li>ctrl+t 更新代码</li>
+</ul>
+<h2 id="调试快捷键"><a href="#调试快捷键" class="headerlink" title="调试快捷键"></a>调试快捷键</h2><ul>
+<li>其实常用的 就是F8 F7 F9 最值得一提的 就是Drop Frame<br>可以让运行过的代码从头再来</li>
+<li>alt+F8 debug时选中查看值</li>
+<li>Alt+Shift+F9，选择 Debug</li>
+<li>Alt+Shift+F10，选择 Run</li>
+<li>Ctrl+Shift+F9，编译</li>
+<li>Ctrl+Shift+F8，查看断点</li>
+<li><ul>
+<li>F7，步入</li>
+</ul>
+</li>
+<li>Shift+F7，智能步入</li>
+<li>Alt+Shift+F7，强制步入</li>
+<li>F8，步过</li>
+<li>Shift+F8，步出</li>
+<li>Alt+Shift+F8，强制步过</li>
+<li><ul>
+<li>Alt+F9，运行至光标处</li>
+</ul>
+</li>
+<li>Ctrl+Alt+F9，强制运行至光标处</li>
+<li>F9，恢复程序</li>
+<li>Alt+F10，定位到断点</li>
+</ul>
+<h2 id="重构"><a href="#重构" class="headerlink" title="重构"></a>重构</h2><ul>
+<li>Ctrl+Alt+Shift+T，弹出重构菜单</li>
+<li>Shift+F6，重命名</li>
+<li>F6，移动</li>
+<li>F5，复制</li>
+<li>Alt+Delete，安全删除</li>
+<li>Ctrl+Alt+N，内联</li>
+</ul>
+<h2 id="十大Intellij-IDEA快捷键"><a href="#十大Intellij-IDEA快捷键" class="headerlink" title="十大Intellij IDEA快捷键"></a>十大Intellij IDEA快捷键</h2><p>Intellij<br>IDEA中有很多快捷键让人爱不释手，stackoverflow上也有一些有趣的讨论。每个人都有自己的最爱，想排出个理想的榜单还真是困难。以前也整理过Intellij的快捷键，这次就按照我日常开发时的使用频率，简单分类列一下我最喜欢的十大快捷神键吧。</p>
+<ol>
+<li><p>智能提示:<br>Intellij首当其冲的当然就是Intelligence智能！基本的代码提示用Ctrl+Space，还有更智能地按类型信息提示Ctrl+Shift+Space，但因为Intellij总是随着我们敲击而自动提示，所以很多时候都不会手动敲这两个快捷键(除非提示框消失了)。用F2&#x2F;<br>Shift+F2移动到有错误的代码，Alt+Enter快速修复(即Eclipse中的Quick<br>Fix功能)。当智能提示为我们自动补全方法名时，我们通常要自己补上行尾的反括号和分号，当括号嵌套很多层时会很麻烦，这时我们只需敲Ctrl+Shift+Enter就能自动补全末尾的字符。而且不只是括号，例如敲完if&#x2F;for时也可以自动补上{}花括号。最后要说一点，Intellij能够智能感知Spring、Hibernate等主流框架的配置文件和类，以静制动，在看似”静态”的外表下，智能地扫描理解你的项目是如何构造和配置的。</p>
+</li>
+<li><p>重构:<br>Intellij重构是另一完爆Eclipse的功能，其智能程度令人瞠目结舌，比如提取变量时自动检查到所有匹配同时提取成一个变量等。尤其看过《重构改善既有代码设计》之后，有了Intellij的配合简直是令人大呼过瘾！也正是强大的智能和重构功能，使Intellij下的TDD开发非常顺畅。切入正题，先说一个无敌的重构功能大汇总快捷键Ctrl+Shift+Alt+T，叫做Refactor<br>This。按法有点复杂，但也符合Intellij的风格，很多快捷键都要双手完成，而不像Eclipse不少最有用的快捷键可以潇洒地单手完成(不知道算不算Eclipse的一大优点)，但各位用过Emacs的话就会觉得也没什么了(非Emacs黑)。此外，还有些最常用的重构技巧，因为太常用了，若每次都在Refactor<br>This菜单里选的话效率有些低。比如Shift+F6直接就是改名，Ctrl+Alt+V则是提取变量。</p>
+</li>
+<li><p>代码生成：<br>这一点类似Eclipse，虽不是独到之处，但因为日常使用频率极高，所以还是罗列在榜单前面。常用的有fori&#x2F;sout&#x2F;psvm+Tab即可生成循环、System.out、main方法等boilerplate样板代码，用Ctrl+J可以查看所有模板。后面”辅助”一节中将会讲到Alt+Insert，在编辑窗口中点击可以生成构造函数、toString、getter&#x2F;setter、重写父类方法等。这两个技巧实在太常用了，几乎每天都要生成一堆main、System.out和getter&#x2F;setter。另外，Intellij<br>IDEA 13中加入了后缀自动补全功能(Postfix<br>Completion)，比模板生成更加灵活和强大。例如要输入for(User user :<br>users)只需输入user.for+Tab。再比如，要输入Date birthday &#x3D;<br>user.getBirthday();只需输入user.getBirthday().var+Tab即可。</p>
+</li>
+<li><p>编辑：<br>编辑中不得不说的一大神键就是能够自动按语法选中代码的Ctrl+W以及反向的Ctrl+Shift+W了。此外，Ctrl+Left&#x2F;Right移动光标到前&#x2F;后单词，Ctrl+[&#x2F;]移动到前&#x2F;后代码块，这些类Vim风格的光标移动也是一大亮点。以上Ctrl+Left&#x2F;Right&#x2F;[]加上Shift的话就能选中跳跃范围内的代码。Alt+Forward&#x2F;Backward移动到前&#x2F;后方法。还有些非常普通的像Ctrl+Y删除行、Ctrl+D复制行、Ctrl+&lt;&#x2F;&gt;折叠代码就不多说了。关于光标移动再多扩展一点，除了Intellij本身已提供的功能外，我们还可以安装ideaVim或者emacsIDEAs享受到Vim的快速移动和Emacs的AceJump功能(超爽！)。另外，Intellij的书签功能也是不错的，用Ctrl+Shift+Num定义110书签(再次按这组快捷键则是删除书签)，然后通过Ctrl+Num跳转。这避免了多次使用前&#x2F;下一编辑位置Ctrl+Left&#x2F;Right来回跳转的麻烦，而且此快捷键默认与Windows热键冲突(默认多了Alt，与Windows改变显示器显示方向冲突，一不小心显示器就变成倒着显式的了，冏啊)。</p>
+</li>
+<li><p>查找打开：<br>类似Eclipse，Intellij的Ctrl+N&#x2F;Ctrl+Shift+N可以打开类或资源，但Intellij更加智能一些，我们输入的任何字符都将看作模糊匹配，省却了Eclipse中还有输入*的麻烦。最新版本的IDEA还加入了Search<br>Everywhere功能，只需按Shift+Shift即可在一个弹出框中搜索任何东西，包括类、资源、配置项、方法等等。类的继承关系则可用Ctrl+H打开类层次窗口，在继承层次上跳转则用Ctrl+B&#x2F;Ctrl+Alt+B分别对应父类或父方法定义和子类或子方法实现，查看当前类的所有方法用Ctrl+F12。要找类或方法的使用也很简单，Alt+F7。要查找文本的出现位置就用Ctrl+F&#x2F;Ctrl+Shift+F在当前窗口或全工程中查找，再配合F3&#x2F;Shift+F3前后移动到下一匹配处。Intellij更加智能的又一佐证是在任意菜单或显示窗口，都可以直接输入你要找的单词，Intellij就会自动为你过滤。</p>
+</li>
+<li><p>其他辅助：<br>以上这些神键配上一些辅助快捷键，即可让你的双手90%以上的时间摆脱鼠标，专注于键盘仿佛在进行钢琴表演。这些不起眼却是至关重要的最后一块拼图有：</p>
+<ul>
+<li>命令：Ctrl+Shift+A可以查找所有Intellij的命令，并且每个命令后面还有其快捷键。所以它不仅是一大神键，也是查找学习快捷键的工具。</li>
+<li>新建：Alt+Insert可以新建类、方法等任何东西。</li>
+<li>格式化代码：格式化import列表Ctrl+Alt+O，格式化代码Ctrl+Alt+L。</li>
+<li>切换窗口：Alt+Num，常用的有1项目结构，3搜索结果，4&#x2F;5运行调试。Ctrl+Tab切换标签页，Ctrl+E&#x2F;Ctrl+Shift+E打开最近打开过的或编辑过的文件。</li>
+<li>单元测试：Ctrl+Shift+T创建单元测试用例。</li>
+<li>运行：Alt+Shift+F10运行程序，Shift+F9启动调试，Ctrl+F2停止。</li>
+<li>调试：F7&#x2F;F8&#x2F;F9分别对应Step into，Step over，Continue。</li>
+</ul>
+<p>此外还有些我自定义的，例如水平分屏Ctrl+|等，和一些神奇的小功能Ctrl+Shift+V粘贴很早以前拷贝过的，Alt+Shift+Insert进入到列模式进行按列选中。</p>
+<ul>
+<li>Top #10切来切去：Ctrl+Tab</li>
+<li>Top #9选你所想：Ctrl+W</li>
+<li>Top #8代码生成：Template&#x2F;Postfix +Tab</li>
+<li>Top #7发号施令：Ctrl+Shift+A</li>
+<li>Top #6无处藏身：Shift+Shift</li>
+<li>Top #5自动完成：Ctrl+Shift+Enter</li>
+<li>Top #4创造万物：Alt+Insert</li>
+</ul>
+<p>太难割舍，前三名并列吧！</p>
+<ul>
+<li>Top #1智能补全：Ctrl+Shift+Space</li>
+<li>Top #1自我修复：Alt+Enter</li>
+<li>Top #1重构一切：Ctrl+Shift+Alt+T</li>
+</ul>
+</li>
+</ol>
+<h2 id="全选复选框"><a href="#全选复选框" class="headerlink" title="全选复选框"></a>全选复选框</h2><ol>
+<li>shift全部选中</li>
+<li>空格勾选</li>
+</ol>
+<h1 id="一些实用的设置"><a href="#一些实用的设置" class="headerlink" title="一些实用的设置"></a>一些实用的设置</h1><ul>
+<li><p>live templete: idea中可以自定义一些自动生成方式， 很强大,<br>类似sout生成, 目前将用户配置user.xml备份上传</p>
+</li>
+<li><p>隐藏页签 setting–&gt;editor–&gt;general–&gt;placement&#x2F;none</p>
+</li>
+<li><p>无法输入中文, fcitx, 修改idea安装目录下的执行命令idea.sh,<br>在最前面加入与.xinitc一样的一些fcitx的环境变量</p>
+<ul>
+<li><p>vim &#x2F;usr&#x2F;bin&#x2F;idea.sh</p>
+</li>
+<li><p>开头加入</p>
+<pre><code>#!/bin/sh
+export XMODIFIERS=&quot;@im=fcitx&quot;
+export GTK_IM_MODULE=&quot;fcitx&quot;
+export QT_IM_MODULE=&quot;fcitx&quot;
+if [ -z &quot;$IDEA_JDK&quot; ] ; then
+        IDEA_JDK=&quot;/usr/lib/jvm/java-8-openjdk&quot;
+fi
+exec env IDEA_JDK=$IDEA_JDK /usr/share/intellijidea-ce/bin/idea.sh $@
+</code></pre>
+</li>
+<li><p>使用的jdk版本可以加入环境变量 export IDEA<del>JDK</del>&#x3D;&quot;$JAVA<del>HOME</del>&quot;</p>
+</li>
+<li><p>注意，确认下idea.sh中引号是否正确，不然还是不能输入中文</p>
+</li>
+</ul>
+</li>
+<li><p>idea重新安装后无法import project, 改用社区版本+ remote断点的方式</p>
+<ul>
+<li><p>首先在weblogic域中打开debugflag(默认端口8453)(setdomainenv),<br>或者将内容复制到startweblogic.sh启动参数中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">JAVA_DEBUG=&quot;-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,address=4000,server=y,suspend=n&quot;</span><br><span class="line">export JAVA_DEBUG</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动weblogic服务后，idea中新建remote,<br>修改访问的地址以及端口即可, 注意，一定要指定modu</p>
+</li>
+</ul>
+</li>
+<li><p>idea vim插件 :actionlist 显示所有的快捷键,(好牛逼..)</p>
+</li>
+<li><p>ctrl-shift v： idea的历史剪贴板</p>
+</li>
+<li><p>神奇的Inject language</p>
+<ul>
+<li>Inject language or reference。</li>
+<li>alt-enter</li>
+<li>enter</li>
+<li>json file</li>
+<li>alter-enter – &gt; json file fragment</li>
+<li>编辑完成后ctrl-f4退出</li>
+</ul>
+</li>
+<li><p>擦屁股快捷键ctrl+shift+enter</p>
+</li>
+<li><p>ctrl-w alt-j批量修改</p>
+</li>
+<li><p>代码在项目中的定位: alt-f1 –&gt; 选择project –&gt; enter, 如果还想回去<br>f4</p>
+</li>
+<li><p>idea配置同步, setting&gt;repository</p>
+<ol>
+<li>github建立一个新的项目</li>
+<li>setting–&gt; resp中url使用这个项目</li>
+<li>这就是个github项目随便玩.</li>
+</ol>
+</li>
+<li><p>隐藏页签, 在页签右键，none</p>
+</li>
+<li><p>社区版没有 import setting选项，所以安装主题ui就直接搜plugin,<br>然后找对应主题名即可</p>
+</li>
+</ul>
+<h1 id="修改host-防止idea检测注册信息"><a href="#修改host-防止idea检测注册信息" class="headerlink" title="修改host, 防止idea检测注册信息"></a>修改host, 防止idea检测注册信息</h1><p>127.0.0.1 localhost.localdomain localhost arch ::1	localhost.localdomain<br>localhost arch ### idea 0.0.0.0 account.jetbrains.com</p>
+<h1 id="插件推荐"><a href="#插件推荐" class="headerlink" title="插件推荐"></a>插件推荐</h1><ul>
+<li><p>ideavim</p>
+</li>
+<li><p>lombok 可选， 定义bean的时候不用在写getset</p>
+</li>
+<li><p>Alibaba Java Coding Guidelines plugin 阿里规范</p>
+</li>
+<li><p>findbugs 避免低级bug</p>
+</li>
+<li><p>maven helper据说很吊， 暂时没用， 排查maven依赖的</p>
+</li>
+<li><p>generateallsetter 自定调用一个bean的set方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">User user = new User();</span><br><span class="line">alt-enter</span><br><span class="line">选择自动生成</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>key promoter 这个插件是告诉你个傻x， 输入几次了还及不住快捷键</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechat.png" alt="Mr.zhao 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mr.zhao
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://zhaozhiwei1992.github.io/2019/07/25/intellij%E5%BF%AB%E6%8D%B7%E9%94%AE/" title="intellij idea快捷键实战">http://zhaozhiwei1992.github.io/2019/07/25/intellij快捷键/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" rel="tag"># 开发工具</a>
+              <a href="/tags/intellij/" rel="tag"># intellij</a>
+              <a href="/tags/idea/" rel="tag"># idea</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/07/25/linux%E4%B8%8B%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/" rel="prev" title="linux下常用工具">
+                  <i class="fa fa-angle-left"></i> linux下常用工具
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/08/10/mybatis%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE/" rel="next" title="springboot+mybatis多数据源配置">
+                  springboot+mybatis多数据源配置 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mr.zhao</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

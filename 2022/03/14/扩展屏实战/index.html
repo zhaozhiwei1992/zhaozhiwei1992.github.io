@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhaozhiwei1992.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"style":null,"show_result":false},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="普通屏幕连根线就行, 跳过 如何将手机&#x2F;平板&#x2F;其它电脑作为扩展屏幕一些可行的方案如果只是为了演示屏幕,方案很多, 使用各种远程工具啥的都可以如anydesk, 向日葵等.如果是扩展, 那必须要是要支持部分内容到扩展屏幕可以配置活动窗口如deskreen 采用vnc的工具如 VirtScreen 前提基于Intel集显中的Virtualheads功能, 目前笔记本也是集显，没试其">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何将手机&#x2F;平板&#x2F;其它电脑作为扩展屏?">
+<meta property="og:url" content="http://zhaozhiwei1992.github.io/2022/03/14/%E6%89%A9%E5%B1%95%E5%B1%8F%E5%AE%9E%E6%88%98/index.html">
+<meta property="og:site_name" content="离线de日常">
+<meta property="og:description" content="普通屏幕连根线就行, 跳过 如何将手机&#x2F;平板&#x2F;其它电脑作为扩展屏幕一些可行的方案如果只是为了演示屏幕,方案很多, 使用各种远程工具啥的都可以如anydesk, 向日葵等.如果是扩展, 那必须要是要支持部分内容到扩展屏幕可以配置活动窗口如deskreen 采用vnc的工具如 VirtScreen 前提基于Intel集显中的Virtualheads功能, 目前笔记本也是集显，没试其">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-03-13T16:00:00.000Z">
+<meta property="article:author" content="Mr.zhao">
+<meta property="article:tag" content="软件">
+<meta property="article:tag" content="扩展屏">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://zhaozhiwei1992.github.io/2022/03/14/%E6%89%A9%E5%B1%95%E5%B1%8F%E5%AE%9E%E6%88%98/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhaozhiwei1992.github.io/2022/03/14/%E6%89%A9%E5%B1%95%E5%B1%8F%E5%AE%9E%E6%88%98/","path":"2022/03/14/扩展屏实战/","title":"如何将手机/平板/其它电脑作为扩展屏?"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>如何将手机/平板/其它电脑作为扩展屏? | 离线de日常</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">离线de日常</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E5%B1%8F%E5%B9%95"><span class="nav-number">1.</span> <span class="nav-text">普通屏幕</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%B0%86%E6%89%8B%E6%9C%BA-%E5%B9%B3%E6%9D%BF-%E5%85%B6%E5%AE%83%E7%94%B5%E8%84%91%E4%BD%9C%E4%B8%BA%E6%89%A9%E5%B1%95%E5%B1%8F%E5%B9%95"><span class="nav-number">2.</span> <span class="nav-text">如何将手机&#x2F;平板&#x2F;其它电脑作为扩展屏幕</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%8F%AF%E8%A1%8C%E7%9A%84%E6%96%B9%E6%A1%88"><span class="nav-number">2.1.</span> <span class="nav-text">一些可行的方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E5%8F%AA%E6%98%AF%E4%B8%BA%E4%BA%86%E6%BC%94%E7%A4%BA%E5%B1%8F%E5%B9%95-%E6%96%B9%E6%A1%88%E5%BE%88%E5%A4%9A-%E4%BD%BF%E7%94%A8%E5%90%84%E7%A7%8D%E8%BF%9C%E7%A8%8B%E5%B7%A5%E5%85%B7%E5%95%A5%E7%9A%84%E9%83%BD%E5%8F%AF%E4%BB%A5%E5%A6%82anydesk-%E5%90%91%E6%97%A5%E8%91%B5%E7%AD%89"><span class="nav-number">2.1.1.</span> <span class="nav-text">如果只是为了演示屏幕,方案很多, 使用各种远程工具啥的都可以如anydesk, 向日葵等.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E6%98%AF%E6%89%A9%E5%B1%95-%E9%82%A3%E5%BF%85%E9%A1%BB%E8%A6%81%E6%98%AF%E8%A6%81%E6%94%AF%E6%8C%81%E9%83%A8%E5%88%86%E5%86%85%E5%AE%B9%E5%88%B0%E6%89%A9%E5%B1%95%E5%B1%8F%E5%B9%95"><span class="nav-number">2.1.2.</span> <span class="nav-text">如果是扩展, 那必须要是要支持部分内容到扩展屏幕</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E6%8F%90"><span class="nav-number">2.2.</span> <span class="nav-text">前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">2.3.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xrandr%E8%AE%BE%E7%BD%AE%E5%B1%8F%E5%B9%95%E6%89%A9%E5%B1%95"><span class="nav-number">2.4.</span> <span class="nav-text">xrandr设置屏幕扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%8E%B0%E6%9C%89%E9%85%8D%E7%BD%AE"><span class="nav-number">2.4.1.</span> <span class="nav-text">查看现有配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E8%99%9A%E6%8B%9F%E5%B1%8F%E5%B9%95"><span class="nav-number">2.4.2.</span> <span class="nav-text">增加虚拟屏幕</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#X11vnc"><span class="nav-number">2.5.</span> <span class="nav-text">X11vnc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5%E5%B7%A5%E5%85%B7"><span class="nav-number">2.6.</span> <span class="nav-text">客户端连接工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#adb%E5%B7%A5%E5%85%B7-usb%E8%BF%9E%E6%8E%A5%E6%89%8D%E9%9C%80%E8%A6%81"><span class="nav-number">2.7.</span> <span class="nav-text">adb工具(usb连接才需要)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">2.8.</span> <span class="nav-text">参考</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">3.</span> <span class="nav-text">测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%86%E6%B4%BB%E5%8A%A8%E7%A8%8B%E5%BA%8F%E7%A7%BB%E5%8A%A8%E5%88%B0%E6%89%A9%E5%B1%95%E5%B1%8F"><span class="nav-number">3.1.</span> <span class="nav-text">将活动程序移动到扩展屏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%89%E6%A0%87%E5%AE%9A%E4%BD%8D%E6%89%A9%E5%B1%95%E5%B1%8F"><span class="nav-number">3.2.</span> <span class="nav-text">光标定位扩展屏</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">问题处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85virtscreen%E4%BB%A5%E6%9D%A5python-quamash%E6%8F%90%E7%A4%BA%E7%BC%96%E8%AF%91%E4%B8%8D%E9%80%9A%E8%BF%87-%E5%BC%83%E7%94%A8"><span class="nav-number">4.1.</span> <span class="nav-text">安装virtscreen以来python-quamash提示编译不通过(弃用)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%BE%E4%B8%8D%E5%88%B0xrandr-cannot-find-mode-1920x1080-60-00"><span class="nav-number">4.2.</span> <span class="nav-text">找不到xrandr: cannot find mode &quot;1920x1080_60.00&quot;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bvnc%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5%E5%A4%B1%E8%B4%A5"><span class="nav-number">4.3.</span> <span class="nav-text">bvnc客户端连接失败</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E6%B2%A1%E6%95%88%E6%9E%9C"><span class="nav-number">4.4.</span> <span class="nav-text">扩展没效果?</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Mr.zhao"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Mr.zhao</p>
+  <div class="site-description" itemprop="description">show me your code</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">88</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhaozhiwei1992" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhaozhiwei1992" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/p205/posts" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;p205&#x2F;posts" rel="noopener me" target="_blank"><i class="fab fa-zhihu fa-fw"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.jianshu.com/u/65f51bc73109" title="简书 → https:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;65f51bc73109" rel="noopener me" target="_blank"><i class="fas fa-book-open fa-fw"></i>简书</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/qq347061329" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;qq347061329" rel="noopener me" target="_blank"><i class="fab fa-blog fa-fw"></i>博客园</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u012768510" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u012768510" rel="noopener me" target="_blank"><i class="fas fa-code fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhaozhiweishanxi@gmail.com" title="E-Mail → mailto:zhaozhiweishanxi@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2022/03/14/%E6%89%A9%E5%B1%95%E5%B1%8F%E5%AE%9E%E6%88%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Mr.zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="如何将手机/平板/其它电脑作为扩展屏? | 离线de日常">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何将手机/平板/其它电脑作为扩展屏?
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-03-14 00:00:00" itemprop="dateCreated datePublished" datetime="2022-03-14T00:00:00+08:00">2022-03-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%BD%AF%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">软件</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%BD%AF%E4%BB%B6/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="普通屏幕"><a href="#普通屏幕" class="headerlink" title="普通屏幕"></a>普通屏幕</h1><p>连根线就行, 跳过</p>
+<h1 id="如何将手机-平板-其它电脑作为扩展屏幕"><a href="#如何将手机-平板-其它电脑作为扩展屏幕" class="headerlink" title="如何将手机&#x2F;平板&#x2F;其它电脑作为扩展屏幕"></a>如何将手机&#x2F;平板&#x2F;其它电脑作为扩展屏幕</h1><h2 id="一些可行的方案"><a href="#一些可行的方案" class="headerlink" title="一些可行的方案"></a>一些可行的方案</h2><h3 id="如果只是为了演示屏幕-方案很多-使用各种远程工具啥的都可以如anydesk-向日葵等"><a href="#如果只是为了演示屏幕-方案很多-使用各种远程工具啥的都可以如anydesk-向日葵等" class="headerlink" title="如果只是为了演示屏幕,方案很多, 使用各种远程工具啥的都可以如anydesk, 向日葵等."></a>如果只是为了演示屏幕,方案很多, 使用各种远程工具啥的都可以如anydesk, 向日葵等.</h3><h3 id="如果是扩展-那必须要是要支持部分内容到扩展屏幕"><a href="#如果是扩展-那必须要是要支持部分内容到扩展屏幕" class="headerlink" title="如果是扩展, 那必须要是要支持部分内容到扩展屏幕"></a>如果是扩展, 那必须要是要支持部分内容到扩展屏幕</h3><p>可以配置活动窗口如deskreen</p>
+<p>采用vnc的工具如 VirtScreen</p>
+<h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><p>基于Intel集显中的Virtualheads功能, 目前笔记本也是集显，没试其他方案</p>
+<p>这里也是采用vnc技术来搞， 如果是用现成的推荐virtscreen</p>
+<p>扩展屏在 <strong>右</strong></p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>archlinux(主) + i3wm桌面管理器</p>
+<p>android(扩展) 小米平板</p>
+<h2 id="xrandr设置屏幕扩展"><a href="#xrandr设置屏幕扩展" class="headerlink" title="xrandr设置屏幕扩展"></a>xrandr设置屏幕扩展</h2><p>将笔记本屏幕扩展到android平板上, 并且采用分屏方式</p>
+<h3 id="查看现有配置"><a href="#查看现有配置" class="headerlink" title="查看现有配置"></a>查看现有配置</h3><p>~: xrandr</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Screen 0: minimum 8 x 8, current 1920 x 1080, maximum 32767 x 32767</span><br><span class="line">eDP1 connected primary 1920x1080+0+0 (normal left inverted right x axis y axis) 310mm x 170mm</span><br><span class="line">   1920x1080     60.02*+  59.93  </span><br><span class="line">   1680x1050     59.88  </span><br><span class="line">   1400x1050     59.98  </span><br><span class="line">   1600x900      60.00    59.95    59.82  </span><br><span class="line">DP1 disconnected (normal left inverted right x axis y axis)</span><br><span class="line">DP2 disconnected (normal left inverted right x axis y axis)</span><br><span class="line">HDMI1 disconnected (normal left inverted right x axis y axis)</span><br><span class="line">HDMI2 disconnected (normal left inverted right x axis y axis)</span><br></pre></td></tr></table></figure>
+
+<p>该命令显示了电脑当前的显示状态，Screen 0<br>是当前正在显示的屏幕的分辨率参数，eDP1是笔记本内置显示屏当前的分辨率参数，下面的一堆数字是该显示屏所支持的分辨率及刷新率，最底下的三行分别是<br>HDMI 接口输出及虚拟输出，如果没有连接则会显示disconnect</p>
+<h3 id="增加虚拟屏幕"><a href="#增加虚拟屏幕" class="headerlink" title="增加虚拟屏幕"></a>增加虚拟屏幕</h3><ol>
+<li><p>使用cvt命令获取所需分辨率的相应配置信息,<br>如我想让扩展屏幕分辨率为1920x1080</p>
+<p>~: cvt 1920 1080</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 1920x1080 59.96 Hz (CVT 2.07M9) hsync: 67.16 kHz; pclk: 173.00 MHz</span><br><span class="line">Modeline &quot;1920x1080_60.00&quot;  173.00  1920 2048 2248 2576  1080 1083 1088 1120 -hsync +vsync</span><br></pre></td></tr></table></figure>
+
+<p>其中第二行 Modeline <strong>后面的内容</strong> 是接下来需要的</p>
+</li>
+<li><p>产生新的分辨率模式 xrandr –newmode</p>
+<p>~: xrandr –newmode<br>上述Modelline后边部分，或者直接使用下面命令一步到位</p>
+<p>~: xrandr –newmode `cvt 1920 1080|tail -n1 |sed &#39;s&#x2F;Modeline<br>&#x2F;&#x2F;&#39; |sed &#39;s&#x2F;&quot;&#x2F;&#x2F;g&#39;`</p>
+<p>此时通过查看xrandr, 多出了Virtual1部分,</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Screen 0: minimum 8 x 8, current 1920 x 1080, maximum 32767 x 32767</span><br><span class="line">eDP1 connected primary 1920x1080+0+0 (normal left inverted right x axis y axis) 310mm x 170mm</span><br><span class="line">   1920x1080     60.02*+  59.93  </span><br><span class="line">   1680x1050     59.88  </span><br><span class="line">   1400x1050     59.98  </span><br><span class="line">DP1 disconnected (normal left inverted right x axis y axis)</span><br><span class="line">DP2 disconnected (normal left inverted right x axis y axis)</span><br><span class="line">HDMI1 disconnected (normal left inverted right x axis y axis)</span><br><span class="line">HDMI2 disconnected (normal left inverted right x axis y axis)</span><br><span class="line">VIRTUAL1 disconnected (normal left inverted right x axis y axis)</span><br><span class="line">  1920x1080_60.00 (0x20a) 173.000MHz -HSync +VSync</span><br><span class="line">        h: width  1920 start 2048 end 2248 total 2576 skew    0 clock  67.16KHz</span><br><span class="line">        v: height 1080 start 1083 end 1088 total 1120           clock  59.96Hz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启用新的显示器</p>
+<p>~: xrandr –addmode VIRTUAL1 &quot;1920x1080_60.00&quot;<br><strong>注意VIRTUAL1变成了connected</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">VIRTUAL1 connected (normal left inverted right x axis y axis)</span><br><span class="line">  1920x1080_60.00  59.96  </span><br></pre></td></tr></table></figure>
+
+<p>xrandr –output VIRTUAL1 –right-of eDP1 –auto <strong>eDP1为主屏幕,<br>扩展屏幕在右边,所以使用right-of,<br>该命令最好执行两次，否则可能不生效</strong></p>
+</li>
+<li><p>关闭扩展屏设置</p>
+<p>~: xrandr –output VIRTUAL1 –off</p>
+</li>
+</ol>
+<h2 id="X11vnc"><a href="#X11vnc" class="headerlink" title="X11vnc"></a>X11vnc</h2><p>启动x11vnc server服务并设置扩展屏</p>
+<p>x11vnc -rfbport 5900 -clip 1920x1080+1920+0 -wait 1 –defer 1 -nowf -sb<br>0</p>
+<p>x11vnc -rfbport 5900 -clip xinerama1 -wait 1 –defer 1 -nowf -sb 0</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-rfbport：指定了连接所用的端口，默认为5900也可以自行设置。</span><br><span class="line">-clip：该命令设置x11vnc映射屏幕的范围，可以使用-clip WxH+X+Y来手动设置映射范围，也可以使用-clip xinerama0来自动映射显示器，其中xinerama0为屏幕设置中从左往右数第一个显示器，以此类推xinerama1为第二个，如果你的主屏幕在左边虚拟屏幕在右边，那如果设置为xinerama0就会将主屏幕的显示内容复制到虚拟屏幕上，也就是两个屏幕的内容一样了，这时就应该设置为xinerama1。</span><br><span class="line">-wait：是两次屏幕抓取的时间间隔，默认为 20 ms 效果比较卡顿，设置为 1 的话会尽可能降低抓取时间减少延迟。</span><br><span class="line">-defer：向vnc客户端发送更新的间隔，默认也为 20 ms，设置为 1 可以尽可能提高发送频率（但对网速的要求就高了）。</span><br><span class="line">-nowf：在移动窗口到虚拟屏幕时显示内容，否则会显示为一个框。</span><br><span class="line">-sb：设置休眠时间，默认为 60s 也就是如果屏幕 60s 内没有活动的话就停止数据传送，这样会导致有时鼠标从主屏移动到虚拟屏幕时会卡顿，设置为 0 后就不会休眠了</span><br></pre></td></tr></table></figure>
+
+<h2 id="客户端连接工具"><a href="#客户端连接工具" class="headerlink" title="客户端连接工具"></a>客户端连接工具</h2><p>安卓下可以使用bvnc</p>
+<p>默认配置地址如192.168.1.xx:5900即可</p>
+<h2 id="adb工具-usb连接才需要"><a href="#adb工具-usb连接才需要" class="headerlink" title="adb工具(usb连接才需要)"></a>adb工具(usb连接才需要)</h2><p>打开手机的开发者模式, 并且选择usb调试</p>
+<p>电脑端安装adb工具</p>
+<p>使用adb reverse tcp:5900 tcp:5900 创建代理</p>
+<p>扩展端配置host地址为127.0.0.1:5900即可</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://blog.csdn.net/u010750137/article/details/104277527">https://blog.csdn.net/u010750137/article/details/104277527</a></p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><h2 id="将活动程序移动到扩展屏"><a href="#将活动程序移动到扩展屏" class="headerlink" title="将活动程序移动到扩展屏"></a>将活动程序移动到扩展屏</h2><p>Win+Shift+Right</p>
+<h2 id="光标定位扩展屏"><a href="#光标定位扩展屏" class="headerlink" title="光标定位扩展屏"></a>光标定位扩展屏</h2><p>Win+Right 注意观察鼠标光标</p>
+<h1 id="问题处理"><a href="#问题处理" class="headerlink" title="问题处理"></a>问题处理</h1><h2 id="安装virtscreen以来python-quamash提示编译不通过-弃用"><a href="#安装virtscreen以来python-quamash提示编译不通过-弃用" class="headerlink" title="安装virtscreen以来python-quamash提示编译不通过(弃用)"></a>安装virtscreen以来python-quamash提示编译不通过(弃用)</h2><p>python版本过高，考虑降低版本</p>
+<h2 id="找不到xrandr-cannot-find-mode-1920x1080-60-00"><a href="#找不到xrandr-cannot-find-mode-1920x1080-60-00" class="headerlink" title="找不到xrandr: cannot find mode &quot;1920x1080_60.00&quot;"></a>找不到xrandr: cannot find mode &quot;1920x1080_60.00&quot;</h2><p>执行该命令时提示上述错误xrandr –delmode VIRTUAL1 &quot;1920x1080_60.00&quot;</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">VIRTUAL1 disconnected (normal left inverted right x axis y axis)</span><br><span class="line">  1920x1080_60.00 (0x20a) 173.000MHz -HSync +VSync</span><br><span class="line">        h: width  1920 start 2048 end 2248 total 2576 skew    0 clock  67.16KHz</span><br><span class="line">        v: height 1080 start 1083 end 1088 total 1120           clock  59.96Hz</span><br></pre></td></tr></table></figure>
+
+<p>注意这里的mode不能有双引号, 必须是1920x1080_60.00<br>而不是&quot;1920x1080_60.00&quot;</p>
+<h2 id="bvnc客户端连接失败"><a href="#bvnc客户端连接失败" class="headerlink" title="bvnc客户端连接失败"></a>bvnc客户端连接失败</h2><p>确认服务端已经启动，客户端连接失败, 一般为防火墙导致</p>
+<p>关闭防火墙systemctl stop iptables.service</p>
+<p>增加防火墙规则(推荐)</p>
+<h2 id="扩展没效果"><a href="#扩展没效果" class="headerlink" title="扩展没效果?"></a>扩展没效果?</h2><p><strong>该命令最好执行两次，否则可能不生效</strong></p>
+<p>xrandr –output VIRTUAL1 –right-of eDP1 –auto</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechat.png" alt="Mr.zhao 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mr.zhao
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://zhaozhiwei1992.github.io/2022/03/14/%E6%89%A9%E5%B1%95%E5%B1%8F%E5%AE%9E%E6%88%98/" title="如何将手机&#x2F;平板&#x2F;其它电脑作为扩展屏?">http://zhaozhiwei1992.github.io/2022/03/14/扩展屏实战/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E8%BD%AF%E4%BB%B6/" rel="tag"># 软件</a>
+              <a href="/tags/%E6%89%A9%E5%B1%95%E5%B1%8F/" rel="tag"># 扩展屏</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/05/18/%E8%BF%81%E7%A7%BBpolardb%E9%97%AE%E9%A2%98%E4%B8%80/" rel="prev" title="迁移polardb问题一">
+                  <i class="fa fa-angle-left"></i> 迁移polardb问题一
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/03/14/cpu%E5%BC%82%E5%B8%B8%E5%88%86%E6%9E%90%E4%BC%98%E5%8C%96/" rel="next" title="cpu异常分析优化">
+                  cpu异常分析优化 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mr.zhao</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

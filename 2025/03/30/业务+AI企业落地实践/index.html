@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhaozhiwei1992.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"style":null,"show_result":false},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="前言：为什么企业需要警惕”AI军备竞赛”？当前AI技术发展呈现”技术狂欢”态势，今天Deepseek火了跟一把，明天出来个其它看着高级的东西又跟一把。但企业实践中最常出现的问题在于：投入大量资源训练模型后，业务价值却难以量化。本文从业务出发，探讨如何让AI真正成为业务增长的助推器。 为什么AI是业务的必选项?现在网上AI技术层出不穷，很多人通过ai来做一些日常工作，比如写写文章，查查资料，做做总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从业务视角看AI落地：避免技术狂欢，聚焦真实需求">
+<meta property="og:url" content="http://zhaozhiwei1992.github.io/2025/03/30/%E4%B8%9A%E5%8A%A1+AI%E4%BC%81%E4%B8%9A%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/index.html">
+<meta property="og:site_name" content="离线de日常">
+<meta property="og:description" content="前言：为什么企业需要警惕”AI军备竞赛”？当前AI技术发展呈现”技术狂欢”态势，今天Deepseek火了跟一把，明天出来个其它看着高级的东西又跟一把。但企业实践中最常出现的问题在于：投入大量资源训练模型后，业务价值却难以量化。本文从业务出发，探讨如何让AI真正成为业务增长的助推器。 为什么AI是业务的必选项?现在网上AI技术层出不穷，很多人通过ai来做一些日常工作，比如写写文章，查查资料，做做总结">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-03-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-12T07:40:02.882Z">
+<meta property="article:author" content="Mr.zhao">
+<meta property="article:tag" content="AI, 企业落地">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://zhaozhiwei1992.github.io/2025/03/30/%E4%B8%9A%E5%8A%A1+AI%E4%BC%81%E4%B8%9A%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhaozhiwei1992.github.io/2025/03/30/%E4%B8%9A%E5%8A%A1+AI%E4%BC%81%E4%B8%9A%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/","path":"2025/03/30/业务+AI企业落地实践/","title":"从业务视角看AI落地：避免技术狂欢，聚焦真实需求"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>从业务视角看AI落地：避免技术狂欢，聚焦真实需求 | 离线de日常</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">离线de日常</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%81%E4%B8%9A%E9%9C%80%E8%A6%81%E8%AD%A6%E6%83%95%E2%80%9DAI%E5%86%9B%E5%A4%87%E7%AB%9E%E8%B5%9B%E2%80%9D%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">前言：为什么企业需要警惕”AI军备竞赛”？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88AI%E6%98%AF%E4%B8%9A%E5%8A%A1%E7%9A%84%E5%BF%85%E9%80%89%E9%A1%B9"><span class="nav-number">2.</span> <span class="nav-text">为什么AI是业务的必选项?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88AI%E5%BE%88%E9%9A%BE%E5%9C%A8%E4%BC%81%E4%B8%9A%E4%B8%AD%E8%90%BD%E5%9C%B0"><span class="nav-number">3.</span> <span class="nav-text">为什么AI很难在企业中落地?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AI%E5%A6%82%E4%BD%95%E9%87%8D%E5%A1%91%E6%A0%B8%E5%BF%83%E5%9C%BA%E6%99%AF"><span class="nav-number">4.</span> <span class="nav-text">AI如何重塑核心场景?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E7%A1%AE%E8%AE%A4%E8%AF%86AI"><span class="nav-number">4.1.</span> <span class="nav-text">正确认识AI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%86%E5%88%AB%E5%85%B3%E9%94%AE%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF"><span class="nav-number">4.2.</span> <span class="nav-text">识别关键业务场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AI%E6%8A%80%E6%9C%AF%E7%9A%84%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B"><span class="nav-number">4.3.</span> <span class="nav-text">AI技术的应用案例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AI%E5%8A%A9%E7%90%86"><span class="nav-number">4.3.1.</span> <span class="nav-text">AI助理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%99%BA%E8%83%BD%E9%A3%8E%E6%8E%A7"><span class="nav-number">4.3.2.</span> <span class="nav-text">智能风控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E5%AE%83"><span class="nav-number">4.3.3.</span> <span class="nav-text">其它</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B"><span class="nav-number">5.</span> <span class="nav-text">技术选型</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Mr.zhao"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Mr.zhao</p>
+  <div class="site-description" itemprop="description">show me your code</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">88</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhaozhiwei1992" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhaozhiwei1992" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/p205/posts" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;p205&#x2F;posts" rel="noopener me" target="_blank"><i class="fab fa-zhihu fa-fw"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.jianshu.com/u/65f51bc73109" title="简书 → https:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;65f51bc73109" rel="noopener me" target="_blank"><i class="fas fa-book-open fa-fw"></i>简书</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/qq347061329" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;qq347061329" rel="noopener me" target="_blank"><i class="fab fa-blog fa-fw"></i>博客园</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u012768510" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u012768510" rel="noopener me" target="_blank"><i class="fas fa-code fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhaozhiweishanxi@gmail.com" title="E-Mail → mailto:zhaozhiweishanxi@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2025/03/30/%E4%B8%9A%E5%8A%A1+AI%E4%BC%81%E4%B8%9A%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Mr.zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="从业务视角看AI落地：避免技术狂欢，聚焦真实需求 | 离线de日常">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          从业务视角看AI落地：避免技术狂欢，聚焦真实需求
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-03-30 00:00:00" itemprop="dateCreated datePublished" datetime="2025-03-30T00:00:00+08:00">2025-03-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-11-12 15:40:02" itemprop="dateModified" datetime="2025-11-12T15:40:02+08:00">2025-11-12</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="前言：为什么企业需要警惕”AI军备竞赛”？"><a href="#前言：为什么企业需要警惕”AI军备竞赛”？" class="headerlink" title="前言：为什么企业需要警惕”AI军备竞赛”？"></a>前言：为什么企业需要警惕”AI军备竞赛”？</h1><p>当前AI技术发展呈现”技术狂欢”态势，今天Deepseek火了跟一把，明天出来个其它看着高级的东西又跟一把。但企业实践中最常出现的问题在于：投入大量资源训练模型后，业务价值却难以量化。本文从业务出发，探讨如何让AI真正成为业务增长的助推器。</p>
+<h1 id="为什么AI是业务的必选项"><a href="#为什么AI是业务的必选项" class="headerlink" title="为什么AI是业务的必选项?"></a>为什么AI是业务的必选项?</h1><p>现在网上AI技术层出不穷，很多人通过ai来做一些日常工作，比如写写文章，查查资料，做做总结。高级一点的自己通过coze之类的平台做一些自己的AI工作流，智能体，通过各种组合提高自己的工作效率。</p>
+<p>对于企业来说，如果自己在业务上能跟AI结合，能够从各方面提高自己产品的竞争力。</p>
+<p>就以客服系统来说，有时候机器人客服回复的内容比较死板，很多都是通过内容匹配给出结果。但是使用AI以后能够充分利用AI的分析总结能力，将一些散落的知识分析总结，更加合理的提供给用户，甚至不仔细观察都以为是真人。相对于之前冷冰冰的知识，通过AI可以更好的提高客户体验，增强客户满意度和忠诚度。</p>
+<h1 id="为什么AI很难在企业中落地"><a href="#为什么AI很难在企业中落地" class="headerlink" title="为什么AI很难在企业中落地?"></a>为什么AI很难在企业中落地?</h1><p>这里不是说落不了地，而是这么久了还没有爆炸性落地的产品。之前Deepseek火了，出来一拨”落地”热，基本上就是自己自己部署个模型或者搭建个简单知识库就敢说是落地。</p>
+<p>其实AI无法落地主要的问题在于找不到切入点，还有行动力不足。首先是切入点问题，有些领导认为AI无所不能，上来就是高难度操作，认为只要部署个模型，挂个知识库，就可以让自己的产品智能了，用户问啥能干啥，也不需要那么多开发，测试，运营了。这种是完全被洗脑的，觉得AI就是神仙，无所不能，并不是所有场景适合硬往AI上套。还有一种是行动力不足，觉得AI现在发展还看不懂，不够成熟，准备再观察观察。</p>
+<p>那么怎么让业务能跟AI更好的结合呢，下面我会给出一些自己在实践中的理解。</p>
+<h1 id="AI如何重塑核心场景"><a href="#AI如何重塑核心场景" class="headerlink" title="AI如何重塑核心场景?"></a>AI如何重塑核心场景?</h1><h2 id="正确认识AI"><a href="#正确认识AI" class="headerlink" title="正确认识AI"></a>正确认识AI</h2><p>首先我们要对AI有个正确的认识，AI不是无所不能，并不是所有的场景都适合AI。AI本生是科技的产物，可以把它理解为一个拥有海量通用知识的业务小白。业务太庞杂了，对于一个行业内摸爬滚打多年的人都不敢说样样精通，并且很多业务不公开或者还需要随机应变，一些网上能下载到的通用大模型根本没有经过业务训练，不可能一上来就解决业务问题。</p>
+<h2 id="识别关键业务场景"><a href="#识别关键业务场景" class="headerlink" title="识别关键业务场景"></a>识别关键业务场景</h2><p>之前说道网上有很多把AI玩出花的场景，也有很多解决实际问题的场景。为什么能出现这些东西，是因为大家会思考，能动手，知道自己要什么。比如我在没有AI之前也会通过程序脚本之类的各种玩意儿来解决自己实际问题，提高效率。对个人来说会思考，知道自己要什么，加一点点动手能力才能用好AI。</p>
+<p>对于企业来说本身在行业深耕多年，业务就是企业最大的优势，应深入分析业务，在业务中找到与AI的结合点。AI的能力应该是解决实际问题，而不是为了应用AI而强行整合。再炫酷的操作如何用户不买账没有任何意义。最好是找三五个业务专家，再配合三五个对AI了解的工程师大家坐在一起，互相分享下业务场景，AI相关知识，多次分享讨论研究最终找出中间的结合点。</p>
+<p>一定不要刚开始就给自己上强度，可以先找点场景试试demo，在做的过程中发现真正需要的场景再去挖掘。中小公司千万不要一上来就微调训练模型。刚开始的目标应该是业务+AI，业务为主，AI为辅，用业务驱动AI更快落地，最终让AI成为系统中一项不可分割的能力。</p>
+<h2 id="AI技术的应用案例"><a href="#AI技术的应用案例" class="headerlink" title="AI技术的应用案例"></a>AI技术的应用案例</h2><p>下边我给出一些业务中使用的案例，供大家参考，不同的企业有不同的业务，这里只抛砖引玉。</p>
+<h3 id="AI助理"><a href="#AI助理" class="headerlink" title="AI助理"></a>AI助理</h3><p>首先是问答类的AI助理，这种是对知识库的应用。企业在多年发展过程中本身积累了不少行业知识，那么就可以整理调整为知识库供AI使用。如何做知识库之前文章也说过，最重要的是知识库的准确性，一般来说，整理成QA方式最方便知识库使用，可以先将一些系统操作手册，问题解决方案之类的东西做知识库，后边再扩展。</p>
+<h3 id="智能风控"><a href="#智能风控" class="headerlink" title="智能风控"></a>智能风控</h3><p>在很多领域都有风控的处理，好一点的会使用一些规则库进行处理，如果差的直接就是硬编码了，这些规则一般都是来源于一些业务或者政策文件，需要翻译成程序能识别的规则才能使用。如果用AI，我们只需要把这些政策做到人能理解的程度，那么AI就可以结合规则在数据流转中进行控制，并按照预设的要求进行反馈，比如生成一个风控报告之类的。这种方式比通过程序处理更方便，不用单独再通过程序实现报告功能，还得需要程序去主动调用。</p>
+<h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><p>每个企业的业务都不一样，主要是从业务入手，去发现。一定是奔着简化用户操作，优化用户体验去的场景，而不是为了AI而造出来的业务。</p>
+<h1 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h1><p>业务再整合模型时一定不会只使用一种模型走天下，不同的模型有不同的优势。所以前期可以选择市面好用的编排工具，比如DIFY之类的，配置比较灵活，可以整合市面上绝大部分模型。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechat.png" alt="Mr.zhao 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mr.zhao
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://zhaozhiwei1992.github.io/2025/03/30/%E4%B8%9A%E5%8A%A1+AI%E4%BC%81%E4%B8%9A%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/" title="从业务视角看AI落地：避免技术狂欢，聚焦真实需求">http://zhaozhiwei1992.github.io/2025/03/30/业务+AI企业落地实践/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/AI-%E4%BC%81%E4%B8%9A%E8%90%BD%E5%9C%B0/" rel="tag"># AI, 企业落地</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/03/13/AI%E6%A8%A1%E5%9E%8B%E8%90%BD%E5%9C%B0%E6%80%9D%E8%80%83/" rel="prev" title="从"我要去山西旅游"看AI智能体的未来之旅：大模型如何重构自动化服务生态">
+                  <i class="fa fa-angle-left"></i> 从"我要去山西旅游"看AI智能体的未来之旅：大模型如何重构自动化服务生态
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/04/22/Vaultwarden%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86/" rel="next" title="本地密码管理器-Vaultwarden">
+                  本地密码管理器-Vaultwarden <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mr.zhao</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

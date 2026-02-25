@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhaozhiwei1992.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"style":null,"show_result":false},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="摘要如果想让机器人的回复更加灵活可控，使用个人或企业内部的数据资料等，那么就需要构建自己的企业微信机器人。文章列举了构建机器人的过程，如果只是想直接使用，可以直接下载代码构建即可。 前置准备环境要求 企业微信管理员权限（用于创建API模式的智能机器人） 具备域名的可公开访问项目 Java 9以下版本需要下载JCE无限制权限策略文件（我直接java17）  技术准备引入官方代码 从企业微信开发者中心">
+<meta property="og:type" content="article">
+<meta property="og:title" content="企业微信机器人开发文档">
+<meta property="og:url" content="http://zhaozhiwei1992.github.io/2025/10/30/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%80%E5%8F%91%E6%96%87%E6%A1%A3/index.html">
+<meta property="og:site_name" content="离线de日常">
+<meta property="og:description" content="摘要如果想让机器人的回复更加灵活可控，使用个人或企业内部的数据资料等，那么就需要构建自己的企业微信机器人。文章列举了构建机器人的过程，如果只是想直接使用，可以直接下载代码构建即可。 前置准备环境要求 企业微信管理员权限（用于创建API模式的智能机器人） 具备域名的可公开访问项目 Java 9以下版本需要下载JCE无限制权限策略文件（我直接java17）  技术准备引入官方代码 从企业微信开发者中心">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://43.143.194.245:9000/images/20251030/001_001.png">
+<meta property="og:image" content="http://43.143.194.245:9000/images/20251030/001_002.png">
+<meta property="og:image" content="http://43.143.194.245:9000/images/20251030/001_003.png">
+<meta property="og:image" content="http://43.143.194.245:9000/images/20251030/001_004.png">
+<meta property="og:image" content="http://43.143.194.245:9000/images/20251030/001_005.png">
+<meta property="og:image" content="http://43.143.194.245:9000/images/20251030/001_006.png">
+<meta property="og:image" content="http://43.143.194.245:9000/images/20251030/001_007.png">
+<meta property="og:image" content="http://zhaozhiwei1992.github.io/images/001_008.png">
+<meta property="article:published_time" content="2025-10-30T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-10-30T00:00:00.000Z">
+<meta property="article:author" content="Mr.zhao">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="企业微信机器人">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://43.143.194.245:9000/images/20251030/001_001.png">
+
+
+<link rel="canonical" href="http://zhaozhiwei1992.github.io/2025/10/30/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%80%E5%8F%91%E6%96%87%E6%A1%A3/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhaozhiwei1992.github.io/2025/10/30/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%80%E5%8F%91%E6%96%87%E6%A1%A3/","path":"2025/10/30/企业微信机器人开发文档/","title":"企业微信机器人开发文档"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>企业微信机器人开发文档 | 离线de日常</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">离线de日常</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%91%98%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87"><span class="nav-number">2.</span> <span class="nav-text">前置准备</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E8%A6%81%E6%B1%82"><span class="nav-number">2.1.</span> <span class="nav-text">环境要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E5%87%86%E5%A4%87"><span class="nav-number">2.2.</span> <span class="nav-text">技术准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E5%AE%98%E6%96%B9%E4%BB%A3%E7%A0%81"><span class="nav-number">2.2.1.</span> <span class="nav-text">引入官方代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%A4%E4%BA%92%E6%B5%81%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">交互流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#URL%E9%AA%8C%E8%AF%81%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.</span> <span class="nav-text">URL验证接口实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%A5%E6%94%B6%E6%B6%88%E6%81%AF%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0"><span class="nav-number">5.</span> <span class="nav-text">接收消息接口实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9A%E4%B9%89"><span class="nav-number">5.1.</span> <span class="nav-text">数据结构定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E4%BB%A3%E7%A0%81"><span class="nav-number">5.2.</span> <span class="nav-text">接口代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E6%A0%BC%E5%BC%8F%E8%AF%B4%E6%98%8E"><span class="nav-number">5.3.</span> <span class="nav-text">消息格式说明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%8A%A0%E8%A7%A3%E5%AF%86%E5%B7%A5%E5%85%B7%E7%B1%BB"><span class="nav-number">6.</span> <span class="nav-text">修改加解密工具类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E8%B7%AF%E5%BE%84"><span class="nav-number">7.</span> <span class="nav-text">代码路径</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%B5%8B%E8%AF%95"><span class="nav-number">8.</span> <span class="nav-text">配置与测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2"><span class="nav-number">8.1.</span> <span class="nav-text">应用部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%85%8D%E7%BD%AE"><span class="nav-number">8.2.</span> <span class="nav-text">机器人配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E9%AA%8C%E8%AF%81"><span class="nav-number">8.3.</span> <span class="nav-text">测试验证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E6%8E%A5%E6%94%B6%E6%B5%8B%E8%AF%95%EF%BC%9A"><span class="nav-number">8.3.1.</span> <span class="nav-text">消息接收测试：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5"><span class="nav-number">8.4.</span> <span class="nav-text">常见问题排查</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">9.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">10.</span> <span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Mr.zhao"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Mr.zhao</p>
+  <div class="site-description" itemprop="description">show me your code</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">88</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhaozhiwei1992" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhaozhiwei1992" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/p205/posts" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;p205&#x2F;posts" rel="noopener me" target="_blank"><i class="fab fa-zhihu fa-fw"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.jianshu.com/u/65f51bc73109" title="简书 → https:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;65f51bc73109" rel="noopener me" target="_blank"><i class="fas fa-book-open fa-fw"></i>简书</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/qq347061329" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;qq347061329" rel="noopener me" target="_blank"><i class="fab fa-blog fa-fw"></i>博客园</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u012768510" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u012768510" rel="noopener me" target="_blank"><i class="fas fa-code fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhaozhiweishanxi@gmail.com" title="E-Mail → mailto:zhaozhiweishanxi@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2025/10/30/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%80%E5%8F%91%E6%96%87%E6%A1%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Mr.zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="企业微信机器人开发文档 | 离线de日常">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          企业微信机器人开发文档
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-10-30 08:00:00" itemprop="dateCreated datePublished" datetime="2025-10-30T08:00:00+08:00">2025-10-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI-%E6%9C%BA%E5%99%A8%E4%BA%BA/" itemprop="url" rel="index"><span itemprop="name">AI,机器人</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>如果想让机器人的回复更加灵活可控，使用个人或企业内部的数据资料等，那么就需要构建自己的企业微信机器人。文章列举了构建机器人的过程，如果只是想直接使用，可以直接下载代码构建即可。</p>
+<h1 id="前置准备"><a href="#前置准备" class="headerlink" title="前置准备"></a>前置准备</h1><h2 id="环境要求"><a href="#环境要求" class="headerlink" title="环境要求"></a>环境要求</h2><ol>
+<li>企业微信管理员权限（用于创建API模式的智能机器人）</li>
+<li>具备域名的可公开访问项目</li>
+<li>Java 9以下版本需要下载JCE无限制权限策略文件（我直接java17）</li>
+</ol>
+<h2 id="技术准备"><a href="#技术准备" class="headerlink" title="技术准备"></a>技术准备</h2><h3 id="引入官方代码"><a href="#引入官方代码" class="headerlink" title="引入官方代码"></a>引入官方代码</h3><ol>
+<li>从企业微信开发者中心下载官方提供的加解密代码<br><img src="http://43.143.194.245:9000/images/20251030/001_001.png"><br><img src="http://43.143.194.245:9000/images/20251030/001_002.png"></li>
+<li>将 com&#x2F;qq&#x2F;weixin&#x2F;mp&#x2F;aes 目录下的所有Java文件复制到您的项目中<br><img src="http://43.143.194.245:9000/images/20251030/001_003.png"></li>
+<li>确保相关导入没有问题，无编译错误</li>
+</ol>
+<h1 id="交互流程"><a href="#交互流程" class="headerlink" title="交互流程"></a>交互流程</h1><p><img src="http://43.143.194.245:9000/images/20251030/001_004.png"></p>
+<h1 id="URL验证接口实现"><a href="#URL验证接口实现" class="headerlink" title="URL验证接口实现"></a>URL验证接口实现</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * URL验证接口 (GET请求)</span></span><br><span class="line"><span class="comment">     * 企业微信会调用此接口验证URL有效性</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/push/wechat&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">wechatGet</span><span class="params">(</span></span><br><span class="line"><span class="params">            <span class="meta">@RequestParam(&quot;msg_signature&quot;)</span> String msgSignature,</span></span><br><span class="line"><span class="params">            <span class="meta">@RequestParam(&quot;timestamp&quot;)</span> String timestamp,</span></span><br><span class="line"><span class="params">            <span class="meta">@RequestParam(&quot;corpid&quot;)</span> String corpid, // 企业id</span></span><br><span class="line"><span class="params">            <span class="meta">@RequestParam(&quot;nonce&quot;)</span> String nonce,</span></span><br><span class="line"><span class="params">            <span class="meta">@RequestParam(&quot;echostr&quot;)</span> String echostr)</span> &#123;</span><br><span class="line">        log.info(<span class="string">&quot;验证URL请求的corpid：&#123;&#125;, 签名: &#123;&#125;, 时间戳: &#123;&#125;, 随机数: &#123;&#125;&quot;</span>, </span><br><span class="line">                corpid, msgSignature, timestamp, nonce);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 使用URL中的corpid初始化加解密工具</span></span><br><span class="line">            <span class="type">WXBizJsonMsgCrypt</span> <span class="variable">wxcpt</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">WXBizJsonMsgCrypt</span>(sToken, sEncodingAESKey, <span class="string">&quot;&quot;</span>);</span><br><span class="line">            <span class="comment">// 验证URL并获取明文echostr</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">sEchoStr</span> <span class="operator">=</span> wxcpt.VerifyURL(msgSignature, timestamp, nonce, echostr);</span><br><span class="line">            log.info(<span class="string">&quot;验证URL成功, 返回明文: &#123;&#125;&quot;</span>, sEchoStr);</span><br><span class="line">            <span class="keyword">return</span> sEchoStr;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            log.error(<span class="string">&quot;验证URL失败&quot;</span>, e);</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;error&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">关键点说明</span><br><span class="line">corpid参数：必须从URL参数中获取，不能使用固定值</span><br><span class="line">返回值：必须返回解密后的明文echostr，不能包含其他内容</span><br><span class="line">异常处理：必须捕获所有异常并记录日志，但对外返回简洁信息</span><br></pre></td></tr></table></figure>
+
+<h1 id="接收消息接口实现"><a href="#接收消息接口实现" class="headerlink" title="接收消息接口实现"></a>接收消息接口实现</h1><h2 id="数据结构定义"><a href="#数据结构定义" class="headerlink" title="数据结构定义"></a>数据结构定义</h2><figure class="highlight plaintext"><figcaption><span>org-language</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">public static class RobotData &#123;</span><br><span class="line">    private String tousername; // 接收方企业微信ID</span><br><span class="line">    private String encrypt;    // 加密的消息内容</span><br><span class="line">    private String agentid;    // 应用ID</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="接口代码"><a href="#接口代码" class="headerlink" title="接口代码"></a>接口代码</h2><p>这里代码如果看着比较复杂，可以直接下载tag:<br>v0.1版本，只是做了简单的文本回复测试。这里代码是已经打通百炼。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 接收消息接口 (POST请求)</span></span><br><span class="line"><span class="comment"> * 企业微信会将用户发送给机器人的消息推送到此接口</span></span><br><span class="line"><span class="comment"> * &#123;</span></span><br><span class="line"><span class="comment"> *     &quot;msgid&quot;: &quot;CAIQ16HMjQYY/NGagIOAgAMgq4KM0AI=&quot;,</span></span><br><span class="line"><span class="comment"> *     &quot;aibotid&quot;: &quot;AIBOTID&quot;,</span></span><br><span class="line"><span class="comment"> *     &quot;chatid&quot;: &quot;CHATID&quot;,</span></span><br><span class="line"><span class="comment"> *     &quot;chattype&quot;: &quot;group&quot;,</span></span><br><span class="line"><span class="comment"> *     &quot;from&quot;: &#123;</span></span><br><span class="line"><span class="comment"> *         &quot;userid&quot;: &quot;USERID&quot;</span></span><br><span class="line"><span class="comment"> *     &#125;,</span></span><br><span class="line"><span class="comment"> *     &quot;msgtype&quot;: &quot;text&quot;,</span></span><br><span class="line"><span class="comment"> *     &quot;text&quot;: &#123;</span></span><br><span class="line"><span class="comment"> *         &quot;content&quot;: &quot;<span class="doctag">@RobotA</span> hello robot&quot;</span></span><br><span class="line"><span class="comment"> *     &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment">  curl -X POST http://127.0.0.1:8080/wx/work/robot/push/wechat?msg_signature=65173e4c8284b36c27ea1565a12fe9b98da7b760&amp;timestamp=1698044465&amp;nonce=1698044465 -H &quot;Content-Type: application/json&quot; -d &#x27;&#123;&quot;encrypt&quot;:&quot;1/eL5o4f0xYunv/GG/9AVW+UXnj3ZCntsFmkLcTW8Ekm8nenhQ2IcTzeZNQujFiXgjrEMAnxFX55pHnYZHxmlEl6K9k+gjLiS8k2gKn4hqmATH8WcQgJW+pahiqg3jH4WMuk6RSgZ6QpL4x21LgUB3SimB5DM4SkkrIDt+sWgM2L0JjJqK9vFio0txS12CW5GBjlpVhg1kcvJP9JZ9c/VYU0eJ9R8I3GfI377UlINYHgwwfFTyRIpeWz8gS9lybijk7vFcNrW+qyvRKOKZeT3Mi7OXuLu4MKuVLL8fDy45E=&quot;&#125;&#x27;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@PostMapping(&quot;/push/wechat&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">wechatPost</span><span class="params">(</span></span><br><span class="line"><span class="params">        <span class="meta">@RequestParam(&quot;msg_signature&quot;)</span> String msgSignature,</span></span><br><span class="line"><span class="params">        <span class="meta">@RequestParam(&quot;timestamp&quot;)</span> String timestamp,</span></span><br><span class="line"><span class="params">        <span class="meta">@RequestParam(&quot;nonce&quot;)</span> String nonce,</span></span><br><span class="line"><span class="params">        <span class="meta">@RequestBody</span> RobotData postData)</span> &#123;</span><br><span class="line"></span><br><span class="line">    log.info(<span class="string">&quot;接收消息请求的签名: &#123;&#125;, 时间戳: &#123;&#125;, 随机数: &#123;&#125;&quot;</span>, msgSignature, timestamp, nonce);</span><br><span class="line">    log.info(<span class="string">&quot;接收到的加密消息: &#123;&#125;&quot;</span>, JSON.toJSONString(postData));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 加解密库要求传 receiveid 参数，企业自建智能机器人的使用场景里，receiveid直接传空字符串即可；。</span></span><br><span class="line">        <span class="type">WXBizJsonMsgCrypt</span> <span class="variable">wxcpt</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">WXBizJsonMsgCrypt</span>(sToken, sEncodingAESKey, <span class="string">&quot;&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 解密消息</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">sMsg</span> <span class="operator">=</span> wxcpt.DecryptMsg(msgSignature, timestamp, nonce, JSON.toJSONString(postData));</span><br><span class="line">        log.info(<span class="string">&quot;消息解密后内容: &#123;&#125;&quot;</span>, sMsg);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 解析消息内容</span></span><br><span class="line">        <span class="type">JSONObject</span> <span class="variable">json</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JSONObject</span>(sMsg);</span><br><span class="line">        <span class="type">String</span> <span class="variable">msgType</span> <span class="operator">=</span> json.getString(<span class="string">&quot;msgtype&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">chatType</span> <span class="operator">=</span> json.getString(<span class="string">&quot;chattype&quot;</span>); <span class="comment">// 聊天类型: single/group</span></span><br><span class="line">        log.info(<span class="string">&quot;消息类型: &#123;&#125;, 聊天类型: &#123;&#125;&quot;</span>, msgType, chatType);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 处理文本消息</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="string">&quot;text&quot;</span>.equals(msgType)) &#123;</span><br><span class="line">            <span class="type">JSONObject</span> <span class="variable">textObj</span> <span class="operator">=</span> json.getJSONObject(<span class="string">&quot;text&quot;</span>);</span><br><span class="line">            <span class="type">String</span> <span class="variable">content</span> <span class="operator">=</span> textObj.getString(<span class="string">&quot;content&quot;</span>);</span><br><span class="line">            <span class="type">String</span> <span class="variable">userId</span> <span class="operator">=</span> json.getJSONObject(<span class="string">&quot;from&quot;</span>).getString(<span class="string">&quot;userid&quot;</span>);</span><br><span class="line"></span><br><span class="line">            log.info(<span class="string">&quot;用户[&#123;&#125;]在[&#123;&#125;]聊天中发送消息: &#123;&#125;&quot;</span>, userId, chatType, content);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 构建回复消息</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">replyMsg</span> <span class="operator">=</span> replyMessageStream.reply(json);</span><br><span class="line"></span><br><span class="line">            log.info(<span class="string">&quot;加密前的回复消息: &#123;&#125;&quot;</span>, replyMsg);</span><br><span class="line">            <span class="comment">// 加密回复消息</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">encryptMsg</span> <span class="operator">=</span> wxcpt.EncryptMsg(replyMsg, timestamp, nonce);</span><br><span class="line">            log.info(<span class="string">&quot;加密后的回复消息: &#123;&#125;&quot;</span>, encryptMsg);</span><br><span class="line">            <span class="keyword">return</span> encryptMsg;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="string">&quot;stream&quot;</span>.equals(msgType))&#123;</span><br><span class="line">            <span class="comment">// 企业微信官方文档显示如果首次返回stream，则后续的stream消息会返回stream_id，且stream_id不变</span></span><br><span class="line">            <span class="type">JSONObject</span> <span class="variable">streamObj</span> <span class="operator">=</span> json.getJSONObject(<span class="string">&quot;stream&quot;</span>);</span><br><span class="line">            String streamId= streamObj.getString(<span class="string">&quot;id&quot;</span>);</span><br><span class="line">            <span class="comment">// 通过streamId获取数据栈，返回结果</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">poll</span> <span class="operator">=</span> streamMapRepository.poll(streamId);</span><br><span class="line">            <span class="type">String</span> <span class="variable">streamText</span> <span class="operator">=</span> streamMapRepository.getStreamText(streamId);</span><br><span class="line">            log.info(<span class="string">&quot;streamId: &#123;&#125;, pull: &#123;&#125;, streamText: &#123;&#125;&quot;</span>, streamId, poll, streamText);</span><br><span class="line">            String replyMsg;</span><br><span class="line">            <span class="keyword">if</span>(!StringUtils.hasText(streamText))&#123;</span><br><span class="line">                replyMsg = replyMessageStream.buildStreamMessage(<span class="string">&quot;你好呀！我是智能机器人，有什么可以帮您的吗？ 当前时间是&quot;</span> + <span class="keyword">new</span> <span class="title class_">Date</span>(), streamId, <span class="literal">true</span>, <span class="literal">null</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="string">&quot;messageend&quot;</span>.equals(poll))&#123;</span><br><span class="line">                replyMsg = replyMessageStream.buildStreamMessage(streamText, streamId, <span class="literal">true</span>, <span class="literal">null</span>);</span><br><span class="line">                <span class="comment">// 结束后清理数据</span></span><br><span class="line">                streamMapRepository.delete(streamId);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                replyMsg = replyMessageStream.buildStreamMessage(streamText, streamId, <span class="literal">false</span>, <span class="literal">null</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            log.info(<span class="string">&quot;streamId: &#123;&#125;, 加密前的回复消息: &#123;&#125;&quot;</span>, streamId, replyMsg);</span><br><span class="line">            <span class="comment">// 加密回复消息</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">encryptMsg</span> <span class="operator">=</span> wxcpt.EncryptMsg(replyMsg, timestamp, nonce);</span><br><span class="line">            log.info(<span class="string">&quot;streamId: &#123;&#125;, 加密后的回复消息: &#123;&#125;&quot;</span>, streamId, encryptMsg);</span><br><span class="line">            <span class="keyword">return</span> encryptMsg;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        log.error(<span class="string">&quot;处理消息失败&quot;</span>, e);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="消息格式说明"><a href="#消息格式说明" class="headerlink" title="消息格式说明"></a>消息格式说明</h2><p>企业微信推送的消息格式示例：实际以官方最新内容为准。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;msgid&quot;</span><span class="punctuation">:</span> <span class="string">&quot;CAIQ16HMjQYY/NGagIOAgAMgq4KM0AI=&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;aibotid&quot;</span><span class="punctuation">:</span> <span class="string">&quot;AIBOTID&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;chatid&quot;</span><span class="punctuation">:</span> <span class="string">&quot;CHATID&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;chattype&quot;</span><span class="punctuation">:</span> <span class="string">&quot;group&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;from&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;userid&quot;</span><span class="punctuation">:</span> <span class="string">&quot;USERID&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;msgtype&quot;</span><span class="punctuation">:</span> <span class="string">&quot;text&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;text&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;content&quot;</span><span class="punctuation">:</span> <span class="string">&quot;@RobotA hello robot&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br><span class="line">参数  说明</span><br><span class="line">msgid   本次回调的唯一性标志，开发者需据此进行事件排重（可能因为网络等原因重复回调）</span><br><span class="line">aibotid 智能机器人id</span><br><span class="line">chatid  会话id，仅群聊类型时候返回</span><br><span class="line">chattype    会话类型，single\group，分别表示：单聊\群聊</span><br><span class="line">from    该事件触发者的信息</span><br><span class="line">from.userid 操作者的userid</span><br><span class="line">msgtype 消息类型，此时固定是text</span><br><span class="line">text.content    消息内容</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="修改加解密工具类"><a href="#修改加解密工具类" class="headerlink" title="修改加解密工具类"></a>修改加解密工具类</h1><p>修改 JsonParse 类的 extract 方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 提取出 JSON 包中的加密消息</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> jsontext 待提取的json字符串</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 提取出的加密消息字符串</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> AesException </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> Object[] extract(String jsontext) <span class="keyword">throws</span> AesException &#123;</span><br><span class="line">    Object[] result = <span class="keyword">new</span> <span class="title class_">Object</span>[<span class="number">3</span>];</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="type">JSONObject</span> <span class="variable">json</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JSONObject</span>(jsontext);</span><br><span class="line">        <span class="type">String</span> <span class="variable">encrypt_msg</span> <span class="operator">=</span> json.getString(<span class="string">&quot;encrypt&quot;</span>);</span><br><span class="line">        <span class="comment">// 企业微信机器人消息格式中不包含tousername和agentid</span></span><br><span class="line">        result[<span class="number">0</span>] = <span class="string">&quot;&quot;</span>; <span class="comment">// tousername</span></span><br><span class="line">        result[<span class="number">1</span>] = encrypt_msg;</span><br><span class="line">        result[<span class="number">2</span>] = <span class="string">&quot;&quot;</span>; <span class="comment">// agentid</span></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        log.error(<span class="string">&quot;json解析出错！&quot;</span>, e);</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">AesException</span>(AesException.ParseJsonError);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="代码路径"><a href="#代码路径" class="headerlink" title="代码路径"></a>代码路径</h1><p>如果有帮助，点点star <a href="https://github.com/zhaozhiwei1992/weixin-work-bot">https://github.com/zhaozhiwei1992/weixin-work-bot</a></p>
+<h1 id="配置与测试"><a href="#配置与测试" class="headerlink" title="配置与测试"></a>配置与测试</h1><h2 id="应用部署"><a href="#应用部署" class="headerlink" title="应用部署"></a>应用部署</h2><p>将应用部署到具备域名的服务器上并确保应用可通过HTTPS访问（企业微信要求回调URL必须是HTTPS）</p>
+<h2 id="机器人配置"><a href="#机器人配置" class="headerlink" title="机器人配置"></a>机器人配置</h2><ol>
+<li>在企业微信管理后台创建API模式的智能机器人 <img src="http://43.143.194.245:9000/images/20251030/001_005.png"></li>
+<li>随机生成Token和EncodingAESKey，在application.yml中填入生成的Token和EncodingAESKey</li>
+<li>设置回调URL为：https:&#x2F;&#x2F;您的域名&#x2F;robot&#x2F;push&#x2F;wechat?corpid&#x3D;$CORPID$<br><img src="http://43.143.194.245:9000/images/20251030/001_006.png"></li>
+</ol>
+<h2 id="测试验证"><a href="#测试验证" class="headerlink" title="测试验证"></a>测试验证</h2><p>URL验证测试：保存机器人配置时，企业微信会自动调用验证接口</p>
+<h3 id="消息接收测试："><a href="#消息接收测试：" class="headerlink" title="消息接收测试："></a>消息接收测试：</h3><p>在企业微信中单聊或群聊中@机器人发送消息，查看后台日志确认收到并正确处理消息，验证机器人是否能正确回复。</p>
+<p><img src="http://43.143.194.245:9000/images/20251030/001_007.png"> <img src="/./images/001_008.png"></p>
+<h2 id="常见问题排查"><a href="#常见问题排查" class="headerlink" title="常见问题排查"></a>常见问题排查</h2><ol>
+<li>URL验证失败：检查Token、EncodingAESKey和corpid是否正确</li>
+<li>解密失败：检查提取加密消息的方法是否正确修改</li>
+<li>无法回复消息：检查回复消息的格式是否符合企业微信要求，回复msgtype一定要用stream，否则可能出现都访问通了，但是客户端收不到消息。</li>
+<li>HTTPS证书问题：确保证书有效且受信任</li>
+</ol>
+<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p>性能考虑：消息处理应尽量高效，避免超时（企业微信默认超时时间为5秒）<br>安全考虑： 验证消息签名确保请求来自企业微信<br>对用户输入进行适当过滤和转义，防止注入攻击<br>错误处理：妥善处理所有异常，避免服务崩溃<br>日志记录：详细记录请求和响应信息，便于排查问题<br>通过以上步骤，您可以成功开发并部署一个企业微信智能机器人，实现接收消息和自动回复的功能。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://developer.work.weixin.qq.com/community/question/detail?content_id=16740110965903826290">https://developer.work.weixin.qq.com/community/question/detail?content_id=16740110965903826290</a></p>
+<p><a href="https://blog.csdn.net/qq_52011411/article/details/150932697">https://blog.csdn.net/qq_52011411/article/details/150932697</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechat.png" alt="Mr.zhao 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mr.zhao
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://zhaozhiwei1992.github.io/2025/10/30/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%80%E5%8F%91%E6%96%87%E6%A1%A3/" title="企业微信机器人开发文档">http://zhaozhiwei1992.github.io/2025/10/30/企业微信机器人开发文档/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%9C%BA%E5%99%A8%E4%BA%BA/" rel="tag"># 企业微信机器人</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/06/18/Dify0.15.1%E5%8D%87%E7%BA%A71.4.3/" rel="prev" title="Dify0.15.1升级1.4.3版本">
+                  <i class="fa fa-angle-left"></i> Dify0.15.1升级1.4.3版本
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/11/12/%E6%9C%89%E4%BA%86AI%E6%9B%B4%E4%BC%98%E9%9B%85%E7%9A%84%E8%80%83%E8%AF%81/" rel="next" title="">
+                   <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mr.zhao</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
