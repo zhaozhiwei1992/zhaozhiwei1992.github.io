@@ -123,18 +123,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">61</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">37</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">88</span>
+        <span class="site-state-item-count">91</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -171,6 +171,201 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2025/04/22/Vaultwarden%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Mr.zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 离线de日常">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/04/22/Vaultwarden%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86/" class="post-title-link" itemprop="url">本地密码管理器-Vaultwarden</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-04-22 00:00:00" itemprop="dateCreated datePublished" datetime="2025-04-22T00:00:00+08:00">2025-04-22</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>之前主要使用lastpass，目前是浏览器端免费，其它都要收费，而且密码存在别人服务器总是不放心。</p>
+<p>所以我们要本地部署vaultwarden并且可以在各种Bitwarden正常使用。这里使用vaultwarden是因为相比原生更加轻量，占用资源极少。</p>
+<h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><h2 id="环境准备​​"><a href="#环境准备​​" class="headerlink" title="环境准备​​"></a>环境准备​​</h2><p>​​服务器要求​​：腾讯云服务器（1核2GB内存，Ubuntu&#x2F;Debian系统）。</p>
+<p>​​开放端口​​：80（HTTP）、443（HTTPS），通过腾讯云控制台配置安全组</p>
+<p>注:<br>如果家里本身就有公网ip，或者只是本地玩玩，是不需要公网服务器的。我这里公网服务器资源紧张，用来做转发，实际服务部署到内网机，所以公网和内网交互需要内网穿透，我这里使用的是zerotier。</p>
+<h2 id="内网机部署"><a href="#内网机部署" class="headerlink" title="内网机部署"></a>内网机部署</h2><p>为了方便从云服务器转发到内网，所以通过nginx包一层，给vaultwarden套一个前缀，比如:&#x2F;bitwarden。否则云服务nginx转发会很乱</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">nginx-proxy:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">nginx:alpine</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">nginx-proxy</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;8000:80&quot;</span>    <span class="comment"># 对外暴露 HTTPS 端口</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./nginx.conf:/etc/nginx/nginx.conf</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./ssl:/etc/nginx/ssl</span>   <span class="comment"># 证书存储目录</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">vaultwarden-net</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">vaultwarden</span></span><br><span class="line">  <span class="attr">vaultwarden:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">vaultwarden/server:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">vaultwarden</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">vaultwarden-net</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./vw-data/:/data/</span></span><br><span class="line">    <span class="attr">expose:</span>          <span class="comment"># 仅内部暴露端口，nginx能访问即可</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;80&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;3012&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 自定义网络（实现容器间通信）</span></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">vaultwarden-net:</span></span><br><span class="line">    <span class="attr">driver:</span> <span class="string">bridge</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="挂载目录结构如下"><a href="#挂载目录结构如下" class="headerlink" title="挂载目录结构如下"></a>挂载目录结构如下</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">vaultwarden/</span><br><span class="line">├── docker-compose.yaml</span><br><span class="line">└── volumes</span><br><span class="line">    ├── nginx</span><br><span class="line">    │   ├── conf.d</span><br><span class="line">    │   │   └── default.conf</span><br><span class="line">    │   ├── ssl</span><br><span class="line">    │   │   ├── certificate.crt</span><br><span class="line">    │   │   └── private.key</span><br><span class="line">    │   └── uwsgi_params</span><br><span class="line">    └── vw-data</span><br></pre></td></tr></table></figure>
+
+<h3 id="conf-d-default-conf配置"><a href="#conf-d-default-conf配置" class="headerlink" title="conf.d&#x2F;default.conf配置"></a>conf.d&#x2F;default.conf配置</h3><p>这里nginx.conf会默认引入所有conf.d&#x2F;*.conf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    listen  [::]:80;</span><br><span class="line">    server_name  localhost;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">return</span> 301 https://$host<span class="variable">$request_uri</span>;  <span class="comment"># 301 永久重定向</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># HTTPS 主配置</span></span><br><span class="line">server &#123;</span><br><span class="line">    listen 443 ssl http2;</span><br><span class="line">    listen [::]:443 ssl http2;</span><br><span class="line">    server_name localhost;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># SSL 证书配置（自签名示例，生产环境替换为 Let&#x27;s Encrypt）</span></span><br><span class="line">    <span class="comment">#ssl_certificate /etc/nginx/ssl/cert.pem;</span></span><br><span class="line">    <span class="comment">#ssl_certificate_key /etc/nginx/ssl/privkey.pem;</span></span><br><span class="line">    ssl_certificate /etc/nginx/ssl/certificate.crt;</span><br><span class="line">    ssl_certificate_key /etc/nginx/ssl/private.key;</span><br><span class="line">    ssl_session_cache shared:SSL:1m;</span><br><span class="line">    ssl_session_timeout 10m;</span><br><span class="line">    ssl_ciphers HIGH:!aNULL:!MD5;</span><br><span class="line">    ssl_prefer_server_ciphers on;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 静态文件服务（可选）</span></span><br><span class="line">    location / &#123;</span><br><span class="line">        root /usr/share/nginx/html;</span><br><span class="line">        index index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Vaultwarden 代理配置（核心修正）</span></span><br><span class="line">    location /bitwarden/ &#123;</span><br><span class="line">        proxy_pass http://vaultwarden/;  <span class="comment"># 末尾斜杠确保移除路径前缀</span></span><br><span class="line">        proxy_set_header Host <span class="variable">$host</span>;</span><br><span class="line">        proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">        proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">        proxy_set_header X-Forwarded-Proto <span class="variable">$scheme</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 解决路径前缀导致的资源加载问题</span></span><br><span class="line">        proxy_redirect off;</span><br><span class="line">        sub_filter_once off;</span><br><span class="line">        sub_filter_types *;</span><br><span class="line">        sub_filter <span class="string">&#x27;href=&quot;/&#x27;</span> <span class="string">&#x27;href=&quot;/bitwarden/&#x27;</span>;</span><br><span class="line">        sub_filter <span class="string">&#x27;src=&quot;/&#x27;</span> <span class="string">&#x27;src=&quot;/bitwarden/&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># WebSocket 支持（实时同步）, 自 v1.31.0 起，已移除对 3012 端口 WebSocket 流量的支持，因为它已集成至主 HTTP 端口。</span></span><br><span class="line">    location /bitwarden/notifications/hub &#123;</span><br><span class="line">        proxy_pass http://vaultwarden:3012;</span><br><span class="line">        proxy_set_header Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">        proxy_set_header Connection <span class="string">&quot;upgrade&quot;</span>;</span><br><span class="line">        proxy_set_header Host <span class="variable">$host</span>;</span><br><span class="line">        proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">        proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 错误页面配置（保持原样）</span></span><br><span class="line">    error_page 500 502 503 504 /50x.html;</span><br><span class="line">    location = /50x.html &#123;</span><br><span class="line">        root /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置自签名证书"><a href="#配置自签名证书" class="headerlink" title="配置自签名证书"></a>配置自签名证书</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在docker-compose同级目录执行</span></span><br><span class="line"><span class="built_in">sudo</span> openssl req -x509 -nodes -days 365 -newkey rsa:2048 \</span><br><span class="line">  -keyout ./volumes/nginx/ssl/private.key \</span><br><span class="line">  -out ./volumes/nginx/ssl/certificate.crt</span><br></pre></td></tr></table></figure>
+
+<h3 id="服务启动"><a href="#服务启动" class="headerlink" title="服务启动"></a>服务启动</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<h3 id="测试访问"><a href="#测试访问" class="headerlink" title="测试访问"></a>测试访问</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://10.241.189.234:8443/bitwarden</span><br></pre></td></tr></table></figure>
+
+<h2 id="公网ECS配置nginx-无域名"><a href="#公网ECS配置nginx-无域名" class="headerlink" title="公网ECS配置nginx(无域名)"></a>公网ECS配置nginx(无域名)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/nginx/conf.d</span><br><span class="line"></span><br><span class="line"><span class="comment"># 增加 234-proxy-443.conf, 这里一定要注意，把nginx.conf中server啥的都干掉，避免影响。</span></span><br><span class="line"></span><br><span class="line">[root@VM-8-12-centos conf.d]# <span class="built_in">cat</span> 234-proxy-443.conf</span><br><span class="line">server &#123;</span><br><span class="line">    listen 443 ssl;</span><br><span class="line">    server_name 替换为你的公网域名或IP;  <span class="comment"># 替换为你的公网域名或IP</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># SSL 证书配置（必须使用有效证书，如 Let&#x27;s Encrypt）</span></span><br><span class="line">    <span class="comment"># ssl_certificate /etc/letsencrypt/live/your-public-domain.com/fullchain.pem;</span></span><br><span class="line">    <span class="comment"># ssl_certificate_key /etc/letsencrypt/live/your-public-domain.com/privkey.pem;</span></span><br><span class="line">    ssl_certificate /etc/nginx/ssl/certificate.crt;</span><br><span class="line">    ssl_certificate_key /etc/nginx/ssl/private.key;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 反向代理到内网服务</span></span><br><span class="line">    location /bitwarden &#123;</span><br><span class="line">    proxy_pass https://10.241.189.234:8443;</span><br><span class="line">        proxy_set_header Host <span class="variable">$host</span>;</span><br><span class="line">        proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">        proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">        proxy_set_header X-Forwarded-Proto <span class="variable">$scheme</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 信任内网服务的自签名证书（可选）</span></span><br><span class="line">        proxy_ssl_verify off;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 其他安全头配置</span></span><br><span class="line">    add_header Strict-Transport-Security <span class="string">&quot;max-age=63072000; includeSubDomains; preload&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="nginx-s-reload"><a href="#nginx-s-reload" class="headerlink" title="nginx -s reload"></a>nginx -s reload</h3><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">https://ECS公网IP/bitwarden</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这种方式配置后，在浏览器可以直接使用，包括插件。但是会提示证书不安全，手机端除非手动能安装自建证书，否则无法直接使用。</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="公网ECS配置nginx-有域名"><a href="#公网ECS配置nginx-有域名" class="headerlink" title="公网ECS配置nginx(有域名)"></a>公网ECS配置nginx(有域名)</h2><p>以腾讯ECS为例</p>
+<h3 id="域名配置"><a href="#域名配置" class="headerlink" title="域名配置"></a>域名配置</h3><p>根据官方提示，将域名绑定到ECS机器</p>
+<p>进行域名备案</p>
+<h3 id="调整nginx配置"><a href="#调整nginx配置" class="headerlink" title="调整nginx配置"></a>调整nginx配置</h3><p>使用免费或者付费的ssl证书，下载后替换nginx中配置的证书信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># SSL 证书配置（必须使用有效证书）</span></span><br><span class="line">ssl_certificate /etc/nginx/ssl/自己的域名.crt;</span><br><span class="line">ssl_certificate_key /etc/nginx/ssl/自己的域名.xyz.key;</span><br></pre></td></tr></table></figure>
+
+<h2 id="客户端配置"><a href="#客户端配置" class="headerlink" title="客户端配置"></a>客户端配置</h2><ol>
+<li>下载安装bitwarden相关客户端，包括app端，浏览器插件等</li>
+<li>配置为自托管，然后按照自己设置的用户密码登录即可</li>
+</ol>
+<h1 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h1><p>找一个自己觉得安全的地方备份自己的挂载(volumes目录)，比如NAS或者网盘，U盘等</p>
+<h1 id="问题处理"><a href="#问题处理" class="headerlink" title="问题处理"></a>问题处理</h1><h2 id="console-log-service-ts-53-Unhandled-error-in-angular-Error-Could-not-instantiate-WebCryptoFunctionService-Could-not-locate-Subtle-crypto"><a href="#console-log-service-ts-53-Unhandled-error-in-angular-Error-Could-not-instantiate-WebCryptoFunctionService-Could-not-locate-Subtle-crypto" class="headerlink" title="console-log.service.ts:53 Unhandled error in angular Error: Could not instantiate WebCryptoFunctionService. Could not locate Subtle crypto."></a>console-log.service.ts:53 Unhandled error in angular Error: Could not instantiate WebCryptoFunctionService. Could not locate Subtle crypto.</h2><h3 id="分析处理"><a href="#分析处理" class="headerlink" title="分析处理"></a>分析处理</h3><p>必须使用https访问，否则报错</p>
+<h2 id="安卓客户端无法访问，提示无法验证服务器证书"><a href="#安卓客户端无法访问，提示无法验证服务器证书" class="headerlink" title="安卓客户端无法访问，提示无法验证服务器证书"></a>安卓客户端无法访问，提示无法验证服务器证书</h2><h3 id="分析处理-1"><a href="#分析处理-1" class="headerlink" title="分析处理"></a>分析处理</h3><p>这个真得有域名了。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2025/03/30/%E4%B8%9A%E5%8A%A1+AI%E4%BC%81%E4%B8%9A%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Mr.zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离线de日常">
+      <meta itemprop="description" content="show me your code">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 离线de日常">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/03/30/%E4%B8%9A%E5%8A%A1+AI%E4%BC%81%E4%B8%9A%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/" class="post-title-link" itemprop="url">从业务视角看AI落地：避免技术狂欢，聚焦真实需求</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-03-30 00:00:00" itemprop="dateCreated datePublished" datetime="2025-03-30T00:00:00+08:00">2025-03-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-11-12 15:40:02" itemprop="dateModified" datetime="2025-11-12T15:40:02+08:00">2025-11-12</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="前言：为什么企业需要警惕”AI军备竞赛”？"><a href="#前言：为什么企业需要警惕”AI军备竞赛”？" class="headerlink" title="前言：为什么企业需要警惕”AI军备竞赛”？"></a>前言：为什么企业需要警惕”AI军备竞赛”？</h1><p>当前AI技术发展呈现”技术狂欢”态势，今天Deepseek火了跟一把，明天出来个其它看着高级的东西又跟一把。但企业实践中最常出现的问题在于：投入大量资源训练模型后，业务价值却难以量化。本文从业务出发，探讨如何让AI真正成为业务增长的助推器。</p>
+<h1 id="为什么AI是业务的必选项"><a href="#为什么AI是业务的必选项" class="headerlink" title="为什么AI是业务的必选项?"></a>为什么AI是业务的必选项?</h1><p>现在网上AI技术层出不穷，很多人通过ai来做一些日常工作，比如写写文章，查查资料，做做总结。高级一点的自己通过coze之类的平台做一些自己的AI工作流，智能体，通过各种组合提高自己的工作效率。</p>
+<p>对于企业来说，如果自己在业务上能跟AI结合，能够从各方面提高自己产品的竞争力。</p>
+<p>就以客服系统来说，有时候机器人客服回复的内容比较死板，很多都是通过内容匹配给出结果。但是使用AI以后能够充分利用AI的分析总结能力，将一些散落的知识分析总结，更加合理的提供给用户，甚至不仔细观察都以为是真人。相对于之前冷冰冰的知识，通过AI可以更好的提高客户体验，增强客户满意度和忠诚度。</p>
+<h1 id="为什么AI很难在企业中落地"><a href="#为什么AI很难在企业中落地" class="headerlink" title="为什么AI很难在企业中落地?"></a>为什么AI很难在企业中落地?</h1><p>这里不是说落不了地，而是这么久了还没有爆炸性落地的产品。之前Deepseek火了，出来一拨”落地”热，基本上就是自己自己部署个模型或者搭建个简单知识库就敢说是落地。</p>
+<p>其实AI无法落地主要的问题在于找不到切入点，还有行动力不足。首先是切入点问题，有些领导认为AI无所不能，上来就是高难度操作，认为只要部署个模型，挂个知识库，就可以让自己的产品智能了，用户问啥能干啥，也不需要那么多开发，测试，运营了。这种是完全被洗脑的，觉得AI就是神仙，无所不能，并不是所有场景适合硬往AI上套。还有一种是行动力不足，觉得AI现在发展还看不懂，不够成熟，准备再观察观察。</p>
+<p>那么怎么让业务能跟AI更好的结合呢，下面我会给出一些自己在实践中的理解。</p>
+<h1 id="AI如何重塑核心场景"><a href="#AI如何重塑核心场景" class="headerlink" title="AI如何重塑核心场景?"></a>AI如何重塑核心场景?</h1><h2 id="正确认识AI"><a href="#正确认识AI" class="headerlink" title="正确认识AI"></a>正确认识AI</h2><p>首先我们要对AI有个正确的认识，AI不是无所不能，并不是所有的场景都适合AI。AI本生是科技的产物，可以把它理解为一个拥有海量通用知识的业务小白。业务太庞杂了，对于一个行业内摸爬滚打多年的人都不敢说样样精通，并且很多业务不公开或者还需要随机应变，一些网上能下载到的通用大模型根本没有经过业务训练，不可能一上来就解决业务问题。</p>
+<h2 id="识别关键业务场景"><a href="#识别关键业务场景" class="headerlink" title="识别关键业务场景"></a>识别关键业务场景</h2><p>之前说道网上有很多把AI玩出花的场景，也有很多解决实际问题的场景。为什么能出现这些东西，是因为大家会思考，能动手，知道自己要什么。比如我在没有AI之前也会通过程序脚本之类的各种玩意儿来解决自己实际问题，提高效率。对个人来说会思考，知道自己要什么，加一点点动手能力才能用好AI。</p>
+<p>对于企业来说本身在行业深耕多年，业务就是企业最大的优势，应深入分析业务，在业务中找到与AI的结合点。AI的能力应该是解决实际问题，而不是为了应用AI而强行整合。再炫酷的操作如何用户不买账没有任何意义。最好是找三五个业务专家，再配合三五个对AI了解的工程师大家坐在一起，互相分享下业务场景，AI相关知识，多次分享讨论研究最终找出中间的结合点。</p>
+<p>一定不要刚开始就给自己上强度，可以先找点场景试试demo，在做的过程中发现真正需要的场景再去挖掘。中小公司千万不要一上来就微调训练模型。刚开始的目标应该是业务+AI，业务为主，AI为辅，用业务驱动AI更快落地，最终让AI成为系统中一项不可分割的能力。</p>
+<h2 id="AI技术的应用案例"><a href="#AI技术的应用案例" class="headerlink" title="AI技术的应用案例"></a>AI技术的应用案例</h2><p>下边我给出一些业务中使用的案例，供大家参考，不同的企业有不同的业务，这里只抛砖引玉。</p>
+<h3 id="AI助理"><a href="#AI助理" class="headerlink" title="AI助理"></a>AI助理</h3><p>首先是问答类的AI助理，这种是对知识库的应用。企业在多年发展过程中本身积累了不少行业知识，那么就可以整理调整为知识库供AI使用。如何做知识库之前文章也说过，最重要的是知识库的准确性，一般来说，整理成QA方式最方便知识库使用，可以先将一些系统操作手册，问题解决方案之类的东西做知识库，后边再扩展。</p>
+<h3 id="智能风控"><a href="#智能风控" class="headerlink" title="智能风控"></a>智能风控</h3><p>在很多领域都有风控的处理，好一点的会使用一些规则库进行处理，如果差的直接就是硬编码了，这些规则一般都是来源于一些业务或者政策文件，需要翻译成程序能识别的规则才能使用。如果用AI，我们只需要把这些政策做到人能理解的程度，那么AI就可以结合规则在数据流转中进行控制，并按照预设的要求进行反馈，比如生成一个风控报告之类的。这种方式比通过程序处理更方便，不用单独再通过程序实现报告功能，还得需要程序去主动调用。</p>
+<h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><p>每个企业的业务都不一样，主要是从业务入手，去发现。一定是奔着简化用户操作，优化用户体验去的场景，而不是为了AI而造出来的业务。</p>
+<h1 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h1><p>业务再整合模型时一定不会只使用一种模型走天下，不同的模型有不同的优势。所以前期可以选择市面好用的编排工具，比如DIFY之类的，配置比较灵活，可以整合市面上绝大部分模型。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1111,221 +1306,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2024/09/28/linux%E8%87%AA%E5%BB%BANAS%E6%95%99%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Mr.zhao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="离线de日常">
-      <meta itemprop="description" content="show me your code">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 离线de日常">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/09/28/linux%E8%87%AA%E5%BB%BANAS%E6%95%99%E7%A8%8B/" class="post-title-link" itemprop="url">linux下自建NAS教程</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-09-28 00:00:00" itemprop="dateCreated datePublished" datetime="2024-09-28T00:00:00+08:00">2024-09-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%BD%AF%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">软件</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%BD%AF%E4%BB%B6/NAS/" itemprop="url" rel="index"><span itemprop="name">NAS</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="什么是NAS及为什么要用NAS"><a href="#什么是NAS及为什么要用NAS" class="headerlink" title="什么是NAS及为什么要用NAS"></a>什么是NAS及为什么要用NAS</h1><p>NAS，英文全名Network Attached Storage，翻译过来是:网络附接存储。</p>
-<p>引用维基百科定义</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">网络附接存储（英语：Network Attached Storage，缩写：NAS）[1]是一种文件级（与块级存储相对）的计算机数据存储服务器，它连接到计算机网络，并提供对异构网络用户的数据访问。它专门用于通过其硬件、软件或配置来提供文件服务。它通常作为专门制造的专用计算机设备制造。 NAS系统是包含一个或多个通常排列成逻辑存储器、冗余存储器或RAID存储驱动器的网络设备。NAS消除了从网络上的其他服务器提供文件服务的负担，它们通常使用网络文件共享协议（如NFS、SMB或AFP）提供对文件的访问。</span><br></pre></td></tr></table></figure>
-
-<p>上边说了一大堆，看着头疼。其实说直白一点，百度网盘大家都用过，可以直接存文件，看电影，放照片很方便对吧, 那么NAS也是干这事儿的。这里大家要问，那我百度2个T的宝贝为啥还要要用NAS呢? 这里就不得不说百度网盘及各种乱七八糟的网盘是很方便，但是有一个很大的缺点，那就是你的资源都掌握在别人手里(你懂得)，这时候NAS就体现了它的一个优势，数据都由你自己掌控。</p>
-<h2 id="小白特供，NAS可以干什么"><a href="#小白特供，NAS可以干什么" class="headerlink" title="小白特供，NAS可以干什么"></a>小白特供，NAS可以干什么</h2><p>个人感觉最主要的几个场景，构建家庭影院，照片分享，文件备份。 同时因为其本身就是一个服务器，心情好你可以做个人博客。</p>
-<h1 id="如何选择"><a href="#如何选择" class="headerlink" title="如何选择"></a>如何选择</h1><p>新手小白可以直接选择现成品牌即可，市面上用的比较多的有以下几个:</p>
-<p>极空间：<a href="https://tiyan.zspace.cn/">https://tiyan.zspace.cn/</a></p>
-<p>群晖：<a href="https://demo.synology.cn/zh-cn/dsm">https://demo.synology.cn/zh-cn/dsm</a></p>
-<p>威联通：<a href="https://www.qnap.com.cn/zh-cn/live-demo">https://www.qnap.com.cn/zh-cn/live-demo</a></p>
-<p>爱速特：<a href="https://www.asustor.com/zh-cn/live_demo">https://www.asustor.com/zh-cn/live_demo</a></p>
-<p>可以参考他们的官网按照自己的心里价位购买即可，很easy</p>
-<p>如果是老鸟(我是菜鸟)，就可以根据以前的使用经验，从硬件到软件统统考虑，然后再结合自己的心里价位去综合考虑。或者动手能力强，自己刷刷刷也不是不行。</p>
-<h1 id="为什么要自建及优缺点"><a href="#为什么要自建及优缺点" class="headerlink" title="为什么要自建及优缺点"></a>为什么要自建及优缺点</h1><p>现在到了本文的重点，自建NAS。 那么为什么自建，且听我一一道来。</p>
-<h2 id="成本效益："><a href="#成本效益：" class="headerlink" title="成本效益："></a>成本效益：</h2><p>自建NAS通常比购买现成的NAS系统更经济，只要你有台差不多的基本废弃不用的电脑，就可以自建。系统本身及需要的软件也是开源免费使用，四舍五入那就是不花钱。</p>
-<h2 id="定制化"><a href="#定制化" class="headerlink" title="定制化"></a>定制化</h2><p>可以根据自己的需求定制硬件和软件，如果你觉得自己磁盘不够就可以随时加硬盘，软件不好用那就换软件，系统用腻了那就换系统，爽。</p>
-<h2 id="上边都是优点，当然自建也是有缺点的"><a href="#上边都是优点，当然自建也是有缺点的" class="headerlink" title="上边都是优点，当然自建也是有缺点的"></a>上边都是优点，当然自建也是有缺点的</h2><p>没有开箱即用，很多东西需要自己学习，对于小白来说有点难。</p>
-<p>稳定性可能不如现成的NAS。</p>
-<p>UI没有现成的NAS看起来好看统一。</p>
-<h1 id="如何自建"><a href="#如何自建" class="headerlink" title="如何自建"></a>如何自建</h1><h2 id="一台个人闲置电脑"><a href="#一台个人闲置电脑" class="headerlink" title="一台个人闲置电脑"></a>一台个人闲置电脑</h2><p>首先要有一台电脑，最好是台式机，小机箱也行，但是如果需要扩展多块硬盘还是大点好。其次是系统，我个人是使用archlinux习惯了，也可以使用其它发行版本。</p>
-<h2 id="DLNA-UPnP家庭流媒体服务-jellyfin-KODI-播放器-家庭影院软件"><a href="#DLNA-UPnP家庭流媒体服务-jellyfin-KODI-播放器-家庭影院软件" class="headerlink" title="DLNA&#x2F;UPnP家庭流媒体服务 jellyfin + KODI(播放器) 家庭影院软件"></a>DLNA&#x2F;UPnP家庭流媒体服务 jellyfin + KODI(播放器) 家庭影院软件</h2><p><a href="https://jellyfin.org/docs/general/installation/linux/">https://jellyfin.org/docs/general/installation/linux/</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 启动</span><br><span class="line">systemctl start jellyfin.service</span><br><span class="line"># 访问, 按照自己设置的密码搞起即可</span><br><span class="line">http://127.0.0.1:8096</span><br></pre></td></tr></table></figure>
-
-<h2 id="BT下载aria2"><a href="#BT下载aria2" class="headerlink" title="BT下载aria2"></a>BT下载aria2</h2><h2 id="Linux服务器web管理神器–Cockpit-作为服务资源监控管理工具使用"><a href="#Linux服务器web管理神器–Cockpit-作为服务资源监控管理工具使用" class="headerlink" title="Linux服务器web管理神器–Cockpit (作为服务资源监控管理工具使用)"></a>Linux服务器web管理神器–Cockpit (作为服务资源监控管理工具使用)</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#启动</span><br><span class="line">systemctl start cockpit.service</span><br><span class="line"># 访问</span><br><span class="line">http://localhost:9091</span><br></pre></td></tr></table></figure>
-<h2 id="照片查看-photoprism"><a href="#照片查看-photoprism" class="headerlink" title="照片查看 photoprism"></a>照片查看 photoprism</h2><p><a href="https://docs.photoprism.app/user-guide/">https://docs.photoprism.app/user-guide/</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.photoprism</span><br><span class="line">docker-compose up -d</span><br><span class="line"></span><br><span class="line">#访问</span><br><span class="line">http://127.0.0.1:2342</span><br><span class="line"></span><br><span class="line">PhotoPrism 的默认用户名为 admin，密码为 insecure</span><br></pre></td></tr></table></figure>
-
-<h3 id="注"><a href="#注" class="headerlink" title="注"></a>注</h3><p>优势: 可以使用现有的存储路径，重建索引</p>
-<p>缺点: 只有网页版</p>
-<h2 id="网盘聚合alist-rclone-非必须"><a href="#网盘聚合alist-rclone-非必须" class="headerlink" title="网盘聚合alist + rclone(非必须)"></a>网盘聚合alist + rclone(非必须)</h2><p>可以通过该工具,直接在线访问网盘中视频,或者配合其它工具(rclone)通过webdav将网盘目录挂载到本地</p>
-<p>windows下用RaiDrive替代rclone</p>
-<h2 id="samba-Samba-SMB-文件共享服务-非必须"><a href="#samba-Samba-SMB-文件共享服务-非必须" class="headerlink" title="samba: Samba(SMB)文件共享服务(非必须)"></a>samba: Samba(SMB)文件共享服务(非必须)</h2><p>主要是用来跟win进行数据共享，如果有需要可以安装起来</p>
-<h2 id="移动端"><a href="#移动端" class="headerlink" title="移动端"></a>移动端</h2><h3 id="视频播放-mxplayer-安卓-nplayer-ios"><a href="#视频播放-mxplayer-安卓-nplayer-ios" class="headerlink" title="视频播放 mxplayer(安卓) nplayer(ios)"></a>视频播放 mxplayer(安卓) nplayer(ios)</h3><h3 id="浏览器直接访问"><a href="#浏览器直接访问" class="headerlink" title="浏览器直接访问"></a>浏览器直接访问</h3><h1 id="交流"><a href="#交流" class="headerlink" title="交流"></a>交流</h1><p>欢迎关注公众号, 更方便查看文章</p>
-<p>公众号: 陌上花kai</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://zhaozhiwei1992.github.io/2024/09/26/%E4%B8%80%E4%B8%AA8%E5%B9%B4archlinux%E9%87%8D%E5%BA%A6%E4%BD%BF%E7%94%A8%E8%80%85%E8%87%AA%E8%BF%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Mr.zhao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="离线de日常">
-      <meta itemprop="description" content="show me your code">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 离线de日常">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/09/26/%E4%B8%80%E4%B8%AA8%E5%B9%B4archlinux%E9%87%8D%E5%BA%A6%E4%BD%BF%E7%94%A8%E8%80%85%E8%87%AA%E8%BF%B0/" class="post-title-link" itemprop="url">一个9年archlinux重度使用者自述</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-09-26 21:50:40" itemprop="dateCreated datePublished" datetime="2024-09-26T21:50:40+08:00">2024-09-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-12 15:40:02" itemprop="dateModified" datetime="2025-11-12T15:40:02+08:00">2025-11-12</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>系统没有高低贵贱,主要还是使用的人，哪个跟你更契合。对我而言, archlinux就是最契合的那个。本文主要是对archlinux使用做一个粗浅的介绍，如果能勾起你一丝兴趣，那就更好了。</p>
-<h1 id="第一部分：初识Arch-Linux"><a href="#第一部分：初识Arch-Linux" class="headerlink" title="第一部分：初识Arch Linux"></a>第一部分：初识Arch Linux</h1><h2 id="从Ubuntu和Fedora到Arch的转变"><a href="#从Ubuntu和Fedora到Arch的转变" class="headerlink" title="从Ubuntu和Fedora到Arch的转变"></a>从Ubuntu和Fedora到Arch的转变</h2><p>大学期间了解到有linux这么一类系统，看起来很酷，那命令行操作神秘又高级，瞬间引起了我的兴趣。经过各种对比，选择了最容易上手的ubuntu发行版。使用中发现跟windown体验大不相同，很多东西都要从头学起，对于喜欢折腾的人来说真的是瞌睡给了个枕头。同时这个系统简直是游戏荒漠，使用这个系统又能帮助我远离游戏，一举多得。</p>
-<p>大概使用一年多ubuntu后中间也接触了fedora但是也没什么吸引力，个人感觉也就是界面不同，包管理机制不同，没什么特殊的。直到我遇到了archlinux，搜索各种资料学习安装，说实话刚开始纯命令行安装真的很头大，就怕一步搞不对，但是折腾起来后，很有j成就感。瞬间感觉自己的水平上了一个档次。</p>
-<h2 id="搜索与学习：如何克服初期困难"><a href="#搜索与学习：如何克服初期困难" class="headerlink" title="搜索与学习：如何克服初期困难"></a>搜索与学习：如何克服初期困难</h2><p>其实所有发行版都是基于同一个linux内核，大差不差，但是不同的发行版有各自的特色，archlinux就是让你可以更加自由的定制。如果是纯新手我建议不用想别的就是一直逼着自己用, 不会就去搜索，这个是必须要经历的，等过了这段时间就是海阔天空。</p>
-<h1 id="第二部分：桌面环境的探索"><a href="#第二部分：桌面环境的探索" class="headerlink" title="第二部分：桌面环境的探索"></a>第二部分：桌面环境的探索</h1><h2 id="UNITY"><a href="#UNITY" class="headerlink" title="UNITY"></a>UNITY</h2><p>最初ubuntu模式使用unity桌面，那时候导航栏靠左显示，那叫一个帅气。</p>
-<h2 id="GNOME"><a href="#GNOME" class="headerlink" title="GNOME"></a>GNOME</h2><p>fedora系统默认使用gnome桌面，这个桌面给我的第一感觉就是很绚，而且这套桌面环境自带了很多实用的功能，开箱即用，对新手很友好。</p>
-<h2 id="XFCE"><a href="#XFCE" class="headerlink" title="XFCE"></a>XFCE</h2><p>如果你的电脑比较老旧，可以选用xfce，这个桌面环境麻雀虽小五脏俱全，占用资源很小而且足够用，不用太折腾。</p>
-<h2 id="Openbox"><a href="#Openbox" class="headerlink" title="Openbox"></a>Openbox</h2><p>严格来说openbox并不算桌面环境，只能算是个桌面管理器，要构成一个完整的桌面需要自己去定制，如: panel栏:tint2，背景透明: xcompmgr，程序运行:albert，喇叭图标volumeicon，登录管理器:slim等。一段时间这是我的主力桌面，真的很快。</p>
-<h2 id="i3wm"><a href="#i3wm" class="headerlink" title="i3wm"></a>i3wm</h2><p>一个偶然的机会听说有一种叫平铺的桌面环境，然后就结识了i3，跟openbox一样仅仅是个桌面管理器，一切都要自己去定制，包括桌面背景，导航栏，登录管理器等。感兴趣的道友可以去看看，新手不建议使用，容易劝退。</p>
-<h1 id="第三部分：Arch-Linux的日常生活"><a href="#第三部分：Arch-Linux的日常生活" class="headerlink" title="第三部分：Arch Linux的日常生活"></a>第三部分：Arch Linux的日常生活</h1><h2 id="从不熟悉到离不开"><a href="#从不熟悉到离不开" class="headerlink" title="从不熟悉到离不开"></a>从不熟悉到离不开</h2><p>最开始因为对系统的不熟悉有很多问题，天天不是在搜索就是在搜索的路上，工作的事情一点没干都是在学怎么用系统了。随着时间的推移，很多坑也慢慢填平了，系统使用越来越熟练，很多工作在命令下操作会比界面操作效率高很多，现在让我换回windows真的很不习惯。</p>
-<h2 id="日常工作与生活的便利"><a href="#日常工作与生活的便利" class="headerlink" title="日常工作与生活的便利"></a>日常工作与生活的便利</h2><p>在日常工作和生活中，Arch Linux的高效操作让我能够更快地完成任务。有一件印象深刻的事儿，刚毕业工作那会儿，有一次领导让整理几百个脚本文件,需要在每个脚本前边加上begin。作为一个”懒惰”的程序员，必须善用工具，使用sed命令分分钟搞定，当时那叫一个骄傲。</p>
-<h1 id="第四部分：工作中的Arch-Linux"><a href="#第四部分：工作中的Arch-Linux" class="headerlink" title="第四部分：工作中的Arch Linux"></a>第四部分：工作中的Arch Linux</h1><h2 id="提高工作效率的秘诀"><a href="#提高工作效率的秘诀" class="headerlink" title="提高工作效率的秘诀"></a>提高工作效率的秘诀</h2><p>工作这么多年，大家一致觉得我的工作效率比较高，主要原因就在于这个系统，因为基本上是我自己定制出来的，对它更熟悉，使用起来当然得心应手。对于文本操作，软件开发，linux是有天然的优势，因为一切皆文件，很多时候文本操作会比图形界面快很多，比如开发环境搭建，文本有天然优势，可以做成工具一步到位。</p>
-<h2 id="定制化系统以适应工作需求"><a href="#定制化系统以适应工作需求" class="headerlink" title="定制化系统以适应工作需求"></a>定制化系统以适应工作需求</h2><p>不论任何行业工作久了都会有自己的工具箱，我自己会把一些日常使用的东西配置都整理到一起，然后通过git版本控制，如果换新的机器，直接安装好后统一初始化，搞定。这个真的很舒服，要用起来。</p>
-<h2 id="服务器管理的简便性"><a href="#服务器管理的简便性" class="headerlink" title="服务器管理的简便性"></a>服务器管理的简便性</h2><p>如果你是技术人员，日常中使用linux让你在面对生产服务器时也会更从容。 就相当与给你换了太电脑，仅此而已，so easy。</p>
-<h1 id="第五部分：Arch-Linux的学习之道"><a href="#第五部分：Arch-Linux的学习之道" class="headerlink" title="第五部分：Arch Linux的学习之道"></a>第五部分：Arch Linux的学习之道</h1><h2 id="逼迫自己：持续使用的重要性"><a href="#逼迫自己：持续使用的重要性" class="headerlink" title="逼迫自己：持续使用的重要性"></a>逼迫自己：持续使用的重要性</h2><p>学会使用Arch Linux的最好方式就是逼迫自己一直使用它。</p>
-<h2 id="实践出真知：通过实际操作学习"><a href="#实践出真知：通过实际操作学习" class="headerlink" title="实践出真知：通过实际操作学习"></a>实践出真知：通过实际操作学习</h2><p>系统就是要经常用，不要怕，用不坏的。</p>
-<h2 id="社区资源：如何利用Arch-Linux社区"><a href="#社区资源：如何利用Arch-Linux社区" class="headerlink" title="社区资源：如何利用Arch Linux社区"></a>社区资源：如何利用Arch Linux社区</h2><p>大部分的问题在arch wiki都可以找到，系统安装了之类的不要看乱七八糟的地方，wiki足以。</p>
-<p><a href="https://archlinux.org/">https://archlinux.org/</a></p>
-<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>Arch Linux的旅程充满了挑战，但也充满了乐趣。它不仅提高了我的技术能力，也锻炼了我的自制力。如果你也在寻找一个能够挑战自我、提高效率的Linux发行版，那么Arch Linux绝对是一个不错的选择。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
